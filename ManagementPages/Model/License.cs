@@ -7,5 +7,8 @@ namespace ManagementPages.Model
 {
     public class License
     {
+        public int LicenseNumber { get; set; }
+
+        public DateTime RegistrationDate { get; set; }
     }
 }
