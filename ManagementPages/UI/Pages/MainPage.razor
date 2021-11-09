@@ -1,7 +1,44 @@
 ﻿@page "/mainpage"
 @using ManagementPages.Model
 
-<h3>mainpage</h3>
+<section class="row">
+    <h1 class="col-3 mt-1 border">talDigital Kontrolpanel</h1>
+    <div class="col-8 mt-1 border">
+        <h3 class="text-center">Kildeparken</h3>
+        <nav class="nav nav-pills flex-column flex-sm-row">
+            <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#">Kategori</a>
+            <a class="flex-sm-fill text-sm-center nav-link active" href="#">Kategori</a>
+            <a class="flex-sm-fill text-sm-center nav-link active" href="#">Kategori</a>
+            <a class="flex-sm-fill text-sm-center nav-link active" href="#">Kategori</a>
+            <a class="flex-sm-fill text-sm-center nav-link active" href="#">Kategori</a>
+            <a class="flex-sm-fill text-sm-center nav-link active" href="#">Kategori</a>
+        </nav>
+    </div>
+    
+    <div class="col-1 mt-1 border">
+        <a class="btn btn-primary float-end" href="#" role="button">Logout</a>
+    </div>
+</section>
+
+
+<section class="row">
+    <div class="col-2 border">
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <a class="nav-link" href="/mainpage">Sohngaardsholmsparken</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/mainpage">Kildeparken</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/mainpage">Signalbakken</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-10 border">
+
+    </div>
+</section>
 
 @code {
 
