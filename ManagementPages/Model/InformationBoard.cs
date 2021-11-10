@@ -11,6 +11,8 @@ namespace ManagementPages.Model
 
         //Url?
 
+        //sorting af categories, er det her den skal være? 
+
         public string Name { get; set; }
 
         public List<Category> Categories { get; set; }

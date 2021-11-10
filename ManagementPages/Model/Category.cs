@@ -14,6 +14,8 @@ namespace ManagementPages.Model
         public bool IsPublished { get; set; }
 
         //icon?
+
+        //sorting af posts er det her den skal ligge?
         
     }
 }
