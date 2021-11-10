@@ -4,4 +4,23 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <Compile Remove="Pages\**" />
+    <Compile Remove="Shared\**" />
+    <Content Remove="Pages\**" />
+    <Content Remove="Shared\**" />
+    <EmbeddedResource Remove="Pages\**" />
+    <EmbeddedResource Remove="Shared\**" />
+    <None Remove="Pages\**" />
+    <None Remove="Shared\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Pages\_Host.cshtml" />
+  </ItemGroup>
+
+	<ItemGroup>
+    <Folder Include="UI\Layouts\" />
+  </ItemGroup>
+
 </Project>
