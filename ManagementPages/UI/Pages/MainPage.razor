@@ -7,16 +7,20 @@
 </head>
 
 <section class="row">
-    <h1 class="col-3 mt-1 border">talDigital Kontrolpanel</h1>
+    <div class="col-3 mt-1 border">
+        <h2 class="text-center">talDigital Kontrolpanel</h2>
+        <h4 class="mt-5 ms-3 bottom-align-text">Informationstavler</h4>
+    </div>
+    
     <div class="col-8 mt-1 border">
-        <h3 class="text-center">Kildeparken</h3>
+        <h1 class="display-2">Kildeparken</h1>
         <nav class="nav nav-pills flex-column flex-sm-row">
-            <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#">Kategori</a>
-            <a class="flex-sm-fill text-sm-center nav-link" href="#">Kategori</a>
-            <a class="flex-sm-fill text-sm-center nav-link" href="#">Kategori</a>
-            <a class="flex-sm-fill text-sm-center nav-link" href="#">Kategori</a>
-            <a class="flex-sm-fill text-sm-center nav-link" href="#">Kategori</a>
-            <a class="flex-sm-fill text-sm-center nav-link" href="#">Kategori</a>
+            <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#">talDigital</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="#">Nyheder</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="#">Dyr</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="#">Planter</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="#">Begivenheder</a>
+            <a class="flex-sm-fill text-sm-center nav-link" href="#">Information</a>
         </nav>
     </div>
     
@@ -27,11 +31,11 @@
 
 
 <section class="row">
-    <div class="col-2 border">
+    <div class="col-3 border">
         <ul class="nav nav-pills flex-column">
             <li class="nav-item">
                 <div class="nav-link">
-                    <a class="" href="/mainpage">Sohngaardsholm</a>
+                    <a class="" href="/mainpage">Sohngaardsholmparken</a>
                     <Boardicons />
                 </div>
             </li>
@@ -59,8 +63,19 @@
             </li>
         </ul>
     </div>
-    <div class="col-10 border">
-
+    <div class="col-9 border">
+        <a class="btn btn-primary" href="#" role="button">Nyt opslag</a>
+        <div class="dropdown float-end">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Rediger rækkefølge på opslag
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Alfabetisk</a></li>
+                <li><a class="dropdown-item" href="#">Ældste til nyeste</a></li>
+                <li><a class="dropdown-item" href="#">Nyeste til ældste</a></li>
+            </ul>
+        </div>
+        <div class="row border"></div>
     </div>
 </section>
 
