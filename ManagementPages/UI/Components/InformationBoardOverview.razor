@@ -1,4 +1,46 @@
-﻿<h3>InformationBoardOverview</h3>
+﻿<section class="row">
+    <div class="col-3 border">
+        <h3 class="ms-3 bottom-align-text">Informationstavler</h3>
+        <ul class="nav nav-pills flex-column">
+            <li class="nav-item">
+                <div class="nav-link">
+                    <a class="" href="/404">Sohngaardsholmparken</a>
+                    <Boardicons />
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link">
+                    <a class="" href="/404">Kildeparken</a>
+                    <Boardicons />
+                </div>
+            </li>
+            <li class="nav-item">
+                <div class="nav-link">
+                    <a class="" href="/404">Signalbakken</a>
+                    <Boardicons />
+                </div>
+            </li>
+        </ul>
+    </div>
+
+    <!-- Dropdown menu -->
+    <div class="col-9 border">
+        <a class="btn btn-primary" href="#" role="button">Nyt opslag</a>
+        <div class="dropdown float-end">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Rediger rækkefølge på opslag
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Alfabetisk</a></li>
+                <li><a class="dropdown-item" href="#">Ældste til nyeste</a></li>
+                <li><a class="dropdown-item" href="#">Nyeste til ældste</a></li>
+            </ul>
+        </div>
+
+        <PostOverview />
+
+    </div>
+</section>
 
 @code {
 

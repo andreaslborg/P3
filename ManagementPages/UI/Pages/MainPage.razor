@@ -1,116 +1,17 @@
 ﻿@page "/mainpage"
 @using ManagementPages.Model
+@using ManagementPages.UI.Components
 
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
-<section class="row">
-    <div class="col-3 mt-1 border">
-        <h2 class="text-center">talDigital Kontrolpanel</h2>
-        <h4 class="mt-5 ms-3 bottom-align-text">Informationstavler</h4>
-    </div>
     
-    <div class="col-8 mt-1 border">
-        <h1 class="display-2">Kildeparken</h1>
-        <nav class="nav nav-pills flex-column flex-sm-row">
-            <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#">talDigital</a>
-            <a class="flex-sm-fill text-sm-center nav-link" href="#">Nyheder</a>
-            <a class="flex-sm-fill text-sm-center nav-link" href="#">Dyr</a>
-            <a class="flex-sm-fill text-sm-center nav-link" href="#">Planter</a>
-            <a class="flex-sm-fill text-sm-center nav-link" href="#">Begivenheder</a>
-            <a class="flex-sm-fill text-sm-center nav-link" href="#">Information</a>
-        </nav>
-    </div>
+<CategoryOverview />
     
-    <div class="col mt-1 border">
-        <a class="btn btn-primary float-end" href="#" role="button">Logout</a>
-    </div>
-</section>
+<InformationBoardOverview />
 
-
-<section class="row">
-    <div class="col-3 border">
-        <ul class="nav nav-pills flex-column">
-            <li class="nav-item">
-                <div class="nav-link">
-                    <a class="" href="/mainpage">Sohngaardsholmparken</a>
-                    <Boardicons />
-                </div>
-            </li>
-            <li class="nav-item">
-                <div class="nav-link">
-                    <a class="" href="/mainpage">Kildeparken</a>
-                    <div class="float-end">
-                        <a class="ms-1" href="/404"><i class="bi bi-pencil-square"></i></a>
-                        <a class="ms-1" href="/404"><i class="bi bi-eye-fill"></i></a>
-                        <a class="ms-1" href="/404"><i class="bi bi-qr-code"></i></a>
-                        <a class="ms-1" href="/404"><i class="bi bi-bar-chart"></i></a>
-                    </div>
-                </div>
-            </li>
-            <li class="nav-item">
-                <div class="nav-link">
-                    <a class="" href="/404">Signalbakken</a>
-                    <div class="float-end">
-                        <a class="ms-1" href="/404"><i class="bi bi-pencil-square"></i></a>
-                        <a class="ms-1" href="/404"><i class="bi bi-eye-fill"></i></a>
-                        <a class="ms-1" href="/404"><i class="bi bi-qr-code"></i></a>
-                        <a class="ms-1" href="/404"><i class="bi bi-bar-chart"></i></a>
-                    </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-    <div class="col-9 border">
-        <a class="btn btn-primary" href="#" role="button">Nyt opslag</a>
-        <div class="dropdown float-end">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                Rediger rækkefølge på opslag
-            </button>
-            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                <li><a class="dropdown-item" href="#">Alfabetisk</a></li>
-                <li><a class="dropdown-item" href="#">Ældste til nyeste</a></li>
-                <li><a class="dropdown-item" href="#">Nyeste til ældste</a></li>
-            </ul>
-        </div>
-        <div class="row me-1 border">
-            <h5>Titel</h5>
-            <div>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                It has survived not only five centuries, but also the leap into electronic typesetting, 
-                remaining essentially unchanged. It was popularised in the 1960s with the release of 
-                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing 
-                software like Aldus PageMaker including versions of Lorem Ipsum.
-                <div class="float-end">
-                    <a class="ms-1" href="/404"><i class="bi bi-pencil-square"></i></a>
-                    <a class="ms-1" href="/404"><i class="bi bi-eye-fill"></i></a>
-                    <a class="ms-1" href="/404"><i class="bi bi-trash"></i></a>
-                </div>
-            </div>
-        </div>
-        <div class="row me-1 mt-1 border">
-            <h5>Titel</h5>
-            <div>
-                Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-                Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-                when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-                It has survived not only five centuries, but also the leap into electronic typesetting, 
-                remaining essentially unchanged. It was popularised in the 1960s with the release of 
-                Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing 
-                software like Aldus PageMaker including versions of Lorem Ipsum.
-                <div class="float-end">
-                    <a class="ms-1" href="/404"><i class="bi bi-pencil-square"></i></a>
-                    <a class="ms-1" href="/404"><i class="bi bi-eye-fill"></i></a>
-                    <a class="ms-1" href="/404"><i class="bi bi-trash"></i></a>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
 
 @code {
 
