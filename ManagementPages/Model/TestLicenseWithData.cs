@@ -7,5 +7,6 @@ namespace ManagementPages.Model
 {
     public class TestLicenseWithData
     {
+
     }
 }
