@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace ManagementPages.Model
 {
@@ -9,13 +10,17 @@ namespace ManagementPages.Model
     {
         public string Title { get; set; }
 
-        public List<Post> Posts { get; set; }
+        public List<Post> Posts = new();
 
         public bool IsPublished { get; set; }
 
-        //icon?
+        public string Icon { get; set; }
 
-        //sorting af posts er det her den skal ligge?
-        
+        //https://docs.microsoft.com/en-us/dotnet/api/system.drawing.color?view=net-5.0 
+        public Color ColorOfCategory { get; set; }
+
+        //Skal assignes i constructor - dependency injection 
+        //public ISortingMachine PostSortingMachine { get; set; }
+
     }
 }

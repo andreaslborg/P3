@@ -11,9 +11,13 @@ namespace ManagementPages.Model
 
         public string Text { get; set; }
 
-        //image?
+        public string Author { get; set; }
 
-        public bool IsVisible { get; set; }
+        public string Image { get; set; }
+
+        public string Audio { get; set; }
+        
+        public bool IsPublished { get; set; }
 
         public DateTime ExpirationDate { get; set; }
     }

@@ -9,6 +9,8 @@ namespace ManagementPages.Model
     {
         public int LicenseNumber { get; set; }
 
+        public List<InformationBoard> InformationBoards = new();
+
         public DateTime RegistrationDate { get; set; }
     }
 }
