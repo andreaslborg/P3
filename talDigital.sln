@@ -7,6 +7,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisitorApplication", "Visit
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagementPages", "ManagementPages\ManagementPages.csproj", "{7365FB5C-4AC6-4344-B5EE-2A84393D3F05}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataAccessLibrary", "DataAccessLibrary\DataAccessLibrary.csproj", "{B7DB4C62-3972-4FBE-8969-DE2BFAF6F1DD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{7365FB5C-4AC6-4344-B5EE-2A84393D3F05}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7365FB5C-4AC6-4344-B5EE-2A84393D3F05}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7365FB5C-4AC6-4344-B5EE-2A84393D3F05}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7DB4C62-3972-4FBE-8969-DE2BFAF6F1DD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7DB4C62-3972-4FBE-8969-DE2BFAF6F1DD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7DB4C62-3972-4FBE-8969-DE2BFAF6F1DD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7DB4C62-3972-4FBE-8969-DE2BFAF6F1DD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
