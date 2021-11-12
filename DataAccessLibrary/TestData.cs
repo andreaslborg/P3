@@ -26,7 +26,7 @@ namespace DataAccessLibrary
         public Task InsertTest(TestModel test)
         {
             string sql = @"insert into dbo.test (id, name)
-                            value (@Id, @Name);";
+                            values (@ID, @Name);";
 
             return _db.SaveData(sql, test);
         }

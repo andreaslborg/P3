@@ -1,0 +1,78 @@
+﻿@page "/Test";
+
+@using DataAccessLibrary;
+@using DataAccessLibrary.Models;
+@using ManagementPages.Model;
+
+
+@inject ITestData _db; 
+
+<h3>Test Page</h3>
+
+<h4>Insert new test</h4>
+<EditForm Model="@newTest" OnValidSubmit="@InsertTest">
+
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+
+    <InputNumber id="id" @bind-Value="newTest.ID"> </InputNumber>
+    <InputText id="name" @bind-Value="newTest.Name">  </InputText>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
+
+<h4>Current</h4>
+@if(test == null)
+{
+    <p>Loading..</p>
+}
+else
+{
+<table class="table table-striped">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+        @foreach(var elem in test)
+        {
+        <tr>
+            <td>@elem.ID</td>
+            <td>@elem.Name</td>
+        </tr>
+        }
+    </tbody>
+</table>
+
+}
+
+@code {
+    private List<TestModel> test;
+    private DisplayTest newTest = new DisplayTest();
+
+    protected override async Task OnInitializedAsync()
+    {
+        test = await _db.GetTest();
+
+    }
+
+    private async Task InsertTest()
+    {
+        TestModel t = new TestModel
+        {
+            ID = newTest.ID,
+            Name = newTest.Name
+
+        };
+
+        await _db.InsertTest(t);
+
+        test.Add(t);
+
+        newTest = new DisplayTest();
+    }
+
+}
