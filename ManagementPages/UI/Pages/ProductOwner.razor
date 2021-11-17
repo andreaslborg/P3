@@ -7,7 +7,85 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
+<section class="row">
+    <div class="col-3 mt-1 border">
+        <h2 class="text-center">talDigital Kontrolpanel</h2>
+        <h5 class="text-center">Product Owner Panel</h5>
+    </div>
+    <div class="col-7 mt-1 border">
 
+    </div>
+    <div class="col-2 mt-1 border">
+        <a class="btn btn-primary float-end" href="#" role="button"><i class="bi bi-box-arrow-right"></i> Logout</a>
+        <a class="btn btn-primary float-end" href="#" role="button"><i class="bi bi-person-fill"></i> Profil</a>
+        <a class="btn btn-primary float-end" href="#" role="button"><i class="bi bi-question-circle"></i> Hjælp</a>
+    </div>
+    
+    <div class="col-10 border">
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th scope="col">Licens</th>
+              <th scope="col">Antal Boards</th>
+              <th scope="col">Antal Besøg</th>
+              <th scope="col">Unikke Besøg</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><button class="btn btn-outline p-0">Sohngaardsholmparken</button><Boardicons /></td>
+              <td>3</td>
+              <td>2394</td>
+              <td>903</td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-outline p-0">Kildeparken</button><Boardicons /></td>
+              <td>3</td>
+              <td>2394</td>
+              <td>903</td>
+            </tr>
+            <tr>
+              <td><button class="btn btn-outline p-0">Signalbakken</button><Boardicons /></td>
+              <td>3</td>
+              <td>2394</td>
+              <td>903</td>
+            </tr>
+          </tbody>
+        </table>
+	</div>
+
+    <div class="col-2 border">
+        <h3 class="">Opret ny licens</h3>
+        <form class="col-11">
+            <div>
+                <label for="textName" class="form-label">Navn på kunde</label>
+                <input type="text" class="form-control" id="licenseName">
+            </div>
+            <br />
+            <p>Vælg antal informationstavler</p>
+            <div class="dropdown">
+                <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Antal Informationstavler
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    <li><a class="dropdown-item" href="#">Alfabetisk</a></li>
+                    <li><a class="dropdown-item" href="#">Ældste til nyeste</a></li>
+                    <li><a class="dropdown-item" href="#">Nyeste til ældste</a></li>
+                </ul>
+            </div>
+            <br />
+            <div>
+                <label for="exampleInputEmail1" class="form-label">Email på admin</label>
+                <input type="email" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp">
+            </div>
+            <NavLink class="nav-link ps-0" href="admin">
+                <button class="btn btn-primary" role="button"><i class="bi bi-check2"></i> Gem</button>
+            </NavLink>
+        </form>
+	</div>
+
+
+</section>
 
 
 @code {
