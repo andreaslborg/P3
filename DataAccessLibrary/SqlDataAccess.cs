@@ -4,7 +4,6 @@ using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,7 +36,7 @@ namespace DataAccessLibrary
         {
             //string connectionString = _config.GetConnectionString(ConnectionStringName);
 
-            using (IDbConnection connection = new SqlConnection(connectionString))
+            using (IDbConnection connection = new MySqlConnection(connectionString))
             {
                 return connection.ExecuteAsync(sql, parameters);
 

@@ -18,7 +18,7 @@ namespace DataAccessLibrary
 
         public Task<List<TestModel>> GetTest()
         {
-            string sql = "select * from dbo.test";
+            string sql = "select * from test";
 
             return _db.LoadData<TestModel, dynamic>(sql, new { });
 
@@ -26,7 +26,7 @@ namespace DataAccessLibrary
 
         public Task InsertTest(TestModel test)
         {
-            string sql = @"insert into dbo.test (id, name)
+            string sql = @"insert into test (id, name)
                             values (@ID, @Name);";
 
             return _db.SaveData(sql, test);

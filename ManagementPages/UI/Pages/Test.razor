@@ -11,7 +11,7 @@
 
 <h3>Test Page</h3>
 
-<!--
+
 <h4>Insert new test</h4>
 <EditForm Model="@newTest" OnValidSubmit="@InsertTest">
 
@@ -23,7 +23,7 @@
 
     <button type="submit">Submit</button>
 </EditForm>
--->
+
 
 
 <h4>Current</h4>
@@ -57,15 +57,14 @@ else
     private List<TestModel> test;
     private DisplayTest newTest = new DisplayTest();
 
-    
+
     protected override async Task OnInitializedAsync()
     {
         string sql = "select * from test";
         test = await _data.LoadData<TestModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
 
     }
-    
-    /*
+
     private async Task InsertTest()
     {
         TestModel t = new TestModel
@@ -75,13 +74,15 @@ else
 
         };
 
-        await _db.InsertTest(t);
+        string sql = @"insert into test (id, name)
+                            values (@ID, @Name);";
+
+        await _data.SaveData(sql, t, _config.GetConnectionString("default"));
 
         test.Add(t);
 
         newTest = new DisplayTest();
-    */
-}
+    }
 
 
 }
