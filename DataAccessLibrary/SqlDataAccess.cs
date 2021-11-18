@@ -1,5 +1,6 @@
 ﻿using Dapper;
 using Microsoft.Extensions.Configuration;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -23,13 +24,11 @@ namespace DataAccessLibrary
 
         public async Task<List<T>> LoadData<T, U>(string sql, U parameters, string connectionString)
         {
-            //string connectionString = _config.GetConnectionString(ConnectionStringName);
-
-            using (IDbConnection connection = new SqlConnection(connectionString))
+            
+            using (IDbConnection connection = new MySqlConnection(connectionString))
             {
                 var rows = await connection.QueryAsync<T>(sql, parameters);
-                //var data = await connection.QueryAsync<T>(sql, parameters);
-
+               
                 return rows.ToList();
             }
         }

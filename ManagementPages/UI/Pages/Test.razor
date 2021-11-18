@@ -57,12 +57,14 @@ else
     private List<TestModel> test;
     private DisplayTest newTest = new DisplayTest();
 
+    
     protected override async Task OnInitializedAsync()
     {
         string sql = "select * from test";
         test = await _data.LoadData<TestModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
 
     }
+    
     /*
     private async Task InsertTest()
     {
