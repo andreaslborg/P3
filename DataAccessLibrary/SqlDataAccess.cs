@@ -14,32 +14,33 @@ namespace DataAccessLibrary
     {
         private readonly IConfiguration _config;
 
-        public string ConnectionStringName { get; set; } = "Default";
+        //public string ConnectionStringName { get; set; } = "Default";
 
         public SqlDataAccess(IConfiguration config)
         {
             _config = config;
         }
 
-        public async Task<List<T>> LoadData<T, U>(string sql, U parameters)
+        public async Task<List<T>> LoadData<T, U>(string sql, U parameters, string connectionString)
         {
-            string connectionString = _config.GetConnectionString(ConnectionStringName);
+            //string connectionString = _config.GetConnectionString(ConnectionStringName);
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                var data = await connection.QueryAsync<T>(sql, parameters);
+                var rows = await connection.QueryAsync<T>(sql, parameters);
+                //var data = await connection.QueryAsync<T>(sql, parameters);
 
-                return data.ToList();
+                return rows.ToList();
             }
         }
 
-        public async Task SaveData<T>(string sql, T parameters)
+        public Task SaveData<T>(string sql, T parameters, string connectionString)
         {
-            string connectionString = _config.GetConnectionString(ConnectionStringName);
+            //string connectionString = _config.GetConnectionString(ConnectionStringName);
 
             using (IDbConnection connection = new SqlConnection(connectionString))
             {
-                await connection.ExecuteAsync(sql, parameters);
+                return connection.ExecuteAsync(sql, parameters);
 
             }
         }

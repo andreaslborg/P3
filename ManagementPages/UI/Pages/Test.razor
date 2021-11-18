@@ -3,12 +3,15 @@
 @using DataAccessLibrary;
 @using DataAccessLibrary.Models;
 @using ManagementPages.Model;
+@using Microsoft.Extensions.Configuration;
 
 
-@inject ITestData _db; 
+@inject ISqlDataAccess _data;
+@inject IConfiguration _config;
 
 <h3>Test Page</h3>
 
+<!--
 <h4>Insert new test</h4>
 <EditForm Model="@newTest" OnValidSubmit="@InsertTest">
 
@@ -20,32 +23,33 @@
 
     <button type="submit">Submit</button>
 </EditForm>
+-->
 
 
 <h4>Current</h4>
-@if(test == null)
+@if (test == null)
 {
     <p>Loading..</p>
 }
 else
 {
-<table class="table table-striped">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Name</th>
-    </tr>
-    </thead>
-    <tbody>
-        @foreach(var elem in test)
-        {
-        <tr>
-            <td>@elem.ID</td>
-            <td>@elem.Name</td>
-        </tr>
-        }
-    </tbody>
-</table>
+    <table class="table table-striped">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var elem in test)
+            {
+                <tr>
+                    <td>@elem.ID</td>
+                    <td>@elem.Name</td>
+                </tr>
+            }
+        </tbody>
+    </table>
 
 }
 
@@ -55,10 +59,11 @@ else
 
     protected override async Task OnInitializedAsync()
     {
-        test = await _db.GetTest();
+        string sql = "select * from test";
+        test = await _data.LoadData<TestModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
 
     }
-
+    /*
     private async Task InsertTest()
     {
         TestModel t = new TestModel
@@ -73,6 +78,8 @@ else
         test.Add(t);
 
         newTest = new DisplayTest();
-    }
+    */
+}
+
 
 }

@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLibrary
 {
+    /*
     public class TestData : ITestData
     {
         private readonly ISqlDataAccess _db;
@@ -30,6 +31,7 @@ namespace DataAccessLibrary
 
             return _db.SaveData(sql, test);
         }
-
+   
     }
+     */
 }
