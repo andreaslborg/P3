@@ -5,7 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel.DataAnnotations;
 
-namespace ManagementPages.Functions.DbTableModels
+namespace ManagementPages.Functions
 {
     public class TestModel
     {
