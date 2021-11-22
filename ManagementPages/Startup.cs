@@ -28,7 +28,7 @@ namespace ManagementPages
         {
             services.AddRazorPages();
             services.AddServerSideBlazor();
-            services.AddSingleton<ISqlDataAccess, SqlDataAccess>();
+            services.AddSingleton<IDbService, DbService>();
             //services.AddTransient<ITestData, TestData>();
         }
 
