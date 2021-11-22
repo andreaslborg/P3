@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace DataAccessLibrary
+namespace ManagementPages.Functions
 {
     public interface ISqlDataAccess
     {

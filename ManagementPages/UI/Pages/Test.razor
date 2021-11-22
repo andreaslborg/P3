@@ -1,7 +1,7 @@
 ﻿@page "/Test";
 
-@using DataAccessLibrary;
-@using DataAccessLibrary.Models;
+@using ManagementPages.Functions;
+@using ManagementPages.Functions.DbTableModels;
 @using ManagementPages.Model;
 @using Microsoft.Extensions.Configuration;
 
@@ -55,7 +55,7 @@ else
 
 @code {
     private List<TestModel> test;
-    private DisplayTest newTest = new DisplayTest();
+    private TestModel newTest = new TestModel();
 
 
     protected override async Task OnInitializedAsync()
@@ -81,7 +81,7 @@ else
 
         test.Add(t);
 
-        newTest = new DisplayTest();
+        newTest = new TestModel();
     }
 
 

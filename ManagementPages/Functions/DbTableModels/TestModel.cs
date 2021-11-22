@@ -1,14 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Functions.DbTableModels
 {
-    public class DisplayTest
+    public class TestModel
     {
-       [Required]
+        [Required]
         public int ID { get; set; }
 
         [Required]
