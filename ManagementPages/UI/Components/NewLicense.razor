@@ -1,0 +1,33 @@
+﻿<div class="col-2 border">
+    <h3 class="">Opret ny licens</h3>
+    <form class="col-11">
+        <div>
+            <label for="textName" class="form-label">Navn på kunde</label>
+            <input type="text" class="form-control" id="licenseName">
+        </div>
+        <br />
+        <p>Vælg antal informationstavler</p>
+        <div class="dropdown">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                Antal Informationstavler
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                <li><a class="dropdown-item" href="#">Alfabetisk</a></li>
+                <li><a class="dropdown-item" href="#">Ældste til nyeste</a></li>
+                <li><a class="dropdown-item" href="#">Nyeste til ældste</a></li>
+            </ul>
+        </div>
+        <br />
+        <div>
+            <label for="exampleInputEmail1" class="form-label">Email på admin</label>
+            <input type="email" class="form-control" id="exampleInputPassword1" aria-describedby="emailHelp">
+        </div>
+        <NavLink class="nav-link ps-0" href="admin">
+            <button class="btn btn-primary" role="button"><i class="bi bi-check2"></i> Gem</button>
+        </NavLink>
+    </form>
+</div>
+
+@code {
+
+}

@@ -1,4 +1,9 @@
-﻿<section class="row col-12">
+﻿<ManagementPages.UI.Components.Help @ref="Help"></ManagementPages.UI.Components.Help>
+<ManagementPages.UI.Components.Profile @ref="Profile"></ManagementPages.UI.Components.Profile>
+<ManagementPages.UI.Components.NewCategory @ref="NewCategory"></ManagementPages.UI.Components.NewCategory>
+<ManagementPages.UI.Components.EditCategories @ref="EditCategories"></ManagementPages.UI.Components.EditCategories>
+
+<section class="row col-12">
     <div class="col-3 mt-1 border">
         <h2 class="text-center">talDigital Kontrolpanel</h2>
         <h5 class="text-center">Aalborg Kommune</h5>
@@ -8,8 +13,8 @@
     </div>
     <div class="col-2 mt-1 border">
         <a class="btn btn-primary float-end" href="#" role="button"><i class="bi bi-box-arrow-right"></i> Logout</a>
-        <a class="btn btn-primary float-end" href="#" role="button"><i class="bi bi-person-fill"></i> Profil</a>
-        <a class="btn btn-primary float-end" href="#" role="button"><i class="bi bi-question-circle"></i> Hjælp</a>
+        <button @onclick="() => Profile.Open()" class="btn btn-primary float-end"><i class="bi bi-person-fill"></i> Profil</button>
+        <button @onclick="() => Help.Open()" class="btn btn-primary float-end"><i class="bi bi-question-circle"></i> Hjælp</button>
     </div>
     <div class="col-3">
     
@@ -22,11 +27,14 @@
             <a class="flex-sm-fill text-sm-center nav-link" href="#">Planter</a>
             <a class="flex-sm-fill text-sm-center nav-link" href="#">Begivenheder</a>
             <a class="flex-sm-fill text-sm-center nav-link" href="#">Information</a>
-            <a class="btn btn-primary" href="#" role="button"><i class="bi bi-plus-circle"></i> Ny kategori</a>
-            <a class="btn btn-primary" href="#" role="button"><i class="bi bi-pencil"></i> Rediger kategorier</a>
+            <button @onclick="() => NewCategory.Open()" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Ny kategori</button>
+            <button @onclick="() => EditCategories.Open()"class="btn btn-primary"><i class="bi bi-pencil"></i> Rediger kategorier</button>
         </nav>
     </div>
 </section>
 @code {
-
+    private ManagementPages.UI.Components.Help Help { get; set; }
+    private ManagementPages.UI.Components.Profile Profile { get; set; }
+    private ManagementPages.UI.Components.NewCategory NewCategory { get; set; }
+    private ManagementPages.UI.Components.EditCategories EditCategories { get; set; }
 }
