@@ -11,16 +11,8 @@ namespace ManagementPages.Functions
 {
     public class DbService : IDbService
     {
-        private readonly IConfiguration _config;
-
-        public DbService(IConfiguration config)
-        {
-            _config = config;
-        }
-
         public async Task<List<T>> LoadData<T, U>(string sql, U parameters, string connectionString)
         {
-
             using (IDbConnection connection = new MySqlConnection(connectionString))
             {
                 var rows = await connection.QueryAsync<T>(sql, parameters);

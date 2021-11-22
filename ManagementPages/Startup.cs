@@ -29,7 +29,6 @@ namespace ManagementPages
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<IDbService, DbService>();
-            //services.AddTransient<ITestData, TestData>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

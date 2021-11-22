@@ -24,6 +24,18 @@
     <button type="submit">Submit</button>
 </EditForm>
 
+<h4>Update test</h4>
+<EditForm Model="@updateTest" OnValidSubmit="@UpdateData">
+
+    <DataAnnotationsValidator></DataAnnotationsValidator>
+    <ValidationSummary></ValidationSummary>
+
+    <InputNumber id="id" @bind-Value="updateTest.ID"> </InputNumber>
+    <InputText id="name" @bind-Value="updateTest.Name">  </InputText>
+
+    <button type="submit">Submit</button>
+</EditForm>
+
 
 
 <h4>Current</h4>
@@ -56,13 +68,34 @@ else
 @code {
     private List<TestModel> test;
     private TestModel newTest = new TestModel();
-
+    private TestModel updateTest = new TestModel();
 
     protected override async Task OnInitializedAsync()
     {
+        //skal ind i en metode i functions.. samme med de andre ting under.. 
         string sql = "select * from test";
         test = await _data.LoadData<TestModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
 
+    }
+
+    private async Task UpdateData()
+    {
+        TestModel updateT = new TestModel
+        {
+            ID = updateTest.ID,
+            Name = updateTest.Name
+        };
+
+        
+        string sql = @"update test
+                       set id = @ID, name = (@Name)
+                       where id = 1";
+
+        await _data.SaveData(sql, updateT, _config.GetConnectionString("default"));
+
+        updateTest = new TestModel();
+
+        await OnInitializedAsync();
     }
 
     private async Task InsertTest()
