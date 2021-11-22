@@ -24,7 +24,7 @@
     <button type="submit">Submit</button>
 </EditForm>
 
-<h4>Update test where id = 1</h4>
+<h4>Update name where id = ?</h4>
 <EditForm Model="@updateTest" OnValidSubmit="@UpdateData">
 
     <DataAnnotationsValidator></DataAnnotationsValidator>
@@ -69,7 +69,6 @@ else
             }
         </tbody>
     </table>
-
 }
 
 @code {
@@ -77,25 +76,23 @@ else
     private TestModel newTest = new TestModel();
     private TestModel updateTest = new TestModel();
     private TestModel deleteTest = new TestModel();
-
+   
     protected override async Task OnInitializedAsync()
     {
         //skal ind i en metode i functions.. samme med de andre ting under..
         string sql = "select * from test";
         test = await _data.LoadData<TestModel, dynamic>(sql, new { }, _config.GetConnectionString("default"));
-
     }
 
     private async Task DeleteData()
     {
         TestModel deleteT = new TestModel
         {
-            ID = deleteTest.ID,
-            //Name = deleteTest.Name
+            ID = deleteTest.ID
         };
 
         string sql = @"delete from test
-                   where id = @ID";
+               where id = @ID";
 
         await _data.SaveData(sql, deleteT, _config.GetConnectionString("default"));
 
@@ -103,6 +100,7 @@ else
 
         await OnInitializedAsync();
     }
+
 
     private async Task UpdateData()
     {
@@ -112,9 +110,10 @@ else
             Name = updateTest.Name
         };
 
+
         string sql = @"update test
-                   set id = @ID, name = (@Name)
-                   where id = 1";
+               set name = @Name
+               where id = @ID";
 
         await _data.SaveData(sql, updateT, _config.GetConnectionString("default"));
 
@@ -133,7 +132,7 @@ else
         };
 
         string sql = @"insert into test (id, name)
-                        values (@ID, @Name);";
+                    values (@ID, @Name);";
 
         await _data.SaveData(sql, t, _config.GetConnectionString("default"));
 
@@ -141,6 +140,5 @@ else
 
         newTest = new TestModel();
     }
-
 
 }
