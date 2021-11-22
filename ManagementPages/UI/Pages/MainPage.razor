@@ -7,13 +7,17 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
-    
+
 <CategoryOverview />
-    
+
 <InformationBoardOverview />
 
+@* Dette er modal implementeringen *@
+<ManagementPages.UI.Components.Modal @ref="Modal"></ManagementPages.UI.Components.Modal>
 
+<button @onclick="() => Modal.Open()">Open Modal</button>
 
 @code {
-
+    private ManagementPages.UI.Components.Modal Modal { get; set; }
 }
+@*------------------------------------*@
