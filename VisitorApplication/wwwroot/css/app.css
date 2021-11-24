@@ -2,11 +2,29 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background-image: url("https://i.imgur.com/HPrM238.jpg");
+    background-repeat: no-repeat;
+    background-size: cover;
 }
 
 a, .btn-link {
     color: #0366d6;
 }
+
+.square {
+    background-image: url("");
+}
+
+.bi {
+    font-size: 6em;
+}
+
+.square:after {
+    content: "";
+    display: block;
+    padding-bottom: 85%;
+}
+
 
 .btn-primary {
     color: #fff;
