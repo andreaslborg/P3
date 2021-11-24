@@ -1,11 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using ManagementPages.Model;
 
 namespace ManagementPages.Functions
 {
     public interface IPostViewModel
     {
+        public Post PostModel { get; set; }
+
+        public void GetPostData(int licenseId);
     }
 }
