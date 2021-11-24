@@ -1,0 +1,48 @@
+﻿@page "/"
+@using VisitorApp.Shared
+@using System.Net.Http;
+@using System.Net.Http.Json; 
+@inject HttpClient Http
+
+<div>
+    @if (testList == null)
+    {
+<p><em>Loading...</em></p> }
+else
+{
+<table class="table">
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th></th>
+
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var test in testList)
+        {
+<tr>
+    <td>@test.ID</td>
+    <td>@test.Name</td>
+    <td></td>
+
+</tr>}
+    </tbody>
+</table>}
+</div>
+
+
+
+@functions
+{ SharedTestModel[] testList;
+
+            private SharedTestModel tes { get; set; } = new SharedTestModel();
+
+            protected async override Task OnInitializedAsync()
+            {
+                testList = await Http.GetFromJsonAsync<SharedTestModel[]>("api/Test/TestList");
+            }
+
+            
+}
