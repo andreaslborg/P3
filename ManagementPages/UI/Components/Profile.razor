@@ -1,0 +1,66 @@
+﻿<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Profil - Navn Navn</h5>
+                <button @onclick="() => Close()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="col-12 row modal-body">
+                <div class="col-6">
+                    <p class="fw-bold">Rediger navn</p>
+                    <label for="editName" class="form-label">Navn</label>
+                    <input type="text" class="form-control" id="editName" placeholder="Marius Ihlen">
+                    <br />
+                    <p class="fw-bold">Rediger e-mailadresse</p>
+                    <label for="editMail" class="form-label">E-mailadresse</label>
+                    <input type="text" class="form-control" id="editMail">
+				</div>
+                <div class="col-6">
+                    <p class="fw-bold">Rediger adgangskode</p>
+                    <label for="currentPass" class="form-label">Gamle adgangskode</label>
+                    <input type="text" class="form-control" id="currentPass" placeholder="*****">
+                    <br />
+                    <label for="editPass1" class="form-label">Ny adgangskode</label>
+                    <input type="text" class="form-control" id="editPass1" placeholder="">
+                    <label for="editPass2" class="form-label">Gentag ny adgangskode</label>
+                    <input type="text" class="form-control" id="editPass2" placeholder="">
+				</div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Luk</button>
+                <button type="button" class="btn btn-primary">Gem</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+@code {
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+
+    public void Open()
+    {
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+    }
+}
