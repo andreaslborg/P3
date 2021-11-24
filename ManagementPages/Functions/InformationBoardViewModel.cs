@@ -8,16 +8,21 @@ namespace ManagementPages.Functions
     {
         private DbService _dbService;
 
-        public List<ICategoryViewModel> Categories = new();
-
         public InformationBoardViewModel(DbService dbService, int informationBoardId)
         {
+            Categories = new();
             _dbService = dbService;
             GetInformationBoardData(informationBoardId);
             GetCategories(informationBoardId);
         }
 
+        public InformationBoardViewModel()
+        {
+        }
+
         public InformationBoard InformationBoardModel { get; set; }
+
+        public List<ICategoryViewModel> Categories { get; set; }
 
         public void GetInformationBoardData(int informationBoardId)
         {

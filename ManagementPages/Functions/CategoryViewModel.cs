@@ -17,6 +17,10 @@ namespace ManagementPages.Functions
             GetPosts(categoryId);
         }
 
+        public CategoryViewModel()
+        {
+        }
+
         public Category CategoryModel { get; set; }
 
         public void GetCategoryData(int categoryId)

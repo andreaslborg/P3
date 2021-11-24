@@ -8,16 +8,17 @@ namespace ManagementPages.Functions
     {
         private DbService _dbService;
 
-        public List<IInformationBoardViewModel> InformationBoards = new();
-
         public LicenseViewModel(DbService dbService, int licenseId)
         {
             _dbService = dbService;
+            InformationBoards = new List<IInformationBoardViewModel>();
             GetLicenseData(licenseId);
             GetInformationBoards(licenseId);
         }
 
         public License LicenseModel { get; set; }
+
+        public List<IInformationBoardViewModel> InformationBoards { get; }
 
         public void GetLicenseData(int licenseId)
         {

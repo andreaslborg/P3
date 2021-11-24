@@ -1,3 +1,4 @@
+@using ManagementPages.Functions
 <ManagementPages.UI.Components.Modals.Help @ref="Help"></ManagementPages.UI.Components.Modals.Help>
 <ManagementPages.UI.Components.Modals.Profile @ref="Profile"></ManagementPages.UI.Components.Modals.Profile>
 <ManagementPages.UI.Components.Modals.NewCategory @ref="NewCategory"></ManagementPages.UI.Components.Modals.NewCategory>
@@ -21,14 +22,24 @@
     </div>
     <div class="col-9 border">
         <nav class="nav nav-pills flex-column flex-sm-row hoverable hover">
+
+            @foreach (var category in License.InformationBoards.FirstOrDefault().Categories) //vi skal finde ud af, hvordan vi sætter 'selected'
+            {
+                <a class="flex-sm-fill text-sm-center nav-link" href="#">@category.CategoryModel.Title</a>
+            }
+
+            <!--
             <a class="flex-sm-fill text-sm-center nav-link active" aria-current="page" href="#">talDigital</a>
             <a class="flex-sm-fill text-sm-center nav-link" href="#">Nyheder</a>
             <a class="flex-sm-fill text-sm-center nav-link" href="#">Dyr</a>
             <a class="flex-sm-fill text-sm-center nav-link" href="#">Planter</a>
             <a class="flex-sm-fill text-sm-center nav-link" href="#">Begivenheder</a>
             <a class="flex-sm-fill text-sm-center nav-link" href="#">Information</a>
+            -->
+
+
             <button @onclick="() => NewCategory.Open()" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Ny kategori</button>
-            <button @onclick="() => EditCategories.Open()"class="btn btn-primary"><i class="bi bi-pencil"></i> Rediger kategorier</button>
+            <button @onclick="() => EditCategories.Open()" class="btn btn-primary"><i class="bi bi-pencil"></i> Rediger kategorier</button>
         </nav>
     </div>
 </section>
@@ -38,4 +49,7 @@
     private ManagementPages.UI.Components.Modals.Profile Profile { get; set; }
     private ManagementPages.UI.Components.Modals.NewCategory NewCategory { get; set; }
     private ManagementPages.UI.Components.Modals.EditCategories EditCategories { get; set; }
+
+    [Parameter]
+    public ILicenseViewModel License { get; set; }
 }

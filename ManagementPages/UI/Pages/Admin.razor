@@ -1,6 +1,7 @@
 ﻿@page "/admin"
 @using ManagementPages.Model
 @using ManagementPages.UI.Components
+@using ManagementPages.Functions
 
 
 
@@ -10,13 +11,13 @@
 </head>
 
 
-<CategoryOverview />
+<CategoryOverview License="@License"/>
 
 <InformationBoardOverview />
 
 
 @code {
-    
-
+    //public LicenseViewModel _license = new LicenseViewModel(new DbService(), 123); //kan vi ikke inject oppe i toppen og bruge det?
+    ILicenseViewModel License = new TestLicenseViewModel(123);
 }
 

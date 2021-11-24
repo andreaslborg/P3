@@ -7,7 +7,9 @@ namespace ManagementPages.Model
 {
     public class Post
     {
-        public int PostId { get; set; } //skal vi bruge dette til noget?
+        public int PostId { get; set; }
+
+        public int CategoryId { get; set; }
 
         public string Title { get; set; }
 
