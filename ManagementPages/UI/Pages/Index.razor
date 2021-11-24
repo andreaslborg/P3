@@ -4,27 +4,34 @@
     <h1 class="text-center mb-5 mt-5">talDigital Administration</h1>
 </div>
 
-<section class="row">
-    <div class="col-5"></div>
-    <form class="col-2">
-        <div class="mb-3">
-            <label for="exampleInputEmail1" class="form-label">Email</label>
-            <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-        </div>
-        <div class="mb-3">
-            <label for="exampleInputPassword1" class="form-label">Adgangskode</label>
-            <input type="password" class="form-control" id="exampleInputPassword1">
-            <div id="emailHelp" class="form-text">Glemt adgangskode? Tryk <a href="#">her</a>.</div>
-        </div>
-    <NavLink class="nav-link ms-0" href="admin">
-        <button class="btn btn-primary" role="button">Log ind Admin</button>
-    </NavLink>
-    <NavLink class="nav-link ms-0" href="productowner">
-        <button class="btn btn-primary" role="button">Log ind Owner</button>
-    </NavLink>
-    </form>
-    
-    <div class="col-5"></div>
+<section class="wrapper container">
+    <div class="row">
+        <div class="col-4"></div>
+        <form class="col-4">
+
+            <div class="mb-3">
+                <label for="exampleInputEmail1" class="form-label">Email</label>
+                <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+            </div>
+
+            <div class="mb-3">
+                <label for="exampleInputPassword1" class="form-label">Adgangskode</label>
+                <input type="password" class="form-control" id="exampleInputPassword1">
+                <div id="emailHelp" class="form-text">Glemt adgangskode? Tryk <a href="#">her</a>.</div>
+            </div>
+
+            <NavLink class="nav-link ms-0" href="admin">
+                <button class="btn btn-primary" role="button">Log ind Admin</button>
+            </NavLink>
+
+            <NavLink class="nav-link ms-0" href="productowner">
+                <button class="btn btn-primary" role="button">Log ind Owner</button>
+            </NavLink>
+
+        </form>
+    <div class="col-4"></div>
+</div>
+
 </section>
 
 @code {
