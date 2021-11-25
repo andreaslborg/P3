@@ -1,12 +1,15 @@
-﻿using ManagementPages.Model;
+﻿using System.Collections.Generic;
+using ManagementPages.Model;
 
 namespace ManagementPages.Functions
 {
-    internal interface ILicenseViewModel
+    public interface ILicenseViewModel
     {
         public License LicenseModel { get; set; }
 
-        //List<IInformationBoardViewModel> InformationBoards = new List<IInformationBoardViewModel>();
+        public List<IInformationBoardViewModel> InformationBoards { get; }
+
+        public IInformationBoardViewModel SelectedInformationBoard { get; set; }
 
         public void GetLicenseData(int licenseId);
 

@@ -1,7 +1,7 @@
 ﻿@page "/admin"
+@using ManagementPages.Functions
 @using ManagementPages.Model
 @using ManagementPages.UI.Components
-
 
 
 <head>
@@ -9,14 +9,21 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
+<CategoryOverview InformationBoard="@license.SelectedInformationBoard" OnCategoryClicked="@SetSelectedCategory" />
 
-<CategoryOverview />
-
-<InformationBoardOverview />
+<InformationBoardOverview License="@license" OnInformationBoardClicked="@SetSelectedInformationBoard" /> <!-- VS might indicate that there is a problem (CS1503) with 'ClickHandler'. This is not true however... -->
 
 
 @code {
-    
+    readonly ILicenseViewModel license = new TestLicenseViewModel(123);
 
+    private void SetSelectedInformationBoard(IInformationBoardViewModel selectedInformationBoard)
+    {
+        license.SelectedInformationBoard = selectedInformationBoard;
+    }
+
+    private void SetSelectedCategory(ICategoryViewModel selectedCategory)
+    {
+        license.SelectedInformationBoard.SelectedCategory = selectedCategory;
+    }
 }
-

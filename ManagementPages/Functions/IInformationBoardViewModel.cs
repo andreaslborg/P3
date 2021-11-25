@@ -1,4 +1,5 @@
-﻿using ManagementPages.Model;
+﻿using System.Collections.Generic;
+using ManagementPages.Model;
 
 namespace ManagementPages.Functions
 {
@@ -6,10 +7,12 @@ namespace ManagementPages.Functions
     {
         public InformationBoard InformationBoardModel { get; set; }
 
-        //List<ICategoryViewModel> Categories = new List<ICategoryViewModel>();
+        List<ICategoryViewModel> Categories { get; set; }
 
         public void GetInformationBoardData(int informationBoardId);
 
         public void GetCategories(int informationBoardId);
+
+        public ICategoryViewModel SelectedCategory { get; set; }
     }
 }
