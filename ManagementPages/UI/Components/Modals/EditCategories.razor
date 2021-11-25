@@ -1,4 +1,6 @@
-﻿<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+﻿<ManagementPages.UI.Components.Modals.Delete @ref="Delete"></ManagementPages.UI.Components.Modals.Delete>
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -7,13 +9,45 @@
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
-            <div class="modal-body">
-                <p>Nyheder</p>
-                <hr />
+            <div class="row modal-body">
+                <h3>
+                    Nyheder 
+                    <button data-dismiss="modal" class="btn btn-danger btn-sm" @onclick="() => CloseDelete()"><i class="bi bi-trash"></i> Slet</button>
+                </h3>
+                <div class="col-3">
+                    <label for="title" class="form-label">Rediger titel</label>
+                    <input type="text" class="form-control" id="title" placeholder="Nyheder">  
+                </div>
+                <div class="col-3">
+                    <label class="form-label">Rediger synlighed</label> <br />
+                    <button class="btn btn-success"><i class="bi bi-eye"></i> Offentlig</button>
+                    <button class="btn btn-danger"><i class="bi bi-eye-slash"></i> Ikke offentlig</button>
+                </div>
+                <div class="col-3">
+                    <label for="author" class="form-label">Ikon</label>
+                    <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Dropdown button
+                    </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-2">
+                    <label class="form-label">Farve</label> <br />
+                    <button class="btn btn-primary" disabled>Vælg tema farve</button>
+                </div>
+                <div class="col-1 mx-auto">
+                    <button class="btn my-0 py-0"><i class="bi bi-arrow-up-circle" style="font-size: 25px"></i></button>
+                    <br />
+                    <button class="btn my-0 py-0"><i class="bi bi-arrow-down-circle" style="font-size: 25px"></i></button>
+                </div>
             </div>
             <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Luk</button>
-                <button type="button" class="btn btn-primary">Gem</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Slet</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Gem som kladde</button>
+                <button type="button" class="btn btn-success">Gem</button>
             </div>
         </div>
     </div>
@@ -27,6 +61,8 @@
 
 
 @code {
+    private ManagementPages.UI.Components.Modals.Delete Delete { get; set; }
+
     public string ModalDisplay = "none;";
     public string ModalClass = "";
     public bool ShowBackdrop = false;
@@ -45,5 +81,14 @@
         ModalClass = "";
         ShowBackdrop = false;
         StateHasChanged();
+    }
+
+    public void CloseDelete()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+        Delete.Open();
     }
 }

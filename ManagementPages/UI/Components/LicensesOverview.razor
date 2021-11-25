@@ -2,18 +2,18 @@
 <ManagementPages.UI.Components.Modals.Profile @ref="Profile"></ManagementPages.UI.Components.Modals.Profile>
 <ManagementPages.UI.Components.Modals.EditAdmins @ref="EditAdmins"></ManagementPages.UI.Components.Modals.EditAdmins>
 <ManagementPages.UI.Components.Modals.EditLicense @ref="EditLicense"></ManagementPages.UI.Components.Modals.EditLicense>
-<ManagementPages.UI.Components.Modals.Charts @ref="Charts"></ManagementPages.UI.Components.Modals.Charts>
+<ManagementPages.UI.Components.Modals.LicenseStatistics @ref="LicenseStatistics"></ManagementPages.UI.Components.Modals.LicenseStatistics>
 
 <section class="row col-12">
-    <div class="col-3 mt-1 border">
+    <div class="col-3 border">
         <h2 class="text-center">talDigital Kontrolpanel</h2>
         <h5 class="text-center">Product Owner Panel</h5>
     </div>
-    <div class="col-7 mt-1 border">
+    <div class="col-7 border">
 
     </div>
-    <div class="col-2 mt-1 border">
-        <button class="btn btn-primary float-end"><i class="bi bi-box-arrow-right"></i> Logout</button>
+    <div class="col-2 border">
+        <a class="btn btn-primary float-end" href="/"><i class="bi bi-box-arrow-right"></i> Logout</a>
         <button @onclick="() => Profile.Open()" class="btn btn-primary float-end"><i class="bi bi-person-fill"></i> Profil</button>
         <button @onclick="() => Help.Open()" class="btn btn-primary float-end"><i class="bi bi-question-circle"></i> Hjælp</button>
     </div>
@@ -30,11 +30,11 @@
             </thead>
             <tbody>
                 <tr>
-                    <td><button class="btn btn-outline p-0">Sohngaardsholmparken</button>
+                    <td><button class="btn btn-outline p-0">Aalborg Kommune</button>
                         <div class="float-end">
                             <button @onclick="() => EditLicense.Open()" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
                             <button @onclick="() => EditAdmins.Open()" class="btn ms-1 p-0"><i class="bi bi-people-fill"></i></button>
-                            <button @onclick="() => Charts.Open()" class="btn ms-1 p-0"><i class="bi bi-bar-chart"></i></button>
+                            <button @onclick="() => LicenseStatistics.Open()" class="btn ms-1 p-0"><i class="bi bi-bar-chart"></i></button>
                         </div>
               
                     </td>
@@ -43,13 +43,25 @@
                       <td>903</td>
                 </tr>
                 <tr>
-                    <td><button class="btn btn-outline p-0">Kildeparken</button><Boardicons /></td>
+                    <td><button class="btn btn-outline p-0">Kunde 2</button>
+                        <div class="float-end">
+                            <button @onclick="() => EditLicense.Open()" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
+                            <button @onclick="() => EditAdmins.Open()" class="btn ms-1 p-0"><i class="bi bi-people-fill"></i></button>
+                            <button @onclick="() => LicenseStatistics.Open()" class="btn ms-1 p-0"><i class="bi bi-bar-chart"></i></button>
+                        </div>
+                    </td>
                     <td>3</td>
                     <td>2394</td>
                     <td>903</td>
                 </tr>
                 <tr>
-                    <td><button class="btn btn-outline p-0">Signalbakken</button><Boardicons /></td>
+                    <td><button class="btn btn-outline p-0">Kunde 3</button>
+                        <div class="float-end">
+                            <button @onclick="() => EditLicense.Open()" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
+                            <button @onclick="() => EditAdmins.Open()" class="btn ms-1 p-0"><i class="bi bi-people-fill"></i></button>
+                            <button @onclick="() => LicenseStatistics.Open()" class="btn ms-1 p-0"><i class="bi bi-bar-chart"></i></button>
+                        </div>
+                    </td>
                     <td>3</td>
                     <td>2394</td>
                     <td>903</td>
@@ -67,5 +79,5 @@
     private ManagementPages.UI.Components.Modals.Profile Profile { get; set; }
     private ManagementPages.UI.Components.Modals.EditAdmins EditAdmins { get; set; }
     private ManagementPages.UI.Components.Modals.EditLicense EditLicense { get; set; }
-    private ManagementPages.UI.Components.Modals.Charts Charts { get; set; }
+    private ManagementPages.UI.Components.Modals.LicenseStatistics LicenseStatistics { get; set; }
 }
