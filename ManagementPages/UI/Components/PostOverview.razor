@@ -1,7 +1,8 @@
-﻿@using ManagementPages.Functions
-<div class="col">
-    <!-- POST 1 -->
-    
+@using ManagementPages.Functions
+<ManagementPages.UI.Components.Modals.NewPost @ref="NewPost"/>
+<ManagementPages.UI.Components.Modals.Delete @ref="Delete"/>
+
+<div class="col">    
     @foreach (var post in Category.Posts)
     {
         <div class="row me-1 mt-1 border">
@@ -9,9 +10,8 @@
             <div>
                 @post.PostModel.Text
                 <div class="float-end">
-                    <a class="ms-1" href="/404"><i class="bi bi-pencil"></i></a>
-                    <a class="ms-1" href="/404"><i class="bi bi-eye-fill"></i></a>
-                    <a class="ms-1" href="/404"><i class="bi bi-trash"></i></a>
+                    <button @onclick="() => NewPost.Open()" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
+                    <button @onclick="() => Delete.Open()" class="btn p-0"><i class="bi bi-trash"></i></button>
                 </div>
             </div>
         </div>
@@ -21,4 +21,7 @@
 @code {
     [Parameter]
     public ICategoryViewModel Category { get; set; }
+
+    private ManagementPages.UI.Components.Modals.NewPost NewPost { get; set; }
+    private ManagementPages.UI.Components.Modals.Delete Delete { get; set; }
 }
