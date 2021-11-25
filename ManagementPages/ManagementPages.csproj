@@ -16,10 +16,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Compile Remove="Model\TestLicenseWithData.cs" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="Pages\_Host.cshtml" />
   </ItemGroup>
 
