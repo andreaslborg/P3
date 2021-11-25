@@ -18,7 +18,7 @@
                     <label for="infoText" class="form-label">Note</label>
                     <textarea class="form-control" id="infotext" rows="3" placeholder="Aalborg kommune. Tavler rundt i hele byen."></textarea>
                     <br />
-                    <button data-dismiss="modal" class="btn btn-danger btn-sm" @onclick="() => CloseDelete()"><i class="bi bi-trash"></i> Slet kunde</button>
+                    <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseDelete()"><i class="bi bi-trash"></i> Slet kunde</button>
                 </div>
 
                 <div class="col-6">
@@ -48,15 +48,16 @@
                     <label for="title" class="form-label">Navn på informationstavlen</label>
                     <input type="text" class="form-control" id="title" placeholder="">
                     <br />
-                    <label for="title" class="form-label">Kategori navne</label>
-                    <input type="text" class="form-control" id="title" placeholder="Nyheder">
-                    <input type="text" class="form-control" id="title" placeholder="Planter">
-                    <input type="text" class="form-control" id="title" placeholder="Dyr">
-                    <input type="text" class="form-control" id="title" placeholder="Historie">
-                    <input type="text" class="form-control" id="title" placeholder="Information">
-                    <input type="text" class="form-control" id="title" placeholder="Begivenheder">
+                    <label for="title" class="form-label">Kategorier</label> 
                     <br />
-                    <button class="btn btn-success btn-sm float-end" @onclick="() => CloseDelete()"><i class="bi bi-plus-circle"></i> Tilføj</button>
+                    <input type="text" class="form-control" id="title" placeholder="Kategori 1">
+                    <input type="text" class="form-control" id="title" placeholder="Kategori 2">
+
+                    <button class="btn btn-danger btn-sm mt-1"><i class="bi bi-dash-circle"></i> Slet kategori</button>
+                    <button class="btn btn-success btn-sm mt-1"><i class="bi bi-plus-circle"></i> Tilføj kategori</button>
+                    <br />
+                    <br />
+                    <button class="btn btn-success"><i class="bi bi-plus-circle"></i> Tilføj informationstavle</button>
                 </div>
                 
             </div>
@@ -100,10 +101,7 @@
 
     public void CloseDelete()
     {
-        ModalDisplay = "none";
-        ModalClass = "";
-        ShowBackdrop = false;
-        StateHasChanged();
+        Close();
         Delete.Open();
     }
 }

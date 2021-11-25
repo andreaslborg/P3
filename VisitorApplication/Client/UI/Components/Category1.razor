@@ -5,16 +5,33 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
-<section class="row text-white">
-	<a class="col-1 border" href="/">
-		Tilbage
-	</a>
-	<div class="col-10 text-center border">
-		<h1 class="" id="">Nyheder</h1>
+<!-- Category Title -->
+<section class="text-white">
+	<div class="text-center border">
+		<h1 class="display-1">Kategori Titel</h1>
 	</div>
-	<div class="col-1 border"></div>
 </section>
 
+<!-- Post Overview -->
+<section class="wrapper container mx-auto">
+    <!-- Post 1 -->
+	<div class="card m-2 btn" href="/opslag">
+        <div class="row g-0">
+            <div class="col-4">
+	            <i class="bi bi-image img-fluid rounded-start" style="font-size: 120px"></i>
+             </div>
+            <div class="col-8">
+                <div class="card-body">
+                    <h5 class="card-title">Post titel</h5>
+                    <p class="card-text">
+                    Lorem Ipsum is simply dummy text of the printing and typesetting industry.
+                    </p>
+                    <p class="card-text"><small class="text-muted">Forfatter: Mikkel Wammen</small></p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
 
 @code {
 
