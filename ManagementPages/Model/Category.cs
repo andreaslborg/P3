@@ -9,10 +9,10 @@ namespace ManagementPages.Model
     public class Category
     {
         public int CategoryId { get; set; }
-
-        public int InformationBoardId { get; set; }
         
         public string Title { get; set; }
+
+        public List<Post> Posts = new();
 
         public bool IsPublished { get; set; }
 
