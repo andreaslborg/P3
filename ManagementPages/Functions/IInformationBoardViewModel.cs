@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ManagementPages.Model;
 
 namespace ManagementPages.Functions
@@ -15,8 +16,8 @@ namespace ManagementPages.Functions
 
         public ICategoryViewModel SelectedCategory { get; set; }
 
-        public void AddNewCategory(ICategoryViewModel category);
+        public Task AddNewCategory(ICategoryViewModel category);
 
-        public void 
+        
     }
 }

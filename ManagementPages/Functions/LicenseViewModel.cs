@@ -32,11 +32,11 @@ namespace ManagementPages.Functions
             var result = new License();
 
             // hvis vi fetcher et felt ad gangen: 
-            result.LicenseId = licenseId;
-            result.RegistrationDate = ..; //kald til db
+            //result.LicenseId = licenseId;
+            //result.RegistrationDate = ..; //kald til db
 
             // hvis vi fetcher et helt objekt ad gangen: 
-            result = ... ; //kald til db
+            //result = ... ; //kald til db
 
             LicenseModel = result;
         }
@@ -45,7 +45,7 @@ namespace ManagementPages.Functions
         {
             // lave informationboard objekter ud fra licenseId i et loop (where licenseId = licenseId)
             // først skal vi identificere deres Id
-            InformationBoards.Add(new InformationBoardViewModel(_dbService, informationBoardId));
+            //InformationBoards.Add(new InformationBoardViewModel(_dbService, informationBoardId));
         }
     }
 }
