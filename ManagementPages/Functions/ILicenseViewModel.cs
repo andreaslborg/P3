@@ -9,6 +9,8 @@ namespace ManagementPages.Functions
 
         public List<IInformationBoardViewModel> InformationBoards { get; }
 
+        public IInformationBoardViewModel SelectedInformationBoard { get; set; }
+
         public void GetLicenseData(int licenseId);
 
         public void GetInformationBoards(int licenseId);

@@ -8,7 +8,7 @@ namespace ManagementPages.Functions
     {
         private DbService _dbService;
 
-        public List<IPostViewModel> Posts = new();
+        public List<IPostViewModel> Posts { get; set; } = new();
 
         public CategoryViewModel(DbService dbService, int categoryId)
         {

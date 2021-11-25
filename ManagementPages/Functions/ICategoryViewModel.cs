@@ -1,4 +1,5 @@
-﻿using ManagementPages.Model;
+﻿using System.Collections.Generic;
+using ManagementPages.Model;
 
 namespace ManagementPages.Functions
 {
@@ -6,7 +7,7 @@ namespace ManagementPages.Functions
     {
         public Category CategoryModel { get; set; }
 
-        //List<IPostViewModel> Posts = new List<IPostViewModel>();
+         List<IPostViewModel> Posts { get; set; }
 
         public void GetCategoryData(int categoryId);
 

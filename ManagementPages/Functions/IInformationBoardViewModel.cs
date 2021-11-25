@@ -12,5 +12,7 @@ namespace ManagementPages.Functions
         public void GetInformationBoardData(int informationBoardId);
 
         public void GetCategories(int informationBoardId);
+
+        public ICategoryViewModel SelectedCategory { get; set; }
     }
 }

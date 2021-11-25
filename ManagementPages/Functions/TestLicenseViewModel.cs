@@ -1,11 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Linq;
+using System.Runtime.CompilerServices;
+using ManagementPages.Annotations;
 using ManagementPages.Model;
+using License = ManagementPages.Model.License;
 
 namespace ManagementPages.Functions
 {
     public class TestLicenseViewModel : ILicenseViewModel
     {
+        private IInformationBoardViewModel _selectedInformationBoard;
+
         public TestLicenseViewModel(int licenseId)
         {
             InformationBoards = new List<IInformationBoardViewModel>();
@@ -20,6 +27,13 @@ namespace ManagementPages.Functions
 
 
         public List<IInformationBoardViewModel> InformationBoards { get; }
+        
+
+        public IInformationBoardViewModel SelectedInformationBoard
+        {
+            get => _selectedInformationBoard ?? InformationBoards.FirstOrDefault();
+            set => _selectedInformationBoard = value;
+        }
 
         public void GetLicenseData(int licenseId)
         {
@@ -53,18 +67,46 @@ namespace ManagementPages.Functions
                 }
             };
 
-            var posts = new List<IPostViewModel>();
-            posts.Add(post1);
-            posts.Add(post2);
+            var posts1 = new List<IPostViewModel>();
+            posts1.Add(post1);
+            posts1.Add(post2);
+
+            var post3 = new PostViewModel
+            {
+                PostModel = new Post
+                {
+                    Author = "John",
+                    ExpirationDate = new DateTime(2022, 01, 01),
+                    IsPublished = true,
+                    Text = LoremIpsum,
+                    Title = "Post 3"
+                }
+            };
+
+            var post4 = new PostViewModel
+            {
+                PostModel = new Post
+                {
+                    Author = "Hanne",
+                    ExpirationDate = new DateTime(2022, 01, 01),
+                    IsPublished = true,
+                    Text = LoremIpsum,
+                    Title = "Post 4"
+                }
+            };
+
+            var posts2 = new List<IPostViewModel>();
+            posts2.Add(post3);
+            posts2.Add(post4);
 
             var category1 = new CategoryViewModel
             {
                 CategoryModel = new Category
                 {
                     IsPublished = true,
-                    Title = "Category 1"
+                    Title = "IB1: Category 1"
                 },
-                Posts = posts
+                Posts = posts1
             };
 
             var category2 = new CategoryViewModel
@@ -72,18 +114,42 @@ namespace ManagementPages.Functions
                 CategoryModel = new Category
                 {
                     IsPublished = true,
-                    Title = "Category 2"
+                    Title = $"IB1: Category 2"
                 },
-                Posts = posts
+                Posts = posts2
             };
 
-            var categories = new List<ICategoryViewModel>();
-            categories.Add(category1);
-            categories.Add(category2);
+            var categories1 = new List<ICategoryViewModel>();
+            categories1.Add(category1);
+            categories1.Add(category2);
+
+            var category3 = new CategoryViewModel
+            {
+                CategoryModel = new Category
+                {
+                    IsPublished = true,
+                    Title = "IB2: Category 1"
+                },
+                Posts = posts2
+            };
+
+            var category4 = new CategoryViewModel
+            {
+                CategoryModel = new Category
+                {
+                    IsPublished = true,
+                    Title = "IB2: Category 2"
+                },
+                Posts = posts1
+            };
+
+            var categories2 = new List<ICategoryViewModel>();
+            categories2.Add(category3);
+            categories2.Add(category4);
 
             var informationBoard1 = new InformationBoardViewModel
             {
-                Categories = categories,
+                Categories = categories1,
                 InformationBoardModel = new InformationBoard
                 {
                     IsPublished = true,
@@ -93,7 +159,7 @@ namespace ManagementPages.Functions
 
             var informationBoard2 = new InformationBoardViewModel
             {
-                Categories = categories,
+                Categories = categories2,
                 InformationBoardModel = new InformationBoard
                 {
                     IsPublished = true,
