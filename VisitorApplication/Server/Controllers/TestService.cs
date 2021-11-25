@@ -5,9 +5,9 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using VisitorApp.Shared;
+using VisitorApplication.Shared;
 
-namespace VisitorApp.Server.Services
+namespace VisitorApplication.Server.Controllers
 {
     public interface ITest
     {

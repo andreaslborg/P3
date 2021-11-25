@@ -35,8 +35,6 @@ else
 { 
     Test[] testList;
 
-    private Test tes { get; set; } = new Test();
-
     protected async override Task OnInitializedAsync()
     {
         testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
