@@ -39,8 +39,7 @@ namespace VisitorApplication.Server.Controllers
                 try
                 {
                     await con.OpenAsync();
-                    var com = new MySqlCommand("Select `ID`,`Name` FROM test",
-                        con)
+                    var com = new MySqlCommand("Select `ID`,`Name` FROM test", con)
                     {
                         CommandType = CommandType.Text
                     };
@@ -50,6 +49,7 @@ namespace VisitorApplication.Server.Controllers
                     {
                         lst.Add(new Test
                         {
+                            //det ID der er i databasen vil vi gerne have hen i en variabel ID
                             ID = (int)rdr["ID"],
                             Name = rdr["Name"].ToString(),
                         });
