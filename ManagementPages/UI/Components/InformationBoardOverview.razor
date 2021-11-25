@@ -15,36 +15,36 @@
             </tr>
             </thead>
             <tbody>
-            @foreach (var informationBoard in License.InformationBoards)
-            {
-                <tr class="">
-                    <td class="">
-                        <button class="btn btn-outline p-0" @onclick="() => OnInformationBoardClicked.InvokeAsync(informationBoard)">
-                            @if (informationBoard == License.SelectedInformationBoard)
-                            {
-                                @selectedText(informationBoard)
-                            }
-                            else
-                            {
-                                @informationBoard.InformationBoardModel.Title
-                            }
-                        </button>
-                    </td>
-                    <td>
-                        <div class="float-end">
-                            <button @onclick="() => EditInfoboard.Open()" class="btn ms-1 p-0">
-                                <i class="bi bi-pencil"></i>
+                @foreach (var informationBoard in License.InformationBoards)
+                {
+                    <tr class="">
+                        <td class="">
+                            <button class="btn btn-outline p-0" @onclick="() => OnInformationBoardClicked.InvokeAsync(informationBoard)">
+                                @if (informationBoard == License.SelectedInformationBoard)
+                                {
+                                    @selectedText(informationBoard)
+                                }
+                                else
+                                {
+                                    @informationBoard.InformationBoardModel.Title
+                                }
                             </button>
-                            <button @onclick="() => InfoboardQR.Open()" class="btn ms-1 p-0">
-                                <i class="bi bi-qr-code"></i>
-                            </button>
-                            <button @onclick="() => InfoboardStatistics.Open()" class="btn ms-1 p-0">
-                                <i class="bi bi-bar-chart"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            }
+                        </td>
+                        <td>
+                            <div class="float-end">
+                                <button @onclick="() => EditInfoboard.Open()" class="btn ms-1 p-0">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button @onclick="() => InfoboardQR.Open()" class="btn ms-1 p-0">
+                                    <i class="bi bi-qr-code"></i>
+                                </button>
+                                <button @onclick="() => InfoboardStatistics.Open()" class="btn ms-1 p-0">
+                                    <i class="bi bi-bar-chart"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
             </tbody>
         </table>
 
@@ -93,7 +93,7 @@
             </ul>
         </div>
 
-        <PostOverview />
+        <PostOverview Category="@License.SelectedInformationBoard.SelectedCategory" />
 
     </div>
 </section>

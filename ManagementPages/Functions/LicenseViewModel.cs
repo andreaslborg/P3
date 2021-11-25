@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using ManagementPages.Model;
 
 namespace ManagementPages.Functions
@@ -7,8 +8,7 @@ namespace ManagementPages.Functions
     public class LicenseViewModel : ILicenseViewModel
     {
         private DbService _dbService;
-
-        public List<IInformationBoardViewModel> InformationBoards = new();
+        private IInformationBoardViewModel _selectedInformationBoard;
 
         public LicenseViewModel(DbService dbService, int licenseId)
         {
@@ -18,6 +18,14 @@ namespace ManagementPages.Functions
         }
 
         public License LicenseModel { get; set; }
+
+        public List<IInformationBoardViewModel> InformationBoards { get; } = new();
+
+        public IInformationBoardViewModel SelectedInformationBoard
+        {
+            get => _selectedInformationBoard ?? InformationBoards.FirstOrDefault();
+            set => _selectedInformationBoard = value;
+        }
 
         public void GetLicenseData(int licenseId)
         {
