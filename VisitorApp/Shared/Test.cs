@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace VisitorApp.Shared
 {
-    public class SharedTestModel
+    public class Test
     {
         public int ID { get; set; }
 

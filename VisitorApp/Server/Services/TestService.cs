@@ -5,14 +5,14 @@ using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using VisitorApp.Server.Functions;
+using VisitorApp.Shared;
 
 namespace VisitorApp.Server.Services
 {
     public interface ITest
     {
         Task<List<Test>> TestList();
-        Task SaveData(Test tests);
+       
     }
     public class TestService : ITest
     {
@@ -60,29 +60,6 @@ namespace VisitorApp.Server.Services
 
             }
         }
-
-        public async Task SaveData(Test students)
-        {
-            var connectionString = this.GetConnection();
-            using (var con = new MySqlConnection(connectionString))
-            {
-                try
-                {
-                    await con.OpenAsync();
-                    var com = new MySqlCommand("INSERT INTO tblstudinfo () VALUES (@id,@fname,@mi,@lname,@bdate,@address,@email,@user,@pwd)", con)
-                    {
-                        CommandType = CommandType.Text
-                    };
-                    com.Parameters.AddWithValue("@id", students.ID);
-                    com.Parameters.AddWithValue("@fname", students.Name);
-                   
-                    await com.ExecuteNonQueryAsync();
-                }
-                finally { con.Close(); }
-
-            }
-        }
-
 
     }
 }

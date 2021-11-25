@@ -15,5 +15,9 @@
     <ProjectReference Include="..\Shared\VisitorApp.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Functions\" />
+  </ItemGroup>
+
 
 </Project>

@@ -1,7 +1,5 @@
 ﻿@page "/"
 @using VisitorApp.Shared
-@using System.Net.Http;
-@using System.Net.Http.Json; 
 @inject HttpClient Http
 
 <div>
@@ -33,16 +31,15 @@ else
 </div>
 
 
-
 @functions
-{ SharedTestModel[] testList;
+{ 
+    Test[] testList;
 
-            private SharedTestModel tes { get; set; } = new SharedTestModel();
+    private Test tes { get; set; } = new Test();
 
-            protected async override Task OnInitializedAsync()
-            {
-                testList = await Http.GetFromJsonAsync<SharedTestModel[]>("api/Test/TestList");
-            }
+    protected async override Task OnInitializedAsync()
+    {
+        testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
+    }
 
-            
 }

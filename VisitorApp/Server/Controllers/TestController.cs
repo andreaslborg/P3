@@ -3,7 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using VisitorApp.Server.Functions;
+using VisitorApp.Shared;
 using VisitorApp.Server.Services;
 
 namespace VisitorApp.Server.Controllers
