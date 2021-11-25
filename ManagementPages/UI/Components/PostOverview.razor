@@ -1,27 +1,27 @@
-﻿<ManagementPages.UI.Components.Modals.NewPost @ref="NewPost"></ManagementPages.UI.Components.Modals.NewPost>
-<ManagementPages.UI.Components.Modals.Delete @ref="Delete"></ManagementPages.UI.Components.Modals.Delete>
+@using ManagementPages.Functions
+<ManagementPages.UI.Components.Modals.NewPost @ref="NewPost"/>
+<ManagementPages.UI.Components.Modals.Delete @ref="Delete"/>
 
-<div class="col">
-    <!-- POST 1 -->
-    <div class="row me-1 border">
-        <h5>Titel</h5>
-        <div>
-            Lorem Ipsum is simply dummy text of the printing and typesetting industry. 
-            Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, 
-            when an unknown printer took a galley of type and scrambled it to make a type specimen book. 
-            It has survived not only five centuries, but also the leap into electronic typesetting, 
-            remaining essentially unchanged. It was popularised in the 1960s with the release of 
-            Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing 
-            software like Aldus PageMaker including versions of Lorem Ipsum.
-            <div class="float-end">
-                <button @onclick="() => NewPost.Open()" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
-                <button @onclick="() => Delete.Open()" class="btn p-0"><i class="bi bi-trash"></i></button>
+<div class="col">    
+    @foreach (var post in Category.Posts)
+    {
+        <div class="row me-1 mt-1 border">
+            <h5>@post.PostModel.Title</h5>
+            <div>
+                @post.PostModel.Text
+                <div class="float-end">
+                    <button @onclick="() => NewPost.Open()" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
+                    <button @onclick="() => Delete.Open()" class="btn p-0"><i class="bi bi-trash"></i></button>
+                </div>
             </div>
         </div>
-    </div>
+    }
 </div>
 
 @code {
+    [Parameter]
+    public ICategoryViewModel Category { get; set; }
+
     private ManagementPages.UI.Components.Modals.NewPost NewPost { get; set; }
     private ManagementPages.UI.Components.Modals.Delete Delete { get; set; }
 }
