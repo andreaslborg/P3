@@ -40,5 +40,10 @@ namespace ManagementPages.Functions
             get => _selectedCategory ?? Categories.FirstOrDefault();
             set => _selectedCategory = value;
         }
+
+        public void AddNewCategory(ICategoryViewModel category)
+        {
+            //gem kategori til database
+        }
     }
 }

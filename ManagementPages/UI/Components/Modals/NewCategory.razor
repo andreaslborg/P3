@@ -26,7 +26,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Slet</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" @onclick="() => Close()">Gem</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal" @onclick="() => SaveAndClose()">Gem</button>
             </div>
         </div>
     </div>
@@ -50,6 +50,12 @@
         ModalClass = "Show";
         ShowBackdrop = true;
         StateHasChanged();
+    }
+
+    public void SaveAndClose()
+    {
+        AddNewCategory();
+        Close();
     }
 
     public void Close()

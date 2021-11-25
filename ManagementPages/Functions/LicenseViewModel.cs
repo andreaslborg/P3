@@ -29,12 +29,23 @@ namespace ManagementPages.Functions
 
         public void GetLicenseData(int licenseId)
         {
-            throw new NotImplementedException();
+            var result = new License();
+
+            // hvis vi fetcher et felt ad gangen: 
+            result.LicenseId = licenseId;
+            result.RegistrationDate = ..; //kald til db
+
+            // hvis vi fetcher et helt objekt ad gangen: 
+            result = ... ; //kald til db
+
+            LicenseModel = result;
         }
 
         public void GetInformationBoards(int licenseId)
         {
-            throw new NotImplementedException();
+            // lave informationboard objekter ud fra licenseId i et loop (where licenseId = licenseId)
+            // først skal vi identificere deres Id
+            InformationBoards.Add(new InformationBoardViewModel(_dbService, informationBoardId));
         }
     }
 }

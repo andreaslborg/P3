@@ -14,5 +14,9 @@ namespace ManagementPages.Functions
         public void GetCategories(int informationBoardId);
 
         public ICategoryViewModel SelectedCategory { get; set; }
+
+        public void AddNewCategory(ICategoryViewModel category);
+
+        public void 
     }
 }
