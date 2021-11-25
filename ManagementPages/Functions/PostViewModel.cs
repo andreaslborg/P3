@@ -13,10 +13,6 @@ namespace ManagementPages.Functions
             GetPostData(postId);
         }
 
-        public PostViewModel()
-        {
-        }
-
         public Post PostModel { get; set; }
 
         public void GetPostData(int licenseId)
