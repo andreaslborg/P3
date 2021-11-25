@@ -9,6 +9,7 @@ using VisitorApp.Server.Services;
 namespace VisitorApp.Server.Controllers
 {
     [Route("api/[controller]")]
+    //den første del af navnet TestController er sådan man tilgår den, så api/Test
     public class TestController : Controller
     {
         
@@ -19,6 +20,7 @@ namespace VisitorApp.Server.Controllers
             _ITest = Itest;
         }
 
+        //for at gette listen bliver det så til api/Test/TestList
         [HttpGet("[action]")]
         public async Task<List<Test>> TestList()
         {
