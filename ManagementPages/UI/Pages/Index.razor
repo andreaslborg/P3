@@ -1,5 +1,9 @@
 ﻿@page "/"
 
+@using ManagementPages.Functions
+@inject IDbService dbService
+@inject ILicenseViewModel licenseViewModel
+
 <div>
     <h1 class="text-center mb-5 mt-5">talDigital Administration</h1>
 </div>
@@ -29,8 +33,8 @@
             </NavLink>
 
         </form>
-    <div class="col-4"></div>
-</div>
+        <div class="col-4"></div>
+    </div>
 
 </section>
 

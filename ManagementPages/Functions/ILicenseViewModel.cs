@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ManagementPages.Model;
 
 namespace ManagementPages.Functions
@@ -10,9 +11,5 @@ namespace ManagementPages.Functions
         public List<IInformationBoardViewModel> InformationBoards { get; }
 
         public IInformationBoardViewModel SelectedInformationBoard { get; set; }
-
-        public void GetLicenseData(int licenseId);
-
-        public void GetInformationBoards(int licenseId);
     }
 }

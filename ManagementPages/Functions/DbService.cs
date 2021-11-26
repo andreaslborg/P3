@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using Dapper;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
+using ManagementPages.Model;
 
 namespace ManagementPages.Functions
 {
@@ -37,8 +38,45 @@ namespace ManagementPages.Functions
             using (IDbConnection connection = new MySqlConnection(connectionstring))
             {
                 return connection.ExecuteAsync(sql, parameters);
-
             }
+        }
+
+        public async Task<ILicenseViewModel> InitializeLicense(int licenseId)
+        {
+            ILicenseViewModel result = new LicenseViewModel();
+            List<License> licenseList = new List<License>();
+
+            string sql = "select * from License where LicenseId = @licenseId;";
+            licenseList = await LoadData<License, dynamic>(sql, new { });
+
+            result.LicenseModel = licenseList.First();
+
+            Console.WriteLine(result.LicenseModel.CustomerName);
+            return result;
+        }
+
+        public void GetLicenseData(int licenseId)
+        {
+            //var result = new License();
+
+            // hvis vi fetcher et felt ad gangen: 
+            //result.LicenseId = licenseId;
+            //result.RegistrationDate = ..; //kald til db
+
+            // hvis vi fetcher et helt objekt ad gangen: 
+            //result = ... ; //kald til db
+
+            //string sql = "select * from License where LicenseId = @licenseId;";
+            //test = await dbService.LoadData<TestModel, dynamic>(sql, new { });
+
+            //LicenseModel = result;
+        }
+
+        public void GetInformationBoards(int licenseId)
+        {
+            // lave informationboard objekter ud fra licenseId i et loop (where licenseId = licenseId)
+            // først skal vi identificere deres Id
+            //InformationBoards.Add(new InformationBoardViewModel(_dbService, informationBoardId));
         }
     }
 }
