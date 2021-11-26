@@ -41,6 +41,7 @@ namespace ManagementPages.Functions
             }
         }
 
+        
         public async Task<ILicenseViewModel> InitializeLicense(int licenseId)
         {
             ILicenseViewModel result = new LicenseViewModel();
@@ -53,7 +54,7 @@ namespace ManagementPages.Functions
 
             return result;
         }
-
+        
 
         public void GetLicenseData(int licenseId)
         {

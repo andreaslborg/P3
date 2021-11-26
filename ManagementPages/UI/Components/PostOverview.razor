@@ -1,8 +1,11 @@
-<ManagementPages.UI.Components.Modals.EditPost @ref="EditPost"/>
-<ManagementPages.UI.Components.Modals.Delete @ref="Delete"/>
 @using ManagementPages.Functions
 @using ManagementPages.Model
+
 @inject IDbService _dbService
+
+<ManagementPages.UI.Components.Modals.EditPost @ref="EditPost" Category="@Category"/>
+<ManagementPages.UI.Components.Modals.Delete @ref="Delete" />
+
 
 <div class="col">
     @foreach (var post in Category.Posts)
@@ -23,7 +26,7 @@
 @code {
     [Parameter]
     public ICategoryViewModel Category { get; set; }
-                                                
+
     private ManagementPages.UI.Components.Modals.EditPost EditPost { get; set; }
     private ManagementPages.UI.Components.Modals.Delete Delete { get; set; }
 
