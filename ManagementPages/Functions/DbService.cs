@@ -46,14 +46,14 @@ namespace ManagementPages.Functions
             ILicenseViewModel result = new LicenseViewModel();
             List<License> licenseList = new List<License>();
 
-            string sql = "select * from License where LicenseId = @licenseId;";
+            string sql = $"select * from License where LicenseId = {licenseId};";
             licenseList = await LoadData<License, dynamic>(sql, new { });
 
             result.LicenseModel = licenseList.First();
 
-            Console.WriteLine(result.LicenseModel.CustomerName);
             return result;
         }
+
 
         public void GetLicenseData(int licenseId)
         {
