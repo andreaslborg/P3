@@ -1,8 +1,8 @@
 @using ManagementPages.Functions
-
+@using ManagementPages.UI.Components.Modals
 <ManagementPages.UI.Components.Modals.Help @ref="Help"></ManagementPages.UI.Components.Modals.Help>
 <ManagementPages.UI.Components.Modals.Profile @ref="Profile"></ManagementPages.UI.Components.Modals.Profile>
-<ManagementPages.UI.Components.Modals.NewCategory @ref="NewCategory" InformationBoard="@InformationBoard"></ManagementPages.UI.Components.Modals.NewCategory>
+<ManagementPages.UI.Components.Modals.NewCategory @ref="NewCategory" InformationBoard="@InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>
 <ManagementPages.UI.Components.Modals.EditCategories @ref="EditCategories"></ManagementPages.UI.Components.Modals.EditCategories>
 
 <section class="row col-12">
@@ -19,25 +19,23 @@
         <button @onclick="() => Help.Open()" class="btn btn-primary float-end"><i class="bi bi-question-circle"></i> Hjælp</button>
     </div>
     <div class="col-3">
-    
+
     </div>
     <div class="col-9 border">
         <nav class="nav nav-pills flex-column flex-sm-row hoverable hover">
             @foreach (var category in InformationBoard.Categories)
             {
-                if (category == InformationBoard.SelectedCategory)
-                {
-                    <button @onclick="() => OnCategoryClicked.InvokeAsync(category)" class="btn btn-primary">
-                        <i class="bi bi-pencil" />
+                <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary">
+                    @if (category == InformationBoard.SelectedCategory)
+                    {
+                        <i class="bi bi-pencil"/>
                         @category.CategoryModel.Title
-                    </button>
-                }
-                else
-                {
-                    <button @onclick="() => OnCategoryClicked.InvokeAsync(category)" class="btn btn-primary">
+                    }
+                    else
+                    {
                         @category.CategoryModel.Title
-                    </button>
-                }
+                    }
+                </button>
             }
             <button @onclick="() => NewCategory.Open()" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Ny kategori</button>
             <button @onclick="() => EditCategories.Open()" class="btn btn-primary"><i class="bi bi-pencil"></i> Rediger kategorier</button>
@@ -46,14 +44,27 @@
 </section>
 
 @code {
+
     [Parameter]
     public IInformationBoardViewModel InformationBoard { get; set; }
 
     [Parameter]
-    public EventCallback<ICategoryViewModel> OnCategoryClicked { get; set; }
+    public EventCallback OnChangesMade { get; set; }
 
-    private ManagementPages.UI.Components.Modals.Help Help { get; set; }
-    private ManagementPages.UI.Components.Modals.Profile Profile { get; set; }
-    private ManagementPages.UI.Components.Modals.NewCategory NewCategory { get; set; }
-    private ManagementPages.UI.Components.Modals.EditCategories EditCategories { get; set; }
+    private Help Help { get; set; }
+    private Profile Profile { get; set; }
+    private NewCategory NewCategory { get; set; }
+    private EditCategories EditCategories { get; set; }
+
+    private void SetSelectedCategory(ICategoryViewModel selectedCategory)
+    {
+        InformationBoard.SelectedCategory = selectedCategory;
+        OnChangesMade.InvokeAsync();
+    }
+
+    private void OnChangesMadeInChildComponent()
+    {
+        StateHasChanged();
+    }
+
 }
