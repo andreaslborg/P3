@@ -64,6 +64,7 @@
     public void SaveAndClose()
     {
         InformationBoard.AddNewCategory(newCategory, InformationBoard.InformationBoardModel.InformationBoardId, true, _dbService);
+        newCategory = new Category();
         Close();
     }
 
