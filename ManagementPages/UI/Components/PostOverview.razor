@@ -1,6 +1,5 @@
-﻿<ManagementPages.UI.Components.Modals.NewPost @ref="NewPost"></ManagementPages.UI.Components.Modals.NewPost>
-<ManagementPages.UI.Components.Modals.EditPost @ref="EditPost"></ManagementPages.UI.Components.Modals.EditPost>
-<ManagementPages.UI.Components.Modals.Delete @ref="Delete"></ManagementPages.UI.Components.Modals.Delete>
+﻿<ManagementPages.UI.Components.Modals.EditPost @ref="EditPost"/>
+<ManagementPages.UI.Components.Modals.Delete @ref="Delete"/>
 
 <div class="col">
     <!-- POST 1 -->
@@ -23,7 +22,6 @@
 </div>
 
 @code {
-    private ManagementPages.UI.Components.Modals.NewPost NewPost { get; set; }
     private ManagementPages.UI.Components.Modals.EditPost EditPost { get; set; }
     private ManagementPages.UI.Components.Modals.Delete Delete { get; set; }
 }
