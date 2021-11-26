@@ -1,0 +1,99 @@
+﻿<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Rediger opslag - Nyheder</h5>
+                <button @onclick="() => Close()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="col-12 row modal-body">
+                <div class="col-6">
+                    <label for="title" class="form-label">Titel</label>
+                    <input type="text" class="form-control" id="title" placeholder="" value="Titel">
+				</div>
+                <div class="col-6">
+                    <label for="author" class="form-label">Forfatter</label>
+                    <input type="text" class="form-control" id="author" placeholder="" value="Mikkel Wammen">
+				</div>
+                <div class="mt-3" id="toolbar">
+                    <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
+                        <div class="btn-group me-2 " role="group" aria-label="First group">
+                            <button type="button" class="btn btn-outline-secondary"><i class="bi bi-type-bold"></i></button>
+                            <button type="button" class="btn btn-outline-secondary"><i class="bi bi-type-italic"></i></button>
+                            <button type="button" class="btn btn-outline-secondary"><i class="bi bi-type-underline"></i></button>
+                            <button type="button" class="btn btn-outline-secondary"><i class="bi bi-type-strikethrough"></i></button>
+                        </div>
+                        <div class="btn-group me-2" role="group" aria-label="Second group">
+                            <button type="button" class="btn btn-outline-secondary"><i class="bi bi-list-ul"></i></button>
+                            <button type="button" class="btn btn-outline-secondary"><i class="bi bi-list-ol"></i></button>
+                        </div>
+                        <div class="btn-group" role="group" aria-label="Third group">
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tilføj et billede"><i class="bi bi-image"></i></button>
+                            <button type="button" class="btn btn-outline-secondary" data-bs-toggle="tooltip" data-bs-placement="top" title="Tilføj et lyd klip"><i class="bi bi-music-note-beamed"></i></button>
+                        </div>
+                    </div>
+				</div>
+                <div class="mt-3">
+                    <label for="shortIntro" class="form-label">Kort intro</label>
+                    <textarea class="form-control" id="shortIntro" rows="2">Lorem Ipsum is simply dummy text of the printing and typesetting industry.</textarea>
+				</div>
+                <div class="mt-3">
+                    <label for="text" class="form-label">Tekst</label>
+                    <textarea class="form-control" id="text" rows="8">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.</textarea>
+				</div>
+                <br />
+                <div class="col-3 mt-3">
+                    <label for="url" class="form-label">Link / URL</label>
+                    <input type="text" class="form-control" id="url" placeholder="www.taldigital.dk">
+				</div>
+                <div class="col-3 mt-3">
+                    <label for="urltext" class="form-label">Link Tekst</label>
+                    <input type="text" class="form-control" id="urltext" placeholder="Tryk her for at læse mere.">
+                </div>
+                <div class="col-3 mt-3">
+                    <label for="date" class="form-label">Offentlig dato</label>
+                    <input type="date" class="form-control" id="date" placeholder="">
+				</div>
+                <div class="col-3 mt-3">
+                    <label for="date2" class="form-label">Skal skjules dato</label>
+                    <input type="date" class="form-control" id="date2" placeholder="">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Slet</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Gem som kladde</button>
+                <button type="button" class="btn btn-success">Gem</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+@code {
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+
+    public void Open()
+    {
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+    }
+}

@@ -1,10 +1,8 @@
-﻿@using ManagementPages.Functions
-@using ManagementPages.Model
-
-@inject IDbService _dbService
-
-<ManagementPages.UI.Components.Modals.NewPost @ref="NewPost"/>
+<ManagementPages.UI.Components.Modals.EditPost @ref="EditPost"/>
 <ManagementPages.UI.Components.Modals.Delete @ref="Delete"/>
+@using ManagementPages.Functions
+@using ManagementPages.Model
+@inject IDbService _dbService
 
 <div class="col">
     @foreach (var post in Category.Posts)
@@ -14,7 +12,7 @@
             <div>
                 @post.PostModel.Text
                 <div class="float-end">
-                    <button @onclick="() => NewPost.Open()" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
+                    <button @onclick="() => EditPost.Open()" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
                     <button @onclick="() => Delete.Open()" class="btn p-0"><i class="bi bi-trash"></i></button>
                 </div>
             </div>
@@ -25,8 +23,8 @@
 @code {
     [Parameter]
     public ICategoryViewModel Category { get; set; }
-
-    private ManagementPages.UI.Components.Modals.NewPost NewPost { get; set; }
+                                                
+    private ManagementPages.UI.Components.Modals.EditPost EditPost { get; set; }
     private ManagementPages.UI.Components.Modals.Delete Delete { get; set; }
 
 }
