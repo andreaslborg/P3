@@ -13,6 +13,14 @@
 </section>
 
 <section class="wrapper container">
+    @if (!ConsentGiven)
+    {
+        <div class="navbar fixed-bottom" style="background-color: red;">
+            In order to use the application, you need to accept the cookies.
+            <a class="btn btn-outline-secondary" style="color:white;" href="/cookie/consent">Accept</a>
+        </div>
+    }
+
     <div id="categories" class="row justify-content-center text-center">
         <a class="btn btn-outline-light square col-5 m-1 d-flex align-items-center border-2" href="/nyheder">
             <div class="mx-auto">
@@ -83,3 +91,8 @@
     {
         testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
     } }
+
+@code {
+    [CascadingParameter]
+    public bool ConsentGiven { get; set; }
+}

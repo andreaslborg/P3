@@ -27,6 +27,13 @@ namespace VisitorApplication.Server
             services.AddControllersWithViews();
             services.AddRazorPages();
             services.AddSingleton<ITest, TestService>();
+
+
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                options.ConsentCookie.Name = "ConsentCookie";
+                options.CheckConsentNeeded = context => true;
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
