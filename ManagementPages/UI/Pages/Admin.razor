@@ -9,21 +9,16 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
-<CategoryOverview InformationBoard="@license.SelectedInformationBoard" OnCategoryClicked="@SetSelectedCategory" />
+<CategoryOverview InformationBoard="@_license.SelectedInformationBoard" OnChangesMade="OnChangesMadeInChildComponent" />
 
-<InformationBoardOverview License="@license" OnInformationBoardClicked="@SetSelectedInformationBoard" /> <!-- VS might indicate that there is a problem (CS1503) with 'ClickHandler'. This is not true however... -->
+<InformationBoardOverview License="@_license" OnChangesMade="OnChangesMadeInChildComponent" />
 
 
 @code {
-    readonly ILicenseViewModel license = new TestLicenseViewModel(123);
+    readonly ILicenseViewModel _license = new TestLicenseViewModel(123);
 
-    private void SetSelectedInformationBoard(IInformationBoardViewModel selectedInformationBoard)
+    private void OnChangesMadeInChildComponent()
     {
-        license.SelectedInformationBoard = selectedInformationBoard;
-    }
-
-    private void SetSelectedCategory(ICategoryViewModel selectedCategory)
-    {
-        license.SelectedInformationBoard.SelectedCategory = selectedCategory;
+        StateHasChanged();
     }
 }

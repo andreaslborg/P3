@@ -19,10 +19,10 @@
                 {
                     <tr class="">
                         <td class="">
-                            <button class="btn btn-outline p-0" @onclick="() => OnInformationBoardClicked.InvokeAsync(informationBoard)">
+                            <button class="btn btn-outline p-0" @onclick="() => SetSelectedInformationBoard(informationBoard)">
                                 @if (informationBoard == License.SelectedInformationBoard)
                                 {
-                                    @selectedText(informationBoard)
+                                    @SetSelectedText(informationBoard)
                                 }
                                 else
                                 {
@@ -102,13 +102,19 @@
     [Parameter]
     public ILicenseViewModel License { get; set; }
 
-    string selectedText(IInformationBoardViewModel informationBoard)
+    [Parameter]
+    public EventCallback OnChangesMade { get; set; }
+
+    private void SetSelectedInformationBoard(IInformationBoardViewModel selectedInformationBoard)
+    {
+        License.SelectedInformationBoard = selectedInformationBoard;
+        OnChangesMade.InvokeAsync();
+    }
+
+    private string SetSelectedText(IInformationBoardViewModel informationBoard)
     {
         return $"{informationBoard.InformationBoardModel.Title} SELECTED";
     }
-
-    [Parameter]
-    public EventCallback<IInformationBoardViewModel> OnInformationBoardClicked { get; set; }
 
     private ManagementPages.UI.Components.Modals.NewPost NewPost { get; set; }
     private ManagementPages.UI.Components.Modals.EditInfoboard EditInfoboard { get; set; }
