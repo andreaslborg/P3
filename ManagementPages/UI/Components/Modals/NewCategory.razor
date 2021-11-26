@@ -1,4 +1,9 @@
-﻿<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+﻿@using ManagementPages.Functions 
+@using ManagementPages.Model
+
+@inject IDbService _dbService
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -10,7 +15,7 @@
             <div class="col-12 row modal-body">
                 <div class="col-6">
                     <label for="title" class="form-label">Titel</label>
-                    <input type="text" class="form-control" id="title" placeholder="">
+                    <input type="text" class="form-control" id="title" placeholder="" @bind-value="newCategory.Title">
 				</div>
                 <div class="col-6">
                     <label for="author" class="form-label">Ikon</label>
@@ -26,7 +31,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Slet</button>
-                <button type="button" class="btn btn-success" data-dismiss="modal" @onclick="() => Close()">Gem</button>
+                <button type="submit" class="btn btn-success" data-dismiss="modal" @onclick="() => SaveAndClose()">Gem</button>
             </div>
         </div>
     </div>
@@ -40,6 +45,14 @@
 
 
 @code {
+    [Parameter]
+    public IInformationBoardViewModel InformationBoard { get; set; }
+
+    public Category newCategory = new Category();
+    
+    [Parameter]
+    public EventCallback OnChangesMade { get; set; }
+
     public string ModalDisplay = "none;";
     public string ModalClass = "";
     public bool ShowBackdrop = false;
@@ -50,6 +63,14 @@
         ModalClass = "Show";
         ShowBackdrop = true;
         StateHasChanged();
+    }
+
+    public void SaveAndClose()
+    {
+        InformationBoard.AddNewCategory(newCategory, InformationBoard.InformationBoardModel.InformationBoardId, true, _dbService);
+        if (true) OnChangesMade.InvokeAsync(); //vi kan lægge noget logik med at hvis det lykkedes at tilføje category, så kører vi den (kræver at AddNewCategory returnerer en bool)
+        newCategory = new Category();
+        Close();
     }
 
     public void Close()

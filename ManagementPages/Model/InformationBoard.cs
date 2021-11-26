@@ -7,13 +7,15 @@ namespace ManagementPages.Model
 {
     public class InformationBoard
     {
+        public int InformationBoardId { get; set; }
+
+        public int LicenseId { get; set; }
+
         public string Title { get; set; }
 
         public string Url { get; set; }
 
         public string QRCode { get; set; }
-
-        public List<Category> Categories = new();
 
         public bool IsPublished { get; set; }
 

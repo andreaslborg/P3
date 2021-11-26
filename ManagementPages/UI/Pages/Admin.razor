@@ -1,7 +1,7 @@
 ﻿@page "/admin"
+@using ManagementPages.Functions
 @using ManagementPages.Model
 @using ManagementPages.UI.Components
-
 
 
 <head>
@@ -9,14 +9,16 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
+<CategoryOverview InformationBoard="@_license.SelectedInformationBoard" OnChangesMade="OnChangesMadeInChildComponent" />
 
-<CategoryOverview />
-
-<InformationBoardOverview />
+<InformationBoardOverview License="@_license" OnChangesMade="OnChangesMadeInChildComponent" />
 
 
 @code {
-    
+    readonly ILicenseViewModel _license = new TestLicenseViewModel(123);
 
+    private void OnChangesMadeInChildComponent()
+    {
+        StateHasChanged();
+    }
 }
-

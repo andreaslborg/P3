@@ -7,6 +7,10 @@ namespace ManagementPages.Model
 {
     public class Post
     {
+        public int PostId { get; set; }
+
+        public int CategoryId { get; set; }
+
         public string Title { get; set; }
 
         public string Text { get; set; }
@@ -16,7 +20,7 @@ namespace ManagementPages.Model
         public string Image { get; set; }
 
         public string Audio { get; set; }
-        
+
         public bool IsPublished { get; set; }
 
         public DateTime ExpirationDate { get; set; }
