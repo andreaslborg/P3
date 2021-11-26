@@ -1,18 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using ManagementPages.Model;
+
 
 namespace ManagementPages.Functions
 {
     public class InformationBoardViewModel : IInformationBoardViewModel
     {
-        private DbService _dbService;
+
         private ICategoryViewModel _selectedCategory;
 
-        public InformationBoardViewModel(DbService dbService, int informationBoardId)
+        public InformationBoardViewModel(int informationBoardId)
         {
-            _dbService = dbService;
             GetInformationBoardData(informationBoardId);
             GetCategories(informationBoardId);
         }
@@ -40,5 +41,27 @@ namespace ManagementPages.Functions
             get => _selectedCategory ?? Categories.FirstOrDefault();
             set => _selectedCategory = value;
         }
+
+        public async Task AddNewCategory(Category newCategory, int informationBoardId, bool isPublished, IDbService dbService)
+        {
+            Category categoryModel = new Category
+            {
+                Title = newCategory.Title,
+                InformationBoardId = informationBoardId,
+                IsPublished = isPublished
+            };
+
+            string sql = @"insert into Category (Title, InformationBoardId, IsPublished)
+                values (@Title, @InformationBoardId, @IsPublished);";
+
+            await dbService.SaveData(sql, categoryModel);
+
+            ICategoryViewModel newCategoryAdded = new CategoryViewModel();
+            newCategoryAdded.CategoryModel = categoryModel;
+
+            Categories.Add(newCategoryAdded);
+        }
+
     }
+
 }

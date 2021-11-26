@@ -103,7 +103,8 @@ namespace ManagementPages.Functions
                 CategoryModel = new Category
                 {
                     IsPublished = true,
-                    Title = "IB1: Category 1"
+                    Title = "IB1: Category 1",
+                    CategoryId = 1
                 },
                 Posts = posts1
             };
@@ -113,7 +114,8 @@ namespace ManagementPages.Functions
                 CategoryModel = new Category
                 {
                     IsPublished = true,
-                    Title = $"IB1: Category 2"
+                    Title = $"IB1: Category 2",
+                    CategoryId = 2
                 },
                 Posts = posts2
             };
@@ -127,7 +129,8 @@ namespace ManagementPages.Functions
                 CategoryModel = new Category
                 {
                     IsPublished = true,
-                    Title = "IB2: Category 1"
+                    Title = "IB2: Category 1",
+                    CategoryId = 3
                 },
                 Posts = posts2
             };
@@ -137,7 +140,9 @@ namespace ManagementPages.Functions
                 CategoryModel = new Category
                 {
                     IsPublished = true,
-                    Title = "IB2: Category 2"
+                    Title = "IB2: Category 2",
+                    CategoryId = 4
+                    
                 },
                 Posts = posts1
             };
@@ -152,7 +157,8 @@ namespace ManagementPages.Functions
                 InformationBoardModel = new InformationBoard
                 {
                     IsPublished = true,
-                    Title = "Information Board 1"
+                    Title = "Information Board 1",
+                    InformationBoardId = 1
                 }
             };
 
@@ -162,7 +168,8 @@ namespace ManagementPages.Functions
                 InformationBoardModel = new InformationBoard
                 {
                     IsPublished = true,
-                    Title = "Information Board 2"
+                    Title = "Information Board 2",
+                    InformationBoardId = 2
                 }
             };
 

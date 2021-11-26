@@ -11,9 +11,19 @@ namespace ManagementPages.Functions
 {
     public class DbService : IDbService
     {
-        public async Task<List<T>> LoadData<T, U>(string sql, U parameters, string connectionString)
+        private readonly IConfiguration _config;
+
+        public string ConnectionStringName { get; set; } = "default";
+
+        public DbService(IConfiguration config)
         {
-            using (IDbConnection connection = new MySqlConnection(connectionString))
+            _config = config;
+        }   
+     
+        public async Task<List<T>> LoadData<T, U>(string sql, U parameters)
+        {
+            string connectionstring = _config.GetConnectionString(ConnectionStringName);
+            using (IDbConnection connection = new MySqlConnection(connectionstring))
             {
                 var rows = await connection.QueryAsync<T>(sql, parameters);
 
@@ -21,9 +31,10 @@ namespace ManagementPages.Functions
             }
         }
 
-        public Task SaveData<T>(string sql, T parameters, string connectionString)
+        public Task SaveData<T>(string sql, T parameters)
         {
-            using (IDbConnection connection = new MySqlConnection(connectionString))
+            string connectionstring = _config.GetConnectionString(ConnectionStringName);
+            using (IDbConnection connection = new MySqlConnection(connectionstring))
             {
                 return connection.ExecuteAsync(sql, parameters);
 

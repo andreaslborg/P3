@@ -1,18 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 using ManagementPages.Model;
 
 namespace ManagementPages.Functions
 {
     public class CategoryViewModel : ICategoryViewModel
     {
-        private DbService _dbService;
-
+        
         public List<IPostViewModel> Posts { get; set; } = new();
 
-        public CategoryViewModel(DbService dbService, int categoryId)
+        public CategoryViewModel(int categoryId)
         {
-            _dbService = dbService;
             GetCategoryData(categoryId);
             GetPosts(categoryId);
         }
@@ -32,5 +31,28 @@ namespace ManagementPages.Functions
         {
             throw new NotImplementedException();
         }
+
+        public async Task AddNewPost(Post newPost, int categoryId, bool isPublished, IDbService dbService)
+        {
+            Post postModel = new Post
+            {
+                Title = newPost.Title,
+                CategoryId = categoryId,
+                Text = newPost.Text,
+                Author = newPost.Author,
+                IsPublished = isPublished
+            };
+
+            string sql = @"insert into Post (Title, CategoryId, Text, Author, IsPublished)
+                values (@Title, @CategoryId, @Text, @Author, @IsPublished);";
+
+            await dbService.SaveData(sql, postModel);
+
+            IPostViewModel newPostAdded = new PostViewModel();
+            newPostAdded.PostModel = postModel;
+
+            Posts.Add(newPostAdded);
+        }
+    
     }
 }
