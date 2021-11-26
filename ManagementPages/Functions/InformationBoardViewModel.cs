@@ -9,12 +9,11 @@ namespace ManagementPages.Functions
 {
     public class InformationBoardViewModel : IInformationBoardViewModel
     {
-        private IDbService _dbService;
+
         private ICategoryViewModel _selectedCategory;
 
-        public InformationBoardViewModel(DbService dbService, int informationBoardId)
+        public InformationBoardViewModel(int informationBoardId)
         {
-            _dbService = dbService;
             GetInformationBoardData(informationBoardId);
             GetCategories(informationBoardId);
         }
@@ -42,27 +41,25 @@ namespace ManagementPages.Functions
             get => _selectedCategory ?? Categories.FirstOrDefault();
             set => _selectedCategory = value;
         }
-        
-        public List<Category> CategoriesList;
-        public Category newCategory = new Category();
 
-        public async Task AddNewCategory(ICategoryViewModel category)
+        public async Task AddNewCategory(Category newCategory, int informationBoardId, bool isPublished, IDbService dbService)
         {
-            Category cat = new Category
+            Category categoryModel = new Category
             {
                 Title = newCategory.Title,
-                InformationBoardId = category.CategoryModel.InformationBoardId,
-                IsPublished= newCategory.IsPublished
+                InformationBoardId = informationBoardId,
+                IsPublished = isPublished
             };
 
             string sql = @"insert into Category (Title, InformationBoardId, IsPublished)
                 values (@Title, @InformationBoardId, @IsPublished);";
 
-            await _dbService.SaveData(sql, cat);
+            await dbService.SaveData(sql, categoryModel);
 
-            CategoriesList.Add(cat);
+            ICategoryViewModel newCategoryAdded = new CategoryViewModel();
+            newCategoryAdded.CategoryModel = categoryModel;
 
-            newCategory = new Category();
+            Categories.Add(newCategoryAdded);
         }
 
     }

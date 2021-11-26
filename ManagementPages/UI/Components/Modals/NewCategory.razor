@@ -1,5 +1,6 @@
 ﻿@using ManagementPages.Functions 
 @using ManagementPages.Model
+
 @inject IDbService _dbService
 
 <div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
@@ -30,7 +31,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Slet</button>
-                <button type="submit" class="btn btn-success" data-dismiss="modal" @onclick="() => AddNewCategory()">Gem</button>
+                <button type="submit" class="btn btn-success" data-dismiss="modal" @onclick="() => SaveAndClose()">Gem</button>
             </div>
         </div>
     </div>
@@ -44,6 +45,10 @@
 
 
 @code {
+    [Parameter]
+    public IInformationBoardViewModel InformationBoard { get; set; }
+    public Category newCategory = new Category();
+
     public string ModalDisplay = "none;";
     public string ModalClass = "";
     public bool ShowBackdrop = false;
@@ -58,33 +63,9 @@
 
     public void SaveAndClose()
     {
-        //AddNewCategory();
+        InformationBoard.AddNewCategory(newCategory, InformationBoard.InformationBoardModel.InformationBoardId, true, _dbService);
         Close();
     }
-
-    public List<Category> CategoriesList = new List<Category>();
-    public Category newCategory = new Category();
-
-    public async Task AddNewCategory()
-    {
-        Category cat = new Category
-        {
-            Title = newCategory.Title,
-            InformationBoardId = newCategory.InformationBoardId,
-            IsPublished = newCategory.IsPublished
-        };
-
-        string sql = @"insert into Category (Title, InformationBoardId, IsPublished)
-                values (@Title, @InformationBoardId, @IsPublished);";
-
-        await _dbService.SaveData(sql, cat);
-
-        CategoriesList.Add(cat);
-
-        newCategory = new Category();
-        Close();
-    }
-
 
     public void Close()
     {

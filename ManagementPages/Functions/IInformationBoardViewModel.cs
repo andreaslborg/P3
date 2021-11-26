@@ -16,7 +16,7 @@ namespace ManagementPages.Functions
 
         public ICategoryViewModel SelectedCategory { get; set; }
 
-        public Task AddNewCategory(ICategoryViewModel category);
+        public Task AddNewCategory(Category newCategory, int informationBoardId, bool isPublished, IDbService dbService);
 
         
     }

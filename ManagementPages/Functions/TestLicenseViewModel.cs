@@ -152,7 +152,8 @@ namespace ManagementPages.Functions
                 InformationBoardModel = new InformationBoard
                 {
                     IsPublished = true,
-                    Title = "Information Board 1"
+                    Title = "Information Board 1",
+                    InformationBoardId = 1
                 }
             };
 
@@ -162,7 +163,8 @@ namespace ManagementPages.Functions
                 InformationBoardModel = new InformationBoard
                 {
                     IsPublished = true,
-                    Title = "Information Board 2"
+                    Title = "Information Board 2",
+                    InformationBoardId = 2
                 }
             };
 

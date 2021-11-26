@@ -1,4 +1,7 @@
 ﻿@using ManagementPages.Functions
+@using ManagementPages.Model
+
+@inject IDbService _dbService
 
 <ManagementPages.UI.Components.Modals.NewPost @ref="NewPost"></ManagementPages.UI.Components.Modals.NewPost>
 <ManagementPages.UI.Components.Modals.Delete @ref="Delete"></ManagementPages.UI.Components.Modals.Delete>
@@ -20,9 +23,19 @@
 </div>
 
 @code {
+    private List<Post> posts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        string sql = "select * from Post where CategoryId = 1";
+        posts = await _dbService.LoadData<Post, dynamic>(sql, new { });
+    }
+
     [Parameter]
     public ICategoryViewModel Category { get; set; }
 
     private ManagementPages.UI.Components.Modals.NewPost NewPost { get; set; }
     private ManagementPages.UI.Components.Modals.Delete Delete { get; set; }
+
+
 }
