@@ -47,6 +47,7 @@
 @code {
     [Parameter]
     public IInformationBoardViewModel InformationBoard { get; set; }
+
     public Category newCategory = new Category();
     
     [Parameter]
@@ -68,6 +69,7 @@
     {
         InformationBoard.AddNewCategory(newCategory, InformationBoard.InformationBoardModel.InformationBoardId, true, _dbService);
         if (true) OnChangesMade.InvokeAsync(); //vi kan lægge noget logik med at hvis det lykkedes at tilføje category, så kører vi den (kræver at AddNewCategory returnerer en bool)
+        newCategory = new Category();
         Close();
     }
 

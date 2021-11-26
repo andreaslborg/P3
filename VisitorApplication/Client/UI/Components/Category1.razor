@@ -5,16 +5,31 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
-<section class="row text-white">
-	<a class="col-1 border" href="/">
-		Tilbage
-	</a>
-	<div class="col-10 text-center border">
-		<h1 class="" id="">Nyheder</h1>
+<!-- Category Title -->
+<section class="text-white">
+	<div class="border">
+		<div class="wrapper container">
+			<a class="col-1 btn float-start" href="/"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
+			<h1 class="col-10 text-center display-1 ms-0">Nyheder</h1>
+			<div class="col-1"></div>
+		</div>
 	</div>
-	<div class="col-1 border"></div>
 </section>
 
+<!-- Post Overview -->
+<section class="wrapper container text-white mx-auto">
+    <!-- Post 1 -->
+    <div class="d-flex position-relative mt-1 border">
+      <img src="ged.png" class="img-fluid rounded-start m-auto me-3" alt="Ged" style="max-width: 10em; max-height: 10em">
+      <div>
+        <h5>Opslag Titel</h5>
+        <p>This is some placeholder content for the custom component. It is intended to mimic what some real-world content would look like</p>
+        <a href="/nyheder/opslag" class="stretched-link">Læs mere her</a>
+      </div>
+    </div>
+    
+	
+</section>
 
 @code {
 

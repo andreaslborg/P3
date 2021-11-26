@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.Threading.Tasks;
 using ManagementPages.Model;
 
 namespace ManagementPages.Functions
@@ -12,5 +13,7 @@ namespace ManagementPages.Functions
         public void GetCategoryData(int categoryId);
 
         public void GetPosts(int categoryId);
+
+        public Task AddNewPost(Post newPost, int categoryId, bool isPublished, IDbService dbService);
     }
 }
