@@ -12,7 +12,7 @@ namespace ManagementPages.Functions
 
         public License LicenseModel { get; set; }
 
-        public List<IInformationBoardViewModel> InformationBoards { get; } = new();
+        public List<IInformationBoardViewModel> InformationBoards { get; set; } = new();
 
         public IInformationBoardViewModel SelectedInformationBoard
         {

@@ -8,18 +8,25 @@
 
 
 <div class="col">
-    @foreach (var post in Category.Posts)
+    @if (Category?.Posts?.Count > 0)
     {
-        <div class="row me-1 mt-1 border">
-            <h5>@post.PostModel.Title</h5>
-            <div>
-                @post.PostModel.Text
-                <div class="float-end">
-                    <button @onclick="() => EditPost.Open()" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
-                    <button @onclick="() => Delete.Open()" class="btn p-0"><i class="bi bi-trash"></i></button>
+        @foreach (var post in Category.Posts)
+        {
+            <div class="row me-1 mt-1 border">
+                <h5>@post.PostModel.Title</h5>
+                <div>
+                    @post.PostModel.Text
+                    <div class="float-end">
+                        <button @onclick="() => EditPost.Open()" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
+                        <button @onclick="() => Delete.Open()" class="btn p-0"><i class="bi bi-trash"></i></button>
+                    </div>
                 </div>
             </div>
-        </div>
+        }
+    }
+    else
+    {
+        <p>Der er ingen opslag endnu...</p>
     }
 </div>
 
@@ -29,5 +36,4 @@
 
     private ManagementPages.UI.Components.Modals.EditPost EditPost { get; set; }
     private ManagementPages.UI.Components.Modals.Delete Delete { get; set; }
-
 }

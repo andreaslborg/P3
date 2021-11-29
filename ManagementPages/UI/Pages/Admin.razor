@@ -16,23 +16,18 @@
 
 
 @code {
-    public ILicenseViewModel License { get; set; } = new TestLicenseViewModel(123);
+    public ILicenseViewModel License { get; set; } // = new TestLicenseViewModel(123);
 
     public int licenseId { get; set; } = 1;
 
-    /*
+    
     protected override async Task OnInitializedAsync()
     {
         License = await dbService.InitializeLicense(licenseId);
-
     }
-    */
-    
-    //readonly ILicenseViewModel _license = new TestLicenseViewModel(123);
 
     private void OnChangesMadeInChildComponent()
     {
         StateHasChanged();
-    }
     }
 }

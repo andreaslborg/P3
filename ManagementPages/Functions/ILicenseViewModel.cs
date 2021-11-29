@@ -8,7 +8,7 @@ namespace ManagementPages.Functions
     {
         public License LicenseModel { get; set; }
 
-        public List<IInformationBoardViewModel> InformationBoards { get; }
+        public List<IInformationBoardViewModel> InformationBoards { get; set; }
 
         public IInformationBoardViewModel SelectedInformationBoard { get; set; }
     }
