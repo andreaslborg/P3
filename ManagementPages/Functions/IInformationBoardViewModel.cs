@@ -18,6 +18,6 @@ namespace ManagementPages.Functions
 
         public Task AddNewCategory(Category newCategory, int informationBoardId, bool isPublished, IDbService dbService);
 
-        
+        Task EditInformationBoard(int informationBoardId, IDbService dbService);
     }
 }

@@ -10,5 +10,7 @@ namespace ManagementPages.Functions
         public void GetPostData(int licenseId);
 
         Task EditPost(int postModelCategoryId, IDbService dbService);
+
+        Task DeletePost(IDbService dbService);
     }
 }

@@ -4,7 +4,7 @@
 @inject IDbService _dbService
 
 <ManagementPages.UI.Components.Modals.EditPost @ref="EditPost" Post="@SelectedPost" OnChangesMade="OnChangesMadeInChildComponent"/>
-<ManagementPages.UI.Components.Modals.Delete @ref="Delete" />
+<ManagementPages.UI.Components.Modals.Delete @ref="Delete" OnChangesMade="OnChangesMadeInChildComponent"/>
 
 
 <div class="col">
@@ -18,7 +18,7 @@
                     @post.PostModel.Text
                     <div class="float-end">
                         <button @onclick="() => EditExistingPost(post)" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
-                        <button @onclick="() => Delete.Open()" class="btn p-0"><i class="bi bi-trash"></i></button>
+                        <button @onclick="() => Delete.Open(post)" class="btn p-0"><i class="bi bi-trash"></i></button>
                     </div>
                 </div>
             </div>
@@ -34,6 +34,9 @@
     [Parameter]
     public ICategoryViewModel Category { get; set; }
 
+    [Parameter]
+    public EventCallback OnChangesMade { get; set; }
+
     public IPostViewModel SelectedPost { get; set; } = new PostViewModel();
 
     public void EditExistingPost(IPostViewModel post)
@@ -45,8 +48,10 @@
     private ManagementPages.UI.Components.Modals.EditPost EditPost { get; set; }
     private ManagementPages.UI.Components.Modals.Delete Delete { get; set; }
 
-    private void OnChangesMadeInChildComponent()
+    private async Task OnChangesMadeInChildComponent()
     {
+        Category.Posts = await _dbService.GetPosts(Category.CategoryModel.CategoryId);
+        await OnChangesMade.InvokeAsync();
         StateHasChanged();
     }
 }

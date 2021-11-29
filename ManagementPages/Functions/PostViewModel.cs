@@ -31,5 +31,12 @@ namespace ManagementPages.Functions
            
             await dbService.SaveData(sql, PostModel);
         }
+
+        public async Task DeletePost(IDbService dbService)
+        {
+            string sql = $"delete from Post where PostId = {PostModel.PostId}";
+
+            await dbService.SaveData(sql, PostModel);
+        }
     }
 }

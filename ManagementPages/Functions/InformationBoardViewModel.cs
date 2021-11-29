@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ManagementPages.Model;
+using Microsoft.VisualBasic;
 
 
 namespace ManagementPages.Functions
@@ -20,6 +21,7 @@ namespace ManagementPages.Functions
 
         public InformationBoardViewModel()
         {
+            InformationBoardModel = new InformationBoard();
         }
 
         public InformationBoard InformationBoardModel { get; set; }
@@ -62,6 +64,12 @@ namespace ManagementPages.Functions
             Categories.Add(newCategoryAdded);
         }
 
+        public async Task EditInformationBoard(int informationBoardId, IDbService dbService)
+        {
+            string sql = $"update InformationBoard set Title = \"{InformationBoardModel.Title}\" where InformationBoardId = {InformationBoardModel.InformationBoardId}";
+
+            await dbService.SaveData(sql, InformationBoardModel);
+        }
     }
 
 }
