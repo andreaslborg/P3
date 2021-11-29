@@ -15,5 +15,7 @@ namespace ManagementPages.Functions
         public void GetPosts(int categoryId);
 
         public Task AddNewPost(Post newPost, int categoryId, bool isPublished, IDbService dbService);
+
+        public Task EditPost(Post newPost, int categoryId, bool isPublished, IDbService dbService);
     }
 }

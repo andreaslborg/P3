@@ -11,7 +11,7 @@
         <h5 class="text-center">Aalborg Kommune</h5>
     </div>
     <div class="col-7 mt-1 border">
-        <h1 class="display-2">Sohngaardsholmparken</h1>
+        <h1 class="display-2">@InformationBoard.InformationBoardModel.Title</h1>
     </div>
     <div class="col-2 mt-1 border">
         <a class="btn btn-primary float-end" href="#" role="button"><i class="bi bi-box-arrow-right"></i> Logout</a>
@@ -23,20 +23,27 @@
     </div>
     <div class="col-9 border">
         <nav class="nav nav-pills flex-column flex-sm-row hoverable hover">
-            @foreach (var category in InformationBoard.Categories)
+            @if (InformationBoard?.Categories?.Count > 0)
             {
-                @if (category == InformationBoard.SelectedCategory)
+                @foreach (var category in InformationBoard.Categories)
                 {
-                    <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary" style="background-color: darkblue;">
-                        @category.CategoryModel.Title
-                    </button>
+                    @if (category == InformationBoard.SelectedCategory)
+                    {
+                        <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary" style="background-color: darkblue;">
+                            @category.CategoryModel.Title
+                        </button>
+                    }
+                    else
+                    {
+                        <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary" style="background-color: none;">
+                            @category.CategoryModel.Title
+                        </button>
+                    }
                 }
-                else
-                {
-                    <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary" style="background-color: none;">
-                        @category.CategoryModel.Title
-                    </button>
-                }
+            }
+            else
+            {
+                <button class="btn btn-primary">Der er ingen kategorier endnu...</button>
             }
             <button @onclick="() => NewCategory.Open()" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Ny kategori</button>
             <button @onclick="() => EditCategories.Open()" class="btn btn-primary"><i class="bi bi-pencil"></i> Rediger kategorier</button>
@@ -45,7 +52,6 @@
 </section>
 
 @code {
-
     [Parameter]
     public IInformationBoardViewModel InformationBoard { get; set; }
 
@@ -67,5 +73,4 @@
     {
         StateHasChanged();
     }
-
 }
