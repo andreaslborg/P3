@@ -18,9 +18,17 @@
 	<ItemGroup>
 		<Compile Remove="Model\TestLicenseWithData.cs" />
 	</ItemGroup>
+	
+	<ItemGroup>
+	  <None Remove="UI\Components\favicon.ico" />
+	</ItemGroup>
 
   <ItemGroup>
     <Content Include="Pages\_Host.cshtml" />
+    <Content Include="UI\Components\favicon.ico">
+      <ExcludeFromSingleFile>true</ExcludeFromSingleFile>
+      <CopyToPublishDirectory>PreserveNewest</CopyToPublishDirectory>
+    </Content>
   </ItemGroup>
 
 	<ItemGroup>
