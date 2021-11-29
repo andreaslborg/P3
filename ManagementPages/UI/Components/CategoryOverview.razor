@@ -23,19 +23,41 @@
     </div>
     <div class="col-9 border">
         <nav class="nav nav-pills flex-column flex-sm-row hoverable hover">
+
             @foreach (var category in InformationBoard.Categories)
             {
-                <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary">
-                    @if (category == InformationBoard.SelectedCategory)
-                    {
-                        <i class="bi bi-pencil"/>
-                        @category.CategoryModel.Title
-                    }
-                    else
-                    {
-                        @category.CategoryModel.Title
-                    }
-                </button>
+                @if (category == InformationBoard.SelectedCategory)
+                {
+                    <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary" style="background-color: darkblue;">
+                        @if (category == InformationBoard.SelectedCategory)
+                        {
+                            @category.CategoryModel.Title
+                        }
+                        else
+                        {
+                            @category.CategoryModel.Title
+                        }
+                    </button>
+                }
+                else
+                {
+                    <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary" style="background-color: none;">
+                        @if (category == InformationBoard.SelectedCategory)
+                        {
+                            @category.CategoryModel.Title
+                        }
+                        else
+                        {
+                            @category.CategoryModel.Title
+                        }
+                    </button>
+                }
+
+
+
+
+
+
             }
             <button @onclick="() => NewCategory.Open()" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Ny kategori</button>
             <button @onclick="() => EditCategories.Open()" class="btn btn-primary"><i class="bi bi-pencil"></i> Rediger kategorier</button>
@@ -56,8 +78,11 @@
     private NewCategory NewCategory { get; set; }
     private EditCategories EditCategories { get; set; }
 
+    private string TestStyle = "blue;";
+
     private void SetSelectedCategory(ICategoryViewModel selectedCategory)
     {
+        TestStyle = "red;";
         InformationBoard.SelectedCategory = selectedCategory;
         OnChangesMade.InvokeAsync();
     }
