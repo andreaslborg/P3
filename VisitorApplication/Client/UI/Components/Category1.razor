@@ -1,5 +1,9 @@
 ﻿@page "/nyheder"
 
+
+@using VisitorApplication.Shared
+@inject HttpClient Http
+
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
@@ -7,30 +11,73 @@
 
 <!-- Category Title -->
 <section class="text-white">
-	<div class="border">
-		<div class="wrapper container">
-			<a class="col-1 btn float-start" href="/"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
-			<h1 class="col-10 text-center display-1 ms-0">Nyheder</h1>
-			<div class="col-1"></div>
-		</div>
-	</div>
+    <div class="border">
+        <div class="wrapper container">
+            <a class="col-1 btn float-start" href="/"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
+            <h1 class="col-10 text-center display-1 ms-0">Nyheder</h1>
+            <div class="col-1"></div>
+        </div>
+    </div>
 </section>
 
 <!-- Post Overview -->
 <section class="wrapper container text-white mx-auto">
     <!-- Post 1 -->
     <div class="d-flex position-relative mt-1 border">
-      <img src="ged.png" class="img-fluid rounded-start m-auto me-3" alt="Ged" style="max-width: 10em; max-height: 10em">
-      <div>
-        <h5>Opslag Titel</h5>
-        <p>This is some placeholder content for the custom component. It is intended to mimic what some real-world content would look like</p>
-        <a href="/nyheder/opslag" class="stretched-link">Læs mere her</a>
-      </div>
+        <img src="ged.png" class="img-fluid rounded-start m-auto me-3" alt="Ged" style="max-width: 10em; max-height: 10em">
+        <div>
+            <h5>Opslag Titel</h5>
+            <p>This is some placeholder content for the custom component. It is intended to mimic what some real-world content would look like</p>
+            <a href="/nyheder/opslag" class="stretched-link">Læs mere her</a>
+        </div>
     </div>
-    
-	
 </section>
 
+
+<section class="wrapper container text-white mx-auto">
+    @if (testList == null)
+    {
+        <p><em>Loading...</em></p> 
+    }
+    else
+    {
+        @foreach (var test in testList)
+        {
+            <div class="d-flex position-relative mt-1 border">
+                <a class="stretched-link" type="submit" href="@($"/nyheder/{test.ID}")">@test.Name</a>
+                <br />
+            </div>
+
+        }
+    }
+</section>
+
+
 @code {
+
+        Test[] testList;
+
+    protected async override Task OnInitializedAsync()
+    {
+        testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
+    }
+
+    [Parameter]
+    public int categoryID { get; set; }
+    [Parameter]
+    public int postID { get; set; }
+
+
+
+    public void ShowPost()
+    {
+        foreach (var post in testList)
+        {
+            if (categoryID == post.ID)
+            {
+
+            }
+        }
+    }
 
 }

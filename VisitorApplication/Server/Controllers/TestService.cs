@@ -12,7 +12,6 @@ namespace VisitorApplication.Server.Controllers
     public interface ITest
     {
         Task<List<Test>> TestList();
-       
     }
     public class TestService : ITest
     {
@@ -57,7 +56,10 @@ namespace VisitorApplication.Server.Controllers
                     return lst.ToList();
                 }
                 finally { con.Close(); }
+
+                
             }
+
         }
 
     }

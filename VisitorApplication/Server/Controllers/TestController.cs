@@ -11,7 +11,6 @@ namespace VisitorApplication.Server.Controllers
     //den første del af navnet TestController er sådan man tilgår den, så api/Test
     public class TestController : Controller
     {
-        
         readonly ITest _ITest;
 
         public TestController(ITest Itest)
