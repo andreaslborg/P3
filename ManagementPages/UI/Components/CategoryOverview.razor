@@ -3,12 +3,12 @@
 <ManagementPages.UI.Components.Modals.Help @ref="Help"/>
 <ManagementPages.UI.Components.Modals.Profile @ref="Profile"/>
 <ManagementPages.UI.Components.Modals.NewCategory @ref="NewCategory" InformationBoard="@InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>
-<ManagementPages.UI.Components.Modals.EditCategories @ref="EditCategories"/>
+<ManagementPages.UI.Components.Modals.EditCategories @ref="EditCategories" InformationBoard="InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>
 
 <section class="row col-12">
     <div class="col-3 mt-1 border">
         <h2 class="text-center">talDigital Kontrolpanel</h2>
-        <h5 class="text-center">Aalborg Kommune</h5>
+        <h5 class="text-center">@CustomerName</h5>
     </div>
     <div class="col-7 mt-1 border">
         <h1 class="display-2">@InformationBoard.InformationBoardModel.Title</h1>
@@ -19,7 +19,6 @@
         <button @onclick="() => Help.Open()" class="btn btn-primary float-end"><i class="bi bi-question-circle"></i> Hjælp</button>
     </div>
     <div class="col-3">
-
     </div>
     <div class="col-9 border">
         <nav class="nav nav-pills flex-column flex-sm-row hoverable hover">
@@ -56,6 +55,9 @@
     public IInformationBoardViewModel InformationBoard { get; set; }
 
     [Parameter]
+    public string CustomerName { get; set; }
+
+    [Parameter]
     public EventCallback OnChangesMade { get; set; }
 
     private Help Help { get; set; }
@@ -72,5 +74,6 @@
     private void OnChangesMadeInChildComponent()
     {
         StateHasChanged();
+        OnChangesMade.InvokeAsync();
     }
 }
