@@ -173,8 +173,20 @@ namespace ManagementPages.Functions
                 }
             };
 
+            var informationBoard3 = new InformationBoardViewModel
+            {
+                Categories = categories2,
+                InformationBoardModel = new InformationBoard
+                {
+                    IsPublished = true,
+                    Title = "Information Board 3",
+                    InformationBoardId = 3
+                }
+            };
+
             InformationBoards.Add(informationBoard1);
             InformationBoards.Add(informationBoard2);
+            InformationBoards.Add(informationBoard3);
         }
     }
 }

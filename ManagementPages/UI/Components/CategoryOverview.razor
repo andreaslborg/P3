@@ -27,17 +27,18 @@
             {
                 @foreach (var category in InformationBoard.Categories)
                 {
-                    <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary">
-                        @if (category == InformationBoard.SelectedCategory)
-                        {
-                            <i class="bi bi-pencil" />
+                    @if (category == InformationBoard.SelectedCategory)
+                    {
+                        <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary" style="background-color: darkblue;">
                             @category.CategoryModel.Title
-                        }
-                        else
-                        {
+                        </button>
+                    }
+                    else
+                    {
+                        <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary" style="background-color: none;">
                             @category.CategoryModel.Title
-                        }
-                    </button>
+                        </button>
+                    }
                 }
             }
             else
@@ -51,7 +52,6 @@
 </section>
 
 @code {
-
     [Parameter]
     public IInformationBoardViewModel InformationBoard { get; set; }
 
@@ -73,5 +73,4 @@
     {
         StateHasChanged();
     }
-
 }
