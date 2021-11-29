@@ -78,11 +78,8 @@
     private NewCategory NewCategory { get; set; }
     private EditCategories EditCategories { get; set; }
 
-    private string TestStyle = "blue;";
-
     private void SetSelectedCategory(ICategoryViewModel selectedCategory)
     {
-        TestStyle = "red;";
         InformationBoard.SelectedCategory = selectedCategory;
         OnChangesMade.InvokeAsync();
     }
