@@ -7,7 +7,6 @@ namespace ManagementPages.Functions
 {
     public class CategoryViewModel : ICategoryViewModel
     {
-        
         public List<IPostViewModel> Posts { get; set; } = new();
 
         public CategoryViewModel(int categoryId)
@@ -53,6 +52,5 @@ namespace ManagementPages.Functions
 
             Posts.Add(newPostAdded);
         }
-    
     }
 }
