@@ -14,11 +14,11 @@
             <div class="col-12 row modal-body">
                 <div class="col-6">
                     <label for="title" class="form-label">Titel</label>
-                    <input type="text" class="form-control" id="title" placeholder="" @bind-value="editPost.Title">
+                    <input type="text" class="form-control" id="title" placeholder="" @bind-value="Post.PostModel.Title">
                 </div>
                 <div class="col-6">
                     <label for="author" class="form-label">Forfatter</label>
-                    <input type="text" class="form-control" id="author" placeholder="" @bind-value="editPost.Author">
+                    <input type="text" class="form-control" id="author" placeholder="" @bind-value="Post.PostModel.Author">
                 </div>
                 <div class="mt-3" id="toolbar">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -44,7 +44,7 @@
                 </div>
                 <div class="mt-3">
                     <label for="text" class="form-label">Tekst</label>
-                    <input class="form-control" id="text" rows="8" @bind-value="editPost.Text">
+                    <input class="form-control" id="text" rows="8" @bind-value="Post.PostModel.Text">
                 </div>
                 <br />
                 <div class="col-3 mt-3">
@@ -66,7 +66,6 @@
             </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Slet</button>
-                <button type="submit" class="btn btn-secondary" data-dismiss="modal" @onclick="() => EditAsDraftAndClose()">Gem som kladde</button>
                 <button type="submit" class="btn btn-success" @onclick="() => EditPublishAndClose()">Gem</button>
             </div>
         </div>
@@ -82,22 +81,15 @@
 
 @code {
     [Parameter]
-    public ICategoryViewModel Category { get; set; }
-
-    public Post editPost = new Post();
+    public IPostViewModel Post { get; set; }
+    [Parameter]
+    public EventCallback OnChangesMade { get; set; }
 
     public void EditPublishAndClose()
-    { 
-        Category.EditPost(editPost, Category.CategoryModel.CategoryId, true, _dbService);
-        editPost = new Post();
-        Close();
-    }
-
-    public void EditAsDraftAndClose()
     {
-        Category.EditPost(editPost, Category.CategoryModel.CategoryId, false, _dbService);
-        editPost = new Post();
+        Post.EditPost(Post.PostModel.CategoryId, _dbService);
         Close();
+        OnChangesMade.InvokeAsync();
     }
 
     public string ModalDisplay = "none;";
