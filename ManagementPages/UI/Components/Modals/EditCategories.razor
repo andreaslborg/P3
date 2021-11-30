@@ -16,7 +16,7 @@
             <div class="row modal-body">
                 <div class="col-3"><label for="title" class="form-label">Rediger titel</label></div>
                 <div class="col-1" />
-                <div class="col-3"><label class="form-label">Rediger synlighed</label> <br /></div>
+                <div class="col-3"><label class="form-label">Privat/Offentlig</label> <br /></div>
                 <div class="col-2"><label for="author" class="form-label">Ikon</label></div>
                 <div class="col-2"><label class="form-label">Farve</label> <br /></div>
             </div>
@@ -32,9 +32,8 @@
                     </div>
                     <div class="col-3">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked>
-                            <label class="form-check-label mt-2 ms-2" for="flexSwitchCheckChecked">Offentlig</label>
-                        </div>
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked=@category.CategoryModel.IsPublished @bind-value="category.CategoryModel.IsPublished">
+                        </div>  
                     </div>
                     <div class="col-2">
                         <div class="dropdown">
@@ -86,6 +85,7 @@
     public string ModalClass = "";
     public bool ShowBackdrop = false;
 
+
     public void Open()
     {
         ModalDisplay = "block;";
@@ -124,5 +124,4 @@
         await OnChangesMade.InvokeAsync();
         StateHasChanged();
     }
-
 }
