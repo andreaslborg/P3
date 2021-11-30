@@ -55,7 +55,7 @@ namespace ManagementPages.Functions
 
         public async Task EditCategory(int categoryModelCategoryId, IDbService dbService)
         {
-            string sql = $"update Category set Title = \"{CategoryModel.Title}\" where CategoryId = {CategoryModel.CategoryId}";
+            string sql = $"update Category set Title = \"{CategoryModel.Title}\", IsPublished = {CategoryModel.IsPublished}  where CategoryId = {CategoryModel.CategoryId}";
 
             await dbService.SaveData(sql, CategoryModel);
         }

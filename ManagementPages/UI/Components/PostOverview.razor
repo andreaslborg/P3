@@ -4,7 +4,7 @@
 @inject IDbService _dbService
 
 <ManagementPages.UI.Components.Modals.EditPost @ref="EditPost" Post="@SelectedPost" OnChangesMade="OnChangesMadeInChildComponent"/>
-<ManagementPages.UI.Components.Modals.Delete @ref="Delete" OnChangesMade="OnChangesMadeInChildComponent"/>
+<ManagementPages.UI.Components.Modals.DeletePost @ref="DeletePost" OnChangesMade="OnChangesMadeInChildComponent"/>
 
 
 <div class="col">
@@ -18,7 +18,7 @@
                     @post.PostModel.Text
                     <div class="float-end">
                         <button @onclick="() => EditExistingPost(post)" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
-                        <button @onclick="() => Delete.Open(post)" class="btn p-0"><i class="bi bi-trash"></i></button>
+                        <button @onclick="() => DeletePost.Open(post)" class="btn p-0"><i class="bi bi-trash"></i></button>
                     </div>
                 </div>
             </div>
@@ -46,7 +46,7 @@
     }
 
     private ManagementPages.UI.Components.Modals.EditPost EditPost { get; set; }
-    private ManagementPages.UI.Components.Modals.Delete Delete { get; set; }
+    private ManagementPages.UI.Components.Modals.DeletePost DeletePost { get; set; }
 
     private async Task OnChangesMadeInChildComponent()
     {

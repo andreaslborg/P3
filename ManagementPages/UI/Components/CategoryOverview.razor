@@ -1,5 +1,6 @@
 @using ManagementPages.Functions
 @using ManagementPages.UI.Components.Modals
+@inject IDbService _dbService
 <ManagementPages.UI.Components.Modals.Help @ref="Help"/>
 <ManagementPages.UI.Components.Modals.Profile @ref="Profile"/>
 <ManagementPages.UI.Components.Modals.NewCategory @ref="NewCategory" InformationBoard="@InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>
@@ -76,9 +77,10 @@
         OnChangesMade.InvokeAsync();
     }
 
-    private void OnChangesMadeInChildComponent()
+    private async Task OnChangesMadeInChildComponent()
     {
         StateHasChanged();
-        OnChangesMade.InvokeAsync();
+        InformationBoard.Categories = await _dbService.GetCategories(InformationBoard.InformationBoardModel.InformationBoardId);
+        await OnChangesMade.InvokeAsync();
     }
 }

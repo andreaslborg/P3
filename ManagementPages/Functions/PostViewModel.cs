@@ -27,7 +27,7 @@ namespace ManagementPages.Functions
 
         public async Task EditPost(int postModelCategoryId, IDbService dbService)
         {
-            string sql = $"update Post set Title = \"{PostModel.Title}\", Text = \"{PostModel.Text}\", Author = \"{PostModel.Author}\" where PostId = {PostModel.PostId}";
+            string sql = $"update Post set Title = \"{PostModel.Title}\", Text = \"{PostModel.Text}\", Author = \"{PostModel.Author}\", IsPublished = {PostModel.IsPublished} where PostId = {PostModel.PostId}";
            
             await dbService.SaveData(sql, PostModel);
         }

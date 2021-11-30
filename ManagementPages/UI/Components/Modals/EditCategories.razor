@@ -1,7 +1,7 @@
 ﻿@using ManagementPages.Functions
 @using ManagementPages.Model
 @inject IDbService _dbService
-<ManagementPages.UI.Components.Modals.Delete @ref="Delete"/>
+<ManagementPages.UI.Components.Modals.DeleteCategory @ref="DeleteCategory" OnChangesMade="OnChangesMadeInChildComponent"/>
 
 <div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
     <div class="modal-dialog modal-xl" role="document">
@@ -16,7 +16,7 @@
             <div class="row modal-body">
                 <div class="col-3"><label for="title" class="form-label">Rediger titel</label></div>
                 <div class="col-1" />
-                <div class="col-3"><label class="form-label">Rediger synlighed</label> <br /></div>
+                <div class="col-3"><label class="form-label">Privat/Offentlig</label> <br /></div>
                 <div class="col-2"><label for="author" class="form-label">Ikon</label></div>
                 <div class="col-2"><label class="form-label">Farve</label> <br /></div>
             </div>
@@ -28,13 +28,12 @@
                         <input type="text" class="form-control" id="title" placeholder="" @bind-value="@category.CategoryModel.Title" />
                     </div>
                     <div class="col-1">
-                        <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseDelete()"><i class="bi bi-trash"></i></button>
+                        <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseAndOpenDeleteCategory(category)"><i class="bi bi-trash"></i></button>
                     </div>
                     <div class="col-3">
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked>
-                            <label class="form-check-label mt-2 ms-2" for="flexSwitchCheckChecked">Offentlig</label>
-                        </div>
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked=@category.CategoryModel.IsPublished @bind-value="category.CategoryModel.IsPublished">
+                        </div>  
                     </div>
                     <div class="col-2">
                         <div class="dropdown">
@@ -74,7 +73,7 @@
 
 
 @code {
-    private ManagementPages.UI.Components.Modals.Delete Delete { get; set; }
+    private ManagementPages.UI.Components.Modals.DeleteCategory DeleteCategory { get; set; }
 
     [Parameter]
     public IInformationBoardViewModel InformationBoard { get; set; }
@@ -85,6 +84,7 @@
     public string ModalDisplay = "none;";
     public string ModalClass = "";
     public bool ShowBackdrop = false;
+
 
     public void Open()
     {
@@ -102,10 +102,10 @@
         StateHasChanged();
     }
 
-    public void CloseDelete()
+    private void CloseAndOpenDeleteCategory(ICategoryViewModel category)
     {
         Close();
-        //Delete.Open();
+        DeleteCategory.Open(category);
     }
 
     private void SaveAndClose()
@@ -118,4 +118,10 @@
         OnChangesMade.InvokeAsync();
     }
 
+    private async Task OnChangesMadeInChildComponent()
+    {
+        //InformationBoard.Categories = await _dbService.GetCategories(InformationBoard.InformationBoardModel.InformationBoardId);
+        await OnChangesMade.InvokeAsync();
+        StateHasChanged();
+    }
 }

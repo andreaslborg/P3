@@ -12,18 +12,25 @@
                 </button>
             </div>
             <div class="row modal-body">
-                <p class="fw-bold">Er du sikker på at du vil slette "titel"</p>
+                <p class="fw-bold">Er du sikker på at du vil slette "@Category?.CategoryModel.Title"</p>
             </div>
             <div class="col-10 mx-auto mb-3">
-                <label for="title" class="form-label">Skriv "titel"</label>
-                <input type="text" class="form-control" id="title" placeholder="Titel">
+                <label for="title" class="form-label">Skriv "@Category?.CategoryModel.Title"</label>
+                <input type="text" class="form-control" id="title" placeholder="" @bind-value="CategoryTitleToBeDeleted" @bind-value:event="oninput">
             </div>
             
             <div class="modal-footer ">
                 <div class="mx-auto text-center">
                     <p>Dette kan ikke fortrydes. Er du sikker?</p>
                     <button type="button" class="btn btn-success" data-dismiss="modal" @onclick="() => Close()">Nej</button>
-                    <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => DeleteAndClose()">Ja</button>
+                    @if (Category != null && Category.CategoryModel.Title.Equals(CategoryTitleToBeDeleted, StringComparison.OrdinalIgnoreCase))
+                    {
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => DeleteAndClose()">Ja</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-danger" data-dismiss="modal" disabled>Ja</button>
+                    }
                 </div>
             </div>
         </div>
@@ -41,14 +48,15 @@
     public string ModalDisplay = "none;";
     public string ModalClass = "";
     public bool ShowBackdrop = false;
-    public IPostViewModel Post { get; set; }
+    public ICategoryViewModel Category { get; set; }
+    public string CategoryTitleToBeDeleted { get; set; }
 
     [Parameter]
     public EventCallback OnChangesMade { get; set; }
 
-    public void Open(IPostViewModel post)
+    public void Open(ICategoryViewModel category)
     {
-        Post = post;
+        Category = category;
         ModalDisplay = "block;";
         ModalClass = "Show";
         ShowBackdrop = true;
@@ -64,13 +72,15 @@
         OnChangesMade.InvokeAsync();
     }
 
+    //kan lige nu ikke slette en man lige har added
     private async Task DeleteAndClose()
     {
         ModalDisplay = "none";
         ModalClass = "";
         ShowBackdrop = false;
         StateHasChanged();
-        await Post.DeletePost(_dbService);
+        await Category.DeleteCategory(_dbService);
         await OnChangesMade.InvokeAsync();
+        CategoryTitleToBeDeleted = "";
     }
 }
