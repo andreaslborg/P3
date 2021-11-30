@@ -9,11 +9,10 @@ namespace VisitorApplication.Shared
     public class Test
     {
         public int ID { get; set; }
-
         public string Name { get; set; }
     }
 
-    class PostsFromDB
+    public class Post
     {
         public int PostID { get; set; }
         public string Title { get; set; }

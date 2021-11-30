@@ -13,6 +13,7 @@ namespace VisitorApplication.Server.Controllers
     {
         Task<List<Test>> TestList();
     }
+
     public class TestService : ITest
     {
         private readonly IConfiguration _configuration;
