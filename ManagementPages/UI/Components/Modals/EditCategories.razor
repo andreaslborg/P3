@@ -1,7 +1,7 @@
 ﻿@using ManagementPages.Functions
 @using ManagementPages.Model
 @inject IDbService _dbService
-<ManagementPages.UI.Components.Modals.Delete @ref="Delete"/>
+<ManagementPages.UI.Components.Modals.DeleteCategory @ref="DeleteCategory" OnChangesMade="OnChangesMadeInChildComponent"/>
 
 <div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
     <div class="modal-dialog modal-xl" role="document">
@@ -28,7 +28,7 @@
                         <input type="text" class="form-control" id="title" placeholder="" @bind-value="@category.CategoryModel.Title" />
                     </div>
                     <div class="col-1">
-                        <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseDelete()"><i class="bi bi-trash"></i></button>
+                        <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseAndOpenDeleteCategory(category)"><i class="bi bi-trash"></i></button>
                     </div>
                     <div class="col-3">
                         <button class="btn btn-success"><i class="bi bi-eye"></i> Offentlig</button>
@@ -72,7 +72,7 @@
 
 
 @code {
-    private ManagementPages.UI.Components.Modals.Delete Delete { get; set; }
+    private ManagementPages.UI.Components.Modals.DeleteCategory DeleteCategory { get; set; }
 
     [Parameter]
     public IInformationBoardViewModel InformationBoard { get; set; }
@@ -100,10 +100,10 @@
         StateHasChanged();
     }
 
-    public void CloseDelete()
+    private void CloseAndOpenDeleteCategory(ICategoryViewModel category)
     {
         Close();
-        //Delete.Open();
+        DeleteCategory.Open(category);
     }
 
     private void SaveAndClose()
@@ -114,6 +114,13 @@
         }
         Close();
         OnChangesMade.InvokeAsync();
+    }
+
+    private async Task OnChangesMadeInChildComponent()
+    {
+        //InformationBoard.Categories = await _dbService.GetCategories(InformationBoard.InformationBoardModel.InformationBoardId);
+        await OnChangesMade.InvokeAsync();
+        StateHasChanged();
     }
 
 }

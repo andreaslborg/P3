@@ -71,7 +71,7 @@ namespace ManagementPages.Functions
             return result;
         }
 
-        private async Task<List<ICategoryViewModel>> GetCategories(int informationBoardId)
+        public async Task<List<ICategoryViewModel>> GetCategories(int informationBoardId)
         {
             var result = new List<ICategoryViewModel>();
 
