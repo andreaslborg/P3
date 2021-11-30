@@ -7,12 +7,12 @@
 <ManagementPages.UI.Components.Modals.DeletePost @ref="DeletePost" OnChangesMade="OnChangesMadeInChildComponent"/>
 
 
-<div class="col-9">
+<div class="col-12 bg-white">
     @if (Category?.Posts?.Count > 0)
     {
         @foreach (var post in Category.Posts)
         {
-            <div class="row my-2 border-2 border-bottom">
+            <div class="row my-2 mx-1 border-2 border-bottom">
               <p class="fs-4">@post.PostModel.Title</p>
                 <div>
                     @post.PostModel.Text

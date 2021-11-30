@@ -7,7 +7,7 @@
 <ManagementPages.UI.Components.Modals.EditCategories @ref="EditCategories" InformationBoard="InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>
 
 <!-- Header -->
-<section class="row col-12 mb-2">
+<section class="row col-12 mb-2 bg-white">
     <div class="col-3 mt-1 border-bottom">
         <p class="fs-2 text-center mb-0"><img src="/favicon.ico" width="32" height="32"> talDigital Kontrolpanel</p>
         <p class="fs-5 text-center">@CustomerName</p>
@@ -24,9 +24,10 @@
 
 <section class="row col-12">
     <div class="col-3">
-        <!-- Empty to fill out whitespace -->
+        
     </div>
     <div class="col-9">
+        <p class="fw-bold fs-5 border-dark border-2 border-bottom">Kategorier</p>
         <ul class="nav nav-tabs nav-fill">
             @if (InformationBoard?.Categories?.Count > 0)
             {
