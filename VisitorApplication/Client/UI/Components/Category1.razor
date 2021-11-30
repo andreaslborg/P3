@@ -54,11 +54,13 @@
 
 @code {
 
-        Test[] testList;
+    Test[] testList;
+    Category[] categoryList;
 
     protected async override Task OnInitializedAsync()
     {
-        testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
+        //testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
+        categoryList = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
     }
 
     [Parameter]

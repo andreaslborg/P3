@@ -17,6 +17,25 @@
 
 <section class="wrapper container">
     <div id="categories" class="row justify-content-center text-center">
+        @if (categoryList == null)
+        {
+            <p>Loading..</p>
+        }
+        else
+        {
+            foreach (var category in categoryList)
+            {
+                <a class="btn btn-outline-light square col-5 m-1 d-flex align-items-center border-2" href="/nyheder">
+                    <div class="mx-auto">
+                        <i class="bi bi-newspaper"></i>
+                        <h2>@category.Title</h2>
+                    </div>
+                </a>
+            
+            }
+
+        }
+
         <a class="btn btn-outline-light square col-5 m-1 d-flex align-items-center border-2" href="/nyheder">
             <div class="mx-auto">
                 <i class="bi bi-newspaper"></i>
@@ -49,42 +68,14 @@
         </div>
     </div>
 
-    <div>
-        @if (testList == null)
-        {
-            <p><em>Loading...</em></p> }
-        else
-        {
-            <table class="table">
-                <thead>
-                    <tr>
-                        <th>ID</th>
-                        <th>Name</th>
-                        <th></th>
-
-                    </tr>
-                </thead>
-                <tbody>
-                    @foreach (var test in testList)
-                    {
-                        <tr>
-                            <td>@test.ID</td>
-                            <td>@test.Name</td>
-                            <td></td>
-
-                        </tr>
-                    }
-                </tbody>
-            </table>}
-    </div>
 </section>
 
-@functions
+@code
 { 
-    
-    Test[] testList;
+    Category[] categoryList;
 
     protected async override Task OnInitializedAsync()
     {
-        testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
-    } }
+        categoryList = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
+    }
+}

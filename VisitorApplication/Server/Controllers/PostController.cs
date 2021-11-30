@@ -18,7 +18,8 @@ namespace VisitorApplication.Server.Controllers
         }
 
 
-        [HttpGet("[action]")]
-        public async Task<List<Post>> PostList()
+        //[HttpGet("[action]")]
+        //public async Task<List<Post>> PostList()
+
     }
 }
