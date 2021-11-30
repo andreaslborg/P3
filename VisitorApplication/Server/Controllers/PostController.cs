@@ -10,16 +10,18 @@ namespace VisitorApplication.Server.Controllers
     [Route("api/[controller]")]
     public class PostController : Controller
     {
-        readonly IPost _Ipost;
+        readonly IPost _IPost;
 
         public PostController(IPost Ipost)
         {
-            _Ipost = Ipost;
+            _IPost = Ipost;
         }
 
-
-        //[HttpGet("[action]")]
-        //public async Task<List<Post>> PostList()
-
+        [HttpGet("[action]")]
+        public async Task<List<Post>> PostList()
+        {
+            var post = await _IPost.PostList();
+            return post;
+        }
     }
 }
