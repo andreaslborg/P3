@@ -9,16 +9,16 @@ using VisitorApplication.Shared;
 
 namespace VisitorApplication.Server.Controllers
 {
-    public interface ITest
+    public interface IPost
     {
-        Task<List<Test>> TestList();
+        Task<List<Post>> PostList();
     }
 
-    public class TestService : ITest
+    public class PostService : IPost
     {
         private readonly IConfiguration _configuration;
 
-        public TestService(IConfiguration configuration)
+        public PostService(IConfiguration configuration)
         {
             _configuration = configuration;
 
@@ -30,16 +30,16 @@ namespace VisitorApplication.Server.Controllers
             return connection;
         }
 
-        public async Task<List<Test>> TestList()
+        public async Task<List<Post>> PostList()
         {
             var connectionString = this.GetConnection();
-            List<Test> lst = new List<Test>();
+            List<Post> lst = new List<Post>();
             using (var con = new MySqlConnection(connectionString))
             {
                 try
                 {
                     await con.OpenAsync();
-                    var com = new MySqlCommand("Select `ID`,`Name` FROM test", con)
+                    var com = new MySqlCommand("Select `PostId`,`Title`,`Author`,`Text`,`IsPublished`,`ExpirationDate`,`Image`,`Audio`,`CategoryId` FROM Post", con)
                     {
                         CommandType = CommandType.Text
                     };
@@ -47,11 +47,18 @@ namespace VisitorApplication.Server.Controllers
 
                     while (rdr.Read())
                     {
-                        lst.Add(new Test
+                        lst.Add(new Post
                         {
                             //det ID der er i databasen vil vi gerne have hen i en variabel ID
-                            ID = (int)rdr["ID"],
-                            Name = rdr["Name"].ToString(),
+                            PostID = (int)rdr["PostId"],
+                            Title = rdr["Title"].ToString(),
+                            Author = rdr["Author"].ToString(),
+                            Text = rdr["Text"].ToString(),
+                            IsPublished = (bool)rdr["IsPublished"],
+                            ExpirationDate = (DateTime)rdr["ExpirationDate"],
+                            Image = rdr["Image"].ToString(),
+                            Audio = rdr["Audio"].ToString(),
+                            CategoryID = (int)rdr["CategoryID"]
                         });
                     }
                     return lst.ToList();

@@ -1,0 +1,72 @@
+﻿@page "/{categoryID:int}/{postID:int}"
+
+@using VisitorApplication.Shared
+@inject HttpClient Http
+
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+</head>
+
+
+
+<section class="text-white m-3">
+    @if (postList == null)
+    {
+        <p><em>Loading...</em></p>
+    }
+    else
+    {
+        foreach (var category in categoryList)
+        {
+            if (categoryID == category.CategoryId)
+            {
+                <section class="text-white">
+                    <div class="border">
+                        <div class="wrapper container">
+                            <a class="col-1 btn float-start" href="@($"/{categoryID}")"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
+                            <h1 class="col-10 text-center display-1 ms-0">@category.Title</h1>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                </section>
+            }
+        }
+
+
+
+        @foreach (var post in postList)
+        {
+            if (postID == post.PostID)
+            {
+                int currentID = post.PostID;
+
+                <section class="text-white m-3">
+                    <h1>@post.Title</h1>
+                    <p>@post.Text</p>
+                    <p>-@post.Author</p>
+                </section>
+            }
+        }
+    }
+</section>
+
+
+@code {
+
+    //Test[] testList;
+    Post[] postList;
+    Category[] categoryList;
+
+    protected async override Task OnInitializedAsync()
+    {
+        //testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
+        postList = await Http.GetFromJsonAsync<Post[]>("api/Post/PostList");
+        categoryList = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
+    }
+
+    [Parameter]
+    public int categoryID { get; set; }
+    [Parameter]
+    public int postID { get; set; }
+}

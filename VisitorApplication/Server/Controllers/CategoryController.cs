@@ -9,21 +9,21 @@ namespace VisitorApplication.Server.Controllers
 {
     [Route("api/[controller]")]
     //den første del af navnet TestController er sådan man tilgår den, så api/Test
-    public class TestController : Controller
+    public class CategoryController : Controller
     {
-        readonly ITest _ITest;
+        readonly ICategory _ICategory;
 
-        public TestController(ITest Itest)
+        public CategoryController(ICategory Icategory)
         {
-            _ITest = Itest;
+            _ICategory = Icategory;
         }
 
         //for at gette listen bliver det så til api/Test/TestList
         [HttpGet("[action]")]
-        public async Task<List<Test>> TestList()
+        public async Task<List<Category>> CategoryList()
         {
-            var test = await _ITest.TestList();
-            return test;
+            var categories = await _ICategory.CategoryList();
+            return categories;
         }
     }
 }
