@@ -64,6 +64,12 @@
                     <input type="date" class="form-control" id="date2" placeholder="">
                 </div>
             </div>
+            <div class="col-12 mt-3 ms-2">
+                <label class="form-label">Privat/Offentlig</label> <br />
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked=@Post.PostModel.IsPublished @bind-value="Post.PostModel.IsPublished">
+                </div>
+            </div>
             <div class="modal-footer">
                 <button type="submit" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Slet</button>
                 <button type="submit" class="btn btn-success" @onclick="() => EditPublishAndClose()">Gem</button>
