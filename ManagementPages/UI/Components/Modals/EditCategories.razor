@@ -118,7 +118,7 @@
 
     private async Task OnChangesMadeInChildComponent()
     {
-        InformationBoard.Categories = await _dbService.GetCategories(InformationBoard.InformationBoardModel.InformationBoardId);
+        //InformationBoard.Categories = await _dbService.GetCategories(InformationBoard.InformationBoardModel.InformationBoardId);
         await OnChangesMade.InvokeAsync();
         StateHasChanged();
     }
