@@ -1,4 +1,4 @@
-﻿@page "/nyheder/{postID:int}"
+﻿@page "/{categoryID:int}/{postID:int}"
 
 @using VisitorApplication.Shared
 @inject HttpClient Http
@@ -17,19 +17,29 @@
     }
     else
     {
-        @foreach (var post in postList)
+        foreach (var category in categoryList)
         {
-            if (postID == post.PostID)
+            if (categoryID == category.CategoryId)
             {
                 <section class="text-white">
                     <div class="border">
                         <div class="wrapper container">
-                            <a class="col-1 btn float-start" href="/nyheder"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
-                            <h1 class="col-10 text-center display-1 ms-0">Nyheder</h1>
+                            <a class="col-1 btn float-start" href="@($"/{categoryID}")"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
+                            <h1 class="col-10 text-center display-1 ms-0">@category.Title</h1>
                             <div class="col-1"></div>
                         </div>
                     </div>
                 </section>
+            }
+        }
+
+
+
+        @foreach (var post in postList)
+        {
+            if (postID == post.PostID)
+            {
+                int currentID = post.PostID;
 
                 <section class="text-white m-3">
                     <h1>@post.Title</h1>
@@ -46,11 +56,13 @@
 
     //Test[] testList;
     Post[] postList;
+    Category[] categoryList;
 
     protected async override Task OnInitializedAsync()
     {
         //testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
         postList = await Http.GetFromJsonAsync<Post[]>("api/Post/PostList");
+        categoryList = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
     }
 
     [Parameter]

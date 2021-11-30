@@ -14,7 +14,7 @@ namespace VisitorApplication.Server.Controllers
         Task<List<Post>> PostList();
     }
 
-    public class PostService //: IPost
+    public class PostService : IPost
     {
         private readonly IConfiguration _configuration;
 

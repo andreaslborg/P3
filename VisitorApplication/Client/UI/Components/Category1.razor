@@ -1,4 +1,4 @@
-﻿@page "/nyheder"
+﻿@page "/{categoryID:int}"
 
 @using VisitorApplication.Shared
 @inject HttpClient Http
@@ -8,16 +8,34 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
-<!-- Category Title -->
-<section class="text-white">
-    <div class="border">
-        <div class="wrapper container">
-            <a class="col-1 btn float-start" href="/"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
-            <h1 class="col-10 text-center display-1 ms-0">Nyheder</h1>
-            <div class="col-1"></div>
-        </div>
-    </div>
-</section>
+@if (postList == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    @foreach (var category in categoryList)
+    {
+        if (categoryID == category.CategoryId)
+        {
+            <!-- Category Title -->
+            <section class="text-white">
+                <div class="border">
+                    <div class="wrapper container">
+                        <a class="col-1 btn float-start" href="/"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
+                        <h1 class="col-10 text-center display-1 ms-0">@category.Title</h1>
+                        <div class="col-1"></div>
+                    </div>
+                </div>
+            </section>
+        }
+
+    }
+
+
+}
+
+
 
 <!-- Post Overview -->
 <section class="wrapper container text-white mx-auto">
@@ -34,19 +52,24 @@
 
 
 <section class="wrapper container text-white mx-auto">
-    @if (testList == null)
+    @if (postList == null)
     {
-        <p><em>Loading...</em></p> 
+        <p><em>Loading...</em></p>
     }
     else
     {
-        @foreach (var test in testList)
+        @foreach (var post in postList)
         {
-            <div class="d-flex position-relative mt-1 border">
-                <a class="stretched-link" type="submit" href="@($"/nyheder/{test.ID}")">@test.Name</a>
-                <br />
-            </div>
+            if (categoryID == post.CategoryID)
+            {
+                <div class="d-flex position-relative mt-1 border">
 
+                    <br />
+                    <a class="stretched-link" type="submit" href="@($"/{post.CategoryID}/{post.PostID}")">@post.Title</a>
+                    <br />
+                    <p>@post.Text</p>
+                </div>
+            }
         }
     }
 </section>
@@ -56,12 +79,15 @@
 
 @code {
 
-    Test[] testList;
-    //Post[] postList;
+    //Test[] testList;
+    Post[] postList;
+    Category[] categoryList;
 
     protected async override Task OnInitializedAsync()
     {
-        testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");        
+        //testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
+        postList = await Http.GetFromJsonAsync<Post[]>("api/Post/PostList");
+        categoryList = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
     }
 
     [Parameter]

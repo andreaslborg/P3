@@ -25,21 +25,20 @@
         {
             foreach (var category in categoryList)
             {
-                <a class="btn btn-outline-light square col-5 m-1 d-flex align-items-center border-2" href="/nyheder">
+                <a class="btn btn-outline-light square col-5 m-1 d-flex align-items-center border-2" href="@($"/{category.CategoryId}")">
                     <div class="mx-auto">
                         <i class="bi bi-newspaper"></i>
                         <h2>@category.Title</h2>
                     </div>
                 </a>
-            
             }
-
         }
 
+        @*
         <a class="btn btn-outline-light square col-5 m-1 d-flex align-items-center border-2" href="/nyheder">
             <div class="mx-auto">
                 <i class="bi bi-newspaper"></i>
-                <h2>Nyheder</h2>
+                <h2>Nyhedkjkjflksjdfsdfer</h2>
             </div>
         </a>
         <div class="btn btn-outline-light square col-5 m-1 d-flex align-items-center border-2">
@@ -65,7 +64,12 @@
                 <i class="bi bi-app"></i>
                 <h2>Holder</h2>
             </div>
-        </div>
+
+
+        *@
+
+
+    
     </div>
 
 </section>
