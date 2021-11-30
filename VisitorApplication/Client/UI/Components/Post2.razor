@@ -8,41 +8,49 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
-<section class="text-white">
-    <div class="border">
-        <div class="wrapper container">
-            <a class="col-1 btn float-start" href="/nyheder"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
-            <h1 class="col-10 text-center display-1 ms-0">Title</h1>
-            <div class="col-1"></div>
-        </div>
-    </div>
-</section>
+
 
 <section class="text-white m-3">
-    @if (testList == null)
+    @if (postList == null)
     {
-        <p><em>Loading...</em></p> 
+        <p><em>Loading...</em></p>
     }
     else
     {
-        @foreach (var test in testList)
+        @foreach (var post in postList)
         {
-            if (postID == test.ID)
+            if (postID == post.PostID)
             {
-                <h1>@test.ID</h1>
-                <h1>@test.Name</h1>
+                <section class="text-white">
+                    <div class="border">
+                        <div class="wrapper container">
+                            <a class="col-1 btn float-start" href="/nyheder"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
+                            <h1 class="col-10 text-center display-1 ms-0">Nyheder</h1>
+                            <div class="col-1"></div>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="text-white m-3">
+                    <h1>@post.Title</h1>
+                    <p>@post.Text</p>
+                    <p>-@post.Author</p>
+                </section>
             }
         }
     }
 </section>
 
+
 @code {
 
-    Test[] testList;
+    //Test[] testList;
+    Post[] postList;
 
     protected async override Task OnInitializedAsync()
     {
-        testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
+        //testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
+        postList = await Http.GetFromJsonAsync<Post[]>("api/Post/PostList");
     }
 
     [Parameter]

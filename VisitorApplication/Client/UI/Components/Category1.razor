@@ -52,13 +52,17 @@
 </section>
 
 
+
+
 @code {
 
-        Test[] testList;
+    Test[] testList;
+    //Post[] postList;
 
     protected async override Task OnInitializedAsync()
     {
         testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
+        
     }
 
     [Parameter]
@@ -66,17 +70,5 @@
     [Parameter]
     public int postID { get; set; }
 
-
-
-    public void ShowPost()
-    {
-        foreach (var post in testList)
-        {
-            if (categoryID == post.ID)
-            {
-
-            }
-        }
-    }
 
 }
