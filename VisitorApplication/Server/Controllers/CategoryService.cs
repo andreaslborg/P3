@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿
+using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -9,16 +10,16 @@ using VisitorApplication.Shared;
 
 namespace VisitorApplication.Server.Controllers
 {
-    public interface IPost
+    public interface ICategory
     {
-        Task<List<Post>> PostList();
+        Task<List<Category>> CategoryList();
     }
 
-    public class PostService //: IPost
+    public class CategoryService : ICategory
     {
         private readonly IConfiguration _configuration;
 
-        public PostService(IConfiguration configuration)
+        public CategoryService(IConfiguration configuration)
         {
             _configuration = configuration;
 
@@ -30,16 +31,16 @@ namespace VisitorApplication.Server.Controllers
             return connection;
         }
 
-        public async Task<List<Post>> PostList()
+        public async Task<List<Category>> CategoryList()
         {
             var connectionString = this.GetConnection();
-            List<Post> lst = new List<Post>();
+            List<Category> categoryList = new List<Category>();
             using (var con = new MySqlConnection(connectionString))
             {
                 try
                 {
                     await con.OpenAsync();
-                    var com = new MySqlCommand("Select `PostId`,`Title`,`Author`,`Text`,`IsPublished`,`ExpirationDate`,`Image`,`Audio`,`CategoryId` FROM Post", con)
+                    var com = new MySqlCommand("Select `CategoryId`, `Title`, `IsPublished`, `InformationBoardId` FROM Category", con)
                     {
                         CommandType = CommandType.Text
                     };
@@ -47,28 +48,19 @@ namespace VisitorApplication.Server.Controllers
 
                     while (rdr.Read())
                     {
-                        lst.Add(new Post
+                        categoryList.Add(new Category
                         {
                             //det ID der er i databasen vil vi gerne have hen i en variabel ID
-                            PostID = (int)rdr["PostId"],
+                            CategoryId = (int)rdr["CategoryId"],
                             Title = rdr["Title"].ToString(),
-                            Author = rdr["Author"].ToString(),
-                            Text = rdr["Text"].ToString(),
                             IsPublished = (bool)rdr["IsPublished"],
-                            ExpirationDate = (DateTime)rdr["ExpirationDate"],
-                            Image = rdr["Image"].ToString(),
-                            Audio = rdr["Audio"].ToString(),
-                            CategoryID = (int)rdr["CategoryID"]
+                            InformationBoardId = (int)rdr["InformationBoardId"]
                         });
                     }
-                    return lst.ToList();
+                    return categoryList.ToList();
                 }
                 finally { con.Close(); }
-
-                
             }
-
         }
-
     }
 }
