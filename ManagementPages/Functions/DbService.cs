@@ -89,7 +89,7 @@ namespace ManagementPages.Functions
             return result;
         }
 
-        private async Task<List<IPostViewModel>> GetPosts(int categoryId)
+        public async Task<List<IPostViewModel>> GetPosts(int categoryId)
         {
             var result = new List<IPostViewModel>();
 

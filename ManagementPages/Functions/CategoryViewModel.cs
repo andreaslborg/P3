@@ -52,5 +52,19 @@ namespace ManagementPages.Functions
 
             Posts.Add(newPostAdded);
         }
+
+        public async Task EditCategory(int categoryModelCategoryId, IDbService dbService)
+        {
+            string sql = $"update Category set Title = \"{CategoryModel.Title}\" where CategoryId = {CategoryModel.CategoryId}";
+
+            await dbService.SaveData(sql, CategoryModel);
+        }
+
+        public async Task DeleteCategory(IDbService dbService) // virker ikke på nyoprettede kategorier, fordi de ikke har et ID. Se hvordan det er lavet med posts (re-fetcher posts i callback)
+        {
+            string sql = $"delete from Category where CategoryId = {CategoryModel.CategoryId}";
+
+            await dbService.SaveData(sql, CategoryModel);
+        }
     }
 }

@@ -3,13 +3,13 @@
 <ManagementPages.UI.Components.Modals.Help @ref="Help"/>
 <ManagementPages.UI.Components.Modals.Profile @ref="Profile"/>
 <ManagementPages.UI.Components.Modals.NewCategory @ref="NewCategory" InformationBoard="@InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>
-<ManagementPages.UI.Components.Modals.EditCategories @ref="EditCategories"/>
+<ManagementPages.UI.Components.Modals.EditCategories @ref="EditCategories" InformationBoard="InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>
 
 <!-- Header -->
 <section class="row col-12 mb-2">
     <div class="col-3 mt-1 border-bottom">
         <p class="fs-2 text-center mb-0"><img src="/favicon.ico" width="32" height="32"> talDigital Kontrolpanel</p>
-        <p class="fs-5 text-center">Aalborg Kommune</p>
+        <p class="fs-5 text-center">@CustomerName</p>
     </div>
     <div class="col-7 mt-1 border-bottom">
         <h1 class="display-2">@InformationBoard.InformationBoardModel.Title</h1>
@@ -60,6 +60,9 @@
     public IInformationBoardViewModel InformationBoard { get; set; }
 
     [Parameter]
+    public string CustomerName { get; set; }
+
+    [Parameter]
     public EventCallback OnChangesMade { get; set; }
 
     private Help Help { get; set; }
@@ -76,5 +79,6 @@
     private void OnChangesMadeInChildComponent()
     {
         StateHasChanged();
+        OnChangesMade.InvokeAsync();
     }
 }
