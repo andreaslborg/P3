@@ -1,74 +1,67 @@
 @using ManagementPages.Functions
 @using ManagementPages.UI.Components.Modals
+@inject IDbService _dbService
 <ManagementPages.UI.Components.Modals.Help @ref="Help"/>
 <ManagementPages.UI.Components.Modals.Profile @ref="Profile"/>
 <ManagementPages.UI.Components.Modals.NewCategory @ref="NewCategory" InformationBoard="@InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>
-<ManagementPages.UI.Components.Modals.EditCategories @ref="EditCategories"/>
+<ManagementPages.UI.Components.Modals.EditCategories @ref="EditCategories" InformationBoard="InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>
+
+<!-- Header -->
+<section class="row col-12 mb-2">
+    <div class="col-3 mt-1 border-bottom">
+        <p class="fs-2 text-center mb-0"><img src="/favicon.ico" width="32" height="32"> talDigital Kontrolpanel</p>
+        <p class="fs-5 text-center">@CustomerName</p>
+    </div>
+    <div class="col-7 mt-1 border-bottom">
+        <h1 class="display-2">@InformationBoard.InformationBoardModel.Title</h1>
+    </div>
+    <div class="col-2 mt-1 border-bottom">
+        <a class="btn btn-primary me-1 float-end" href="#" role="button"><i class="bi bi-box-arrow-right"></i> Log ud</a>
+        <button @onclick="() => Profile.Open()" class="btn btn-primary me-1 float-end"><i class="bi bi-person-fill"></i> Profil</button>
+        <button @onclick="() => Help.Open()" class="btn btn-primary me-1 float-end"><i class="bi bi-question-circle"></i> Hjælp</button>
+    </div>
+</section>
 
 <section class="row col-12">
-    <div class="col-3 mt-1 border">
-        <h2 class="text-center">talDigital Kontrolpanel</h2>
-        <h5 class="text-center">Aalborg Kommune</h5>
-    </div>
-    <div class="col-7 mt-1 border">
-        <h1 class="display-2">Sohngaardsholmparken</h1>
-    </div>
-    <div class="col-2 mt-1 border">
-        <a class="btn btn-primary float-end" href="#" role="button"><i class="bi bi-box-arrow-right"></i> Logout</a>
-        <button @onclick="() => Profile.Open()" class="btn btn-primary float-end"><i class="bi bi-person-fill"></i> Profil</button>
-        <button @onclick="() => Help.Open()" class="btn btn-primary float-end"><i class="bi bi-question-circle"></i> Hjælp</button>
-    </div>
     <div class="col-3">
-
+        <!-- Empty to fill out whitespace -->
     </div>
-    <div class="col-9 border">
+    <div class="col-9">
         <nav class="nav nav-pills flex-column flex-sm-row hoverable hover">
-
-            @foreach (var category in InformationBoard.Categories)
+            @if (InformationBoard?.Categories?.Count > 0)
             {
-                @if (category == InformationBoard.SelectedCategory)
+                @foreach (var category in InformationBoard.Categories)
                 {
-                    <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary" style="background-color: darkblue;">
-                        @if (category == InformationBoard.SelectedCategory)
-                        {
+                    @if (category == InformationBoard.SelectedCategory)
+                    {
+                        <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary me-1" style="background-color: darkblue;">
                             @category.CategoryModel.Title
-                        }
-                        else
-                        {
+                        </button>
+                    }
+                    else
+                    {
+                        <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary me-1" style="background-color: none;">
                             @category.CategoryModel.Title
-                        }
-                    </button>
+                        </button>
+                    }
                 }
-                else
-                {
-                    <button @onclick="() => SetSelectedCategory(category)" class="btn btn-primary" style="background-color: none;">
-                        @if (category == InformationBoard.SelectedCategory)
-                        {
-                            @category.CategoryModel.Title
-                        }
-                        else
-                        {
-                            @category.CategoryModel.Title
-                        }
-                    </button>
-                }
-
-
-
-
-
-
             }
-            <button @onclick="() => NewCategory.Open()" class="btn btn-primary"><i class="bi bi-plus-circle"></i> Ny kategori</button>
-            <button @onclick="() => EditCategories.Open()" class="btn btn-primary"><i class="bi bi-pencil"></i> Rediger kategorier</button>
+            else
+            {
+                <button class="btn btn-primary">Der er ingen kategorier endnu...</button>
+            }
+            <button @onclick="() => NewCategory.Open()" class="btn btn-secondary me-1"><i class="bi bi-plus-circle"></i> Ny kategori</button>
+            <button @onclick="() => EditCategories.Open()" class="btn btn-secondary me-1"><i class="bi bi-pencil"></i> Rediger kategorier</button>
         </nav>
     </div>
 </section>
 
 @code {
-
     [Parameter]
     public IInformationBoardViewModel InformationBoard { get; set; }
+
+    [Parameter]
+    public string CustomerName { get; set; }
 
     [Parameter]
     public EventCallback OnChangesMade { get; set; }
@@ -84,9 +77,10 @@
         OnChangesMade.InvokeAsync();
     }
 
-    private void OnChangesMadeInChildComponent()
+    private async Task OnChangesMadeInChildComponent()
     {
         StateHasChanged();
+        InformationBoard.Categories = await _dbService.GetCategories(InformationBoard.InformationBoardModel.InformationBoardId);
+        await OnChangesMade.InvokeAsync();
     }
-
 }

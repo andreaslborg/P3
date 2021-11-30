@@ -3,19 +3,28 @@
 @using ManagementPages.Model
 @using ManagementPages.UI.Components
 
+@inject IDbService dbService
 
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
-<CategoryOverview InformationBoard="@_license.SelectedInformationBoard" OnChangesMade="OnChangesMadeInChildComponent" />
+<CategoryOverview InformationBoard="@License.SelectedInformationBoard" OnChangesMade="OnChangesMadeInChildComponent" CustomerName="@License.LicenseModel.CustomerName"/>
 
-<InformationBoardOverview License="@_license" OnChangesMade="OnChangesMadeInChildComponent" />
+<InformationBoardOverview License="@License" OnChangesMade="OnChangesMadeInChildComponent" />
 
 
 @code {
-    readonly ILicenseViewModel _license = new TestLicenseViewModel(123);
+    public ILicenseViewModel License { get; set; } // = new TestLicenseViewModel(123);
+
+    public int licenseId { get; set; } = 1;
+
+    
+    protected override async Task OnInitializedAsync()
+    {
+        License = await dbService.InitializeLicense(licenseId);
+    }
 
     private void OnChangesMadeInChildComponent()
     {
