@@ -1,4 +1,5 @@
-﻿using Microsoft.Extensions.Configuration;
+﻿
+using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
@@ -9,16 +10,16 @@ using VisitorApplication.Shared;
 
 namespace VisitorApplication.Server.Controllers
 {
-    public interface ICategory
+    public interface IInformationboard
     {
-        Task<List<Category>> CategoryList();
+        Task<List<Informationboard>> InformationboardList();
     }
 
-    public class CategoryService : ICategory
+    public class InformationboardService : IInformationboard
     {
         private readonly IConfiguration _configuration;
 
-        public CategoryService(IConfiguration configuration)
+        public InformationboardService(IConfiguration configuration)
         {
             _configuration = configuration;
 
@@ -30,16 +31,16 @@ namespace VisitorApplication.Server.Controllers
             return connection;
         }
 
-        public async Task<List<Category>> CategoryList()
+        public async Task<List<Informationboard>> InformationboardList()
         {
             var connectionString = this.GetConnection();
-            List<Category> categoryList = new List<Category>();
+            List<Informationboard> informationboardList = new List<Informationboard>();
             using (var con = new MySqlConnection(connectionString))
             {
                 try
                 {
                     await con.OpenAsync();
-                    var com = new MySqlCommand("Select `CategoryId`, `Title`, `IsPublished`, `InformationBoardId` FROM Category", con)
+                    var com = new MySqlCommand("Select `InformationBoardId`, `Title`, `Url`, `QRCode`, `IsPublished`, `LicenseId` FROM InformationBoard", con)
                     {
                         CommandType = CommandType.Text
                     };
@@ -47,16 +48,18 @@ namespace VisitorApplication.Server.Controllers
 
                     while (rdr.Read())
                     {
-                        categoryList.Add(new Category
+                        informationboardList.Add(new Informationboard
                         {
                             //det ID der er i databasen vil vi gerne have hen i en variabel ID
-                            CategoryId = (int)rdr["CategoryId"],
+                            InformationboardID = (int)rdr["InformationBoardId"],
                             Title = rdr["Title"].ToString(),
+                            Url = rdr["Url"].ToString(),
+                            QRCode = rdr["QRCode"].ToString(),
                             IsPublished = (bool)rdr["IsPublished"],
-                            InformationBoardId = (int)rdr["InformationBoardId"]
+                            LicenseID = (int)rdr["LicenseID"]
                         });
                     }
-                    return categoryList.ToList();
+                    return informationboardList.ToList();
                 }
                 finally { con.Close(); }
             }

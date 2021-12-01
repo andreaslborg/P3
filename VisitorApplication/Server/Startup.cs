@@ -25,10 +25,9 @@ namespace VisitorApplication.Server
         {
             services.AddControllersWithViews();
             services.AddRazorPages();
-            services.AddSingleton<ITest, TestService>();
+            services.AddSingleton<IInformationboard, InformationboardService>();
             services.AddSingleton<IPost, PostService>();
             services.AddSingleton<ICategory, CategoryService>();
-            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

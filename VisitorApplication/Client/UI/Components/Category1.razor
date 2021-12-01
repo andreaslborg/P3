@@ -1,4 +1,4 @@
-@page "/{categoryID:int}"
+@page "/{informationboardID:int}/{categoryID:int}"
 
 @using VisitorApplication.Shared
 @inject HttpClient Http
@@ -22,7 +22,7 @@ else
             <section class="text-white">
                 <div class="border">
                     <div class="wrapper container">
-                        <a class="col-1 btn float-start" href="/"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
+                        <a class="col-1 btn float-start" href="@($"/{category.InformationBoardId}")"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
                         <h1 class="col-10 text-center display-1 ms-0">@category.Title</h1>
                         <div class="col-1"></div>
                     </div>
@@ -36,7 +36,7 @@ else
 }
 
 
-
+@*
 <!-- Post Overview -->
 <section class="row col-12 text-white mx-auto">
     <!-- Post 1 -->
@@ -45,11 +45,11 @@ else
         <div>
             <h5>Opslag Titel</h5>
             <p>This is some placeholder content for the custom component. It is intended to mimic what some real-world content would look like</p>
-            <a href="/nyheder/opslag" class="stretched-link">Læs mere her</a>
+            <a class="stretched-link">Læs mere her</a>
         </div>
     </div>
 </section>
-
+    *@
 
 <section class="wrapper container text-white mx-auto">
     @if (postList == null)
@@ -65,7 +65,7 @@ else
                 <div class="d-flex position-relative mt-1 border">
 
                     <br />
-                    <a class="stretched-link" type="submit" href="@($"/{post.CategoryID}/{post.PostID}")">@post.Title</a>
+                    <a class="stretched-link" type="submit" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">@post.Title</a>
                     <br />
                     <p>@post.Text</p>
                 </div>
@@ -78,8 +78,6 @@ else
 
 
 @code {
-
-    //Test[] testList;
     Post[] postList;
     Category[] categoryList;
 
@@ -90,6 +88,8 @@ else
         categoryList = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
     }
 
+    [Parameter]
+    public int informationboardID { get; set; }
     [Parameter]
     public int categoryID { get; set; }
     [Parameter]
