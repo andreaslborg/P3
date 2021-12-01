@@ -63,18 +63,18 @@ else
             if (categoryID == post.CategoryID)
             {
                 <div class="d-flex position-relative mt-1 border">
+                    <a class="text-decoration-none" style="color: white;" type="submit" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">
 
-                    <br />
-                    <a class="stretched-link" type="submit" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">@post.Title</a>
-                    <br />
-                    <p>@post.Text</p>
+                        <h1>@post.Title</h1>
+                        <br />
+                        <p>@post.Text</p>
+
+                    </a>
                 </div>
             }
         }
     }
 </section>
-
-
 
 
 @code {
@@ -83,7 +83,6 @@ else
 
     protected async override Task OnInitializedAsync()
     {
-        //testList = await Http.GetFromJsonAsync<Test[]>("api/Test/TestList");
         postList = await Http.GetFromJsonAsync<Post[]>("api/Post/PostList");
         categoryList = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
     }
@@ -94,6 +93,4 @@ else
     public int categoryID { get; set; }
     [Parameter]
     public int postID { get; set; }
-
-
 }

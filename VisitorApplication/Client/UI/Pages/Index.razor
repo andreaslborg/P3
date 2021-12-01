@@ -10,7 +10,11 @@ else
 {
     foreach (var informationboard in informationboardList)
     {
-        if (informationboardID == informationboard.InformationboardID)
+        if (informationboard.IsPublished != true)
+        {
+            <h1>There is nothing at this address</h1>
+        }
+        else if (informationboardID == informationboard.InformationboardID)
         {
             <head>
                 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
@@ -41,27 +45,11 @@ else
                                     </div>
                                 </a>
                             }
-
                         }
-
-
-
                     }
-
-
-                    <h1>Informationboard table contains:</h1>
-                    foreach (var informationboard in informationboardList)
-
-
-                    <h3>@informationboard.Title</h3>
-
-
-
                 </div>
-
             </section>
         }
-
     }
 }
 
