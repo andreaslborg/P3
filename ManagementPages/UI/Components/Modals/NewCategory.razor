@@ -7,7 +7,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Ny Kategori - @InformationBoard.InformationBoardModel.Title</h5>
+                <h5 class="modal-title">Ny Kategori - @SelectedInformationBoard.InformationBoardModel.Title</h5>
                 <button @onclick="() => Close()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
                     <i class="bi bi-x-lg"></i>
                 </button>
@@ -15,12 +15,13 @@
             <div class="col-12 row modal-body">
                 <div class="col-6">
                     <label for="title" class="form-label">Titel</label>
-                    <input type="text" class="form-control" id="title" placeholder="" @bind-value="newCategory.Title">
+                    <input type="text" class="form-control" id="title" @bind-value="NewCategoryTemp.Title">
 				</div>
                 <div class="col-6">
                     <label for="author" class="form-label">Ikon</label>
                     <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown" aria-expanded="false">
                     Dropdown button
                     </button>
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -46,31 +47,23 @@
 
 @code {
     [Parameter]
-    public IInformationBoardViewModel InformationBoard { get; set; }
-
-    public Category newCategory = new Category();
-    
-    [Parameter]
     public EventCallback OnChangesMade { get; set; }
+
+    public IInformationBoardViewModel SelectedInformationBoard { get; set; } = new InformationBoardViewModel();
+
+    public Category NewCategoryTemp = new Category();
 
     public string ModalDisplay = "none;";
     public string ModalClass = "";
     public bool ShowBackdrop = false;
 
-    public void Open()
+    public void Open(IInformationBoardViewModel selectedInformationBoard)
     {
+        SelectedInformationBoard = selectedInformationBoard;
         ModalDisplay = "block;";
         ModalClass = "Show";
         ShowBackdrop = true;
         StateHasChanged();
-    }
-
-    public void SaveAndClose()
-    {
-        InformationBoard.AddNewCategory(newCategory, InformationBoard.InformationBoardModel.InformationBoardId, true, _dbService);
-        if (true) OnChangesMade.InvokeAsync(); //vi kan lægge noget logik med at hvis det lykkedes at tilføje category, så kører vi den (kræver at AddNewCategory returnerer en bool)
-        newCategory = new Category();
-        Close();
     }
 
     public void Close()
@@ -81,4 +74,18 @@
         StateHasChanged();
     }
 
+    public void SaveAndClose()
+    {
+        Close();
+
+        // add new category to database
+        SelectedInformationBoard.AddNewCategory(NewCategoryTemp, SelectedInformationBoard.InformationBoardModel.InformationBoardId, true, _dbService);
+
+        // notify CategoryOverview about changes, so that the list of categories is re-fetched from the database (to give
+        // the new category a category ID, and to update the view)
+        OnChangesMade.InvokeAsync();
+
+        // reset temporary category object
+        NewCategoryTemp = new Category();
+    }
 }

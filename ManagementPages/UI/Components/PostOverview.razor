@@ -4,15 +4,15 @@
 
 @inject IDbService _dbService
 
-<NewPost @ref="NewPost" Category="@SelectedInformationBoard.SelectedCategory" OnChangesMade="OnChangesMadeInChildComponent" />
-<EditPost @ref="EditPost" Post="@SelectedPost" OnChangesMade="OnChangesMadeInChildComponent" />
+<NewPost @ref="NewPost" OnChangesMade="OnChangesMadeInChildComponent" />
+<EditPost @ref="EditPost" OnChangesMade="OnChangesMadeInChildComponent" />
 <DeletePost @ref="DeletePost" OnChangesMade="OnChangesMadeInChildComponent" />
 
 <div class="col bg-white p-2 rounded">
     <div class="pb-2 border-2 border-bottom">
         @if (SelectedInformationBoard.Categories.Count > 0)
         {
-            <button @onclick="() => NewPost.Open()" class="btn btn-primary">
+            <button @onclick="() => NewPost.Open(SelectedInformationBoard.SelectedCategory)" class="btn btn-primary">
                 <i class="bi bi-plus-circle"></i>
                 Nyt opslag
             </button>
@@ -53,17 +53,17 @@
 
 @code {
     [Parameter]
-    public IInformationBoardViewModel SelectedInformationBoard { get; set; }
+    public IInformationBoardViewModel SelectedInformationBoard { get; set; } = new InformationBoardViewModel();
 
     [Parameter]
-    public EventCallback OnChangesMade { get; set; }
+    public EventCallback OnChangesMade { get; set; } // a method from parent (Admin.razor) must be specified/subscribed when using the component
 
     public IPostViewModel SelectedPost { get; set; } = new PostViewModel();
 
-    public void EditExistingPost(IPostViewModel post)
+    public void EditExistingPost(IPostViewModel selectedPost)
     {
-        SelectedPost = post;
-        EditPost.Open();
+        SelectedPost = selectedPost;
+        EditPost.Open(selectedPost);
     }
 
     private NewPost NewPost { get; set; }
@@ -72,8 +72,12 @@
 
     private async Task OnChangesMadeInChildComponent()
     {
+        // in order to delete a post, a post must have an ID, which means that when a new post have been added, we must
+        // reload the posts from the database to get the ID of the new post
         SelectedInformationBoard.SelectedCategory.Posts = await _dbService.GetPosts(SelectedInformationBoard.SelectedCategory.CategoryModel.CategoryId);
+
+        // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
+        // this is done, as the displayed posts should be the ones from the selected category, so PostOverview needs to be updated
         await OnChangesMade.InvokeAsync();
-        StateHasChanged();
     }
 }

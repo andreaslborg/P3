@@ -1,7 +1,7 @@
 @using ManagementPages.Functions
 @using ManagementPages.UI.Components.Modals
 @inject IDbService _dbService
-<NewCategory @ref="NewCategory" InformationBoard="@InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>
+<NewCategory @ref="NewCategory" OnChangesMade="OnChangesMadeInChildComponent"/>
 <EditCategories @ref="EditCategories" InformationBoard="InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>
 
 <section class="row col">
@@ -35,7 +35,7 @@
                 <li class="mt-2 me-1">Der er ingen kategorier endnu...</li>
             }
             <li>
-                <button @onclick="() => NewCategory.Open()" class="btn btn-secondary me-1"><i class="bi bi-plus-circle"></i> Ny kategori</button>
+                <button @onclick="() => NewCategory.Open(InformationBoard)" class="btn btn-secondary me-1"><i class="bi bi-plus-circle"></i> Ny kategori</button>
             </li>
             <li>
                 <button @onclick="() => EditCategories.Open()" class="btn btn-secondary me-1"><i class="bi bi-pencil"></i> Rediger kategorier</button>
@@ -49,7 +49,7 @@
     public IInformationBoardViewModel InformationBoard { get; set; }
 
     [Parameter]
-    public EventCallback OnChangesMade { get; set; }
+    public EventCallback OnChangesMade { get; set; } // a method from parent (Admin.razor) must be specified/subscribed when using the component
 
     private NewCategory NewCategory { get; set; }
     private EditCategories EditCategories { get; set; }
@@ -57,13 +57,18 @@
     private void SetSelectedCategory(ICategoryViewModel selectedCategory)
     {
         InformationBoard.SelectedCategory = selectedCategory;
+
+        // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
+        // this is done, as the displayed posts should be the ones from the selected category, so PostOverview needs to be updated
         OnChangesMade.InvokeAsync();
     }
 
     private async Task OnChangesMadeInChildComponent()
     {
-        StateHasChanged();
+        // reload categories from data base, so that new categories receive an ID (IDs are generated in the data base)
         InformationBoard.Categories = await _dbService.GetCategories(InformationBoard.InformationBoardModel.InformationBoardId);
+
+        // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
         await OnChangesMade.InvokeAsync();
     }
 }

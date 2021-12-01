@@ -69,11 +69,15 @@
     public ILicenseViewModel License { get; set; }
 
     [Parameter]
-    public EventCallback OnChangesMade { get; set; }
+    public EventCallback OnChangesMade { get; set; } // a method from parent (Admin.razor) must be specified/subscribed when using the component
 
     private void SetSelectedInformationBoard(IInformationBoardViewModel selectedInformationBoard)
     {
         License.SelectedInformationBoard = selectedInformationBoard;
+
+        // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
+        // this is done, as the displayed categories and posts should be the ones from the selected informationboard,
+        // so those components need to be updated
         OnChangesMade.InvokeAsync();
     }
 
@@ -83,7 +87,8 @@
 
     private void OnChangesMadeInChildComponent()
     {
-        StateHasChanged();
+        // inform parent (Admin.razor) that changes have been made to the information boards, so that
+        // it rerenders the entire view
         OnChangesMade.InvokeAsync();
     }
 }

@@ -43,6 +43,8 @@
 
     private void OnChangesMadeInChildComponent()
     {
+        // rerender view according to current values of properties (StateHasChanged does not re-fetch data from database,
+        // this must be done explicitly when necessary)
         StateHasChanged();
     }
 }
