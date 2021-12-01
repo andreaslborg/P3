@@ -6,14 +6,10 @@
 <ManagementPages.UI.Components.Modals.InfoboardStatistics @ref="InfoboardStatistics"/>
 <ManagementPages.UI.Components.Modals.InfoboardQR @ref="InfoboardQR"/>
 
-<section class="row col-12 mt-2">
-    <div class="col-3">
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th scope="col">Informationstavler</th>
-            </tr>
-            </thead>
+<section class="row col-12">
+    <div class="col-3 ps-4">
+        <p class="fw-bold fs-5 border-dark border-2 border-bottom">Informationstavler</p>
+        <table class="table table-striped table-hover bg-white rounded">
             <tbody>
                 @foreach (var informationBoard in License.InformationBoards)
                 {
@@ -93,9 +89,7 @@
             </tbody>
         </table>
     </div>
-
-    <!-- Dropdown menu -->
-    <div class="col-9">
+    <div class="col-9 bg-white pt-2 rounded">
         <div class="pb-2 border-2 border-bottom">
           @if (License.SelectedInformationBoard.Categories.Count > 0)
           {
