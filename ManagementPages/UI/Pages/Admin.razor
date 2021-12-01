@@ -10,9 +10,24 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
-<CategoryOverview InformationBoard="@License.SelectedInformationBoard" OnChangesMade="OnChangesMadeInChildComponent" CustomerName="@License.LicenseModel.CustomerName"/>
 
-<InformationBoardOverview License="@License" OnChangesMade="OnChangesMadeInChildComponent" />
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <Header License="License"/>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+            <InformationBoardOverview License="License" OnChangesMade="OnChangesMadeInChildComponent" />
+            <!--EditorOverview /-->
+        </div>
+        <div class="col">
+            <CategoryOverview InformationBoard="License.SelectedInformationBoard" OnChangesMade="OnChangesMadeInChildComponent" />
+            <PostOverview SelectedInformationBoard="License.SelectedInformationBoard" OnChangesMade="OnChangesMadeInChildComponent" />
+        </div>
+    </div>
+</div>
 
 
 @code {
