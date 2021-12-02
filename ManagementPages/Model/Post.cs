@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace ManagementPages.Model
 {
@@ -11,10 +10,18 @@ namespace ManagementPages.Model
 
         public int CategoryId { get; set; }
 
+        [Required (ErrorMessage = "Titel-feltet skal udfyldes")]
+        [StringLength(30, ErrorMessage = "Titlen er for lang")]
         public string Title { get; set; }
 
+
+        [Required (ErrorMessage = "Tekst-feltet skal udfyldes")]
+        [StringLength(429496729, ErrorMessage = "Teksten er for lang")]
         public string Text { get; set; }
 
+
+        [Required(ErrorMessage = "Forfatter-feltet skal udfyldes")]
+        [StringLength(100, ErrorMessage = "Navnet er for lang")]
         public string Author { get; set; }
 
         public string Image { get; set; }

@@ -1,8 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
+using System.ComponentModel.DataAnnotations;
+
 
 namespace ManagementPages.Model
 {
@@ -12,6 +10,8 @@ namespace ManagementPages.Model
 
         public int InformationBoardId { get; set; }
 
+        [Required(ErrorMessage = "Titel-feltet skal udfyldes")]
+        [StringLength(30, ErrorMessage = "Titlen er for lang")]
         public string Title { get; set; }
 
         public bool IsPublished { get; set; }
