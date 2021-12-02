@@ -31,7 +31,7 @@
     </div>
     @if (SelectedInformationBoard?.SelectedCategory?.Posts?.Count > 0)
     {
-        @foreach (var post in SelectedInformationBoard.SelectedCategory.Posts)
+        @foreach (var post in SelectedInformationBoard.SelectedCategory.Posts.OrderByDescending(x => x.PostModel.PostId))
         {
             @if (post.PostModel.IsPublished)
             {
