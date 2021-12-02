@@ -4,7 +4,6 @@ html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: rgb(5,56,107);
     background: linear-gradient(180deg, rgba(5,56,107,1) 0%, rgba(92,219,149,1) 70%, rgba(142,228,175,1) 100%);
-    height:99vh;
 }
 
 body {
