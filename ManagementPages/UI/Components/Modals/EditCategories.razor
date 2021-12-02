@@ -38,7 +38,10 @@
                         </div>
                     </div>
                     <div class="col-2">
-                        <!--Skal de bare default i categorymodel have et ikon?-->
+                        <!--Skal de bare default i categorymodel have et ikon?
+                            kan vi lave en enum(??) med en string og et ikon og så stringen ryger til db?
+                        https://stackoverflow.com/questions/36743041/font-awesome-icon-in-select-option/36743356
+                        -->
                         <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
                         <select @bind="@category.CategoryModel.Icon">
                             @foreach (var icon in Icons)
