@@ -32,6 +32,7 @@ else
     }
 }
 
+
 <section class="wrapper container text-white mx-auto">
     @if (postList == null)
     {
@@ -43,13 +44,10 @@ else
         {
             if (categoryID == post.CategoryID && post.IsPublished == true)
             {
-                <div class="d-flex position-relative mt-1 border">
-                    <a class="text-decoration-none" style="color: white;" type="submit" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">
-                        <h1>@post.Title</h1>
-                        <br />
-                        <p>@post.Text</p>
-                    </a>
-                </div>
+                <a class="btn col-12 mt-1 stretched-link text-start text-white border" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">
+                    <h1 class="">@post.Title</h1>
+                    <p class="">@post.Text</p>
+                </a>
             }
         }
 
