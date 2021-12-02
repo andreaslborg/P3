@@ -29,27 +29,8 @@ else
                 </div>
             </section>
         }
-
     }
-
-
 }
-
-
-@*
-<!-- Post Overview -->
-<section class="row col-12 text-white mx-auto">
-    <!-- Post 1 -->
-    <div class="d-flex position-relative mt-1 border">
-        <img src="ged.png" class="img-fluid rounded-start m-auto me-3" alt="Ged" style="max-width: 10em; max-height: 10em">
-        <div>
-            <h5>Opslag Titel</h5>
-            <p>This is some placeholder content for the custom component. It is intended to mimic what some real-world content would look like</p>
-            <a class="stretched-link">Læs mere her</a>
-        </div>
-    </div>
-</section>
-    *@
 
 <section class="wrapper container text-white mx-auto">
     @if (postList == null)
@@ -60,19 +41,18 @@ else
     {
         @foreach (var post in postList)
         {
-            if (categoryID == post.CategoryID)
+            if (categoryID == post.CategoryID && post.IsPublished == true)
             {
                 <div class="d-flex position-relative mt-1 border">
                     <a class="text-decoration-none" style="color: white;" type="submit" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">
-
                         <h1>@post.Title</h1>
                         <br />
                         <p>@post.Text</p>
-
                     </a>
                 </div>
             }
         }
+
     }
 </section>
 
