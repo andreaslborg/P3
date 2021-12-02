@@ -52,7 +52,7 @@
                         @if (informationBoard.InformationBoardModel.IsPublished)
                          {
                             <td class="">
-                                <button class="btn btn-outline p-0" @onclick="() => SetSelectedInformationBoard(informationBoard)">
+                                <button class="btn btn-outline p-0 shadow-none" @onclick="() => SetSelectedInformationBoard(informationBoard)">
                                     @informationBoard.InformationBoardModel.Title
                                 </button>
                             </td>
@@ -60,7 +60,7 @@
                          else
                          {
                             <td class="">
-                                <button class="btn btn-outline p-0 text-muted" @onclick="() => SetSelectedInformationBoard(informationBoard)">
+                                <button class="btn btn-outline p-0 text-muted shadow-none" @onclick="() => SetSelectedInformationBoard(informationBoard)">
                                     @informationBoard.InformationBoardModel.Title
                                 </button>
                             </td>
