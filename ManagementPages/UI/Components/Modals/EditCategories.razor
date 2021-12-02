@@ -1,7 +1,9 @@
 ﻿@using ManagementPages.Functions
 @using ManagementPages.Model
+
 @inject IDbService _dbService
-<ManagementPages.UI.Components.Modals.DeleteCategory @ref="DeleteCategory" OnChangesMade="OnChangesMadeInChildComponent"/>
+
+<ManagementPages.UI.Components.Modals.DeleteCategory @ref="DeleteCategory" OnChangesMade="OnChangesMadeInChildComponent" />
 
 <div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
     <div class="modal-dialog modal-xl" role="document">
@@ -12,7 +14,7 @@
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
-            
+
             <div class="row modal-body">
                 <div class="col-3"><label for="title" class="form-label">Rediger titel</label></div>
                 <div class="col-1" />
@@ -20,7 +22,7 @@
                 <div class="col-2"><label for="author" class="form-label">Ikon</label></div>
                 <div class="col-2"><label class="form-label">Farve</label> <br /></div>
             </div>
-            
+
             @foreach (var category in InformationBoard.Categories)
             {
                 <div class="row modal-body">
@@ -33,17 +35,30 @@
                     <div class="col-3">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked=@category.CategoryModel.IsPublished @bind-value="category.CategoryModel.IsPublished">
-                        </div>  
+                        </div>
                     </div>
                     <div class="col-2">
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown button
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                            </ul>
+                        <!--Skal de bare default i categorymodel have et ikon?-->
+                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
+                        <select @bind="@category.CategoryModel.Icon">
+                            @foreach (var icon in Icons)
+                            {
+                                <option value="@icon">@icon</option>
+                            }
+                        </select>
+
+                        <div>
+                            <!--https://stackoverflow.com/questions/36743041/font-awesome-icon-in-select-option-->
+                            <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
+                            <select @bind="@category.CategoryModel.Icon">
+
+                                <option>&#xf043;</option>
+                                <option>&#xf044;</option>
+                                <option>&#xf045;</option>
+                                <option>Hi, &#xf046;</option>
+                            </select>
                         </div>
+
                     </div>
                     <div class="col-2">
                         <button class="btn btn-primary" disabled>Vælg tema farve</button>
@@ -55,7 +70,7 @@
                     </div>
                 </div>
             }
-            
+
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Annuller</button>
@@ -80,6 +95,15 @@
 
     [Parameter]
     public EventCallback OnChangesMade { get; set; }
+
+    public string iconTest = "&#xf042";
+
+    //hvor skal denne ligge? på viewmodel eller?
+    public List<string> Icons { get; set; } = new List<string>()
+    {
+            "bi bi-bicycle", "bi bi-bug", "bi bi-tree", "&#xf042", "&#xf043;", "&#xf049;"
+        };
+
 
     public string ModalDisplay = "none;";
     public string ModalClass = "";

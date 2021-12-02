@@ -23,16 +23,14 @@
                         <input type="text" class="form-control" id="title" @bind-value="NewCategoryTemp.Title">
                     </div>
                     <div class="col-6">
-                        <label for="author" class="form-label">Ikon</label>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown button
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                            </ul>
-                        </div>
+                        <label class="form-label">Ikon</label>
+                        <!--Skal de bare default i categorymodel have et ikon?-->
+                        <select @bind="@NewCategoryTemp.Icon">
+                            @foreach (var icon in Icons)
+                            {
+                                <option>@icon</option>
+                            }
+                        </select>
                     </div>
                 </div>
                 <div class="modal-footer">
@@ -61,6 +59,13 @@
     public IInformationBoardViewModel SelectedInformationBoard { get; set; } = new InformationBoardViewModel();
 
     public CategoryModel NewCategoryTemp = new CategoryModel();
+
+    //hvor skal den ligge?
+    public List<string> Icons { get; set; } = new List<string>()
+        {
+            "bi bi-bicycle", "bi bi-bug", "bi bi-tree"
+        };
+
 
     public string ModalDisplay = "none;";
     public string ModalClass = "";
