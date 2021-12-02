@@ -16,6 +16,8 @@ namespace ManagementPages.Model
 
         public bool IsPublished { get; set; }
 
+        [Required(ErrorMessage = "Vælg et ikon")]
+        [StringLength(30, ErrorMessage = "Det valgte ikon kan ikke bruges. Vælg et andet")]
         public string Icon { get; set; }
 
         //https://docs.microsoft.com/en-us/dotnet/api/system.drawing.color?view=net-5.0 

@@ -10,6 +10,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ManagementPages.Functions;
+using Syncfusion.Blazor;
+
 
 namespace ManagementPages
 {
@@ -30,6 +32,7 @@ namespace ManagementPages
             services.AddServerSideBlazor();
             services.AddSingleton<IDbService, DbService>();
             services.AddSingleton<ILicenseViewModel, LicenseViewModel>();
+            services.AddSyncfusionBlazor();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
