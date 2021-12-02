@@ -39,7 +39,7 @@ else
     }
     else
     {
-        @foreach (var post in postList)
+        @foreach (var post in postList.OrderByDescending(x => x.PostID))
         {
             if (categoryID == post.CategoryID && post.IsPublished == true)
             {
