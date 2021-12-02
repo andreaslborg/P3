@@ -51,7 +51,7 @@ else
 </section>
     *@
 
-<section class="wrapper container text-white mx-auto">
+<section class="wrapper container text-white">
     @if (postList == null)
     {
         <p><em>Loading...</em></p>
@@ -62,13 +62,10 @@ else
         {
             if (categoryID == post.CategoryID)
             {
-                <div class="d-flex position-relative mt-1 border">
-
-                    <br />
-                    <a class="stretched-link" type="submit" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">@post.Title</a>
-                    <br />
-                    <p>@post.Text</p>
-                </div>
+                <a class="btn col-12 mt-1 stretched-link text-start text-white border" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">
+                    <h1 class="">@post.Title</h1>
+                    <p class="">@post.Text</p>
+                </a>
             }
         }
     }
