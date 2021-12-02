@@ -8,8 +8,8 @@
 <EditPost @ref="EditPost" OnChangesMade="OnChangesMadeInChildComponent" />
 <DeletePost @ref="DeletePost" OnChangesMade="OnChangesMadeInChildComponent" />
 
-<div class="col bg-white p-2 rounded">
-    <div class="pb-2 border-2 border-bottom">
+<div class="col bg-white rounded"> 
+    <div class="p-2 border-2 border-bottom">
         @if (SelectedInformationBoard.Categories.Count > 0)
         {
             <button @onclick="() => NewPost.Open(SelectedInformationBoard.SelectedCategory)" class="btn btn-primary">
@@ -33,16 +33,24 @@
     {
         @foreach (var post in SelectedInformationBoard.SelectedCategory.Posts)
         {
-            <div class="row my-2 mx-1 border-2 border-bottom">
-                <p class="fs-4">@post.PostModel.Title</p>
+            <div class="row m-1">
+                <div class="fs-4 fw-bolder text-capitalize">
+                    @post.PostModel.Title
+                </div> 
+                <div class="fs-6 fw-light text-muted text-capitalize mt-0">
+                    @post.PostModel.Author
+                </div>
                 <div>
-                    @post.PostModel.Text
-                    <div class="float-end">
-                        <button @onclick="() => EditExistingPost(post)" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
-                        <button @onclick="() => DeletePost.Open(post)" class="btn p-0"><i class="bi bi-trash"></i></button>
+                    <div class="fw-normal mt-1 mb-0">
+                        @post.PostModel.Text
+                        <div class="float-end">
+                            <button @onclick="() => EditExistingPost(post)" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
+                            <button @onclick="() => DeletePost.Open(post)" class="btn p-0"><i class="bi bi-trash"></i></button>
+                        </div>
                     </div>
                 </div>
             </div>
+            <div class="border-2 border-bottom"></div>
         }
     }
     else
