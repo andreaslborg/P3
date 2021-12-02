@@ -2,23 +2,23 @@
 
 html, body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: rgb(5,56,107);
-    background: linear-gradient(180deg, rgba(5,56,107,1) 0%, rgba(92,219,149,1) 70%, rgba(142,228,175,1) 100%);
+    /*background: linear-gradient(180deg, rgba(5,56,107,1) 0%, rgba(92,219,149,1) 70%, rgba(142,228,175,1) 100%);*/
+    min-height: 99vh;
 }
 
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
+#licenseName {
+    color: rgba(92,219,149,1)
+}
 
 a, .btn-link {
     color: #0366d6;
 }
 
-.square {
-    background-image: url("");
-}
-
+/* Icon size */
 .bi {
     font-size: 4em;
 }
@@ -26,7 +26,7 @@ a, .btn-link {
 .square:after {
     content: "";
     display: block;
-    padding-bottom: 85%;
+    padding-bottom: 100%;
 }
 
 
@@ -64,9 +64,9 @@ a, .btn-link {
     z-index: 1000;
 }
 
-    #blazor-error-ui .dismiss {
-        cursor: pointer;
-        position: absolute;
-        right: 0.75rem;
-        top: 0.5rem;
-    }
+#blazor-error-ui .dismiss {
+    cursor: pointer;
+    position: absolute;
+    right: 0.75rem;
+    top: 0.5rem;
+}
