@@ -42,8 +42,8 @@ namespace ManagementPages.Functions
                 IsPublished = isPublished
             };
 
-            string sql = @"insert into Post (Title, CategoryId, Text, Author, IsPublished)
-                values (@Title, @CategoryId, @Text, @Author, @IsPublished);";
+            string sql =
+                $"insert into Post (Title, CategoryId, Text, Author, IsPublished) values (\"{postModel.Title}\", {postModel.CategoryId}, \"{postModel.Text}\", \"{postModel.Author}\", {postModel.IsPublished});";
 
             await dbService.SaveData(sql, postModel);
 
