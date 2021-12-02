@@ -38,5 +38,17 @@ namespace ManagementPages.Functions
 
             await dbService.SaveData(sql, PostModel);
         }
+
+        // method to compare to posts based on their ID. This should always be used instead of '=='
+        public override bool Equals(object obj)
+        {
+            var other = obj as IPostViewModel;
+            return PostModel.PostId == other.PostModel.PostId;
+        }
+
+        public override int GetHashCode()
+        {
+            return PostModel.PostId;
+        }
     }
 }

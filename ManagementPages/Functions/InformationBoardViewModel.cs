@@ -70,6 +70,18 @@ namespace ManagementPages.Functions
 
             await dbService.SaveData(sql, InformationBoardModel);
         }
+
+        // method to compare to information boards based on their ID. This should always be used instead of '=='
+        public override bool Equals(object obj)
+        {
+            var other = obj as IInformationBoardViewModel;
+            return InformationBoardModel.InformationBoardId == other.InformationBoardModel.InformationBoardId;
+        }
+
+        public override int GetHashCode()
+        {
+            return InformationBoardModel.InformationBoardId;
+        }
     }
 
 }

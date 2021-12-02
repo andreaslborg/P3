@@ -12,7 +12,7 @@
             {
                 @foreach (var category in InformationBoard.Categories)
                 {
-                    @if (category == InformationBoard.SelectedCategory)
+                    @if (category.Equals(InformationBoard.SelectedCategory))
                     {
                         <li class="nav-item me-1">
                             <a @onclick="() => SetSelectedCategory(category)" class="nav-link active me-1" style="cursor: pointer;">

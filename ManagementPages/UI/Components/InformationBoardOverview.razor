@@ -12,7 +12,7 @@
             <tbody>
                 @foreach (var informationBoard in License.InformationBoards)
                 {
-                    if (informationBoard == License.SelectedInformationBoard)
+                    if (informationBoard.Equals(License.SelectedInformationBoard))
                     {
                         <tr class="">
                             <td class="table-active">
