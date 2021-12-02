@@ -1,8 +1,10 @@
-﻿<ManagementPages.UI.Components.Modals.Help @ref="Help"/>
-<ManagementPages.UI.Components.Modals.Profile @ref="Profile"/>
-<ManagementPages.UI.Components.Modals.EditAdmins @ref="EditAdmins"/>
-<ManagementPages.UI.Components.Modals.EditLicense @ref="EditLicense"/>
-<ManagementPages.UI.Components.Modals.LicenseStatistics @ref="LicenseStatistics"/>
+﻿@using ManagementPages.UI.Components.Modals
+
+<Help @ref="Help"/>
+<Profile @ref="Profile"/>
+<EditAdmins @ref="EditAdmins"/>
+<EditLicense @ref="EditLicense"/>
+<LicenseStatistics @ref="LicenseStatistics"/>
 
 <section class="row col-12">
     <div class="col-3 border">
@@ -75,9 +77,9 @@
 </section>
 
 @code {
-    private ManagementPages.UI.Components.Modals.Help Help { get; set; }
-    private ManagementPages.UI.Components.Modals.Profile Profile { get; set; }
-    private ManagementPages.UI.Components.Modals.EditAdmins EditAdmins { get; set; }
-    private ManagementPages.UI.Components.Modals.EditLicense EditLicense { get; set; }
-    private ManagementPages.UI.Components.Modals.LicenseStatistics LicenseStatistics { get; set; }
+    private Help Help { get; set; }
+    private Profile Profile { get; set; }
+    private EditAdmins EditAdmins { get; set; }
+    private EditLicense EditLicense { get; set; }
+    private LicenseStatistics LicenseStatistics { get; set; }
 }

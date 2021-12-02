@@ -69,18 +69,20 @@
         ModalClass = "";
         ShowBackdrop = false;
         StateHasChanged();
-        OnChangesMade.InvokeAsync();
     }
 
-    //kan lige nu ikke slette en man lige har added
     private async Task DeleteAndClose()
     {
-        ModalDisplay = "none";
-        ModalClass = "";
-        ShowBackdrop = false;
-        StateHasChanged();
+        Close();
+
+        // delete category from database
         await Category.DeleteCategory(_dbService);
+
+        // notify edit category modal about changes (edit category modal will then notify the category overview,
+        // which will re-fetch the categories from the database)
         await OnChangesMade.InvokeAsync();
+
+        // reset input field in delete category modal
         CategoryTitleToBeDeleted = "";
     }
 }

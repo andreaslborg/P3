@@ -118,10 +118,12 @@
         OnChangesMade.InvokeAsync();
     }
 
-    private async Task OnChangesMadeInChildComponent()
+    private void OnChangesMadeInChildComponent()
     {
-        //InformationBoard.Categories = await _dbService.GetCategories(InformationBoard.InformationBoardModel.InformationBoardId);
-        await OnChangesMade.InvokeAsync();
-        StateHasChanged();
+        // open edit categories modal again after a category has been deleted in the delete category modal
+        Open();
+
+        // notify parent about changes, so that the category overview is rerendered
+        OnChangesMade.InvokeAsync();
     }
 }
