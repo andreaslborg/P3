@@ -6,7 +6,7 @@ namespace ManagementPages.Functions
 {
     public interface ICategoryViewModel
     {
-        public Category CategoryModel { get; set; }
+        public CategoryModel CategoryModel { get; set; }
 
         List<IPostViewModel> Posts { get; set; }
 
@@ -14,7 +14,7 @@ namespace ManagementPages.Functions
 
         public void GetPosts(int categoryId);
 
-        public Task AddNewPost(Post newPost, int categoryId, bool isPublished, IDbService dbService);
+        public Task AddNewPost(PostModel newPost, int categoryId, bool isPublished, IDbService dbService);
 
         Task EditCategory(int categoryModelCategoryId, IDbService dbService);
 

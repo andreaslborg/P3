@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace ManagementPages.Model
 {
-    public class InformationBoard
+    public class InformationBoardModel
     {
         public int InformationBoardId { get; set; }
 

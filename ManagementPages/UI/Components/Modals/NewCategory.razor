@@ -12,28 +12,35 @@
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
-            <div class="col-12 row modal-body">
-                <div class="col-6">
-                    <label for="title" class="form-label">Titel</label>
-                    <input type="text" class="form-control" id="title" @bind-value="NewCategoryTemp.Title">
-				</div>
-                <div class="col-6">
-                    <label for="author" class="form-label">Ikon</label>
-                    <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                            data-bs-toggle="dropdown" aria-expanded="false">
-                    Dropdown button
-                    </button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                        </ul>
+
+            <EditForm Model="NewCategoryTemp" OnValidSubmit="SaveAndClose">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="col-12 row modal-body">
+                    <div class="col-6">
+                        <label for="title" class="form-label">Titel</label>
+                        <input type="text" class="form-control" id="title" @bind-value="NewCategoryTemp.Title">
                     </div>
-				</div>              
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Slet</button>
-                <button type="submit" class="btn btn-success" data-dismiss="modal" @onclick="() => SaveAndClose()">Gem</button>
-            </div>
+                    <div class="col-6">
+                        <label for="author" class="form-label">Ikon</label>
+                        <div class="dropdown">
+                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
+                                    data-bs-toggle="dropdown" aria-expanded="false">
+                                Dropdown button
+                            </button>
+                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                                <li><a class="dropdown-item" href="#">Action</a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Slet</button>
+                    <button type="submit" class="btn btn-secondary" data-dismiss="modal" @onclick="() => IsPublished = false">Gem som kladde</button>
+                    <button type="submit" class="btn btn-success" data-dismiss="modal" @onclick="() => IsPublished = true">Gem</button>
+                </div>
+            </EditForm>
         </div>
     </div>
 </div>
@@ -49,9 +56,11 @@
     [Parameter]
     public EventCallback OnChangesMade { get; set; }
 
+    public bool IsPublished { get; set; }
+
     public IInformationBoardViewModel SelectedInformationBoard { get; set; } = new InformationBoardViewModel();
 
-    public Category NewCategoryTemp = new Category();
+    public CategoryModel NewCategoryTemp = new CategoryModel();
 
     public string ModalDisplay = "none;";
     public string ModalClass = "";
@@ -79,13 +88,13 @@
         Close();
 
         // add new category to database
-        SelectedInformationBoard.AddNewCategory(NewCategoryTemp, SelectedInformationBoard.InformationBoardModel.InformationBoardId, true, _dbService);
+        SelectedInformationBoard.AddNewCategory(NewCategoryTemp, SelectedInformationBoard.InformationBoardModel.InformationBoardId, IsPublished, _dbService);
 
         // notify CategoryOverview about changes, so that the list of categories is re-fetched from the database (to give
         // the new category a category ID, and to update the view)
         OnChangesMade.InvokeAsync();
 
         // reset temporary category object
-        NewCategoryTemp = new Category();
+        NewCategoryTemp = new CategoryModel();
     }
 }

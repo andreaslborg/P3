@@ -19,7 +19,7 @@ namespace ManagementPages.Functions
         {
         }
 
-        public Category CategoryModel { get; set; }
+        public CategoryModel CategoryModel { get; set; }
 
         public void GetCategoryData(int categoryId)
         {
@@ -31,9 +31,9 @@ namespace ManagementPages.Functions
             throw new NotImplementedException();
         }
 
-        public async Task AddNewPost(Post newPost, int categoryId, bool isPublished, IDbService dbService)
+        public async Task AddNewPost(PostModel newPost, int categoryId, bool isPublished, IDbService dbService)
         {
-            Post postModel = new Post
+            PostModel postModel = new PostModel
             {
                 Title = newPost.Title,
                 CategoryId = categoryId,
@@ -60,11 +60,23 @@ namespace ManagementPages.Functions
             await dbService.SaveData(sql, CategoryModel);
         }
 
-        public async Task DeleteCategory(IDbService dbService) // virker ikke på nyoprettede kategorier, fordi de ikke har et ID. Se hvordan det er lavet med posts (re-fetcher posts i callback)
+        public async Task DeleteCategory(IDbService dbService)
         {
             string sql = $"delete from Category where CategoryId = {CategoryModel.CategoryId}";
 
             await dbService.SaveData(sql, CategoryModel);
+        }
+
+        // method to compare to Categories based on their ID. This should always be used instead of '=='
+        public override bool Equals(object obj)
+        {
+            var other = obj as ICategoryViewModel;
+            return CategoryModel.CategoryId == other.CategoryModel.CategoryId;
+        }
+
+        public override int GetHashCode()
+        {
+            return CategoryModel.CategoryId;
         }
     }
 }

@@ -12,21 +12,43 @@
             {
                 @foreach (var category in InformationBoard.Categories)
                 {
-                    @if (category == InformationBoard.SelectedCategory)
+                    @if (category.Equals(InformationBoard.SelectedCategory))
                     {
-                        <li class="nav-item me-1">
-                            <a @onclick="() => SetSelectedCategory(category)" class="nav-link active me-1" style="cursor: pointer;">
-                                @category.CategoryModel.Title
-                            </a>
-                        </li>
+                        @if (category.CategoryModel.IsPublished)
+                        {
+                            <li class="nav-item me-1">
+                                <a @onclick="() => SetSelectedCategory(category)" class="nav-link active me-1 text-dark" style="cursor: pointer;">
+                                    @category.CategoryModel.Title
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item me-1">
+                                <a @onclick="() => SetSelectedCategory(category)" class="nav-link active me-1 text-muted" style="cursor: pointer;">
+                                    @category.CategoryModel.Title
+                                </a>
+                            </li>
+                        }
                     }
                     else
                     {
-                        <li class="nav-item me-1">
-                            <a @onclick="() => SetSelectedCategory(category)" class="nav-link me-1" style="cursor: pointer;">
-                                @category.CategoryModel.Title
-                            </a>
-                        </li>
+                        @if (category.CategoryModel.IsPublished)
+                        {
+                            <li class="nav-item me-1">
+                                <a @onclick="() => SetSelectedCategory(category)" class="nav-link text-dark me-1" style="cursor: pointer;">
+                                    @category.CategoryModel.Title
+                                </a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item me-1">
+                                <a @onclick="() => SetSelectedCategory(category)" class="nav-link me-1 text-muted" style="cursor: pointer;">
+                                    @category.CategoryModel.Title
+                                </a>
+                            </li>
+                        }
                     }
                 }
             }
