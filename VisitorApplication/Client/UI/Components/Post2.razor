@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
-<section class="text-white m-3">
+<section class="text-white">
     @if (postList == null)
     {
         <p><em>Loading...</em></p>
@@ -20,13 +20,11 @@
         {
             if (categoryID == category.CategoryId)
             {
-                <section class="text-white">
-                    <div class="border">
-                        <div class="wrapper container">
-                            <a class="col-1 btn float-start" href="@($"/{InformationboardID}/{categoryID}")"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
-                            <h1 class="col-10 text-center display-1 ms-0">@category.Title</h1>
-                            <div class="col-1"></div>
-                        </div>
+                <section class="border">
+                    <div class="wrapper container">
+                        <a class="col-1 btn float-start" href="@($"/{InformationboardID}/{categoryID}")"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
+                        <h1 class="col-10 text-center display-1 ms-0">@category.Title</h1>
+                        <div class="col-1"></div>
                     </div>
                 </section>
             }
@@ -39,7 +37,7 @@
             {
                 int currentID = post.PostID;
 
-                <section class="text-white m-3">
+                <section class="m-3">
                     <h1>@post.Title</h1>
                     <p>@post.Text</p>
                     <p>-@post.Author</p>

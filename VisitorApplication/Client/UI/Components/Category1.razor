@@ -19,20 +19,18 @@ else
         if (categoryID == category.CategoryId)
         {
             <!-- Category Title -->
-            <section class="text-white">
-                <div class="border">
-                    <div class="wrapper container">
-                        <a class="col-1 btn float-start" href="@($"/{category.InformationBoardId}")"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
-                        <h1 class="col-10 text-center display-1 ms-0">@category.Title</h1>
-                        <div class="col-1"></div>
-                    </div>
+            <section class="text-white border">
+                <div class="wrapper container">
+                    <a class="col-1 btn float-start" href="@($"/{category.InformationBoardId}")"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
+                    <h1 class="col-10 text-center display-1 ms-0">@category.Title</h1>
+                    <div class="col-1"></div>
                 </div>
             </section>
         }
     }
 }
 
-<section class="wrapper container text-white mx-auto">
+<section class="row col-12 mx-auto text-white">
     @if (postList == null)
     {
         <p><em>Loading...</em></p>
@@ -43,13 +41,12 @@ else
         {
             if (categoryID == post.CategoryID && post.IsPublished == true)
             {
-                <div class="d-flex position-relative mt-1 border">
-                    <a class="text-decoration-none" style="color: white;" type="submit" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">
+                <a class="mt-2 p-1 text-white text-decoration-none border" type="submit" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">
+                    <div class="">
                         <h1>@post.Title</h1>
-                        <br />
                         <p>@post.Text</p>
-                    </a>
-                </div>
+                    </div>
+                </a>
             }
         }
 
