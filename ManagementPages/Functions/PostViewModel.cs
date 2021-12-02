@@ -18,7 +18,7 @@ namespace ManagementPages.Functions
         {
         }
 
-        public Post PostModel { get; set; } = new Post();
+        public PostModel PostModel { get; set; } = new PostModel();
 
         public void GetPostData(int licenseId)
         {

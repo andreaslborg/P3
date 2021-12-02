@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ManagementPages.Model
 {
-    public class Post
+    public class PostModel
     {
         public int PostId { get; set; }
 

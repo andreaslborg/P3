@@ -57,7 +57,7 @@ namespace ManagementPages.Functions
         {
             var result = new List<IInformationBoardViewModel>();
 
-            var informationBoardModels = new List<InformationBoard>();
+            var informationBoardModels = new List<InformationBoardModel>();
             informationBoardModels = await GetInformationBoardModels(licenseId);
 
             foreach (var informationBoardModel in informationBoardModels)
@@ -75,7 +75,7 @@ namespace ManagementPages.Functions
         {
             var result = new List<ICategoryViewModel>();
 
-            var categoryModels = new List<Category>();
+            var categoryModels = new List<CategoryModel>();
             categoryModels = await GetCategoryModels(informationBoardId);
 
             foreach (var categoryModel in categoryModels)
@@ -93,7 +93,7 @@ namespace ManagementPages.Functions
         {
             var result = new List<IPostViewModel>();
 
-            var postModels = new List<Post>();
+            var postModels = new List<PostModel>();
             postModels = await GetPostModels(categoryId);
 
             foreach (var postModel in postModels)
@@ -106,44 +106,44 @@ namespace ManagementPages.Functions
             return result;
         }
 
-        private async Task<List<Post>> GetPostModels(int categoryId)
+        private async Task<List<PostModel>> GetPostModels(int categoryId)
         {
-            var postList = new List<Post>();
+            var postList = new List<PostModel>();
 
             string sql = $"select * from Post where CategoryId = {categoryId};";
-            postList = await LoadData<Post, dynamic>(sql, new { });
+            postList = await LoadData<PostModel, dynamic>(sql, new { });
 
             return postList;
         }
 
-        private async Task<List<Category>> GetCategoryModels(int informationBoardId)
+        private async Task<List<CategoryModel>> GetCategoryModels(int informationBoardId)
         {
-            var categoryList = new List<Category>();
+            var categoryList = new List<CategoryModel>();
 
             string sql = $"select * from Category where InformationBoardId = {informationBoardId};";
-            categoryList = await LoadData<Category, dynamic>(sql, new { });
+            categoryList = await LoadData<CategoryModel, dynamic>(sql, new { });
 
             return categoryList;
         }
 
 
-        private async Task<List<InformationBoard>> GetInformationBoardModels(int licenseId)
+        private async Task<List<InformationBoardModel>> GetInformationBoardModels(int licenseId)
         {
-            var informationBoardList = new List<InformationBoard>();
+            var informationBoardList = new List<InformationBoardModel>();
 
             string sql = $"select * from InformationBoard where LicenseId = {licenseId};";
-            informationBoardList = await LoadData<InformationBoard, dynamic>(sql, new { });
+            informationBoardList = await LoadData<InformationBoardModel, dynamic>(sql, new { });
 
             return informationBoardList;
         }
 
 
-        public async  Task<License> GetLicenseModel(int licenseId)
+        public async  Task<LicenseModel> GetLicenseModel(int licenseId)
         {
-            List<License> licenseList = new List<License>();
+            List<LicenseModel> licenseList = new List<LicenseModel>();
 
             string sql = $"select * from License where LicenseId = {licenseId};";
-            licenseList = await LoadData<License, dynamic>(sql, new { });
+            licenseList = await LoadData<LicenseModel, dynamic>(sql, new { });
 
             return licenseList.First();
         }

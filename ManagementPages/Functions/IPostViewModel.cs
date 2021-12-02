@@ -5,7 +5,7 @@ namespace ManagementPages.Functions
 {
     public interface IPostViewModel
     {
-        public Post PostModel { get; set; }
+        public PostModel PostModel { get; set; }
 
         public void GetPostData(int licenseId);
 

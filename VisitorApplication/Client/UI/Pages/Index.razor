@@ -2,21 +2,23 @@
 @using VisitorApplication.Shared
 @inject HttpClient Http
 
+<head>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
+</head>
+
+
 @if (informationboardList == null)
 {
-    <h1>Loading...</h1>
+    <h1 class="col-10 text-center display-1 ms-0" style="color: white;">Loading...</h1>
 }
 else
 {
     foreach (var informationboard in informationboardList)
     {
-        if (informationboardID == informationboard.InformationboardID)
+        // Displays the published information board, if any at the specific path
+        if (informationboardID == informationboard.InformationboardID && informationboard.IsPublished == true)
         {
-            <head>
-                <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
-                <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
-            </head>
-
             <section class="col-12 text-white">
                 <p class="display-5 text-center mt-2" id="licenseName">@informationboard.Title</p>
                 <p class="text-center text-capitalize mt-0">En digital informationstavle</p>
@@ -26,47 +28,33 @@ else
                 <div id="categories" class="row justify-content-center text-center">
                     @if (categoryList == null)
                     {
-                        <p>Loading..</p>
+                        <p class="col-10 text-center display-1 ms-0" style="color: white;">Loading..</p>
                     }
                     else
                     {
                         foreach (var category in categoryList)
                         {
-                            if (informationboardID == category.InformationBoardId)
+                            // Displays the published categories within the selected information board if any
+                            if (informationboardID == category.InformationBoardId && category.IsPublished == true)
                             {
-                                <a class="btn btn-outline-light square col-5 m-1 d-flex align-items-center border-2" href="@($"/{category.InformationBoardId}/{category.CategoryId}")">
+                                <a class="btn btn-outline-light square col-5 m-1 d-flex align-items-center border-2" href="@($"/{informationboard.InformationboardID}/{category.CategoryId}")">
                                     <div class="mx-auto">
                                         <i class="bi bi-newspaper"></i>
                                         <h2>@category.Title</h2>
                                     </div>
                                 </a>
                             }
-
                         }
-
-
-
                     }
-
-
-                    <h1>Informationboard table contains:</h1>
-                    foreach (var informationboard in informationboardList)
-
-
-                    <h3>@informationboard.Title</h3>
-
-
-
                 </div>
-
             </section>
         }
-
+        if (informationboardID == informationboard.InformationboardID && informationboard.IsPublished != true)
+        {
+            <h1 class="col-10 text-center display-1 ms-0" style="color: white;">There is nothing at this address</h1>
+        }
     }
 }
-
-
-
 
 @code
 {

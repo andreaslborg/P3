@@ -6,7 +6,7 @@ namespace ManagementPages.Functions
 {
     public interface ILicenseViewModel
     {
-        public License LicenseModel { get; set; }
+        public LicenseModel LicenseModel { get; set; }
 
         public List<IInformationBoardViewModel> InformationBoards { get; set; }
 

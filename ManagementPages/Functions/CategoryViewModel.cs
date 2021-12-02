@@ -19,7 +19,7 @@ namespace ManagementPages.Functions
         {
         }
 
-        public Category CategoryModel { get; set; }
+        public CategoryModel CategoryModel { get; set; }
 
         public void GetCategoryData(int categoryId)
         {
@@ -31,9 +31,9 @@ namespace ManagementPages.Functions
             throw new NotImplementedException();
         }
 
-        public async Task AddNewPost(Post newPost, int categoryId, bool isPublished, IDbService dbService)
+        public async Task AddNewPost(PostModel newPost, int categoryId, bool isPublished, IDbService dbService)
         {
-            Post postModel = new Post
+            PostModel postModel = new PostModel
             {
                 Title = newPost.Title,
                 CategoryId = categoryId,
@@ -42,8 +42,8 @@ namespace ManagementPages.Functions
                 IsPublished = isPublished
             };
 
-            string sql = @"insert into Post (Title, CategoryId, Text, Author, IsPublished)
-                values (@Title, @CategoryId, @Text, @Author, @IsPublished);";
+            string sql =
+                $"insert into Post (Title, CategoryId, Text, Author, IsPublished) values (\"{postModel.Title}\", {postModel.CategoryId}, \"{postModel.Text}\", \"{postModel.Author}\", {postModel.IsPublished});";
 
             await dbService.SaveData(sql, postModel);
 
