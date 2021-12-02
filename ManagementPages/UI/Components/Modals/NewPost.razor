@@ -103,7 +103,7 @@
 
     public ICategoryViewModel SelectedCategory { get; set; } = new CategoryViewModel();
 
-    public Post NewPostTemp = new Post();
+    public PostModel NewPostTemp = new PostModel();
 
     public bool IsPublished { get; set; }
 
@@ -139,6 +139,6 @@
         OnChangesMade.InvokeAsync();
 
         // reset temporary post object
-        NewPostTemp = new Post();
+        NewPostTemp = new PostModel();
     }
 }

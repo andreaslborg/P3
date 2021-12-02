@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace ManagementPages.Model
 {
-    public class Category
+    public class CategoryModel
     {
         public int CategoryId { get; set; }
 

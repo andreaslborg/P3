@@ -60,7 +60,7 @@
 
     public IInformationBoardViewModel SelectedInformationBoard { get; set; } = new InformationBoardViewModel();
 
-    public Category NewCategoryTemp = new Category();
+    public CategoryModel NewCategoryTemp = new CategoryModel();
 
     public string ModalDisplay = "none;";
     public string ModalClass = "";
@@ -95,6 +95,6 @@
         OnChangesMade.InvokeAsync();
 
         // reset temporary category object
-        NewCategoryTemp = new Category();
+        NewCategoryTemp = new CategoryModel();
     }
 }

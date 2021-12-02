@@ -6,7 +6,7 @@ namespace ManagementPages.Functions
 {
     public interface IInformationBoardViewModel
     {
-        public InformationBoard InformationBoardModel { get; set; }
+        public InformationBoardModel InformationBoardModel { get; set; }
 
         List<ICategoryViewModel> Categories { get; set; }
 
@@ -16,7 +16,7 @@ namespace ManagementPages.Functions
 
         public ICategoryViewModel SelectedCategory { get; set; }
 
-        public Task AddNewCategory(Category newCategory, int informationBoardId, bool isPublished, IDbService dbService);
+        public Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished, IDbService dbService);
 
         Task EditInformationBoard(int informationBoardId, IDbService dbService);
     }

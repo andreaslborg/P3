@@ -21,10 +21,10 @@ namespace ManagementPages.Functions
 
         public InformationBoardViewModel()
         {
-            InformationBoardModel = new InformationBoard();
+            InformationBoardModel = new InformationBoardModel();
         }
 
-        public InformationBoard InformationBoardModel { get; set; }
+        public InformationBoardModel InformationBoardModel { get; set; }
 
         public List<ICategoryViewModel> Categories { get; set; } = new();
 
@@ -44,9 +44,9 @@ namespace ManagementPages.Functions
             set => _selectedCategory = value;
         }
 
-        public async Task AddNewCategory(Category newCategory, int informationBoardId, bool isPublished, IDbService dbService)
+        public async Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished, IDbService dbService)
         {
-            Category categoryModel = new Category
+            CategoryModel categoryModel = new CategoryModel
             {
                 Title = newCategory.Title,
                 InformationBoardId = informationBoardId,
