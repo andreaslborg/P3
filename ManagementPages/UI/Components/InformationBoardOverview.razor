@@ -1,15 +1,14 @@
 @using ManagementPages.Functions
 @using ManagementPages.UI.Components.Modals
 
-<ManagementPages.UI.Components.Modals.NewPost @ref="NewPost" Category="@License.SelectedInformationBoard.SelectedCategory" OnChangesMade="OnChangesMadeInChildComponent"/>
-<ManagementPages.UI.Components.Modals.EditInfoboard @ref="EditInfoboard" OnChangesMade="OnChangesMadeInChildComponent"/>
-<ManagementPages.UI.Components.Modals.InfoboardStatistics @ref="InfoboardStatistics"/>
-<ManagementPages.UI.Components.Modals.InfoboardQR @ref="InfoboardQR"/>
+<EditInfoboard @ref="EditInfoboard" OnChangesMade="OnChangesMadeInChildComponent"/>
+<InfoboardStatistics @ref="InfoboardStatistics"/>
+<InfoboardQR @ref="InfoboardQR"/>
 
-<section class="row col-12">
-    <div class="col-3 ps-4">
+<section class="row col">
+    <div class="col ps-4">
         <p class="fw-bold fs-5 border-dark border-2 border-bottom">Informationstavler</p>
-        <table class="table table-striped table-hover bg-white rounded">
+        <table class="table table-hover bg-white rounded">
             <tbody>
                 @foreach (var informationBoard in License.InformationBoards)
                 {
@@ -17,7 +16,7 @@
                     {
                         <tr class="">
                             <td class="table-active">
-                                <button class="btn btn-outline p-0" @onclick="() => SetSelectedInformationBoard(informationBoard)" style="text-decoration: underline;">
+                                <button class="btn btn-outline p-0" @onclick="() => SetSelectedInformationBoard(informationBoard)" style="">
                                     @informationBoard.InformationBoardModel.Title
                                 </button>
                             </td>
@@ -62,57 +61,6 @@
                 }
             </tbody>
         </table>
-
-        <table class="table table-striped table-hover">
-            <thead>
-            <tr>
-                <th scope="col">
-                    Redaktører
-                </th>
-                <th>
-                    <button class="btn btn-primary me-0 float-end" disabled><i class="bi bi-plus-circle"></i> Tilføj ny redaktør</button>
-                </th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr class="">
-                <td>Test Person</td>
-                <td class="">
-                    <button class="btn ms-1 p-0 float-end" disabled>
-                        <i class="bi bi-trash"></i>
-                    </button>
-                    <button class="btn ms-1 p-0 float-end" disabled>
-                        <i class="bi bi-pencil"></i>
-                    </button>
-                </td>
-            </tr>
-            </tbody>
-        </table>
-    </div>
-    <div class="col-9 bg-white pt-2 rounded">
-        <div class="pb-2 border-2 border-bottom">
-          @if (License.SelectedInformationBoard.Categories.Count > 0)
-          {
-              <button @onclick="() => NewPost.Open()" class="btn btn-primary">
-                  <i class="bi bi-plus-circle"></i>
-                  Nyt opslag
-              </button>
-          }
-
-              <div class="dropdown float-end">
-                  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                      Rediger rækkefølge på opslag
-                  </button>
-                  <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                      <li><a class="dropdown-item" href="#">Alfabetisk</a></li>
-                      <li><a class="dropdown-item" href="#">Ældste til nyeste</a></li>
-                      <li><a class="dropdown-item" href="#">Nyeste til ældste</a></li>
-                  </ul>
-              </div>
-        </div>
-
-        <PostOverview Category="@License.SelectedInformationBoard.SelectedCategory" OnChangesMade="OnChangesMadeInChildComponent"/>
-
     </div>
 </section>
 
@@ -121,27 +69,26 @@
     public ILicenseViewModel License { get; set; }
 
     [Parameter]
-    public EventCallback OnChangesMade { get; set; }
+    public EventCallback OnChangesMade { get; set; } // a method from parent (Admin.razor) must be specified/subscribed when using the component
 
     private void SetSelectedInformationBoard(IInformationBoardViewModel selectedInformationBoard)
     {
         License.SelectedInformationBoard = selectedInformationBoard;
+
+        // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
+        // this is done, as the displayed categories and posts should be the ones from the selected informationboard,
+        // so those components need to be updated
         OnChangesMade.InvokeAsync();
     }
 
-    private string SetSelectedText(IInformationBoardViewModel informationBoard)
-    {
-        return $"{informationBoard.InformationBoardModel.Title} SELECTED";
-    }
-
-    private ManagementPages.UI.Components.Modals.NewPost NewPost { get; set; }
-    private ManagementPages.UI.Components.Modals.EditInfoboard EditInfoboard { get; set; }
-    private ManagementPages.UI.Components.Modals.InfoboardStatistics InfoboardStatistics { get; set; }
-    private ManagementPages.UI.Components.Modals.InfoboardQR InfoboardQR { get; set; }
+    private EditInfoboard EditInfoboard { get; set; }
+    private InfoboardStatistics InfoboardStatistics { get; set; }
+    private InfoboardQR InfoboardQR { get; set; }
 
     private void OnChangesMadeInChildComponent()
     {
-        StateHasChanged();
+        // inform parent (Admin.razor) that changes have been made to the information boards, so that
+        // it rerenders the entire view
         OnChangesMade.InvokeAsync();
     }
 }
