@@ -8,8 +8,6 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
-
-
 <section class="text-white m-3">
     @if (postList == null)
     {
@@ -17,7 +15,7 @@
     }
     else
     {
-        // Displays the links to the different posts
+        // Displays the title of the category in the top
         foreach (var category in categoryList)
         {
             if (categoryID == category.CategoryId)
@@ -34,9 +32,10 @@
             }
         }
 
+        // Displays the selected post
         @foreach (var post in postList)
         {
-            if (postID == post.PostID)
+            if (postID == post.PostID && post.IsPublished == true)
             {
                 int currentID = post.PostID;
 
@@ -49,7 +48,6 @@
         }
     }
 </section>
-
 
 @code {
     Informationboard[] informationboardList;

@@ -66,7 +66,7 @@ namespace ManagementPages.Functions
 
         public async Task EditInformationBoard(int informationBoardId, IDbService dbService)
         {
-            string sql = $"update InformationBoard set Title = \"{InformationBoardModel.Title}\" where InformationBoardId = {InformationBoardModel.InformationBoardId}";
+            string sql = $"update InformationBoard set Title = \"{InformationBoardModel.Title}\", IsPublished = {InformationBoardModel.IsPublished} where InformationBoardId = {InformationBoardModel.InformationBoardId}";
 
             await dbService.SaveData(sql, InformationBoardModel);
         }
