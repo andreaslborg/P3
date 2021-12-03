@@ -13,6 +13,7 @@ namespace VisitorApplication.Shared
         public string Author { get; set; }
         public string Text { get; set; }
         public bool IsPublished { get; set; }
+        public string Link { get; set; }
         public DateTime ExpirationDate { get; set; }
         public string Image { get; set; }
         public string Audio { get; set; }

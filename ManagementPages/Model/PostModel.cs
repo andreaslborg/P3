@@ -30,6 +30,8 @@ namespace ManagementPages.Model
 
         public bool IsPublished { get; set; }
 
+        public string Link { get; set; }
+
         public DateTime ExpirationDate { get; set; }
     }
 }
