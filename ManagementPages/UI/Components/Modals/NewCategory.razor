@@ -1,5 +1,6 @@
 ﻿@using ManagementPages.Functions 
 @using ManagementPages.Model
+@using Syncfusion.Blazor.DropDowns
 
 @inject IDbService _dbService
 
@@ -13,27 +14,32 @@
                 </button>
             </div>
 
-            <EditForm Model="NewCategoryTemp" OnValidSubmit="SaveAndClose">
+            <EditForm Model="NewCategoryModelTemp" OnValidSubmit="SaveAndClose">
                 <DataAnnotationsValidator />
                 <ValidationSummary />
 
                 <div class="col-12 row modal-body">
                     <div class="col-6">
                         <label for="title" class="form-label">Titel</label>
-                        <input type="text" class="form-control" id="title" @bind-value="NewCategoryTemp.Title">
+                        <input type="text" class="form-control" id="title" @bind-value="NewCategoryModelTemp.Title">
                     </div>
                     <div class="col-6">
-                        <label for="author" class="form-label">Ikon</label>
-                        <div class="dropdown">
-                            <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                Dropdown button
-                            </button>
-                            <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                <li><a class="dropdown-item" href="#">Action</a></li>
-                            </ul>
-                        </div>
+                        <label for="icon" class="form-label">Ikon</label>
+                        <SfDropDownList CssClass="form-control" ID="icon" TValue="string" Placeholder="Vælg et ikon" TItem="IconOption" @bind-Value="@NewCategoryModelTemp.Icon"
+                                        DataSource="@Icons">
+                            <DropDownListFieldSettings IconCss="BootstrapCode" Value="BootstrapCode" Text="Name"></DropDownListFieldSettings>
+                        </SfDropDownList>
                     </div>
+                    <!--div class="col-6">
+                        <!--label class="form-label">Ikon</label-->
+                        <!--Skal de bare default i categorymodel have et ikon?-- >
+                        <select @bind="@NewCategoryTemp.Icon">
+                            @foreach (var icon in Icons)
+                            {
+                                <option>@icon</option>
+                            }
+                        </select>
+                    </div-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Slet</button>
@@ -60,7 +66,43 @@
 
     public IInformationBoardViewModel SelectedInformationBoard { get; set; } = new InformationBoardViewModel();
 
-    public CategoryModel NewCategoryTemp = new CategoryModel();
+    public CategoryModel NewCategoryModelTemp = new CategoryModel();
+
+    //hvor skal den ligge?
+    public List<IconOption> Icons { get; set; } = new List<IconOption>()
+        {
+            new IconOption()
+            {
+                Name = "Insekt",
+                BootstrapCode = "bi bi-bug"
+            },
+            new IconOption()
+            {
+                Name = "Cykel",
+                BootstrapCode = "bi bi-bicycle"
+            },
+            new IconOption()
+            {
+                Name = "Træ",
+                BootstrapCode = "bi bi-tree"
+            },
+            new IconOption()
+            {
+                Name = "Newspaper",
+                BootstrapCode = "bi bi-newspaper"
+            },
+            new IconOption()
+            {
+                Name = "Butik",
+                BootstrapCode = "bi bi-shop"
+            },
+            new IconOption()
+            {
+                Name = "Skilt",
+                BootstrapCode = "bi bi-signpost"
+            }
+    };
+
 
     public string ModalDisplay = "none;";
     public string ModalClass = "";
@@ -88,13 +130,13 @@
         Close();
 
         // add new category to database
-        SelectedInformationBoard.AddNewCategory(NewCategoryTemp, SelectedInformationBoard.InformationBoardModel.InformationBoardId, IsPublished, _dbService);
+        SelectedInformationBoard.AddNewCategory(NewCategoryModelTemp, SelectedInformationBoard.InformationBoardModel.InformationBoardId, IsPublished, _dbService);
 
         // notify CategoryOverview about changes, so that the list of categories is re-fetched from the database (to give
         // the new category a category ID, and to update the view)
         OnChangesMade.InvokeAsync();
 
         // reset temporary category object
-        NewCategoryTemp = new CategoryModel();
+        NewCategoryModelTemp = new CategoryModel();
     }
 }

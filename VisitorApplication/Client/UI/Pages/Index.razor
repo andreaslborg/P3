@@ -56,7 +56,7 @@ else
                             {
                                 <a class="btn btn-outline-light square col-5 m-1 p-1 d-flex align-items-center border-2 bg-secondary bg-opacity-50 text-white shadow-lg rounded-3" href="@($"/{informationboard.InformationboardID}/{category.CategoryId}")">
                                     <div class="mx-auto">
-                                        <i class="bi bi-newspaper"></i>
+                                        <i class="@category.Icon"></i>
                                         @if (category.Title.Length > 11)
                                         {
                                             <p class="fs-6 text-break">@category.Title</p>
