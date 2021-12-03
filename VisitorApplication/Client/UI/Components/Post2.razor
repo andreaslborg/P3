@@ -11,7 +11,7 @@
 <section class="text-white">
     @if (postList == null)
     {
-        <p><em>Loading...</em></p>
+    <p><em>Loading...</em></p>
     }
     else
     {
@@ -20,28 +20,36 @@
         {
             if (categoryID == category.CategoryId)
             {
-                <section class="border">
-                    <div class="wrapper container">
-                        <a class="col-1 btn float-start" href="@($"/{InformationboardID}/{categoryID}")"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
-                        <h1 class="col-10 text-center display-1 ms-0">@category.Title</h1>
-                        <div class="col-1"></div>
-                    </div>
-                </section>
+            <section class="text-white">
+                <div class="wrapper container mt-1">
+                    <a class="btn float-start" href="@($"/{InformationboardID}/{categoryID}")"><i class="bi bi-arrow-left-square" style="font-size: 7.5vw; color: white;"></i></a>
+                    @if (category.Title.Length > 11)
+                    {
+                    <h1 class="titleGreen mx-auto display-3 fw-bold mt-2 text-break">@category.Title</h1>
+                    }
+                    else
+                    {
+                    <h1 class="titleGreen mx-auto display-1 fw-bold mt-2 text-break">@category.Title</h1>
+                    }
+                </div>
+            </section>
             }
         }
 
         // Displays the selected post
-        @foreach (var post in postList)
+    @foreach (var post in postList)
         {
             if (postID == post.PostID && post.IsPublished == true)
             {
                 int currentID = post.PostID;
 
-                <section class="m-3">
-                    <h1>@post.Title</h1>
+            <section class="shadow-lg rounded-3 bg-secondary bg-opacity-50">
+                <div class="m-3 py-2">
+                    <h1 class="">@post.Title</h1>
+                    <p class="fst-italic">@post.Author</p>
                     <p>@post.Text</p>
-                    <p>-@post.Author</p>
-                </section>
+                </div>
+            </section>
             }
         }
     }

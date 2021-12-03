@@ -19,18 +19,24 @@ else
         if (categoryID == category.CategoryId)
         {
             <!-- Category Title -->
-            <section class="text-white border">
-                <div class="wrapper container">
-                    <a class="col-1 btn float-start" href="@($"/{category.InformationBoardId}")"><i class="bi bi-arrow-left-square" style="font-size: 35px; color: white;"></i></a>
-                    <h1 class="col-10 text-center display-1 ms-0">@category.Title</h1>
-                    <div class="col-1"></div>
+            <section class="text-white">
+                <div class="wrapper container mt-1">
+                    <a class="btn float-start" href="@($"/{category.InformationBoardId}")"><i class="bi bi-arrow-left-square" style="font-size: 7.5vw; color: white;"></i></a>
+                    @if (category.Title.Length > 11)
+                    {
+                    <h1 class="titleGreen mx-auto display-3 fw-bold mt-2 text-break">@category.Title</h1>
+                    }
+                    else
+                    {
+                    <h1 class="titleGreen mx-auto display-1 fw-bold mt-2 text-break">@category.Title</h1>
+                    }
                 </div>
             </section>
         }
     }
 }
 
-<section class="row col-12 mx-auto text-white">
+<section class="row col-12 mx-auto">
     @if (postList == null)
     {
         <p><em>Loading...</em></p>
@@ -41,11 +47,22 @@ else
         {
             if (categoryID == post.CategoryID && post.IsPublished == true)
             {
-                <a class="mt-2 p-1 text-white text-decoration-none border" type="submit" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">
-                    <div class="">
-                        <h1>@post.Title</h1>
-                        <p>@post.Text</p>
+                <a class="card mt-2 p-1 text-white text-decoration-none bg-white bg-opacity-25" type="submit" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">
+                    <div class="card-body">
+                        <h1 class="card-title">@post.Title</h1>
+                        <p class="card-text">
+                            @if (@post.Text.Length > 120)
+                            {
+                                @post.Text.Substring(0, 120);
+                                <span>...</span>
+                            }
+                            else
+                            {
+                                @post.Text
+                            }
+                        </p>
                     </div>
+                    <div class="card-footer ">@post.Author</div>
                 </a>
             }
         }
