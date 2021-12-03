@@ -10,7 +10,7 @@
 
 @if (postList == null)
 {
-    <p><em>Loading...</em></p>
+    
 }
 else
 {
@@ -39,7 +39,7 @@ else
 <section class="row col-12 mx-auto">
     @if (postList == null)
     {
-        <p><em>Loading...</em></p>
+        
     }
     else
     {
@@ -47,7 +47,7 @@ else
         {
             if (categoryID == post.CategoryID && post.IsPublished == true)
             {
-                <a class="card mt-2 p-1 text-white text-decoration-none bg-white bg-opacity-25" type="submit" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">
+                <a class="card mt-2 p-1 text-white text-decoration-none bg-white bg-opacity-25 rounded-2" type="submit" href="@($"/{informationboardID}/{categoryID}/{post.PostID}")">
                     <div class="card-body">
                         <h1 class="card-title">@post.Title</h1>
                         <p class="card-text">

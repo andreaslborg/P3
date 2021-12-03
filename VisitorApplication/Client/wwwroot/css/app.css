@@ -1,17 +1,20 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, sans-serif;
-    background: linear-gradient(180deg, rgba(5,56,107,1) 0%, rgba(92,219,149,1) 70%, rgba(142,228,175,1) 100%);
+    font-family: HelveticaNeue-Light,'Helvetica Neue Light','Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif;
+    /*background-color: #659dbd;
+     background: linear-gradient(180deg, rgba(5,56,107,1) 0%, rgba(92,219,149,0.1) 70%, rgba(142,228,175,0.5) 100%);*/
+    background: rgb(107,81,242);
+    background: linear-gradient(146deg, rgba(116,99,228,1) 0%, rgba(69,48,178,1) 42%);
     min-height: 99vh;
 }
 
 body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: HelveticaNeue-Light,'Helvetica Neue Light','Helvetica Neue',Helvetica,Arial,'Lucida Grande',sans-serif;
 }
 
-.titleGreen {
-    color: rgba(92,219,149,1)
+.creyTitle {
+    color: rgba(200,200,232,1);
 }
 
 a, .btn-link {
@@ -21,6 +24,10 @@ a, .btn-link {
 /* Icon size */
 .bi {
     font-size: 4em;
+}
+
+.square {
+    background-color: #5450d6;
 }
 
 .square:after {
