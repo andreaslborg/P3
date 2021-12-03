@@ -1,7 +1,7 @@
 ﻿@import url('open-iconic/font/css/open-iconic-bootstrap.min.css');
 
 html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    font-family: 'Helvetica Neue', Helvetica, sans-serif;
     background: linear-gradient(180deg, rgba(5,56,107,1) 0%, rgba(92,219,149,1) 70%, rgba(142,228,175,1) 100%);
     min-height: 99vh;
 }
@@ -10,7 +10,7 @@ body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
-#licenseName {
+.titleGreen {
     color: rgba(92,219,149,1)
 }
 
@@ -28,7 +28,6 @@ a, .btn-link {
     display: block;
     padding-bottom: 100%;
 }
-
 
 .btn-primary {
     color: #fff;
