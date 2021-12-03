@@ -17,7 +17,9 @@ namespace VisitorApplication.Shared
 
         public bool IsPublished { get; set; }
 
-       
+        public string Icon { get; set; }
+
+
 
         //Skal assignes i constructor - dependency injection 
         //public ISortingMachine PostSortingMachine { get; set; }

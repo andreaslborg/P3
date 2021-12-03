@@ -39,7 +39,7 @@ namespace VisitorApplication.Server.Controllers
                 try
                 {
                     await con.OpenAsync();
-                    var com = new MySqlCommand("Select `CategoryId`, `Title`, `IsPublished`, `InformationBoardId` FROM Category", con)
+                    var com = new MySqlCommand("Select `CategoryId`, `Title`, `IsPublished`, `Icon`, `InformationBoardId` FROM Category", con)
                     {
                         CommandType = CommandType.Text
                     };
@@ -53,6 +53,7 @@ namespace VisitorApplication.Server.Controllers
                             CategoryId = (int)rdr["CategoryId"],
                             Title = rdr["Title"].ToString(),
                             IsPublished = (bool)rdr["IsPublished"],
+                            Icon = rdr["Icon"].ToString(),
                             InformationBoardId = (int)rdr["InformationBoardId"]
                         });
                     }
