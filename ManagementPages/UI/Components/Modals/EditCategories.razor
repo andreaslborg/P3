@@ -1,5 +1,5 @@
 ﻿@using ManagementPages.Functions
-@using ManagementPages.Model
+@using Syncfusion.Blazor.DropDowns
 
 @inject IDbService _dbService
 
@@ -25,33 +25,35 @@
 
             @foreach (var category in InformationBoard.Categories)
             {
-                <div class="row modal-body">
-                    <div class="col-3">
-                        <input type="text" class="form-control" id="title" placeholder="" @bind-value="@category.CategoryModel.Title" />
-                    </div>
-                    <div class="col-1">
-                        <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseAndOpenDeleteCategory(category)"><i class="bi bi-trash"></i></button>
-                    </div>
-                    <div class="col-3">
-                        <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked=@category.CategoryModel.IsPublished @bind-value="category.CategoryModel.IsPublished">
-                        </div>
-                    </div>
-                    <div class="col-2">
-                        <!--Skal de bare default i categorymodel have et ikon?
-                            kan vi lave en enum(??) med en string og et ikon og så stringen ryger til db?
-                        https://stackoverflow.com/questions/36743041/font-awesome-icon-in-select-option/36743356
-                        -->
-                        <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
-                        <select @bind="@category.CategoryModel.Icon">
-                            @foreach (var icon in Icons)
-                            {
-                            <option value="@icon">@iconTest</option>
-                            }
-                        </select>
+        <div class="row modal-body">
+            <div class="col-3">
+                <input type="text" class="form-control" id="title" placeholder="" @bind-value="@category.CategoryModel.Title" />
+            </div>
+            <div class="col-1">
+                <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseAndOpenDeleteCategory(category)"><i class="bi bi-trash"></i></button>
+            </div>
+            <div class="col-3">
+                <div class="form-check form-switch">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked=@category.CategoryModel.IsPublished @bind-value="category.CategoryModel.IsPublished">
+                </div>
+            </div>
+            <div class="col-2">
+                <SfDropDownList CssClass="form-control" ID="icon" TValue="string" Placeholder="Vælg et ikon" TItem="IconOption" @bind-Value="@category.CategoryModel.Icon"
+                                DataSource="@Icons">
+                    <DropDownListFieldSettings IconCss="BootstrapCode" Value="BootstrapCode" Text="Name"></DropDownListFieldSettings>
+                </SfDropDownList>
 
-                        <div>
-                            <!--https://stackoverflow.com/questions/36743041/font-awesome-icon-in-select-option-->
+                <!--Skal de bare default i categorymodel have et ikon?
+                    https://stackoverflow.com/questions/36743041/font-awesome-icon-in-select-option/36743356
+                    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
+                    <select @bind="@category.CategoryModel.Icon">
+                        @foreach (var icon in Icons)
+                        {
+                            <option value="@icon">@iconTest</option>
+                        }
+                    </select>
+
+                        https://stackoverflow.com/questions/36743041/font-awesome-icon-in-select-option
                             <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
                             <select class="text-muted bi" @bind="@category.CategoryModel.Icon">
                                 <option class="bi bi-bug" value="bi bi-bug">bug</option>
@@ -59,9 +61,9 @@
                                 <option>&#xf045;</option>
                                 <option>Hi, &#xf046;</option>
                             </select>
-                        </div>
+                 -->
 
-                    </div>
+            </div>
                     <div class="col-2">
                         <button class="btn btn-primary" disabled>Vælg tema farve</button>
                     </div>
@@ -101,10 +103,24 @@
     public string iconTest = "&#xf042;";
 
     //hvor skal denne ligge? på viewmodel eller?
-    public List<string> Icons { get; set; } = new List<string>()
-    {
-            "bi bi-bicycle", "bi bi-bug", "bi bi-tree", "&#xf042", "&#xf043;", "&#xf049;"
-        };
+    public List<IconOption> Icons { get; set; } = new List<IconOption>()
+        {
+            new IconOption()
+            {
+                Name = "Insekt",
+                BootstrapCode = "bi bi-bug"
+            },
+            new IconOption()
+            {
+                Name = "Cykel",
+                BootstrapCode = "bi bi-bicycle"
+            },
+            new IconOption()
+            {
+                Name = "Træ",
+                BootstrapCode = "bi bi-tree"
+            }
+    };
 
 
     public string ModalDisplay = "none;";
