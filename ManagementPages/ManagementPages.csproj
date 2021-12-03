@@ -13,6 +13,7 @@
     <EmbeddedResource Remove="Shared\**" />
     <None Remove="Pages\**" />
     <None Remove="Shared\**" />
+    <None Remove="Syncfusion.Blazor" />
   </ItemGroup>
 	
 	<ItemGroup>
@@ -38,6 +39,7 @@
 	<ItemGroup>
 	  <PackageReference Include="Dapper" Version="2.0.123" />
 	  <PackageReference Include="MySql.Data" Version="8.0.27" />
+	  <PackageReference Include="Syncfusion.Blazor" Version="19.3.0.56" />
 	</ItemGroup>
 
 	<ProjectExtensions><VisualStudio><UserProperties appsettings_1json__JsonSchema="" /></VisualStudio></ProjectExtensions>

@@ -50,11 +50,14 @@ namespace ManagementPages.Functions
             {
                 Title = newCategory.Title,
                 InformationBoardId = informationBoardId,
-                IsPublished = isPublished
+                IsPublished = isPublished,
+                Icon = newCategory.Icon
             };
 
-            string sql = @"insert into Category (Title, InformationBoardId, IsPublished)
-                values (@Title, @InformationBoardId, @IsPublished);";
+            string sql = $"insert into Category (Title, InformationBoardId, IsPublished, Icon) values(\"{categoryModel.Title}\", {categoryModel.InformationBoardId}, {categoryModel.IsPublished}, \"{categoryModel.Icon}\"); ";
+
+            //string sql = @"insert into Category (Title, InformationBoardId, IsPublished)
+               // values (@Title, @InformationBoardId, @IsPublished);";
 
             await dbService.SaveData(sql, categoryModel);
 
