@@ -6,7 +6,7 @@
 
 <div class="row col">
     <p class="fw-bold fs-5 border-dark border-2 border-bottom">Kategorier</p>
-        <div class="col-9">
+        <div class="col-9 mt-auto">
             <ul class="nav nav-tabs nav-fill text-nowrap flex-nowrap" style="overflow-x: auto; overflow-y: hidden;">
                 @if (InformationBoard?.Categories?.Count > 0)
                 {
@@ -58,7 +58,7 @@
                 }
             </ul>
         </div>
-        <div class="col p-2">
+        <div class="col ps-2">
             <button @onclick="() => NewCategory.Open(InformationBoard)" class="btn btn-secondary me-1 float-end"><i class="bi bi-plus-circle"></i> Ny kategori</button>
             <button @onclick="() => EditCategories.Open()" class="btn btn-secondary me-1 float-end"><i class="bi bi-pencil"></i> Rediger kategorier</button>
         </div>
