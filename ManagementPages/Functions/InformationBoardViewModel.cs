@@ -12,6 +12,7 @@ namespace ManagementPages.Functions
     {
 
         private ICategoryViewModel _selectedCategory;
+        private List<int> _categoryOrder;
 
         public InformationBoardViewModel(int informationBoardId)
         {
@@ -26,7 +27,7 @@ namespace ManagementPages.Functions
 
         public InformationBoardModel InformationBoardModel { get; set; }
 
-        public List<ICategoryViewModel> Categories { get; set; } = new();
+        public Dictionary<int, ICategoryViewModel> Categories { get; set; } = new();
 
         public void GetInformationBoardData(int informationBoardId)
         {
@@ -40,8 +41,36 @@ namespace ManagementPages.Functions
 
         public ICategoryViewModel SelectedCategory
         {
-            get => _selectedCategory ?? Categories.FirstOrDefault();
+            get => _selectedCategory ?? Categories.FirstOrDefault().Value;
             set => _selectedCategory = value;
+        }
+        public List<int> CategoryOrder
+        {
+            get
+            {
+                if (_categoryOrder != null)
+                {
+                    return _categoryOrder;
+                }
+
+                _categoryOrder = new();
+
+                foreach (var category in Categories)
+                {
+                    _categoryOrder.Add(category.Key);
+                }
+
+                return _categoryOrder;
+            }
+            set
+            {
+                if (_categoryOrder == null)
+                {
+                    _categoryOrder = new(); //ved ikke om det er nødvendigt egentlig
+                }
+
+                _categoryOrder = value;
+            }
         }
 
         public async Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished, IDbService dbService)
@@ -64,7 +93,8 @@ namespace ManagementPages.Functions
             ICategoryViewModel newCategoryAdded = new CategoryViewModel();
             newCategoryAdded.CategoryModel = categoryModel;
 
-            Categories.Add(newCategoryAdded);
+            Categories.Add(newCategoryAdded.GetHashCode(), newCategoryAdded);
+            CategoryOrder.Add(newCategoryAdded.GetHashCode());
         }
 
         public async Task EditInformationBoard(int informationBoardId, IDbService dbService)

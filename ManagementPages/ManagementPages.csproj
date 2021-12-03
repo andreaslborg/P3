@@ -14,6 +14,7 @@
     <None Remove="Pages\**" />
     <None Remove="Shared\**" />
     <None Remove="Syncfusion.Blazor" />
+    <Compile Remove="Functions\TestLicenseViewModel.cs" />
   </ItemGroup>
 	
 	<ItemGroup>
