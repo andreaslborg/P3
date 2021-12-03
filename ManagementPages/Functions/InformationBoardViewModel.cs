@@ -94,7 +94,6 @@ namespace ManagementPages.Functions
             newCategoryAdded.CategoryModel = categoryModel;
 
             Categories.Add(newCategoryAdded.GetHashCode(), newCategoryAdded);
-            CategoryOrder.Add(newCategoryAdded.GetHashCode());
         }
 
         public async Task EditInformationBoard(int informationBoardId, IDbService dbService)

@@ -23,56 +23,69 @@
                 <div class="col-2"><label class="form-label">Farve</label> <br /></div>
             </div>
 
-            @foreach (var category in InformationBoard.Categories)
+            @foreach (var id in InformationBoard.CategoryOrder)
             {
         <div class="row modal-body">
             <div class="col-3">
-                <input type="text" class="form-control" id="title" placeholder="" @bind-value="@category.Value.CategoryModel.Title" />
+                <input type="text" class="form-control" id="title" placeholder="" @bind-value="@InformationBoard.Categories[id].CategoryModel.Title" />
             </div>
             <div class="col-1">
-                <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseAndOpenDeleteCategory(category.Value)"><i class="bi bi-trash"></i></button>
+                <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseAndOpenDeleteCategory(InformationBoard.Categories[id])"><i class="bi bi-trash"></i></button>
             </div>
             <div class="col-2">
                 <div class="form-check form-switch">
-                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked=@category.Value.CategoryModel.IsPublished @bind-value="category.Value.CategoryModel.IsPublished">
+                    <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px"
+                           checked=@InformationBoard.Categories[id].CategoryModel.IsPublished
+                           @bind-value="InformationBoard.Categories[id].CategoryModel.IsPublished">
                 </div>
             </div>
             <div class="col-3">
-                <SfDropDownList CssClass="form-control" ID="icon" TValue="string" Placeholder="Vælg et ikon" TItem="IconOption" @bind-Value="@category.Value.CategoryModel.Icon"
+                <SfDropDownList CssClass="form-control" ID="icon" TValue="string" Placeholder="Vælg et ikon" TItem="IconOption"
+                                @bind-Value="@InformationBoard.Categories[id].CategoryModel.Icon"
                                 DataSource="@Icons">
                     <DropDownListFieldSettings IconCss="BootstrapCode" Value="BootstrapCode" Text="Name"></DropDownListFieldSettings>
                 </SfDropDownList>
-
-                <!--Skal de bare default i categorymodel have et ikon?
-       https://stackoverflow.com/questions/36743041/font-awesome-icon-in-select-option/36743356
-       <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
-       <select @bind="@category.Value.CategoryModel.Icon">
-           @foreach (var icon in Icons)
-           {
-               <option value="@icon">@iconTest</option>
-           }
-       </select>
-
-           https://stackoverflow.com/questions/36743041/font-awesome-icon-in-select-option
-               <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.1/css/font-awesome.min.css" rel="stylesheet" />
-               <select class="text-muted bi" @bind="@category.Value.CategoryModel.Icon">
-                   <option class="bi bi-bug" value="bi bi-bug">bug</option>
-                   <option>&#xf044;</option>
-                   <option>&#xf045;</option>
-                   <option>Hi, &#xf046;</option>
-               </select>
-    -->
-
             </div>
-                    <div class="col-2">
-                        <button class="btn btn-primary" disabled>Vælg tema farve</button>
-                    </div>
-                    <div class="col-1 mx-auto">
-                        <button class="btn my-0 py-0"><i class="bi bi-arrow-up-circle" style="font-size: 25px"></i></button>
-                        <br />
-                        <button class="btn my-0 py-0"><i class="bi bi-arrow-down-circle" style="font-size: 25px"></i></button>
-                    </div>
+            <div class="col-2">
+                <button class="btn btn-primary" disabled>Vælg tema farve</button>
+            </div>
+
+            @if (!(id == InformationBoard.CategoryOrder.First() || id == InformationBoard.CategoryOrder.Last()))
+            {
+                <div class="col-1 mx-auto">
+                    <button class="btn my-0 py-0">
+                        <i class="bi bi-arrow-up-circle" style="font-size: 25px"
+                           @onclick="() => MoveUp(id)"></i>
+                    </button>
+                    <br />
+                    <button class="btn my-0 py-0">
+                        <i class="bi bi-arrow-down-circle" style="font-size: 25px"
+                           @onclick="() => MoveDown(id)"></i>
+                    </button>
                 </div>
+            }
+            else if (id == InformationBoard.CategoryOrder.First())
+            {
+                <div class="col-1 mx-auto">
+                    <br />
+                    <button class="btn my-0 py-0">
+                        <i class="bi bi-arrow-down-circle" style="font-size: 25px"
+                           @onclick="() => MoveDown(id)"></i>
+                    </button>
+                </div>
+            }
+            else
+            {
+                <div class="col-1 mx-auto">
+                    <br />
+                    <button class="btn my-0 py-0">
+                        <i class="bi bi-arrow-up-circle" style="font-size: 25px"
+                           @onclick="() => MoveUp(id)"></i>
+                    </button>
+                </div>
+            }
+
+        </div>
             }
 
 
@@ -101,6 +114,24 @@
     public EventCallback OnChangesMade { get; set; }
 
     public string iconTest = "&#xf042;";
+
+    public void MoveUp(int id)
+    {
+        var indexOfCurrent = InformationBoard.CategoryOrder.IndexOf(id);
+        InformationBoard.CategoryOrder[indexOfCurrent] = InformationBoard.CategoryOrder[indexOfCurrent - 1];
+        InformationBoard.CategoryOrder[indexOfCurrent - 1] = id;
+
+        StateHasChanged();
+    }
+
+    public void MoveDown(int id)
+    {
+        var indexOfCurrent = InformationBoard.CategoryOrder.IndexOf(id);
+        InformationBoard.CategoryOrder[indexOfCurrent] = InformationBoard.CategoryOrder[indexOfCurrent + 1];
+        InformationBoard.CategoryOrder[indexOfCurrent + 1] = id;
+
+        StateHasChanged();
+    }
 
     //hvor skal denne ligge? på viewmodel eller?
     public List<IconOption> Icons { get; set; } = new List<IconOption>()
@@ -272,6 +303,9 @@
             category.Value.EditCategory(category.Value.CategoryModel.CategoryId, _dbService);
         }
         Close();
+
+        //gem category order i databasen
+
         OnChangesMade.InvokeAsync();
     }
 
