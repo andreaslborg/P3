@@ -25,7 +25,7 @@ else
             </head>
 
             <section class="col-12">
-                <p class="display-1 text-center fw-bold mt-2" id="licenseName">@informationboard.Title</p>
+                <p class="display-4 mw-100 text-center fw-bold mt-2" id="licenseName">@informationboard.Title</p>
                 <p class="text-center mt-0 text-secondary">En digital informationstavle</p>
             </section>
 
@@ -42,10 +42,17 @@ else
                             // Displays the published categories within the selected information board if any
                             if (informationboardID == category.InformationBoardId && category.IsPublished == true)
                             {
-                                <a class="btn btn-outline-light square col-5 m-1 d-flex align-items-center border-2 bg-secondary" href="@($"/{informationboard.InformationboardID}/{category.CategoryId}")">
+                                <a class="btn btn-outline-light square col-6 p-1 d-flex align-items-center border-2 bg-secondary" href="@($"/{informationboard.InformationboardID}/{category.CategoryId}")">
                                     <div class="mx-auto">
                                         <i class="bi bi-newspaper"></i>
-                                        <p class="fs-5 text-break">@category.Title</p>
+                                        @if (category.Title.Length > 31)
+                                        {
+                                            <p class="fs-6 text-break">@category.Title</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="fs-4 text-break">@category.Title</p>
+                                        }
                                     </div>
                                 </a>
                             }
