@@ -39,11 +39,12 @@ namespace ManagementPages.Functions
                 CategoryId = categoryId,
                 Text = newPost.Text,
                 Author = newPost.Author,
-                IsPublished = isPublished
+                IsPublished = isPublished,
+                Link = newPost.Link
             };
 
             string sql =
-                $"insert into Post (Title, CategoryId, Text, Author, IsPublished) values (\"{postModel.Title}\", {postModel.CategoryId}, \"{postModel.Text}\", \"{postModel.Author}\", {postModel.IsPublished});";
+                $"insert into Post (Title, CategoryId, Text, Author, IsPublished, Link) values (\"{postModel.Title}\", {postModel.CategoryId}, \"{postModel.Text}\", \"{postModel.Author}\", {postModel.IsPublished}, \"{postModel.Link}\" );";
 
             await dbService.SaveData(sql, postModel);
 
