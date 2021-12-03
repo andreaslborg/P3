@@ -10,7 +10,7 @@
 
 @if (informationboardList == null)
 {
-    <h1 class="col-10 text-center display-3 ms-0" style="color: white;">Loading...</h1>
+    <h1 class="display-5 m-1" style="color: white;">Loading...</h1>
 }
 else
 {
@@ -27,25 +27,25 @@ else
             <section class="col-12">
                 @if (@informationboard.Title.Length > 15)
                 {
-                    <p class="titleGreen display-5 text-center fw-bold mt-2">
+                    <p class="text-white display-5 text-center fw-bold mt-2">
                         @informationboard.Title
                     </p>
                 }
                 else
                 {
-                    <p class="titleGreen display-2 text-center fw-bold mt-2">
+                    <p class="text-white display-2 text-center fw-bold mt-2 mb-1">
                         @informationboard.Title
                     </p>
                 }
-
-                <p class="text-center mt-0 text-white text-wrap">En digital informationstavle</p>
+                <!-- Linje under overskrift -->
+                <div class="col-5 mx-auto mt-0 mb-1 border-1 border-bottom"></div>
+                <p class="creyTitle text-center mt-0 text-wrap">En digital informationstavle</p>
             </section>
 
             <section class="wrapper container">
                 <div id="categories" class="row justify-content-center text-center">
                     @if (categoryList == null)
                     {
-                        <p class="col-10 text-center ms-0" style="color: white;">Loading..</p>
                     }
                     else
                     {
@@ -54,16 +54,16 @@ else
                             // Displays the published categories within the selected information board if any
                             if (informationboardID == category.InformationBoardId && category.IsPublished == true)
                             {
-                                <a class="btn btn-outline-light square col-5 m-1 p-1 d-flex align-items-center border-2 bg-secondary bg-opacity-50 text-white shadow-lg rounded-3" href="@($"/{informationboard.InformationboardID}/{category.CategoryId}")">
+                                <a class="btn square col-5 m-1 p-1 d-flex align-items-center text-white shadow-lg rounded-3" href="@($"/{informationboard.InformationboardID}/{category.CategoryId}")">
                                     <div class="mx-auto">
                                         <i class="@category.Icon"></i>
                                         @if (category.Title.Length > 11)
                                         {
-                                            <p class="fs-6 text-break">@category.Title</p>
+                                            <p class="creyTitle fs-6 text-break">@category.Title</p>
                                         }
                                         else
                                         {
-                                            <p class="fs-4 text-break">@category.Title</p>
+                                            <p class="creyTitle fs-4 text-break">@category.Title</p>
                                         }
                                     </div>
                                 </a>
