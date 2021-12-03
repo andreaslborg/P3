@@ -21,14 +21,14 @@
             <div class="modal-footer ">
                 <div class="mx-auto text-center">
                     <p>Dette kan ikke fortrydes. Er du sikker?</p>
-                    <button type="button" class="btn btn-success" data-dismiss="modal" @onclick="() => Close()">Nej</button>
+                    <button type="button" class="btn btn-success m-1" data-dismiss="modal" @onclick="() => Close()">Nej</button>
                     @if (SelectedPost != null && SelectedPost.PostModel.Title.Equals(PostTitleToBeDeleted,StringComparison.OrdinalIgnoreCase))
                     {
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => DeleteAndClose()">Ja</button>
+                        <button type="button" class="btn btn-danger m-1" data-dismiss="modal" @onclick="() => DeleteAndClose()">Ja</button>
                     }
                     else
                     {
-                        <button type="button" class="btn btn-danger" data-dismiss="modal" disabled>Ja</button>
+                        <button type="button" class="btn btn-danger m-1" data-dismiss="modal" disabled>Ja</button>
                     }
                 </div>
             </div>
