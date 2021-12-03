@@ -7,10 +7,6 @@ a, .btn-link {
     color: #0366d6;
 }
 
-select {
-    font-family: 'FontAwesome', 'Second Font name'
-}
-
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
