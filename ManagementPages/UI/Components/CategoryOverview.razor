@@ -10,7 +10,7 @@
             <ul class="nav nav-tabs nav-fill text-nowrap flex-nowrap" style="overflow-x: auto; overflow-y: hidden;">
                 @if (InformationBoard?.Categories?.Count > 0)
                 {
-                    @foreach (var id in InformationBoard.CategoryOrder)
+                    @foreach (var id in InformationBoard.InformationBoardModel.CategoryOrder)
                     {
                         @if (id == InformationBoard.SelectedCategory.CategoryModel.CategoryId)
                         {
@@ -92,18 +92,18 @@
         // add them to the end, if they are missing
         foreach(var category in InformationBoard.Categories)
         {
-            if (!InformationBoard.CategoryOrder.Contains(category.Key))
+            if (!InformationBoard.InformationBoardModel.CategoryOrder.Contains(category.Key))
             {
-                InformationBoard.CategoryOrder.Add(category.Key);
+                InformationBoard.InformationBoardModel.CategoryOrder.Add(category.Key);
             }
         }
 
         // check if there are any invalid ids in the CategoryOrder, and if so - delete them
-        foreach(var key in InformationBoard.CategoryOrder)
+        foreach(var key in InformationBoard.InformationBoardModel.CategoryOrder)
         {
             if (!InformationBoard.Categories.ContainsKey(key))
             {
-                InformationBoard.CategoryOrder.Remove(key);
+                InformationBoard.InformationBoardModel.CategoryOrder.Remove(key);
             }
         }
 

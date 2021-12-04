@@ -65,7 +65,25 @@ namespace ManagementPages.Functions
                 var informationBoard = new InformationBoardViewModel();
                 informationBoard.InformationBoardModel = informationBoardModel;
                 informationBoard.Categories = await GetCategories(informationBoard.InformationBoardModel.InformationBoardId);
+
+                if (informationBoard.Categories.Count != informationBoardModel.CategoryOrder.Count)
+                {
+                    ResetCategoryOrder(informationBoard.Categories);
+                }
+
                 result.Add(informationBoard);
+            }
+
+            return result;
+        }
+
+        public List<int> ResetCategoryOrder(Dictionary<int, ICategoryViewModel> categories)
+        {
+            var result = new List<int>();
+
+            foreach (var category in categories)
+            {
+                result.Add(category.Key);
             }
 
             return result;

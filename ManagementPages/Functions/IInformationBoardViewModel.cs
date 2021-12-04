@@ -20,6 +20,6 @@ namespace ManagementPages.Functions
 
         Task EditInformationBoard(int informationBoardId, IDbService dbService);
 
-        List<int> CategoryOrder { get; set; }
+        Task EditCategoryOrder(IInformationBoardViewModel informationBoard, IDbService dbService);
     }
 }

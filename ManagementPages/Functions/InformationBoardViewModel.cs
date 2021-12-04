@@ -12,7 +12,6 @@ namespace ManagementPages.Functions
     {
 
         private ICategoryViewModel _selectedCategory;
-        private List<int> _categoryOrder;
 
         public InformationBoardViewModel(int informationBoardId)
         {
@@ -44,34 +43,6 @@ namespace ManagementPages.Functions
             get => _selectedCategory ?? Categories.FirstOrDefault().Value;
             set => _selectedCategory = value;
         }
-        public List<int> CategoryOrder
-        {
-            get
-            {
-                if (_categoryOrder != null)
-                {
-                    return _categoryOrder;
-                }
-
-                _categoryOrder = new();
-
-                foreach (var category in Categories)
-                {
-                    _categoryOrder.Add(category.Key);
-                }
-
-                return _categoryOrder;
-            }
-            set
-            {
-                if (_categoryOrder == null)
-                {
-                    _categoryOrder = new(); //ved ikke om det er nødvendigt egentlig
-                }
-
-                _categoryOrder = value;
-            }
-        }
 
         public async Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished, IDbService dbService)
         {
@@ -99,6 +70,13 @@ namespace ManagementPages.Functions
         public async Task EditInformationBoard(int informationBoardId, IDbService dbService)
         {
             string sql = $"update InformationBoard set Title = \"{InformationBoardModel.Title}\", IsPublished = {InformationBoardModel.IsPublished} where InformationBoardId = {InformationBoardModel.InformationBoardId}";
+
+            await dbService.SaveData(sql, InformationBoardModel);
+        }
+
+        public async Task EditCategoryOrder(IInformationBoardViewModel informationBoard, IDbService dbService)
+        {
+            string sql = $"update InformationBoard set CategoryOrder = \"{informationBoard.InformationBoardModel.CategoryOrder}\"  where InformationBoardId = {informationBoard.InformationBoardModel.InformationBoardId}";
 
             await dbService.SaveData(sql, InformationBoardModel);
         }
