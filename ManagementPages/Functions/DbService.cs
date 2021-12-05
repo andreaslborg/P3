@@ -33,11 +33,21 @@ namespace ManagementPages.Functions
             }
         }
 
-        public Task SaveData<T>(string sql, T parameters)
+        public Task<int> SaveData<T>(string sql, T parameters)
         {
             string connectionstring = _config.GetConnectionString(ConnectionStringName);
             using (IDbConnection connection = new MySqlConnection(connectionstring))
             {
+                try
+                {
+                    return connection.ExecuteAsync(sql, parameters);
+                }
+                catch (TimeoutException)
+                {
+                    //håndter
+                }
+
+                //skal ikke være der, men skal lige have styr på det (try-catch skal ligge et niveau højere, så prøv SaveData i try
                 return connection.ExecuteAsync(sql, parameters);
             }
         }

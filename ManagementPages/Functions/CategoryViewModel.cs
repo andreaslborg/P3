@@ -46,12 +46,19 @@ namespace ManagementPages.Functions
             string sql =
                 $"insert into Post (Title, CategoryId, Text, Author, IsPublished, Link) values (\"{postModel.Title}\", {postModel.CategoryId}, \"{postModel.Text}\", \"{postModel.Author}\", {postModel.IsPublished}, \"{postModel.Link}\" );";
 
-            await dbService.SaveData(sql, postModel);
+            bool success = Convert.ToBoolean(await dbService.SaveData(sql, postModel));
 
             IPostViewModel newPostAdded = new PostViewModel();
             newPostAdded.PostModel = postModel;
 
-            Posts.Add(newPostAdded);
+            if (success)
+            {
+                Posts.Add(newPostAdded);
+            }
+            else
+            {
+                // failure, throw exception - never gets in here, kode fra l. 49 bliver skippet, hvis den fejler
+            }
         }
 
         public async Task EditCategory(int categoryModelCategoryId, IDbService dbService)

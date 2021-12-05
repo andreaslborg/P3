@@ -1,6 +1,7 @@
 @using ManagementPages.Functions
 @using ManagementPages.Model
 @using ManagementPages.UI.Components.Modals
+@using System.Linq
 
 @inject IDbService _dbService
 
@@ -85,11 +86,11 @@
 </div>
 
 @code {
-    [Parameter]
-    public IInformationBoardViewModel SelectedInformationBoard { get; set; } = new InformationBoardViewModel();
+        [Parameter]
+        public IInformationBoardViewModel SelectedInformationBoard { get; set; } = new InformationBoardViewModel();
 
-    [Parameter]
-    public EventCallback OnChangesMade { get; set; } // a method from parent (Admin.razor) must be specified/subscribed when using the component
+        [Parameter]
+        public EventCallback OnChangesMade { get; set; } // a method from parent (Admin.razor) must be specified/subscribed when using the component
 
     public IPostViewModel SelectedPost { get; set; } = new PostViewModel();
 
@@ -109,6 +110,11 @@
         // reload the posts from the database to get the ID of the new post
         SelectedInformationBoard.SelectedCategory.Posts = await _dbService.GetPosts(SelectedInformationBoard.SelectedCategory.CategoryModel.CategoryId);
 
+        //  if (SelectedInformationBoard.SelectedCategory.Posts.Select(x => x).Where(x => x.PostModel.PostId == null))
+        if (SelectedInformationBoard.SelectedCategory.Posts.Select(x => x).Where(x => x.PostModel.PostId == 0).Any())
+        {
+            // some code med at det ikke lykkedes at tilføje postet
+        }
         // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
         // this is done, as the displayed posts should be the ones from the selected category, so PostOverview needs to be updated
         await OnChangesMade.InvokeAsync();
