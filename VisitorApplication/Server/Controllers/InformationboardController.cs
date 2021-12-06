@@ -1,14 +1,12 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using VisitorApplication.Shared;
 
 namespace VisitorApplication.Server.Controllers
 {
     [Route("api/[controller]")]
-    //den første del af navnet TestController er sådan man tilgår den, så api/Test
+    //den første del af navnet InformationboardController er sådan man tilgår den, så api/Informationboard
     public class InformationboardController : Controller
     {
         readonly IInformationboard _IInformationboard;
@@ -18,7 +16,7 @@ namespace VisitorApplication.Server.Controllers
             _IInformationboard = IInformationboard;
         }
 
-        //for at gette listen bliver det så til api/Test/TestList
+        //for at gette listen bliver det så til api/Informationboard/InformationboardList
         [HttpGet("[action]")]
         public async Task<List<Informationboard>> InformationboardList()
         {

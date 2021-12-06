@@ -21,7 +21,6 @@ namespace VisitorApplication.Server.Controllers
         public PostService(IConfiguration configuration)
         {
             _configuration = configuration;
-
         }
 
         public string GetConnection()
@@ -65,11 +64,7 @@ namespace VisitorApplication.Server.Controllers
                     return lst.ToList();
                 }
                 finally { con.Close(); }
-
-                
             }
-
         }
-
     }
 }
