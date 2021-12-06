@@ -30,16 +30,6 @@
                             <DropDownListFieldSettings IconCss="BootstrapCode" Value="BootstrapCode" Text="Name"></DropDownListFieldSettings>
                         </SfDropDownList>
                     </div>
-                    <!--div class="col-6">
-                        <!--label class="form-label">Ikon</label-->
-                        <!--Skal de bare default i categorymodel have et ikon?-- >
-                        <select @bind="@NewCategoryTemp.Icon">
-                            @foreach (var icon in Icons)
-                            {
-                                <option>@icon</option>
-                            }
-                        </select>
-                    </div-->
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Slet</button>
