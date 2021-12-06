@@ -21,6 +21,9 @@ namespace ManagementPages.Model
 
         public List<int> CategoryOrder { get; set; } = new();
 
+        // hvis det skal virke, skal ovenstående category order smides på viewmodel'en, og så skal der laves en categoryorderstring
+        // på modellen, som så skal parses/konverteres, når den skal hentes fra/lægges i databasen
+
         //Skal assignes i constructor - dependency injection 
         //Skal være manuel sortering
         //public ISortingMachine CategorySortingMachine { get; set; }
