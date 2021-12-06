@@ -65,11 +65,7 @@ namespace VisitorApplication.Server.Controllers
                     return lst.ToList();
                 }
                 finally { con.Close(); }
-
-                
             }
-
         }
-
     }
 }

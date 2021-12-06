@@ -1,6 +1,5 @@
 ﻿using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
@@ -21,7 +20,6 @@ namespace VisitorApplication.Server.Controllers
         public CategoryService(IConfiguration configuration)
         {
             _configuration = configuration;
-
         }
 
         public string GetConnection()

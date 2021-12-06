@@ -51,7 +51,7 @@ else
                     {
                         foreach (var category in categoryList)
                         {
-                            // Displays the published categories within the selected information board if any
+                            // Displays the published categories within the selected information board if there is any
                             if (informationboardID == category.InformationBoardId && category.IsPublished == true)
                             {
                                 <a class="btn square col-5 m-1 p-1 d-flex align-items-center text-white shadow-lg rounded-3" href="@($"/{informationboard.InformationboardID}/{category.CategoryId}")">
@@ -93,7 +93,4 @@ else
 
     [Parameter]
     public int informationboardID { get; set; }
-    [Parameter]
-    public int categoryID { get; set; }
-
 }

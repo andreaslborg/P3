@@ -8,10 +8,7 @@
     <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
-@if (postList == null)
-{
-    
-}
+@if (categoryList == null) { }
 else
 {
     @foreach (var category in categoryList)
@@ -37,10 +34,7 @@ else
 }
 
 <section class="row col-12 mx-auto">
-    @if (postList == null)
-    {
-        
-    }
+    @if (postList == null) { }
     else
     {
         @foreach (var post in postList.OrderByDescending(x => x.PostID))
@@ -62,14 +56,12 @@ else
                             }
                         </p>
                     </div>
-                    <div class="card-footer ">@post.Author</div>
+                    <div class="card-footer">@post.Author</div>
                 </a>
             }
         }
-
     }
 </section>
-
 
 @code {
     Post[] postList;
@@ -85,6 +77,4 @@ else
     public int informationboardID { get; set; }
     [Parameter]
     public int categoryID { get; set; }
-    [Parameter]
-    public int postID { get; set; }
 }

@@ -9,10 +9,7 @@
 </head>
 
 <section class="text-white">
-    @if (postList == null)
-    {
-    
-    }
+    @if (postList == null) { }
     else
     {
         // Displays the title of the category in the top
@@ -48,15 +45,11 @@
                     <h1 class="">@post.Title</h1>
                     <p class="fst-italic">@post.Author</p>
                     <p>@post.Text</p>
-                    @if (!post.Link.Contains("."))
-                    {
-
-                    }
+                    @if (!post.Link.Contains(".")) { }
                     else
-                    { 
+                    {
                         <a href="@post.Link">Tryk her for at læse mere</a>
                     }
-
                 </div>
             </section>
             }
@@ -65,13 +58,11 @@
 </section>
 
 @code {
-    Informationboard[] informationboardList;
     Post[] postList;
     Category[] categoryList;
 
     protected async override Task OnInitializedAsync()
     {
-        informationboardList = await Http.GetFromJsonAsync<Informationboard[]>("api/Informationboard/InformationboardList");
         categoryList = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
         postList = await Http.GetFromJsonAsync<Post[]>("api/Post/PostList");
     }
