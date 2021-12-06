@@ -10,42 +10,42 @@
             <ul class="nav nav-tabs nav-fill text-nowrap flex-nowrap" style="overflow-x: auto; overflow-y: hidden;">
                 @if (InformationBoard?.Categories?.Count > 0)
                 {
-                    @foreach (var category in InformationBoard.Categories)
+                    @foreach (var id in InformationBoard.CategoryOrder)
                     {
-                        @if (category.Equals(InformationBoard.SelectedCategory))
+                        @if (id == InformationBoard.SelectedCategory.CategoryModel.CategoryId)
                         {
-                            @if (category.CategoryModel.IsPublished)
+                            @if (InformationBoard.Categories[id].CategoryModel.IsPublished)
                             {
                                 <li class="nav-item me-1">
-                                    <a @onclick="() => SetSelectedCategory(category)" class="nav-link active me-1 text-dark" style="cursor: pointer;">
-                                        @category.CategoryModel.Title
+                                    <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link active me-1 text-dark" style="cursor: pointer;">
+                                        @InformationBoard.Categories[id].CategoryModel.Title
                                     </a>
                                 </li>
                             }
                             else
                             {
                                 <li class="nav-item me-1">
-                                    <a @onclick="() => SetSelectedCategory(category)" class="nav-link active me-1 text-muted" style="cursor: pointer;">
-                                        @category.CategoryModel.Title
+                                    <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link active me-1 text-muted" style="cursor: pointer;">
+                                        @InformationBoard.Categories[id].CategoryModel.Title
                                     </a>
                                 </li>
                             }
                         }
                         else
                         {
-                            @if (category.CategoryModel.IsPublished)
+                            @if (InformationBoard.Categories[id].CategoryModel.IsPublished)
                             {
                                 <li class="nav-item me-1">
-                                    <a @onclick="() => SetSelectedCategory(category)" class="nav-link text-dark me-1" style="cursor: pointer;">
-                                        @category.CategoryModel.Title
+                                    <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link text-dark me-1" style="cursor: pointer;">
+                                        @InformationBoard.Categories[id].CategoryModel.Title
                                     </a>
                                 </li>
                             }
                             else
                             {
                                 <li class="nav-item me-1">
-                                    <a @onclick="() => SetSelectedCategory(category)" class="nav-link me-1 text-muted" style="cursor: pointer;">
-                                        @category.CategoryModel.Title
+                                    <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link me-1 text-muted" style="cursor: pointer;">
+                                        @InformationBoard.Categories[id].CategoryModel.Title
                                     </a>
                                 </li>
                             }
@@ -87,6 +87,10 @@
     {
         // reload categories from data base, so that new categories receive an ID (IDs are generated in the data base)
         InformationBoard.Categories = await _dbService.GetCategories(InformationBoard.InformationBoardModel.InformationBoardId);
+
+        InformationBoard.CheckCategoryOrder();
+
+        await InformationBoard.EditCategoryOrder(InformationBoard, _dbService);
 
         // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
         await OnChangesMade.InvokeAsync();

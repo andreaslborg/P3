@@ -8,7 +8,7 @@ namespace ManagementPages.Functions
     {
         public InformationBoardModel InformationBoardModel { get; set; }
 
-        List<ICategoryViewModel> Categories { get; set; }
+        Dictionary<int, ICategoryViewModel> Categories { get; set; }
 
         public void GetInformationBoardData(int informationBoardId);
 
@@ -19,5 +19,11 @@ namespace ManagementPages.Functions
         public Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished, IDbService dbService);
 
         Task EditInformationBoard(int informationBoardId, IDbService dbService);
+
+        Task EditCategoryOrder(IInformationBoardViewModel informationBoard, IDbService dbService);
+
+        List<int> CategoryOrder { get; set; }
+
+        void CheckCategoryOrder();
     }
 }
