@@ -39,7 +39,7 @@ namespace VisitorApplication.Server.Controllers
                 try
                 {
                     await con.OpenAsync();
-                    var com = new MySqlCommand("Select `PostId`,`Title`,`Author`,`Text`,`IsPublished`,`ExpirationDate`,`Image`,`Audio`,`CategoryId` FROM Post", con)
+                    var com = new MySqlCommand("Select `PostId`,`Title`,`Author`,`Text`,`IsPublished`,`ExpirationDate`,`Image`,`Audio`,`CategoryId`, `Link` FROM Post", con)
                     {
                         CommandType = CommandType.Text
                     };
@@ -55,6 +55,7 @@ namespace VisitorApplication.Server.Controllers
                             Author = rdr["Author"].ToString(),
                             Text = rdr["Text"].ToString(),
                             IsPublished = (bool)rdr["IsPublished"],
+                            Link = rdr["Link"].ToString(),
                             ExpirationDate = (DateTime)rdr["ExpirationDate"],
                             Image = rdr["Image"].ToString(),
                             Audio = rdr["Audio"].ToString(),
