@@ -23,7 +23,7 @@
                 <div class="col-2"><label class="form-label">Farve</label> <br /></div>
             </div>
 
-            @foreach (var id in InformationBoard.InformationBoardModel.CategoryOrder)
+            @foreach (var id in InformationBoard.CategoryOrder)
             {
         <div class="row modal-body">
             <div class="col-3">
@@ -50,7 +50,7 @@
                 <button class="btn btn-primary" disabled>Vælg tema farve</button>
             </div>
 
-            @if (!(id == InformationBoard.InformationBoardModel.CategoryOrder.First() || id == InformationBoard.InformationBoardModel.CategoryOrder.Last()))
+            @if (!(id == InformationBoard.CategoryOrder.First() || id == InformationBoard.CategoryOrder.Last()))
             {
                 <div class="col-1 mx-auto">
                     <button class="btn my-0 py-0">
@@ -64,7 +64,7 @@
                     </button>
                 </div>
             }
-            else if (id == InformationBoard.InformationBoardModel.CategoryOrder.First())
+            else if (id == InformationBoard.CategoryOrder.First())
             {
                 <div class="col-1 mx-auto">
                     <br />
@@ -117,23 +117,23 @@
 
     public void MoveUp(int id)
     {
-        var indexOfCurrent = InformationBoard.InformationBoardModel.CategoryOrder.IndexOf(id);
-        InformationBoard.InformationBoardModel.CategoryOrder[indexOfCurrent] = InformationBoard.InformationBoardModel.CategoryOrder[indexOfCurrent - 1];
-        InformationBoard.InformationBoardModel.CategoryOrder[indexOfCurrent - 1] = id;
+        var indexOfCurrent = InformationBoard.CategoryOrder.IndexOf(id);
+        InformationBoard.CategoryOrder[indexOfCurrent] = InformationBoard.CategoryOrder[indexOfCurrent - 1];
+        InformationBoard.CategoryOrder[indexOfCurrent - 1] = id;
 
         StateHasChanged();
     }
 
     public void MoveDown(int id)
     {
-        var indexOfCurrent = InformationBoard.InformationBoardModel.CategoryOrder.IndexOf(id);
-        InformationBoard.InformationBoardModel.CategoryOrder[indexOfCurrent] = InformationBoard.InformationBoardModel.CategoryOrder[indexOfCurrent + 1];
-        InformationBoard.InformationBoardModel.CategoryOrder[indexOfCurrent + 1] = id;
+        var indexOfCurrent = InformationBoard.CategoryOrder.IndexOf(id);
+        InformationBoard.CategoryOrder[indexOfCurrent] = InformationBoard.CategoryOrder[indexOfCurrent + 1];
+        InformationBoard.CategoryOrder[indexOfCurrent + 1] = id;
 
         StateHasChanged();
     }
 
-    //hvor skal denne ligge? på viewmodel eller?
+    //hvor skal denne ligge? på viewmodel eller? evt. eget object og singleton injection
     public List<IconOption> Icons { get; set; } = new List<IconOption>()
         {
             new IconOption()

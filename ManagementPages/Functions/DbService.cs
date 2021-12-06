@@ -66,10 +66,12 @@ namespace ManagementPages.Functions
                 informationBoard.InformationBoardModel = informationBoardModel;
                 informationBoard.Categories = await GetCategories(informationBoard.InformationBoardModel.InformationBoardId);
 
-                if (informationBoard.Categories.Count != informationBoardModel.CategoryOrder.Count)
+                if (informationBoardModel.CategoryOrder != null)
                 {
-                    ResetCategoryOrder(informationBoard.Categories);
+                    informationBoard.CategoryOrder = informationBoard.ConvertToListOfInt(informationBoardModel.CategoryOrder);
                 }
+
+                informationBoard.CheckCategoryOrder();
 
                 result.Add(informationBoard);
             }

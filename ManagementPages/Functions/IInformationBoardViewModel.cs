@@ -21,5 +21,9 @@ namespace ManagementPages.Functions
         Task EditInformationBoard(int informationBoardId, IDbService dbService);
 
         Task EditCategoryOrder(IInformationBoardViewModel informationBoard, IDbService dbService);
+
+        List<int> CategoryOrder { get; set; }
+
+        void CheckCategoryOrder();
     }
 }

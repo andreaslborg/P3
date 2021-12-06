@@ -44,6 +44,8 @@ namespace ManagementPages.Functions
             set => _selectedCategory = value;
         }
 
+        public List<int> CategoryOrder { get; set; } = new();
+
         public async Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished, IDbService dbService)
         {
             CategoryModel categoryModel = new CategoryModel
@@ -75,8 +77,8 @@ namespace ManagementPages.Functions
         }
 
         public async Task EditCategoryOrder(IInformationBoardViewModel informationBoard, IDbService dbService)
-        {
-            string sql = $"update InformationBoard set CategoryOrder = \"{informationBoard.InformationBoardModel.CategoryOrder}\"  where InformationBoardId = {informationBoard.InformationBoardModel.InformationBoardId}";
+        { // vi skal ikke inputte information boards, nrå metoden jo bliver kaldt på et information board xD
+            string sql = $"update InformationBoard set CategoryOrder = \"{ConvertToCommaSeparatedString(CategoryOrder)}\"  where InformationBoardId = {InformationBoardModel.InformationBoardId}";
 
             await dbService.SaveData(sql, InformationBoardModel);
         }
@@ -91,6 +93,75 @@ namespace ManagementPages.Functions
         public override int GetHashCode()
         {
             return InformationBoardModel.InformationBoardId;
+        }
+
+        public string ConvertToCommaSeparatedString(List<int> list)
+        {
+            string result = String.Empty;
+
+            foreach(var number in list)
+            {
+                result += $"{number},";
+            }
+
+            return result;
+        }
+
+        public List<int> ConvertToListOfInt(string input)
+        {
+            List<int> result = new();
+            var list = input.Split(',');
+
+            foreach(var numberString in list)
+            {
+                try
+                {
+                    var number = Int32.Parse(numberString);
+                    result.Add(number);
+                }
+                catch (FormatException)
+                {
+                    // Handle
+                }
+            }
+
+            return result;
+        }
+
+        public void CheckCategoryOrder()
+        {
+            // check if all categories are in the CategoryOrder (meaning that they will be displayed), and
+            // add them to the end, if they are missing
+            List<int> keysToAdd = new();
+            List<int> keysToRemove = new();
+
+            foreach (var category in Categories)
+            {
+                if (!CategoryOrder.Contains(category.Key))
+                {
+                    keysToAdd.Add(category.Key);
+                }
+            }
+
+            // check if there are any invalid ids in the CategoryOrder, and if so - delete them
+            foreach (var key in CategoryOrder)
+            {
+                if (!Categories.ContainsKey(key))
+                {
+                    keysToRemove.Add(key);
+                }
+            }
+
+            foreach (var key in keysToAdd)
+            {
+                CategoryOrder.Add(key);
+            }
+
+            foreach (var key in keysToRemove)
+            {
+                CategoryOrder.Remove(key);
+            }
+
         }
     }
 
