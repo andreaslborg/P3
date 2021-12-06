@@ -75,6 +75,7 @@ else
     Post[] postList;
     Category[] categoryList;
 
+
     protected async override Task OnInitializedAsync()
     {
         postList = await Http.GetFromJsonAsync<Post[]>("api/Post/PostList");
@@ -87,4 +88,8 @@ else
     public int categoryID { get; set; }
     [Parameter]
     public int postID { get; set; }
+
+
+
+    
 }

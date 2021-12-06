@@ -40,7 +40,7 @@ namespace VisitorApplication.Server.Controllers
                 try
                 {
                     await con.OpenAsync();
-                    var com = new MySqlCommand("Select `InformationBoardId`, `Title`, `Url`, `QRCode`, `IsPublished`, `LicenseId` FROM InformationBoard", con)
+                    var com = new MySqlCommand("Select `InformationBoardId`, `Title`, `Url`, `QRCode`, `IsPublished`, `LicenseId`, `CategoryOrder` FROM InformationBoard", con)
                     {
                         CommandType = CommandType.Text
                     };
@@ -56,7 +56,8 @@ namespace VisitorApplication.Server.Controllers
                             Url = rdr["Url"].ToString(),
                             QRCode = rdr["QRCode"].ToString(),
                             IsPublished = (bool)rdr["IsPublished"],
-                            LicenseID = (int)rdr["LicenseID"]
+                            LicenseID = (int)rdr["LicenseID"],
+                            CategoryOrder = rdr["CategoryOrder"].ToString()
                         });
                     }
                     return informationboardList.ToList();

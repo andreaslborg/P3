@@ -14,5 +14,26 @@ namespace VisitorApplication.Shared
         public string QRCode { get; set; }
         public bool IsPublished { get; set; }
         public int LicenseID { get; set; }
+        public string CategoryOrder { get; set; }
+
+
+        public void CategoryOrderGenerator(Informationboard informationboard)
+        {
+            int i = 0;
+            List<int> categoryOrder;
+            string line = informationboard.CategoryOrder;
+            string[] lineArray;
+
+            lineArray = line.Split(",");
+
+            foreach (var item in categoryOrder)
+            {
+                item = Convert.ToInt32(lineArray[i]);
+                i++;
+            }
+                
+            
+
+        }
     }
 }
