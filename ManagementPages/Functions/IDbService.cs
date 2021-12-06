@@ -12,7 +12,7 @@ namespace ManagementPages.Functions
 
         Task<List<IPostViewModel>> GetPosts(int categoryId);
 
-        Task<List<ICategoryViewModel>> GetCategories(int informationBoardId);
+        Task<Dictionary<int, ICategoryViewModel>> GetCategories(int informationBoardId);
 
 
     }

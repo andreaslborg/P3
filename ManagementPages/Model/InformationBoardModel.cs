@@ -19,6 +19,8 @@ namespace ManagementPages.Model
 
         public bool IsPublished { get; set; }
 
+        public string CategoryOrder { get; set; }
+
         //Skal assignes i constructor - dependency injection 
         //Skal være manuel sortering
         //public ISortingMachine CategorySortingMachine { get; set; }

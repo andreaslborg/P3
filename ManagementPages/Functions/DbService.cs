@@ -66,14 +66,20 @@ namespace ManagementPages.Functions
                 informationBoard.InformationBoardModel = informationBoardModel;
                 informationBoard.Categories = await GetCategories(informationBoard.InformationBoardModel.InformationBoardId);
                 result.Add(informationBoard);
+
+                if (informationBoardModel.CategoryOrder != null)
+                {
+                    informationBoard.CategoryOrder = informationBoard.ConvertToListOfInt(informationBoardModel.CategoryOrder);
+                }
+                informationBoard.CheckCategoryOrder();
             }
 
             return result;
         }
 
-        public async Task<List<ICategoryViewModel>> GetCategories(int informationBoardId)
+        public async Task<Dictionary<int, ICategoryViewModel>> GetCategories(int informationBoardId)
         {
-            var result = new List<ICategoryViewModel>();
+            var result = new Dictionary<int, ICategoryViewModel>();
 
             var categoryModels = new List<CategoryModel>();
             categoryModels = await GetCategoryModels(informationBoardId);
@@ -83,7 +89,7 @@ namespace ManagementPages.Functions
                 var category = new CategoryViewModel();
                 category.CategoryModel = categoryModel;
                 category.Posts = await GetPosts(category.CategoryModel.CategoryId);
-                result.Add(category);
+                result.Add(category.GetHashCode(), category);
             }
 
             return result;
