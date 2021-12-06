@@ -9,16 +9,16 @@ using VisitorApplication.Shared;
 
 namespace VisitorApplication.Server.Controllers
 {
-    public interface ICategory
+    public interface ITest
     {
-        Task<List<Category>> CategoryList();
+        Task<List<Test>> TestList();
     }
 
-    public class CategoryService : ICategory
+    public class TestService : ITest
     {
         private readonly IConfiguration _configuration;
 
-        public CategoryService(IConfiguration configuration)
+        public TestService(IConfiguration configuration)
         {
             _configuration = configuration;
 
@@ -30,16 +30,16 @@ namespace VisitorApplication.Server.Controllers
             return connection;
         }
 
-        public async Task<List<Category>> CategoryList()
+        public async Task<List<Test>> TestList()
         {
             var connectionString = this.GetConnection();
-            List<Category> categoryList = new List<Category>();
+            List<Test> lst = new List<Test>();
             using (var con = new MySqlConnection(connectionString))
             {
                 try
                 {
                     await con.OpenAsync();
-                    var com = new MySqlCommand("Select `CategoryId`, `Title`, `IsPublished`, `Icon`, `InformationBoardId` FROM Category", con)
+                    var com = new MySqlCommand("Select `ID`,`Name` FROM test", con)
                     {
                         CommandType = CommandType.Text
                     };
@@ -47,20 +47,21 @@ namespace VisitorApplication.Server.Controllers
 
                     while (rdr.Read())
                     {
-                        categoryList.Add(new Category
+                        lst.Add(new Test
                         {
                             //det ID der er i databasen vil vi gerne have hen i en variabel ID
-                            CategoryId = (int)rdr["CategoryId"],
-                            Title = rdr["Title"].ToString(),
-                            IsPublished = (bool)rdr["IsPublished"],
-                            Icon = rdr["Icon"].ToString(),
-                            InformationBoardId = (int)rdr["InformationBoardId"]
+                            ID = (int)rdr["ID"],
+                            Name = rdr["Name"].ToString(),
                         });
                     }
-                    return categoryList.ToList();
+                    return lst.ToList();
                 }
                 finally { con.Close(); }
+
+                
             }
+
         }
+
     }
 }
