@@ -152,6 +152,7 @@ namespace ManagementPages.Functions
                 }
             }
 
+            // keys cannot be deleted/added inside foreach loop as it messes up the order
             foreach (var key in keysToAdd)
             {
                 CategoryOrder.Add(key);
