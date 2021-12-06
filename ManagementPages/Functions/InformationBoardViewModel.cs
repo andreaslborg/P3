@@ -85,6 +85,74 @@ namespace ManagementPages.Functions
         {
             return InformationBoardModel.InformationBoardId;
         }
-    }
 
+        public string ConvertToCommaSeparatedString(List<int> list)
+        {
+            string result = String.Empty;
+
+            foreach(var number in list)
+            {
+                result += $"{number},";
+            }
+
+            return result;
+        }
+
+        public List<int> ConvertToListOfInt(string input)
+        {
+            List<int> result = new();
+            var list = input.Split(',');
+
+            foreach(var numberString in list)
+            {
+                try
+                {
+                    var number = Int32.Parse(numberString);
+                    result.Add(number);
+                }
+                catch (FormatException)
+                {
+                    // Handle
+                }
+            }
+
+            return result;
+        }
+
+        public void CheckCategoryOrder()
+        {
+            // check if all categories are in the CategoryOrder (meaning that they will be displayed), and
+            // add them to the end, if they are missing
+            List<int> keysToAdd = new();
+            List<int> keysToRemove = new();
+
+            foreach (var category in Categories)
+            {
+                if (!CategoryOrder.Contains(category.Key))
+                {
+                    keysToAdd.Add(category.Key);
+                }
+            }
+
+            // check if there are any invalid ids in the CategoryOrder, and if so - delete them
+            foreach (var key in CategoryOrder)
+            {
+                if (!Categories.ContainsKey(key))
+                {
+                    keysToRemove.Add(key);
+                }
+            }
+
+            // keys cannot be deleted/added inside foreach loop as it messes up the order
+            foreach (var key in keysToAdd)
+            {
+                CategoryOrder.Add(key);
+            }
+
+            foreach (var key in keysToRemove)
+            {
+                CategoryOrder.Remove(key);
+            }
+        }
+    }
 }
