@@ -26,7 +26,7 @@ namespace ManagementPages.Functions
 
         public InformationBoardModel InformationBoardModel { get; set; }
 
-        public Dictionary<int, ICategoryViewModel> Categories { get; set; } = new();
+        public List<ICategoryViewModel> Categories { get; set; } = new();
 
         public void GetInformationBoardData(int informationBoardId)
         {
@@ -40,11 +40,9 @@ namespace ManagementPages.Functions
 
         public ICategoryViewModel SelectedCategory
         {
-            get => _selectedCategory ?? Categories.FirstOrDefault().Value;
+            get => _selectedCategory ?? Categories.FirstOrDefault();
             set => _selectedCategory = value;
         }
-
-        public List<int> CategoryOrder { get; set; } = new();
 
         public async Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished, IDbService dbService)
         {
@@ -66,19 +64,12 @@ namespace ManagementPages.Functions
             ICategoryViewModel newCategoryAdded = new CategoryViewModel();
             newCategoryAdded.CategoryModel = categoryModel;
 
-            Categories.Add(newCategoryAdded.GetHashCode(), newCategoryAdded);
+            Categories.Add(newCategoryAdded);
         }
 
         public async Task EditInformationBoard(int informationBoardId, IDbService dbService)
         {
             string sql = $"update InformationBoard set Title = \"{InformationBoardModel.Title}\", IsPublished = {InformationBoardModel.IsPublished} where InformationBoardId = {InformationBoardModel.InformationBoardId}";
-
-            await dbService.SaveData(sql, InformationBoardModel);
-        }
-
-        public async Task EditCategoryOrder(IInformationBoardViewModel informationBoard, IDbService dbService)
-        { // vi skal ikke inputte information boards, nrå metoden jo bliver kaldt på et information board xD
-            string sql = $"update InformationBoard set CategoryOrder = \"{ConvertToCommaSeparatedString(CategoryOrder)}\"  where InformationBoardId = {InformationBoardModel.InformationBoardId}";
 
             await dbService.SaveData(sql, InformationBoardModel);
         }
@@ -162,8 +153,6 @@ namespace ManagementPages.Functions
             {
                 CategoryOrder.Remove(key);
             }
-
         }
     }
-
 }
