@@ -1,4 +1,4 @@
-﻿@using ManagementPages.Functions
+@using ManagementPages.Functions
 @using ManagementPages.Model
 @using Syncfusion.Blazor.DropDowns
 @inject IDbService _dbService
@@ -57,6 +57,7 @@
     public IInformationBoardModel SelectedInformationBoard { get; set; } = new InformationBoardModel();
 
     public CategoryDataModel NewCategoryModelTemp = new();
+
 
     public List<IconOption> Icons = IconOptions.Icons;
 
