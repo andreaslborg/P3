@@ -30,14 +30,14 @@
 
 
 @code {
-    public ILicenseViewModel License { get; set; } = new LicenseViewModel();
+    public ILicenseModel License { get; set; } = new LicenseModel();
 
     public int LicenseId { get; set; } = 1;  // hardcoded, should be passed to the admin page from the login page
 
 
     protected override async Task OnInitializedAsync()
     {
-        License.LicenseModel = await License.LoadLicenseData(LicenseId, _dbService);
+        License.LicenseDataModel = await License.LoadLicenseDataModel(LicenseId, _dbService);
         License.InformationBoards = await License.LoadInformationBoards(_dbService);
     }
 

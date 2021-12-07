@@ -1,4 +1,5 @@
 @using ManagementPages.Functions
+@using ManagementPages.Model
 @using ManagementPages.UI.Components.Modals
 @inject IDbService _dbService
 <NewCategory @ref="NewCategory" OnChangesMade="OnChangesMadeInChildComponent"/>
@@ -14,11 +15,11 @@
                     {
                         @if (InformationBoard.Categories[id].Equals(InformationBoard.SelectedCategory))
                         {
-                            @if (InformationBoard.Categories[id].CategoryModel.IsPublished)
+                            @if (InformationBoard.Categories[id].CategoryDataModel.IsPublished)
                             {
                                 <li class="nav-item me-1">
                                     <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link active me-1 text-dark" style="cursor: pointer;">
-                                        @InformationBoard.Categories[id].CategoryModel.Title
+                                        @InformationBoard.Categories[id].CategoryDataModel.Title
                                     </a>
                                 </li>
                             }
@@ -26,18 +27,18 @@
                             {
                                 <li class="nav-item me-1">
                                     <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link active me-1 text-muted" style="cursor: pointer;">
-                                        @InformationBoard.Categories[id].CategoryModel.Title
+                                        @InformationBoard.Categories[id].CategoryDataModel.Title
                                     </a>
                                 </li>
                             }
                         }
                         else
                         {
-                            @if (InformationBoard.Categories[id].CategoryModel.IsPublished)
+                            @if (InformationBoard.Categories[id].CategoryDataModel.IsPublished)
                             {
                                 <li class="nav-item me-1">
                                     <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link text-dark me-1" style="cursor: pointer;">
-                                        @InformationBoard.Categories[id].CategoryModel.Title
+                                        @InformationBoard.Categories[id].CategoryDataModel.Title
                                     </a>
                                 </li>
                             }
@@ -45,7 +46,7 @@
                             {
                                 <li class="nav-item me-1">
                                     <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link me-1 text-muted" style="cursor: pointer;">
-                                        @InformationBoard.Categories[id].CategoryModel.Title
+                                        @InformationBoard.Categories[id].CategoryDataModel.Title
                                     </a>
                                 </li>
                             }
@@ -66,7 +67,7 @@
 
 @code {
     [Parameter]
-    public IInformationBoardViewModel InformationBoard { get; set; }
+    public IInformationBoardModel InformationBoard { get; set; }
 
     [Parameter]
     public EventCallback OnChangesMade { get; set; } // a method from parent (Admin.razor) must be specified/subscribed when using the component
@@ -74,7 +75,7 @@
     private NewCategory NewCategory { get; set; }
     private EditCategories EditCategories { get; set; }
 
-    private void SetSelectedCategory(ICategoryViewModel selectedCategory)
+    private void SetSelectedCategory(ICategoryModel selectedCategory)
     {
         InformationBoard.SelectedCategory = selectedCategory;
 

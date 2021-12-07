@@ -2,7 +2,7 @@
 
 namespace ManagementPages.Model
 {
-    public class CategoryModel
+    public class CategoryDataModel
     {
         public int CategoryId { get; set; }
 

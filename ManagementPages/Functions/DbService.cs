@@ -3,7 +3,6 @@ using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
 using Dapper;
-using ManagementPages.Model;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 

@@ -7,7 +7,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Ny Kategori - @SelectedInformationBoard.InformationBoardModel.Title</h5>
+                <h5 class="modal-title">Ny Kategori - @SelectedInformationBoard.InformationBoardDataModel.Title</h5>
                 <button @onclick="() => Close()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
                     <i class="bi bi-x-lg"></i>
                 </button>
@@ -54,9 +54,9 @@
 
     public bool IsPublished { get; set; }
 
-    public IInformationBoardViewModel SelectedInformationBoard { get; set; } = new InformationBoardViewModel();
+    public IInformationBoardModel SelectedInformationBoard { get; set; } = new InformationBoardModel();
 
-    public CategoryModel NewCategoryModelTemp = new();
+    public CategoryDataModel NewCategoryModelTemp = new();
 
     //hvor skal den ligge?
     public List<IconOption> Icons { get; set; } = new()
@@ -198,7 +198,7 @@
     public string ModalClass = "";
     public bool ShowBackdrop = false;
 
-    public void Open(IInformationBoardViewModel selectedInformationBoard)
+    public void Open(IInformationBoardModel selectedInformationBoard)
     {
         SelectedInformationBoard = selectedInformationBoard;
         ModalDisplay = "block;";
@@ -227,6 +227,6 @@
         OnChangesMade.InvokeAsync();
 
         // reset temporary category object
-        NewCategoryModelTemp = new CategoryModel();
+        NewCategoryModelTemp = new CategoryDataModel();
     }
 }

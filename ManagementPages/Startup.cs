@@ -10,6 +10,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using ManagementPages.Functions;
+using ManagementPages.Model;
 using Syncfusion.Blazor;
 
 
@@ -31,7 +32,7 @@ namespace ManagementPages
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<IDbService, DbService>();
-            services.AddSingleton<ILicenseViewModel, LicenseViewModel>();
+            services.AddSingleton<ILicenseModel, LicenseModel>();
             services.AddSyncfusionBlazor();
         }
 

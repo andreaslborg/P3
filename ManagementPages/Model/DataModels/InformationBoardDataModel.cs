@@ -1,6 +1,6 @@
 ﻿namespace ManagementPages.Model
 {
-    public class InformationBoardModel
+    public class InformationBoardDataModel
     {
         public int InformationBoardId { get; set; }
 

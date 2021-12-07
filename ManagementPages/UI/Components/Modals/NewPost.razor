@@ -6,7 +6,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title">Nyt opslag - @SelectedCategory?.CategoryModel?.Title</h5>
+                <h5 class="modal-title">Nyt opslag - @SelectedCategory?.CategoryDataModel?.Title</h5>
                 <button @onclick="() => Close()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
                     <i class="bi bi-x-lg"></i>
                 </button>
@@ -109,9 +109,9 @@
     [Parameter]
     public EventCallback OnChangesMade { get; set; }
 
-    public ICategoryViewModel SelectedCategory { get; set; } = new CategoryViewModel();
+    public ICategoryModel SelectedCategory { get; set; } = new CategoryModel();
 
-    public PostModel NewPostTemp = new();
+    public PostDataModel NewPostTemp = new();
 
     public bool IsPublished { get; set; }
 
@@ -119,7 +119,7 @@
     public string ModalClass = "";
     public bool ShowBackdrop = false;
 
-    public void Open(ICategoryViewModel selectedCategory)
+    public void Open(ICategoryModel selectedCategory)
     {
         SelectedCategory = selectedCategory;
         ModalDisplay = "block;";
@@ -147,6 +147,6 @@
         OnChangesMade.InvokeAsync();
 
         // reset temporary post object
-        NewPostTemp = new PostModel();
+        NewPostTemp = new PostDataModel();
     }
 }

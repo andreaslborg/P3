@@ -1,4 +1,5 @@
 ﻿@using ManagementPages.Functions
+@using ManagementPages.Model
 @inject IDbService _dbService
 
 <div class="modal @ModalClass" tabindex="-1" role="dialog" style="display: @ModalDisplay">
@@ -11,10 +12,10 @@
                 </button>
             </div>
             <div class="row modal-body">
-                <p class="fw-bold">Er du sikker på at du vil slette "@Category?.CategoryModel.Title"</p>
+                <p class="fw-bold">Er du sikker på at du vil slette "@Category?.CategoryDataModel.Title"</p>
             </div>
             <div class="col-10 mx-auto mb-3">
-                <label for="title" class="form-label">Skriv "@Category?.CategoryModel.Title"</label>
+                <label for="title" class="form-label">Skriv "@Category?.CategoryDataModel.Title"</label>
                 <input type="text" class="form-control" id="title" placeholder="" @bind-value="CategoryTitleToBeDeleted" @bind-value:event="oninput">
             </div>
 
@@ -22,7 +23,7 @@
                 <div class="mx-auto text-center">
                     <p>Dette kan ikke fortrydes. Er du sikker?</p>
                     <button type="button" class="btn btn-success m-1" data-dismiss="modal" @onclick="() => Close()">Nej</button>
-                    @if (Category != null && Category.CategoryModel.Title.Equals(CategoryTitleToBeDeleted, StringComparison.OrdinalIgnoreCase))
+                    @if (Category != null && Category.CategoryDataModel.Title.Equals(CategoryTitleToBeDeleted, StringComparison.OrdinalIgnoreCase))
                     {
                         <button type="button" class="btn btn-danger m-1" data-dismiss="modal" @onclick="() => DeleteAndClose()">Ja</button>
                     }
@@ -47,13 +48,13 @@
     public string ModalDisplay = "none;";
     public string ModalClass = "";
     public bool ShowBackdrop = false;
-    public ICategoryViewModel Category { get; set; }
+    public ICategoryModel Category { get; set; }
     public string CategoryTitleToBeDeleted { get; set; }
 
     [Parameter]
     public EventCallback OnChangesMade { get; set; }
 
-    public void Open(ICategoryViewModel category)
+    public void Open(ICategoryModel category)
     {
         Category = category;
         ModalDisplay = "block;";
@@ -74,14 +75,14 @@
     {
         Close();
 
-    // delete category from database
+        // delete category from database
         await Category.DeleteCategory(_dbService);
 
-    // notify edit category modal about changes (edit category modal will then notify the category overview,
-    // which will re-fetch the categories from the database)
+        // notify edit category modal about changes (edit category modal will then notify the category overview,
+        // which will re-fetch the categories from the database)
         await OnChangesMade.InvokeAsync();
 
-    // reset input field in delete category modal
+        // reset input field in delete category modal
         CategoryTitleToBeDeleted = "";
     }
 

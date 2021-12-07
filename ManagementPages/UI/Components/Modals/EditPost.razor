@@ -1,4 +1,5 @@
 ﻿@using ManagementPages.Functions
+@using ManagementPages.Model
 @inject IDbService _dbService
 
 <div class="modal @ModalClass" tabindex="-1" role="dialog" style="display: @ModalDisplay">
@@ -13,11 +14,11 @@
             <div class="col-12 row modal-body">
                 <div class="col-6">
                     <label for="title" class="form-label">Titel</label>
-                    <input type="text" class="form-control" id="title" @bind-value="SelectedPost.PostModel.Title">
+                    <input type="text" class="form-control" id="title" @bind-value="SelectedPost.PostDataModel.Title">
                 </div>
                 <div class="col-6">
                     <label for="author" class="form-label">Forfatter</label>
-                    <input type="text" class="form-control" id="author" @bind-value="SelectedPost.PostModel.Author">
+                    <input type="text" class="form-control" id="author" @bind-value="SelectedPost.PostDataModel.Author">
                 </div>
                 <div class="mt-3" id="toolbar">
                     <div class="btn-toolbar" role="toolbar" aria-label="Toolbar with button groups">
@@ -57,12 +58,12 @@
                 </div>
                 <div class="mt-3">
                     <label for="text" class="form-label">Tekst</label>
-                    <textarea class="form-control" id="text" rows="8" @bind="SelectedPost.PostModel.Text"></textarea>
+                    <textarea class="form-control" id="text" rows="8" @bind="SelectedPost.PostDataModel.Text"></textarea>
                 </div>
                 <br/>
                 <div class="col-3 mt-3">
                     <label for="url" class="form-label">Link / URL</label>
-                    <input type="text" class="form-control" id="url" @bind-value="SelectedPost.PostModel.Link">
+                    <input type="text" class="form-control" id="url" @bind-value="SelectedPost.PostDataModel.Link">
                 </div>
                 <div class="col-3 mt-3">
                     <label for="urltext" class="form-label">Link Tekst</label>
@@ -81,7 +82,7 @@
                     <div class="form-check form-switch">
                         <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked"
                                style="height: 30px; width: 55px" 
-                               checked="@SelectedPost.PostModel.IsPublished "bind-value="@SelectedPost.PostModel.IsPublished">
+                               checked="@SelectedPost.PostDataModel.IsPublished "bind-value="@SelectedPost.PostDataModel.IsPublished">
                     </div>
                 </div>
             </div>
@@ -106,13 +107,13 @@
     [Parameter]
     public EventCallback OnChangesMade { get; set; }
 
-    public IPostViewModel SelectedPost { get; set; } = new PostViewModel();
+    public IPostModel SelectedPost { get; set; } = new PostModel();
 
     public string ModalDisplay = "none;";
     public string ModalClass = "";
     public bool ShowBackdrop = false;
 
-    public void Open(IPostViewModel selectedPost)
+    public void Open(IPostModel selectedPost)
     {
         SelectedPost = selectedPost;
         ModalDisplay = "block;";
