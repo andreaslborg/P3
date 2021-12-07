@@ -18,6 +18,7 @@
                             {
                                 <li class="nav-item me-1">
                                     <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link active me-1 text-dark" style="cursor: pointer;">
+                                        <i class="@InformationBoard.Categories[id].CategoryModel.Icon"></i> 
                                         @InformationBoard.Categories[id].CategoryModel.Title
                                     </a>
                                 </li>
@@ -26,6 +27,7 @@
                             {
                                 <li class="nav-item me-1">
                                     <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link active me-1 text-muted" style="cursor: pointer;">
+                                        <i class="@InformationBoard.Categories[id].CategoryModel.Icon"></i> 
                                         @InformationBoard.Categories[id].CategoryModel.Title
                                     </a>
                                 </li>
@@ -37,6 +39,7 @@
                             {
                                 <li class="nav-item me-1">
                                     <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link text-dark me-1" style="cursor: pointer;">
+                                        <i class="@InformationBoard.Categories[id].CategoryModel.Icon"></i> 
                                         @InformationBoard.Categories[id].CategoryModel.Title
                                     </a>
                                 </li>
@@ -45,6 +48,7 @@
                             {
                                 <li class="nav-item me-1">
                                     <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link me-1 text-muted" style="cursor: pointer;">
+                                        <i class="@InformationBoard.Categories[id].CategoryModel.Icon"></i> 
                                         @InformationBoard.Categories[id].CategoryModel.Title
                                     </a>
                                 </li>
