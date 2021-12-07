@@ -220,7 +220,7 @@
         Close();
 
         // add new category to database
-        SelectedInformationBoard.AddNewCategory(NewCategoryModelTemp, SelectedInformationBoard.InformationBoardModel.InformationBoardId, IsPublished, _dbService);
+        SelectedInformationBoard.AddNewCategory(NewCategoryModelTemp, IsPublished, _dbService);
 
         // notify CategoryOverview about changes, so that the list of categories is re-fetched from the database (to give
         // the new category a category ID, and to update the view)

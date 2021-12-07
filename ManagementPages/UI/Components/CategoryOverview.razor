@@ -89,7 +89,7 @@
         InformationBoard.Categories = await _dbService.GetCategories(InformationBoard.InformationBoardModel.InformationBoardId);
 
         InformationBoard.CheckCategoryOrder();
-        await InformationBoard.EditCategoryOrder(InformationBoard, _dbService);
+        await InformationBoard.EditCategoryOrder(_dbService);
 
         // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
         await OnChangesMade.InvokeAsync();

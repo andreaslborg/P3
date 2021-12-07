@@ -25,6 +25,6 @@ namespace ManagementPages.Functions
 
         public void CheckCategoryOrder();
 
-        Task EditCategoryOrder(IInformationBoardViewModel informationBoard, IDbService dbService);
+        Task EditCategoryOrder(IDbService dbService);
     }
 }

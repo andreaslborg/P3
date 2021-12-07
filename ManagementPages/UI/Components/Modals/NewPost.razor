@@ -141,7 +141,7 @@
         Close();
 
         // add new post to database
-        SelectedCategory.AddNewPost(NewPostTemp, SelectedCategory.CategoryModel.CategoryId, IsPublished, _dbService);
+        SelectedCategory.AddNewPost(NewPostTemp, IsPublished, _dbService);
 
         // notify PostOverview about changes
         OnChangesMade.InvokeAsync();

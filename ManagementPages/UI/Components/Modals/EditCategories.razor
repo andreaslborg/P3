@@ -291,7 +291,7 @@
     {
         foreach (var category in InformationBoard.Categories)
         {
-            category.Value.EditCategory(category.Value.CategoryModel.CategoryId, _dbService);
+            category.Value.EditCategory(_dbService);
         }
         Close();
         OnChangesMade.InvokeAsync();

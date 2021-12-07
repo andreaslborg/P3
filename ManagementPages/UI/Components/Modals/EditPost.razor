@@ -134,7 +134,7 @@
         Close();
 
         // save changes to database
-        SelectedPost.EditPost(SelectedPost.PostModel.CategoryId, _dbService);
+        SelectedPost.EditPost(_dbService);
 
         // notify PostOverview about changes
         OnChangesMade.InvokeAsync();

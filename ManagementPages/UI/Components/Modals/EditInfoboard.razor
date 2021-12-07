@@ -71,7 +71,7 @@
         Close();
 
         // save changes to database
-        SelectedInformationBoard.EditInformationBoard(SelectedInformationBoard.InformationBoardModel.InformationBoardId, _dbService);
+        SelectedInformationBoard.EditInformationBoard(_dbService);
 
         // notify InformationBoardOverview about changes
         OnChangesMade.InvokeAsync();
