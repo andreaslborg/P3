@@ -1,4 +1,4 @@
-@using ManagementPages.Functions
+@using ManagementPages.Model
 @using ManagementPages.UI.Components.Modals
 
 <EditInfoboard @ref="EditInfoboard" OnChangesMade="OnChangesMadeInChildComponent"/>
@@ -15,11 +15,11 @@
                     if (informationBoard.Equals(License.SelectedInformationBoard))
                     {
                         <tr class="" style="transform: rotate(0);">
-                            @if (informationBoard.InformationBoardModel.IsPublished)
+                            @if (informationBoard.InformationBoardDataModel.IsPublished)
                             {
                                 <td class="table-active">
                                     <button class="btn btn-outline p-0 stretched-link" @onclick="() => SetSelectedInformationBoard(informationBoard)" style="">
-                                        @informationBoard.InformationBoardModel.Title
+                                        @informationBoard.InformationBoardDataModel.Title
                                     </button>
                                 </td>
                             }
@@ -27,7 +27,7 @@
                             {
                                 <td class="table-active">
                                     <button class="btn btn-outline p-0 text-muted stretched-link" @onclick="() => SetSelectedInformationBoard(informationBoard)" style="">
-                                        @informationBoard.InformationBoardModel.Title
+                                        @informationBoard.InformationBoardDataModel.Title
                                     </button>
                                 </td>
                             }
@@ -49,11 +49,11 @@
                     else
                     {
                     <tr class="" style="transform: rotate(0);">
-                        @if (informationBoard.InformationBoardModel.IsPublished)
+                        @if (informationBoard.InformationBoardDataModel.IsPublished)
                          {
                             <td class="" >
                                 <button class="btn btn-outline p-0 shadow-none stretched-link" @onclick="() => SetSelectedInformationBoard(informationBoard)">
-                                    @informationBoard.InformationBoardModel.Title
+                                    @informationBoard.InformationBoardDataModel.Title
                                 </button>
                             </td>
                          }
@@ -61,7 +61,7 @@
                          {
                             <td class="">
                                 <button class="btn btn-outline p-0 text-muted shadow-none stretched-link" @onclick="() => SetSelectedInformationBoard(informationBoard)">
-                                    @informationBoard.InformationBoardModel.Title
+                                    @informationBoard.InformationBoardDataModel.Title
                                 </button>
                             </td>
                          }
@@ -89,12 +89,12 @@
 
 @code {
     [Parameter]
-    public ILicenseViewModel License { get; set; }
+    public ILicenseModel License { get; set; }
 
     [Parameter]
     public EventCallback OnChangesMade { get; set; } // a method from parent (Admin.razor) must be specified/subscribed when using the component
 
-    private void SetSelectedInformationBoard(IInformationBoardViewModel selectedInformationBoard)
+    private void SetSelectedInformationBoard(IInformationBoardModel selectedInformationBoard)
     {
         License.SelectedInformationBoard = selectedInformationBoard;
 

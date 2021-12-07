@@ -1,4 +1,4 @@
-﻿<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+﻿<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display: @ModalDisplay">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -12,21 +12,21 @@
                     <p class="fw-bold">Rediger navn</p>
                     <label for="editName" class="form-label">Navn</label>
                     <input type="text" class="form-control" id="editName" placeholder="Marius Ihlen">
-                    <br />
+                    <br/>
                     <p class="fw-bold">Rediger e-mailadresse</p>
                     <label for="editMail" class="form-label">E-mailadresse</label>
                     <input type="text" class="form-control" id="editMail">
-				</div>
+                </div>
                 <div class="col-6">
                     <p class="fw-bold">Rediger adgangskode</p>
                     <label for="currentPass" class="form-label">Gamle adgangskode</label>
                     <input type="text" class="form-control" id="currentPass" placeholder="*****">
-                    <br />
+                    <br/>
                     <label for="editPass1" class="form-label">Ny adgangskode</label>
                     <input type="text" class="form-control" id="editPass1" placeholder="">
                     <label for="editPass2" class="form-label">Gentag ny adgangskode</label>
                     <input type="text" class="form-control" id="editPass2" placeholder="">
-				</div>
+                </div>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Luk</button>
@@ -63,4 +63,5 @@
         ShowBackdrop = false;
         StateHasChanged();
     }
+
 }
