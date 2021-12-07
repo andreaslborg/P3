@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ManagementPages.Functions;
+using ManagementPages.Function;
 
 namespace ManagementPages.Model
 {
