@@ -14,11 +14,11 @@
                 if (informationBoard.Equals(License.SelectedInformationBoard))
                 {
                     <tr>
-                        @if (informationBoard.InformationBoardModel.IsPublished)
+                        @if (informationBoard.InformationBoardDataModel.IsPublished)
                         {
                             <td class="table-active" style="transform: rotate(0);">
                                 <button class="btn btn-outline p-0 " @onclick="() => SetSelectedInformationBoard(informationBoard)" style="">
-                                    @informationBoard.InformationBoardModel.Title
+                                    @informationBoard.InformationBoardDataModel.Title
                                 </button>
                             </td>
                         }
@@ -26,7 +26,7 @@
                         {
                             <td class="table-active" style="transform: rotate(0);">
                                 <button class="btn btn-outline p-0 text-muted " @onclick="() => SetSelectedInformationBoard(informationBoard)" style="">
-                                    @informationBoard.InformationBoardModel.Title
+                                    @informationBoard.InformationBoardDataModel.Title
 
                                 </button>
                             </td>
@@ -49,11 +49,11 @@
                 else
                 {
                 <tr>
-                    @if (informationBoard.InformationBoardModel.IsPublished)
+                    @if (informationBoard.InformationBoardDataModel.IsPublished)
                         {
                         <td style="transform: rotate(0);">
                             <button class="btn btn-outline p-0 shadow-none stretched-link" @onclick="() => SetSelectedInformationBoard(informationBoard)">
-                                @informationBoard.InformationBoardModel.Title
+                                @informationBoard.InformationBoardDataModel.Title
                             </button>
                         </td>
                         }
@@ -61,7 +61,7 @@
                         {
                         <td style="transform: rotate(0);">
                             <button class="btn btn-outline p-0 text-muted shadow-none stretched-link" @onclick="() => SetSelectedInformationBoard(informationBoard)">
-                                @informationBoard.InformationBoardModel.Title
+                                @informationBoard.InformationBoardDataModel.Title
                             </button>
                         </td>
                         }
