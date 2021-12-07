@@ -8,16 +8,14 @@
 </head>
 
 
-@if (informationboardList == null)
+@if (InformationboardList == null)
 {
     <h1 class="display-5 m-1" style="color: white;">Loading...</h1>
 }
 else
 {
-    foreach (var informationboard in informationboardList)
+    foreach (var informationboard in InformationboardList)
     {
-
-
         // Displays the published information board, if any at the specific path
         if (informationboardID == informationboard.InformationboardID && informationboard.IsPublished == true)
         {
@@ -45,14 +43,15 @@ else
 
             <section class="wrapper container">
                 <div id="categories" class="row justify-content-center text-center">
-                    @* No categories exist on any informationboards*@
-                    @if (categoryList == null)
+                    @* The categories are not yet loaded from the database*@
+                    @if (CategoryList == null)
                     {
                     }
                     @*The order of the categories has not been altered*@
-                    else if (informationboard.CategoryOrder == string.Empty )
+                    @*This ifelse-statement diplays the categories on the ../{informationboardID} page IF the categoryOrder is empty in the database*@
+                    else if (informationboard.CategoryOrder == string.Empty)
                     {
-                        foreach (var category in catList)
+                        foreach (var category in CatList)
                         {
                             <a class="btn square col-5 m-1 p-1 d-flex align-items-center text-white shadow-lg rounded-3" href="@($"/{informationboard.InformationboardID}/{category.CategoryId}")">
                                 <div class="mx-auto">
@@ -70,9 +69,10 @@ else
                         }
                     }
                     @*The order of the categories has been altered*@
+                    @*This else-statement diplays the categories on the ../{informationboardID} page*@
                     else
                     {
-                        foreach (var id in categoryOrder)
+                        foreach (var id in CategoryOrder)
                         {
                             <a class="btn square col-5 m-1 p-1 d-flex align-items-center text-white shadow-lg rounded-3" href="@($"/{informationboard.InformationboardID}/{CategoryDictionary[id].CategoryId}")">
                                 <div class="mx-auto">
@@ -94,8 +94,8 @@ else
         }
 
         @*Displays message if the selected information board is not publised OR if the selected information board has no categories*@
-        if ((informationboardID == informationboard.InformationboardID && informationboard.IsPublished != true) || (informationboardID == informationboard.InformationboardID && catList.Count == 0))
-        {
+if ((informationboardID == informationboard.InformationboardID && informationboard.IsPublished != true) || (informationboardID == informationboard.InformationboardID && CatList.Count == 0))
+{
             <h1 class="col-10 text-center display-1 ms-0" style="color: white;">Der er ikke noget på denne side.</h1>
         }
     }
@@ -103,34 +103,32 @@ else
 
 @code
 {
-    Informationboard[] informationboardList;
-    Category[] categoryList;
-    Dictionary<int, Category> CategoryDictionary = new Dictionary<int, Category>();
-    List<int> categoryOrder = new();
-    List<Category> catList = new();
-    Informationboard selectedInformationBoard = new Informationboard();
-
-    protected async override Task OnInitializedAsync()
-    {
-        informationboardList = await Http.GetFromJsonAsync<Informationboard[]>("api/Informationboard/InformationboardList");
-        categoryList = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
-        catList = categoryList.Where(x => x.InformationBoardId == informationboardID).Select(x => x).ToList();
-        CategoryToDictionary();
-
-        selectedInformationBoard = informationboardList.Where(x => x.InformationboardID == informationboardID).Select(x => x).First();
-        categoryOrder = CategoryOrderGenerator(selectedInformationBoard);
-    }
-
     [Parameter]
     public int informationboardID { get; set; }
     [Parameter]
     public int categoryID { get; set; }
 
+    Informationboard[] InformationboardList;
+    Category[] CategoryList;
+    Dictionary<int, Category> CategoryDictionary = new Dictionary<int, Category>();
+    List<int> CategoryOrder = new();
+    List<Category> CatList = new();
+    Informationboard selectedInformationBoard = new Informationboard();
+
+    protected async override Task OnInitializedAsync()
+    {
+        InformationboardList = await Http.GetFromJsonAsync<Informationboard[]>("api/Informationboard/InformationboardList");
+        CategoryList = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
+        CatList = CategoryList.Where(x => x.InformationBoardId == informationboardID).Select(x => x).ToList();
+        CategoryToDictionary();
+
+        selectedInformationBoard = InformationboardList.Where(x => x.InformationboardID == informationboardID).Select(x => x).First();
+        CategoryOrder = CategoryOrderGenerator(selectedInformationBoard);
+    }
+
     public void CategoryToDictionary()
     {
-
-
-        foreach (var category in catList)
+        foreach (var category in CatList)
         {
             CategoryDictionary.Add(category.CategoryId, category);
         }
