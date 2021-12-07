@@ -1,5 +1,6 @@
-@using ManagementPages.Functions
+@using ManagementPages.Model
 @using ManagementPages.UI.Components.Modals
+@using ManagementPages.Function
 @inject IDbService _dbService
 <NewCategory @ref="NewCategory" OnChangesMade="OnChangesMadeInChildComponent"/>
 <EditCategories @ref="EditCategories" InformationBoard="InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>
@@ -14,7 +15,7 @@
                     {
                         @if (InformationBoard.Categories[id].Equals(InformationBoard.SelectedCategory))
                         {
-                            @if (InformationBoard.Categories[id].CategoryModel.IsPublished)
+                            @if (InformationBoard.Categories[id].CategoryDataModel.IsPublished)
                             {
                                 <li class="nav-item me-1">
                                     <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link active me-1 text-dark" style="cursor: pointer;">
@@ -35,7 +36,7 @@
                         }
                         else
                         {
-                            @if (InformationBoard.Categories[id].CategoryModel.IsPublished)
+                            @if (InformationBoard.Categories[id].CategoryDataModel.IsPublished)
                             {
                                 <li class="nav-item me-1">
                                     <a @onclick="() => SetSelectedCategory(InformationBoard.Categories[id])" class="nav-link text-dark me-1" style="cursor: pointer;">
@@ -74,7 +75,7 @@
 
 @code {
     [Parameter]
-    public IInformationBoardViewModel InformationBoard { get; set; }
+    public IInformationBoardModel InformationBoard { get; set; }
 
     [Parameter]
     public EventCallback OnChangesMade { get; set; } // a method from parent (Admin.razor) must be specified/subscribed when using the component
@@ -82,7 +83,7 @@
     private NewCategory NewCategory { get; set; }
     private EditCategories EditCategories { get; set; }
 
-    private void SetSelectedCategory(ICategoryViewModel selectedCategory)
+    private void SetSelectedCategory(ICategoryModel selectedCategory)
     {
         InformationBoard.SelectedCategory = selectedCategory;
 
@@ -94,10 +95,9 @@
     private async Task OnChangesMadeInChildComponent()
     {
         // reload categories from data base, so that new categories receive an ID (IDs are generated in the data base)
-        InformationBoard.Categories = await _dbService.GetCategories(InformationBoard.InformationBoardModel.InformationBoardId);
-
+        InformationBoard.Categories = await InformationBoard.LoadCategories(_dbService);
         InformationBoard.CheckCategoryOrder();
-        await InformationBoard.EditCategoryOrder(InformationBoard, _dbService);
+        await InformationBoard.EditCategoryOrder(_dbService);
 
         // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
         await OnChangesMade.InvokeAsync();

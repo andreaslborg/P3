@@ -1,9 +1,9 @@
 ﻿@page "/admin"
-@using ManagementPages.Functions
 @using ManagementPages.Model
 @using ManagementPages.UI.Components
+@using ManagementPages.Function
 
-@inject IDbService dbService
+@inject IDbService _dbService
 
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
@@ -30,14 +30,15 @@
 
 
 @code {
-    public ILicenseViewModel License { get; set; } // = new TestLicenseViewModel(123);
+    public ILicenseModel License { get; set; } = new LicenseModel();
 
-    public int licenseId { get; set; } = 1;
+    public int LicenseId { get; set; } = 1;  // hardcoded, should be passed to the admin page from the login page
 
-    
+
     protected override async Task OnInitializedAsync()
     {
-        License = await dbService.InitializeLicense(licenseId);
+        License.LicenseDataModel = await License.LoadLicenseDataModel(LicenseId, _dbService);
+        License.InformationBoards = await License.LoadInformationBoards(_dbService);
     }
 
     private void OnChangesMadeInChildComponent()

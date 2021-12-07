@@ -1,6 +1,6 @@
-@using ManagementPages.Functions
 @using ManagementPages.Model
 @using ManagementPages.UI.Components.Modals
+@using ManagementPages.Function
 
 @inject IDbService _dbService
 
@@ -31,9 +31,9 @@
     </div>
     @if (SelectedInformationBoard?.SelectedCategory?.Posts?.Count > 0)
     {
-        @foreach (var post in SelectedInformationBoard.SelectedCategory.Posts.OrderByDescending(x => x.PostModel.PostId))
+        @foreach (var post in SelectedInformationBoard.SelectedCategory.Posts.OrderByDescending(x => x.PostDataModel.PostId))
         {
-            @if (post.PostModel.IsPublished)
+            @if (post.PostDataModel.IsPublished)
             {
                 <div class="row m-1">
                     <div class="fs-4 fw-bolder">
@@ -64,10 +64,10 @@
             {
                 <div class="row m-1">
                     <div class="fs-4 fw-bolder text-muted">
-                        @post.PostModel.Title
+                        @post.PostDataModel.Title
                     </div>
                     <div class="fs-6 fw-light text-muted mt-0">
-                        @post.PostModel.Author
+                        @post.PostDataModel.Author
                     </div>
                     <a href="@post.PostModel.Link" target="_blank">@post.PostModel.Link</a>
                     <div class="fw-normal mt-1 mb-0 text-muted">
@@ -98,14 +98,14 @@
 
 @code {
     [Parameter]
-    public IInformationBoardViewModel SelectedInformationBoard { get; set; } = new InformationBoardViewModel();
+    public IInformationBoardModel SelectedInformationBoard { get; set; } = new InformationBoardModel();
 
     [Parameter]
     public EventCallback OnChangesMade { get; set; } // a method from parent (Admin.razor) must be specified/subscribed when using the component
 
-    public IPostViewModel SelectedPost { get; set; } = new PostViewModel();
+    public IPostModel SelectedPost { get; set; } = new PostModel();
 
-    public void EditExistingPost(IPostViewModel selectedPost)
+    public void EditExistingPost(IPostModel selectedPost)
     {
         SelectedPost = selectedPost;
         EditPost.Open(selectedPost);
@@ -119,7 +119,7 @@
     {
         // in order to delete a post, a post must have an ID, which means that when a new post have been added, we must
         // reload the posts from the database to get the ID of the new post
-        SelectedInformationBoard.SelectedCategory.Posts = await _dbService.GetPosts(SelectedInformationBoard.SelectedCategory.CategoryModel.CategoryId);
+        SelectedInformationBoard.SelectedCategory.Posts = await SelectedInformationBoard.SelectedCategory.LoadPosts(_dbService);
 
         // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
         // this is done, as the displayed posts should be the ones from the selected category, so PostOverview needs to be updated

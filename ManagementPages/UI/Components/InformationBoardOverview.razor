@@ -1,4 +1,4 @@
-@using ManagementPages.Functions
+@using ManagementPages.Model
 @using ManagementPages.UI.Components.Modals
 
 <EditInfoboard @ref="EditInfoboard" OnChangesMade="OnChangesMadeInChildComponent"/>
@@ -27,6 +27,7 @@
                             <td class="table-active" style="transform: rotate(0);">
                                 <button class="btn btn-outline p-0 text-muted " @onclick="() => SetSelectedInformationBoard(informationBoard)" style="">
                                     @informationBoard.InformationBoardModel.Title
+
                                 </button>
                             </td>
                         }
@@ -86,12 +87,12 @@
 
 @code {
     [Parameter]
-    public ILicenseViewModel License { get; set; }
+    public ILicenseModel License { get; set; }
 
     [Parameter]
     public EventCallback OnChangesMade { get; set; } // a method from parent (Admin.razor) must be specified/subscribed when using the component
 
-    private void SetSelectedInformationBoard(IInformationBoardViewModel selectedInformationBoard)
+    private void SetSelectedInformationBoard(IInformationBoardModel selectedInformationBoard)
     {
         License.SelectedInformationBoard = selectedInformationBoard;
 

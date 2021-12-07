@@ -1,5 +1,4 @@
-﻿
-<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+﻿<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display: @ModalDisplay">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -13,10 +12,10 @@
                     <h5>Rediger navn</h5>
                     <label for="title" class="form-label">Navn på kunde</label>
                     <input type="text" class="form-control" id="title" placeholder="Aalborg Kommune">
-                    <br />
+                    <br/>
                     <label for="infoText" class="form-label">Note</label>
                     <textarea class="form-control" id="infotext" rows="3" placeholder="Aalborg kommune. Tavler rundt i hele byen."></textarea>
-                    <br />
+                    <br/>
                     <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseDelete()"><i class="bi bi-trash"></i> Slet kunde</button>
                 </div>
 
@@ -46,19 +45,19 @@
                     <h5>Tilføj informationstavle</h5>
                     <label for="title" class="form-label">Navn på informationstavlen</label>
                     <input type="text" class="form-control" id="title" placeholder="">
-                    <br />
-                    <label for="title" class="form-label">Kategorier</label> 
-                    <br />
+                    <br/>
+                    <label for="title" class="form-label">Kategorier</label>
+                    <br/>
                     <input type="text" class="form-control" id="title" placeholder="Kategori 1">
                     <input type="text" class="form-control" id="title" placeholder="Kategori 2">
 
                     <button class="btn btn-danger btn-sm mt-1"><i class="bi bi-dash-circle"></i> Slet kategori</button>
                     <button class="btn btn-success btn-sm mt-1"><i class="bi bi-plus-circle"></i> Tilføj kategori</button>
-                    <br />
-                    <br />
+                    <br/>
+                    <br/>
                     <button class="btn btn-success"><i class="bi bi-plus-circle"></i> Tilføj informationstavle</button>
                 </div>
-                
+
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal" @onclick="() => Close()">Luk og gem ikke</button>
@@ -101,6 +100,6 @@
     public void CloseDelete()
     {
         Close();
-        //Delete.Open();
     }
+
 }

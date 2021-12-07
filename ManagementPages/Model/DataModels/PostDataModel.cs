@@ -1,21 +1,20 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-
 namespace ManagementPages.Model
 {
-    public class PostModel
+    public class PostDataModel
     {
         public int PostId { get; set; }
 
         public int CategoryId { get; set; }
 
-        [Required (ErrorMessage = "Titel-feltet skal udfyldes")]
+        [Required(ErrorMessage = "Titel-feltet skal udfyldes")]
         [StringLength(30, ErrorMessage = "Titlen er for lang")]
         public string Title { get; set; }
 
 
-        [Required (ErrorMessage = "Tekst-feltet skal udfyldes")]
+        [Required(ErrorMessage = "Tekst-feltet skal udfyldes")]
         [StringLength(429496729, ErrorMessage = "Teksten er for lang")]
         public string Text { get; set; }
 
