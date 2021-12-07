@@ -10,26 +10,36 @@ namespace ManagementPages.Functions
 {
     public class InformationBoardViewModel : IInformationBoardViewModel
     {
-
         private ICategoryViewModel _selectedCategory;
 
-        public InformationBoardViewModel()
-        {
-            InformationBoardModel = new InformationBoardModel();
-        }
-
-        public InformationBoardModel InformationBoardModel { get; set; }
+        public InformationBoardModel InformationBoardModel { get; set; } = new();
 
         public Dictionary<int, ICategoryViewModel> Categories { get; set; } = new();
 
-        public void GetInformationBoardData(int informationBoardId)
+        public async Task<Dictionary<int, ICategoryViewModel>> LoadCategories(IDbService dbService)
         {
-            throw new NotImplementedException();
+            var result = new Dictionary<int, ICategoryViewModel>();
+
+            var categoryModels = await GetCategoryModels(dbService);
+
+            foreach (var categoryModel in categoryModels)
+            {
+                var category = new CategoryViewModel
+                {
+                    CategoryModel = categoryModel,
+                };
+                category.Posts = await category.LoadPosts(dbService);
+
+                result.Add(category.GetHashCode(), category);
+            }
+
+            return result;
         }
 
-        public void GetCategories(int informationBoardId)
+        private async Task<List<CategoryModel>> GetCategoryModels(IDbService dbService)
         {
-            throw new NotImplementedException();
+            var sql = $"select * from Category where InformationBoardId = {InformationBoardModel.InformationBoardId};";
+            return await dbService.LoadData<CategoryModel, dynamic>(sql, new { });
         }
 
         public ICategoryViewModel SelectedCategory

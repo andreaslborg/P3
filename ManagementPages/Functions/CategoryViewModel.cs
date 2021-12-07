@@ -11,14 +11,29 @@ namespace ManagementPages.Functions
 
         public CategoryModel CategoryModel { get; set; }
 
-        public void GetCategoryData(int categoryId)
+        public async Task<List<IPostViewModel>> LoadPosts(IDbService dbService)
         {
-            throw new NotImplementedException();
+            var result = new List<IPostViewModel>();
+
+            var postModels = await GetPostModels(dbService);
+
+            foreach (var postModel in postModels)
+            {
+                var post = new PostViewModel
+                {
+                    PostModel = postModel
+                };
+
+                result.Add(post);
+            }
+
+            return result;
         }
 
-        public void GetPosts(int categoryId)
+        private async Task<List<PostModel>> GetPostModels(IDbService dbService)
         {
-            throw new NotImplementedException();
+            var sql = $"select * from Post where CategoryId = {CategoryModel.CategoryId};";
+            return await dbService.LoadData<PostModel, dynamic>(sql, new { });
         }
 
         public async Task AddNewPost(PostModel newPost, bool isPublished, IDbService dbService)

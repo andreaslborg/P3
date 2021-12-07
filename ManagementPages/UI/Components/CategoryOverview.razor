@@ -86,8 +86,7 @@
     private async Task OnChangesMadeInChildComponent()
     {
         // reload categories from data base, so that new categories receive an ID (IDs are generated in the data base)
-        InformationBoard.Categories = await _dbService.GetCategories(InformationBoard.InformationBoardModel.InformationBoardId);
-
+        InformationBoard.Categories = await InformationBoard.LoadCategories(_dbService);
         InformationBoard.CheckCategoryOrder();
         await InformationBoard.EditCategoryOrder(_dbService);
 

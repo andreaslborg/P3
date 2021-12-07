@@ -8,11 +8,6 @@ namespace ManagementPages.Functions
     {
         public PostModel PostModel { get; set; } = new();
 
-        public void GetPostData(int licenseId)
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task EditPost(IDbService dbService)
         {
             var sql =
