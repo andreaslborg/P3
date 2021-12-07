@@ -135,6 +135,16 @@ namespace ManagementPages.Functions
             {
                 Name = "Sky",
                 BootstrapCode = "bi bi-cloud"
+            },
+            new IconOption()
+            {
+                Name = "Tv",
+                BootstrapCode = "bi bi-tv"
+            },
+            new IconOption()
+            {
+                Name = "Person",
+                BootstrapCode = "bi bi-person"
             }
         };
     }
