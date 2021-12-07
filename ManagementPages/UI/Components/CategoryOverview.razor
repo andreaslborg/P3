@@ -62,9 +62,13 @@
                 }
             </ul>
         </div>
-        <div class="col ps-2">
-            <button @onclick="() => NewCategory.Open(InformationBoard)" class="btn btn-secondary me-1 float-end"><i class="bi bi-plus-circle"></i> Ny kategori</button>
-            <button @onclick="() => EditCategories.Open()" class="btn btn-secondary me-1 float-end"><i class="bi bi-pencil"></i> Rediger kategorier</button>
+        <div class="col">
+            <button @onclick="() => EditCategories.Open()" class="btn btn-secondary me-1 mt-1 float-end">
+                <i class="bi bi-pencil"></i> Rediger kategorier
+            </button>
+            <button @onclick="() => NewCategory.Open(InformationBoard)" class="btn btn-secondary me-1 mt-1 float-end">
+                <i class="bi bi-plus-circle"></i> Ny kategori
+            </button>
         </div>
 </div>
 
