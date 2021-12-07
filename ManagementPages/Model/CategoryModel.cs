@@ -1,6 +1,4 @@
-﻿using System.Drawing;
-using System.ComponentModel.DataAnnotations;
-
+﻿using System.ComponentModel.DataAnnotations;
 
 namespace ManagementPages.Model
 {
@@ -19,12 +17,5 @@ namespace ManagementPages.Model
         [Required(ErrorMessage = "Vælg et ikon")]
         [StringLength(30, ErrorMessage = "Det valgte ikon kan ikke bruges. Vælg et andet")]
         public string Icon { get; set; }
-
-        //https://docs.microsoft.com/en-us/dotnet/api/system.drawing.color?view=net-5.0 
-        public Color ColorOfCategory { get; set; }
-
-        //Skal assignes i constructor - dependency injection 
-        //public ISortingMachine PostSortingMachine { get; set; }
-
     }
 }

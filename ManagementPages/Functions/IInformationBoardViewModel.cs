@@ -10,17 +10,18 @@ namespace ManagementPages.Functions
 
         Dictionary<int, ICategoryViewModel> Categories { get; set; }
 
+        public ICategoryViewModel SelectedCategory { get; set; }
+
+        List<int> CategoryOrder { get; set; }
+
         public void GetInformationBoardData(int informationBoardId);
 
         public void GetCategories(int informationBoardId);
 
-        public ICategoryViewModel SelectedCategory { get; set; }
-
-        public Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished, IDbService dbService);
+        public Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished,
+            IDbService dbService);
 
         Task EditInformationBoard(int informationBoardId, IDbService dbService);
-
-        List<int> CategoryOrder { get; set; }
 
         public void CheckCategoryOrder();
 

@@ -1,7 +1,7 @@
 ﻿@using ManagementPages.Functions
 @inject IDbService _dbService
 
-<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display: @ModalDisplay">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -17,12 +17,12 @@
                 <label for="title" class="form-label">Skriv "@SelectedPost?.PostModel.Title"</label>
                 <input type="text" class="form-control" id="title" placeholder="" @bind-value="PostTitleToBeDeleted" @bind-value:event="oninput">
             </div>
-            
+
             <div class="modal-footer ">
                 <div class="mx-auto text-center">
                     <p>Dette kan ikke fortrydes. Er du sikker?</p>
                     <button type="button" class="btn btn-success m-1" data-dismiss="modal" @onclick="() => Close()">Nej</button>
-                    @if (SelectedPost != null && SelectedPost.PostModel.Title.Equals(PostTitleToBeDeleted,StringComparison.OrdinalIgnoreCase))
+                    @if (SelectedPost != null && SelectedPost.PostModel.Title.Equals(PostTitleToBeDeleted, StringComparison.OrdinalIgnoreCase))
                     {
                         <button type="button" class="btn btn-danger m-1" data-dismiss="modal" @onclick="() => DeleteAndClose()">Ja</button>
                     }

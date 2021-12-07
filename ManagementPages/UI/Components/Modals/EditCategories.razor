@@ -1,11 +1,10 @@
 ﻿@using ManagementPages.Functions
 @using Syncfusion.Blazor.DropDowns
-
 @inject IDbService _dbService
 
-<ManagementPages.UI.Components.Modals.DeleteCategory @ref="DeleteCategory" OnChangesMade="OnChangesMadeInChildComponent" />
+<ManagementPages.UI.Components.Modals.DeleteCategory @ref="DeleteCategory" OnChangesMade="OnChangesMadeInChildComponent"/>
 
-<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display: @ModalDisplay">
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -16,21 +15,31 @@
             </div>
 
             <div class="row modal-body">
-                <div class="col-3"><label for="title" class="form-label">Rediger titel</label></div>
-                <div class="col-1" />
-                <div class="col-2"><label class="form-label">Privat/Offentlig</label> <br /></div>
-                <div class="col-3"><label for="author" class="form-label">Ikon</label></div>
-                <div class="col-2"><label class="form-label">Farve</label> <br /></div>
+                <div class="col-3">
+                    <label for="title" class="form-label">Rediger titel</label>
+                </div>
+                <div class="col-1"/>
+                <div class="col-2">
+                    <label class="form-label">Privat/Offentlig</label> <br/>
+                </div>
+                <div class="col-3">
+                    <label for="author" class="form-label">Ikon</label>
+                </div>
+                <div class="col-2">
+                    <label class="form-label">Farve</label> <br/>
+                </div>
             </div>
 
             @foreach (var id in InformationBoard.CategoryOrder)
             {
                 <div class="row modal-body">
                     <div class="col-3">
-                        <input type="text" class="form-control" id="title" placeholder="" @bind-value="@InformationBoard.Categories[id].CategoryModel.Title" />
+                        <input type="text" class="form-control" id="title" placeholder="" @bind-value="@InformationBoard.Categories[id].CategoryModel.Title"/>
                     </div>
                     <div class="col-1">
-                        <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseAndOpenDeleteCategory(InformationBoard.Categories[id])"><i class="bi bi-trash"></i></button>
+                        <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseAndOpenDeleteCategory(InformationBoard.Categories[id])">
+                            <i class="bi bi-trash"></i>
+                        </button>
                     </div>
                     <div class="col-2">
                         <div class="form-check form-switch">
@@ -53,32 +62,36 @@
                         <div class="col-1 mx-auto">
                             <button class="btn my-0 py-0">
                                 <i class="bi bi-arrow-up-circle" style="font-size: 25px"
-                                   @onclick="() => MoveUp(id)"></i>
+                                   @onclick="() => MoveUp(id)">
+                                </i>
                             </button>
-                            <br />
+                            <br/>
                             <button class="btn my-0 py-0">
                                 <i class="bi bi-arrow-down-circle" style="font-size: 25px"
-                                   @onclick="() => MoveDown(id)"></i>
+                                   @onclick="() => MoveDown(id)">
+                                </i>
                             </button>
                         </div>
                     }
                     else if (id == InformationBoard.CategoryOrder.First())
                     {
                         <div class="col-1 mx-auto">
-                            <br />
+                            <br/>
                             <button class="btn my-0 py-0">
                                 <i class="bi bi-arrow-down-circle" style="font-size: 25px"
-                                   @onclick="() => MoveDown(id)"></i>
+                                   @onclick="() => MoveDown(id)">
+                                </i>
                             </button>
                         </div>
                     }
                     else
                     {
                         <div class="col-1 mx-auto">
-                            <br />
+                            <br/>
                             <button class="btn my-0 py-0">
                                 <i class="bi bi-arrow-up-circle" style="font-size: 25px"
-                                   @onclick="() => MoveUp(id)"></i>
+                                   @onclick="() => MoveUp(id)">
+                                </i>
                             </button>
                         </div>
                     }
@@ -101,7 +114,7 @@
 
 
 @code {
-    private ManagementPages.UI.Components.Modals.DeleteCategory DeleteCategory { get; set; }
+    private DeleteCategory DeleteCategory { get; set; }
 
     [Parameter]
     public IInformationBoardViewModel InformationBoard { get; set; }
@@ -112,138 +125,138 @@
     public string iconTest = "&#xf042;";
 
     //hvor skal denne ligge? på viewmodel eller?
-    public List<IconOption> Icons { get; set; } = new List<IconOption>()
+    public List<IconOption> Icons { get; set; } = new()
+    {
+        new IconOption()
         {
-            new IconOption()
-            {
-                Name = "Insekt",
-                BootstrapCode = "bi bi-bug"
-            },
-            new IconOption()
-            {
-                Name = "Cykel",
-                BootstrapCode = "bi bi-bicycle"
-            },
-            new IconOption()
-            {
-                Name = "Træ",
-                BootstrapCode = "bi bi-tree"
-            },
-            new IconOption()
-            {
-                Name = "Newspaper",
-                BootstrapCode = "bi bi-newspaper"
-            },
-            new IconOption()
-            {
-                Name = "Butik",
-                BootstrapCode = "bi bi-shop"
-            },
-            new IconOption()
-            {
-                Name = "Skilt",
-                BootstrapCode = "bi bi-signpost"
-            },
-            new IconOption()
-            {
-                Name = "Seværdighed",
-                BootstrapCode = "bi bi-command"
-            },
-            new IconOption()
-            {
-                Name = "Bold",
-                BootstrapCode = "bi bi-dribbble"
-            },
-            new IconOption()
-            {
-                Name = "Staffeli",
-                BootstrapCode = "bi bi-easel"
-            },
-            new IconOption()
-            {
-                Name = "Blomst",
-                BootstrapCode = "bi bi-flower1"
-            },
-            new IconOption()
-            {
-                Name = "Information",
-                BootstrapCode = "bi bi-info"
-            },
-            new IconOption()
-            {
-                Name = "Opladning",
-                BootstrapCode = "bi bi-lightning-charge"
-            },
-            new IconOption()
-            {
-                Name = "Vejkort",
-                BootstrapCode = "bi bi-map"
-            },
-            new IconOption()
-            {
-                Name = "Telefon",
-                BootstrapCode = "bi bi-telephone"
-            },
-            new IconOption()
-            {
-                Name = "Wifi",
-                BootstrapCode = "bi bi-wifi"
-            },
-            new IconOption()
-            {
-                Name = "WC",
-                BootstrapCode = "bi bi-badge-wc"
-            },
-            new IconOption()
-            {
-                Name = "Shoppingbag",
-                BootstrapCode = "bi bi-bag"
-            },
-            new IconOption()
-            {
-                Name = "Plaster",
-                BootstrapCode = "bi bi-bandaid"
-            },
-            new IconOption()
-            {
-                Name = "Bank",
-                BootstrapCode = "bi bi-bank"
-            },
-            new IconOption()
-            {
-                Name = "Kikkert",
-                BootstrapCode = "bi bi-binoculars"
-            },
-            new IconOption()
-            {
-                Name = "Musik",
-                BootstrapCode = "bi bi-boombox"
-            },
-            new IconOption()
-            {
-                Name = "Kalender",
-                BootstrapCode = "bi bi-calendar-event"
-            },
-            new IconOption()
-            {
-                Name = "Kamera",
-                BootstrapCode = "bi bi-camera"
-            },
-            new IconOption()
-            {
-                Name = "Penge",
-                BootstrapCode = "bi bi-cash-coin"
-            },
-            new IconOption()
-            {
-                Name = "Skraldespand",
-                BootstrapCode = "bi bi-trash"
-            },
-            new IconOption()
-            {
-                Name = "Sky",
-                BootstrapCode = "bi bi-cloud"
-            }
+            Name = "Insekt",
+            BootstrapCode = "bi bi-bug"
+        },
+        new IconOption()
+        {
+            Name = "Cykel",
+            BootstrapCode = "bi bi-bicycle"
+        },
+        new IconOption()
+        {
+            Name = "Træ",
+            BootstrapCode = "bi bi-tree"
+        },
+        new IconOption()
+        {
+            Name = "Newspaper",
+            BootstrapCode = "bi bi-newspaper"
+        },
+        new IconOption()
+        {
+            Name = "Butik",
+            BootstrapCode = "bi bi-shop"
+        },
+        new IconOption()
+        {
+            Name = "Skilt",
+            BootstrapCode = "bi bi-signpost"
+        },
+        new IconOption()
+        {
+            Name = "Seværdighed",
+            BootstrapCode = "bi bi-command"
+        },
+        new IconOption()
+        {
+            Name = "Bold",
+            BootstrapCode = "bi bi-dribbble"
+        },
+        new IconOption()
+        {
+            Name = "Staffeli",
+            BootstrapCode = "bi bi-easel"
+        },
+        new IconOption()
+        {
+            Name = "Blomst",
+            BootstrapCode = "bi bi-flower1"
+        },
+        new IconOption()
+        {
+            Name = "Information",
+            BootstrapCode = "bi bi-info"
+        },
+        new IconOption()
+        {
+            Name = "Opladning",
+            BootstrapCode = "bi bi-lightning-charge"
+        },
+        new IconOption()
+        {
+            Name = "Vejkort",
+            BootstrapCode = "bi bi-map"
+        },
+        new IconOption()
+        {
+            Name = "Telefon",
+            BootstrapCode = "bi bi-telephone"
+        },
+        new IconOption()
+        {
+            Name = "Wifi",
+            BootstrapCode = "bi bi-wifi"
+        },
+        new IconOption()
+        {
+            Name = "WC",
+            BootstrapCode = "bi bi-badge-wc"
+        },
+        new IconOption()
+        {
+            Name = "Shoppingbag",
+            BootstrapCode = "bi bi-bag"
+        },
+        new IconOption()
+        {
+            Name = "Plaster",
+            BootstrapCode = "bi bi-bandaid"
+        },
+        new IconOption()
+        {
+            Name = "Bank",
+            BootstrapCode = "bi bi-bank"
+        },
+        new IconOption()
+        {
+            Name = "Kikkert",
+            BootstrapCode = "bi bi-binoculars"
+        },
+        new IconOption()
+        {
+            Name = "Musik",
+            BootstrapCode = "bi bi-boombox"
+        },
+        new IconOption()
+        {
+            Name = "Kalender",
+            BootstrapCode = "bi bi-calendar-event"
+        },
+        new IconOption()
+        {
+            Name = "Kamera",
+            BootstrapCode = "bi bi-camera"
+        },
+        new IconOption()
+        {
+            Name = "Penge",
+            BootstrapCode = "bi bi-cash-coin"
+        },
+        new IconOption()
+        {
+            Name = "Skraldespand",
+            BootstrapCode = "bi bi-trash"
+        },
+        new IconOption()
+        {
+            Name = "Sky",
+            BootstrapCode = "bi bi-cloud"
+        }
     };
 
 

@@ -6,19 +6,7 @@ namespace ManagementPages.Functions
 {
     public class PostViewModel : IPostViewModel
     {
-        private DbService _dbService;
-
-        public PostViewModel(DbService dbService, int postId)
-        {
-            _dbService = dbService;
-            GetPostData(postId);
-        }
-
-        public PostViewModel()
-        {
-        }
-
-        public PostModel PostModel { get; set; } = new PostModel();
+        public PostModel PostModel { get; set; } = new();
 
         public void GetPostData(int licenseId)
         {
@@ -27,14 +15,15 @@ namespace ManagementPages.Functions
 
         public async Task EditPost(int postModelCategoryId, IDbService dbService)
         {
-            string sql = $"update Post set Title = \"{PostModel.Title}\", Text = \"{PostModel.Text}\", Author = \"{PostModel.Author}\", IsPublished = {PostModel.IsPublished}, Link = \"{PostModel.Link}\" where PostId = {PostModel.PostId}";
-           
+            var sql =
+                $"update Post set Title = \"{PostModel.Title}\", Text = \"{PostModel.Text}\", Author = \"{PostModel.Author}\", IsPublished = {PostModel.IsPublished}, Link = \"{PostModel.Link}\" where PostId = {PostModel.PostId}";
+
             await dbService.SaveData(sql, PostModel);
         }
 
         public async Task DeletePost(IDbService dbService)
         {
-            string sql = $"delete from Post where PostId = {PostModel.PostId}";
+            var sql = $"delete from Post where PostId = {PostModel.PostId}";
 
             await dbService.SaveData(sql, PostModel);
         }

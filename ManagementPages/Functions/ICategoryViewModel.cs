@@ -19,6 +19,5 @@ namespace ManagementPages.Functions
         Task EditCategory(int categoryModelCategoryId, IDbService dbService);
 
         Task DeleteCategory(IDbService dbService);
-
     }
 }

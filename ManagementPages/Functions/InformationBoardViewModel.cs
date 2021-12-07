@@ -13,12 +13,6 @@ namespace ManagementPages.Functions
 
         private ICategoryViewModel _selectedCategory;
 
-        public InformationBoardViewModel(int informationBoardId)
-        {
-            GetInformationBoardData(informationBoardId);
-            GetCategories(informationBoardId);
-        }
-
         public InformationBoardViewModel()
         {
             InformationBoardModel = new InformationBoardModel();
@@ -48,7 +42,7 @@ namespace ManagementPages.Functions
 
         public async Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished, IDbService dbService)
         {
-            CategoryModel categoryModel = new CategoryModel
+            CategoryModel categoryModel = new()
             {
                 Title = newCategory.Title,
                 InformationBoardId = informationBoardId,
@@ -58,13 +52,7 @@ namespace ManagementPages.Functions
 
             string sql = $"insert into Category (Title, InformationBoardId, IsPublished, Icon) values(\"{categoryModel.Title}\", {categoryModel.InformationBoardId}, {categoryModel.IsPublished}, \"{categoryModel.Icon}\"); ";
 
-            //string sql = @"insert into Category (Title, InformationBoardId, IsPublished)
-               // values (@Title, @InformationBoardId, @IsPublished);";
-
             await dbService.SaveData(sql, categoryModel);
-
-            ICategoryViewModel newCategoryAdded = new CategoryViewModel();
-            newCategoryAdded.CategoryModel = categoryModel;
         }
 
         public async Task EditInformationBoard(int informationBoardId, IDbService dbService)

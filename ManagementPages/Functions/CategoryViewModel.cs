@@ -9,16 +9,6 @@ namespace ManagementPages.Functions
     {
         public List<IPostViewModel> Posts { get; set; } = new();
 
-        public CategoryViewModel(int categoryId)
-        {
-            GetCategoryData(categoryId);
-            GetPosts(categoryId);
-        }
-
-        public CategoryViewModel()
-        {
-        }
-
         public CategoryModel CategoryModel { get; set; }
 
         public void GetCategoryData(int categoryId)
@@ -33,7 +23,7 @@ namespace ManagementPages.Functions
 
         public async Task AddNewPost(PostModel newPost, int categoryId, bool isPublished, IDbService dbService)
         {
-            PostModel postModel = new PostModel
+            var postModel = new PostModel
             {
                 Title = newPost.Title,
                 CategoryId = categoryId,
@@ -43,27 +33,30 @@ namespace ManagementPages.Functions
                 Link = newPost.Link
             };
 
-            string sql =
+            var sql =
                 $"insert into Post (Title, CategoryId, Text, Author, IsPublished, Link) values (\"{postModel.Title}\", {postModel.CategoryId}, \"{postModel.Text}\", \"{postModel.Author}\", {postModel.IsPublished}, \"{postModel.Link}\" );";
 
             await dbService.SaveData(sql, postModel);
 
-            IPostViewModel newPostAdded = new PostViewModel();
-            newPostAdded.PostModel = postModel;
+            IPostViewModel newPostAdded = new PostViewModel()
+            {
+                PostModel = postModel
+            };
 
             Posts.Add(newPostAdded);
         }
 
         public async Task EditCategory(int categoryModelCategoryId, IDbService dbService)
         {
-            string sql = $"update Category set Title = \"{CategoryModel.Title}\", IsPublished = {CategoryModel.IsPublished}, Icon = \"{CategoryModel.Icon}\"  where CategoryId = {CategoryModel.CategoryId}";
+            var sql =
+                $"update Category set Title = \"{CategoryModel.Title}\", IsPublished = {CategoryModel.IsPublished}, Icon = \"{CategoryModel.Icon}\"  where CategoryId = {CategoryModel.CategoryId}";
 
             await dbService.SaveData(sql, CategoryModel);
         }
 
         public async Task DeleteCategory(IDbService dbService)
         {
-            string sql = $"delete from Category where CategoryId = {CategoryModel.CategoryId}";
+            var sql = $"delete from Category where CategoryId = {CategoryModel.CategoryId}";
 
             await dbService.SaveData(sql, CategoryModel);
         }
