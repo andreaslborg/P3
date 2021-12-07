@@ -18,10 +18,10 @@ namespace ManagementPages.Functions
 
         public void GetCategories(int informationBoardId);
 
-        public Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished,
+        public Task AddNewCategory(CategoryModel newCategory, bool isPublished,
             IDbService dbService);
 
-        Task EditInformationBoard(int informationBoardId, IDbService dbService);
+        Task EditInformationBoard(IDbService dbService);
 
         public void CheckCategoryOrder();
 

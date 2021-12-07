@@ -40,12 +40,12 @@ namespace ManagementPages.Functions
 
         public List<int> CategoryOrder { get; set; } = new();
 
-        public async Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished, IDbService dbService)
+        public async Task AddNewCategory(CategoryModel newCategory, bool isPublished, IDbService dbService)
         {
             CategoryModel categoryModel = new()
             {
                 Title = newCategory.Title,
-                InformationBoardId = informationBoardId,
+                InformationBoardId = InformationBoardModel.InformationBoardId,
                 IsPublished = isPublished,
                 Icon = newCategory.Icon
             };
@@ -55,7 +55,7 @@ namespace ManagementPages.Functions
             await dbService.SaveData(sql, categoryModel);
         }
 
-        public async Task EditInformationBoard(int informationBoardId, IDbService dbService)
+        public async Task EditInformationBoard(IDbService dbService)
         {
             string sql = $"update InformationBoard set Title = \"{InformationBoardModel.Title}\", IsPublished = {InformationBoardModel.IsPublished} where InformationBoardId = {InformationBoardModel.InformationBoardId}";
 
@@ -86,11 +86,11 @@ namespace ManagementPages.Functions
             return result;
         }
 
-        public async Task EditCategoryOrder(IInformationBoardViewModel informationBoard, IDbService dbService)
+        public async Task EditCategoryOrder(IDbService dbService)
         {
-            informationBoard.InformationBoardModel.CategoryOrder = ConvertToCommaSeparatedString(informationBoard.CategoryOrder);
+            InformationBoardModel.CategoryOrder = ConvertToCommaSeparatedString(CategoryOrder);
 
-            string sql = $"update InformationBoard set CategoryOrder = \"{informationBoard.InformationBoardModel.CategoryOrder}\"  where InformationBoardId = {informationBoard.InformationBoardModel.InformationBoardId}";
+            string sql = $"update InformationBoard set CategoryOrder = \"{InformationBoardModel.CategoryOrder}\"  where InformationBoardId = {InformationBoardModel.InformationBoardId}";
 
             await dbService.SaveData(sql, InformationBoardModel);
         }

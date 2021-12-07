@@ -13,7 +13,7 @@ namespace ManagementPages.Functions
             throw new NotImplementedException();
         }
 
-        public async Task EditPost(int postModelCategoryId, IDbService dbService)
+        public async Task EditPost(IDbService dbService)
         {
             var sql =
                 $"update Post set Title = \"{PostModel.Title}\", Text = \"{PostModel.Text}\", Author = \"{PostModel.Author}\", IsPublished = {PostModel.IsPublished}, Link = \"{PostModel.Link}\" where PostId = {PostModel.PostId}";

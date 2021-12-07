@@ -21,12 +21,12 @@ namespace ManagementPages.Functions
             throw new NotImplementedException();
         }
 
-        public async Task AddNewPost(PostModel newPost, int categoryId, bool isPublished, IDbService dbService)
+        public async Task AddNewPost(PostModel newPost, bool isPublished, IDbService dbService)
         {
             var postModel = new PostModel
             {
                 Title = newPost.Title,
-                CategoryId = categoryId,
+                CategoryId = CategoryModel.CategoryId,
                 Text = newPost.Text,
                 Author = newPost.Author,
                 IsPublished = isPublished,
@@ -46,7 +46,7 @@ namespace ManagementPages.Functions
             Posts.Add(newPostAdded);
         }
 
-        public async Task EditCategory(int categoryModelCategoryId, IDbService dbService)
+        public async Task EditCategory(IDbService dbService)
         {
             var sql =
                 $"update Category set Title = \"{CategoryModel.Title}\", IsPublished = {CategoryModel.IsPublished}, Icon = \"{CategoryModel.Icon}\"  where CategoryId = {CategoryModel.CategoryId}";
