@@ -26,7 +26,7 @@ namespace ManagementPages.Functions
 
         public InformationBoardModel InformationBoardModel { get; set; }
 
-        public List<ICategoryViewModel> Categories { get; set; } = new();
+        public Dictionary<int, ICategoryViewModel> Categories { get; set; } = new();
 
         public void GetInformationBoardData(int informationBoardId)
         {
@@ -40,9 +40,11 @@ namespace ManagementPages.Functions
 
         public ICategoryViewModel SelectedCategory
         {
-            get => _selectedCategory ?? Categories.FirstOrDefault();
+            get => _selectedCategory ?? Categories.FirstOrDefault().Value;
             set => _selectedCategory = value;
         }
+
+        public List<int> CategoryOrder { get; set; } = new();
 
         public async Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished, IDbService dbService)
         {
@@ -63,8 +65,6 @@ namespace ManagementPages.Functions
 
             ICategoryViewModel newCategoryAdded = new CategoryViewModel();
             newCategoryAdded.CategoryModel = categoryModel;
-
-            Categories.Add(newCategoryAdded);
         }
 
         public async Task EditInformationBoard(int informationBoardId, IDbService dbService)
@@ -98,12 +98,21 @@ namespace ManagementPages.Functions
             return result;
         }
 
+        public async Task EditCategoryOrder(IInformationBoardViewModel informationBoard, IDbService dbService)
+        {
+            informationBoard.InformationBoardModel.CategoryOrder = ConvertToCommaSeparatedString(informationBoard.CategoryOrder);
+
+            string sql = $"update InformationBoard set CategoryOrder = \"{informationBoard.InformationBoardModel.CategoryOrder}\"  where InformationBoardId = {informationBoard.InformationBoardModel.InformationBoardId}";
+
+            await dbService.SaveData(sql, InformationBoardModel);
+        }
+
         public List<int> ConvertToListOfInt(string input)
         {
             List<int> result = new();
             var list = input.Split(',');
 
-            foreach(var numberString in list)
+            foreach (var numberString in list)
             {
                 try
                 {
