@@ -26,7 +26,7 @@ namespace ManagementPages.Functions
 
         public InformationBoardModel InformationBoardModel { get; set; }
 
-        public List<ICategoryViewModel> Categories { get; set; } = new();
+        public Dictionary<int, ICategoryViewModel> Categories { get; set; } = new();
 
         public void GetInformationBoardData(int informationBoardId)
         {
@@ -40,9 +40,11 @@ namespace ManagementPages.Functions
 
         public ICategoryViewModel SelectedCategory
         {
-            get => _selectedCategory ?? Categories.FirstOrDefault();
+            get => _selectedCategory ?? Categories.FirstOrDefault().Value;
             set => _selectedCategory = value;
         }
+
+        public List<int> CategoryOrder { get; set; } = new();
 
         public async Task AddNewCategory(CategoryModel newCategory, int informationBoardId, bool isPublished, IDbService dbService)
         {
@@ -63,8 +65,6 @@ namespace ManagementPages.Functions
 
             ICategoryViewModel newCategoryAdded = new CategoryViewModel();
             newCategoryAdded.CategoryModel = categoryModel;
-
-            Categories.Add(newCategoryAdded);
         }
 
         public async Task EditInformationBoard(int informationBoardId, IDbService dbService)
@@ -85,6 +85,83 @@ namespace ManagementPages.Functions
         {
             return InformationBoardModel.InformationBoardId;
         }
-    }
 
+        public string ConvertToCommaSeparatedString(List<int> list)
+        {
+            string result = String.Empty;
+
+            foreach(var number in list)
+            {
+                result += $"{number},";
+            }
+
+            return result;
+        }
+
+        public async Task EditCategoryOrder(IInformationBoardViewModel informationBoard, IDbService dbService)
+        {
+            informationBoard.InformationBoardModel.CategoryOrder = ConvertToCommaSeparatedString(informationBoard.CategoryOrder);
+
+            string sql = $"update InformationBoard set CategoryOrder = \"{informationBoard.InformationBoardModel.CategoryOrder}\"  where InformationBoardId = {informationBoard.InformationBoardModel.InformationBoardId}";
+
+            await dbService.SaveData(sql, InformationBoardModel);
+        }
+
+        public List<int> ConvertToListOfInt(string input)
+        {
+            List<int> result = new();
+            var list = input.Split(',');
+
+            foreach (var numberString in list)
+            {
+                try
+                {
+                    var number = Int32.Parse(numberString);
+                    result.Add(number);
+                }
+                catch (FormatException)
+                {
+                    // Handle
+                }
+            }
+
+            return result;
+        }
+
+        public void CheckCategoryOrder()
+        {
+            // check if all categories are in the CategoryOrder (meaning that they will be displayed), and
+            // add them to the end, if they are missing
+            List<int> keysToAdd = new();
+            List<int> keysToRemove = new();
+
+            foreach (var category in Categories)
+            {
+                if (!CategoryOrder.Contains(category.Key))
+                {
+                    keysToAdd.Add(category.Key);
+                }
+            }
+
+            // check if there are any invalid ids in the CategoryOrder, and if so - delete them
+            foreach (var key in CategoryOrder)
+            {
+                if (!Categories.ContainsKey(key))
+                {
+                    keysToRemove.Add(key);
+                }
+            }
+
+            // keys cannot be deleted/added inside foreach loop as it messes up the order
+            foreach (var key in keysToAdd)
+            {
+                CategoryOrder.Add(key);
+            }
+
+            foreach (var key in keysToRemove)
+            {
+                CategoryOrder.Remove(key);
+            }
+        }
+    }
 }
