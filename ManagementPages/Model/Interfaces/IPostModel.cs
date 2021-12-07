@@ -9,6 +9,6 @@ namespace ManagementPages.Model
 
         Task EditPost(IDbService dbService);
 
-        Task DeletePost(IDbService dbService);
+        Task DeletePostFromDatabase(IDbService dbService);
     }
 }

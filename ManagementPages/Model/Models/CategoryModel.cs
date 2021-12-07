@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ManagementPages.Function;
+using ManagementPages.Model;
 
 namespace ManagementPages.Model
 {
@@ -9,6 +10,10 @@ namespace ManagementPages.Model
         public List<IPostModel> Posts { get; set; } = new();
 
         public CategoryDataModel CategoryDataModel { get; set; }
+
+        public delegate void CategoryEvent(CategoryModel categoryModel);
+
+        public CategoryEvent CategoryDeleted;
 
         public async Task<List<IPostModel>> LoadPosts(IDbService dbService)
         {
@@ -22,6 +27,8 @@ namespace ManagementPages.Model
                 {
                     PostDataModel = postDataModel
                 };
+
+                postModel.PostDeleted += DeletePost;
 
                 result.Add(postModel);
             }
@@ -62,11 +69,18 @@ namespace ManagementPages.Model
             await dbService.SaveData(sql, CategoryDataModel);
         }
 
-        public async Task DeleteCategory(IDbService dbService)
+        public async Task DeleteCategoryFromDatabase(IDbService dbService)
         {
             var sql = $"delete from Category where CategoryId = {CategoryDataModel.CategoryId}";
 
             await dbService.SaveData(sql, CategoryDataModel);
+
+            CategoryDeleted?.Invoke(this);
+        }
+
+        public void DeletePost(IPostModel postModel)
+        {
+            Posts.Remove(postModel);
         }
 
         private async Task<List<PostDataModel>> LoadPostDataModels(IDbService dbService)

@@ -28,10 +28,18 @@ namespace ManagementPages.Model
                 };
                 categoryModel.Posts = await categoryModel.LoadPosts(dbService);
 
+                categoryModel.CategoryDeleted += DeleteCategory;
+
                 result.Add(categoryModel.GetHashCode(), categoryModel);
             }
 
             return result;
+        }
+
+        public void DeleteCategory(CategoryModel categoryModel)
+        {
+            Categories.Remove(categoryModel.GetHashCode());
+            CategoryOrder.Remove(categoryModel.GetHashCode());
         }
 
         public ICategoryModel SelectedCategory
@@ -44,7 +52,7 @@ namespace ManagementPages.Model
 
         public async Task AddNewCategory(CategoryDataModel newCategory, bool isPublished, IDbService dbService)
         {
-            CategoryDataModel categoryModel = new()
+            CategoryDataModel categoryDataModel = new()
             {
                 Title = newCategory.Title,
                 InformationBoardId = InformationBoardDataModel.InformationBoardId,
@@ -53,9 +61,18 @@ namespace ManagementPages.Model
             };
 
             var sql =
-                $"insert into Category (Title, InformationBoardId, IsPublished, Icon) values(\"{categoryModel.Title}\", {categoryModel.InformationBoardId}, {categoryModel.IsPublished}, \"{categoryModel.Icon}\"); ";
+                $"insert into Category (Title, InformationBoardId, IsPublished, Icon) values(\"{categoryDataModel.Title}\", {categoryDataModel.InformationBoardId}, {categoryDataModel.IsPublished}, \"{categoryDataModel.Icon}\"); ";
 
-            await dbService.SaveData(sql, categoryModel);
+            await dbService.SaveData(sql, categoryDataModel);
+
+            var categoryModel = new CategoryModel()
+            {
+                CategoryDataModel = categoryDataModel,
+            };
+            categoryModel.CategoryDeleted += DeleteCategory;
+
+            Categories.Add(categoryModel.GetHashCode(), categoryModel);
+            CategoryOrder.Add(categoryModel.GetHashCode());
         }
 
         public async Task EditInformationBoard(IDbService dbService)
