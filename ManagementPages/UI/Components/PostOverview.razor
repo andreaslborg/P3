@@ -17,9 +17,9 @@
                 Nyt opslag
             </button>
         }
-
+        <!-- Dropdown menu is disabled -->
         <div class="dropdown float-end">
-            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+            <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false" disabled>
                 Rediger rækkefølge på opslag
             </button>
             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
@@ -36,20 +36,26 @@
             @if (post.PostDataModel.IsPublished)
             {
                 <div class="row m-1">
-                    <div class="fs-4 fw-bolder text-capitalize">
-                        @post.PostDataModel.Title
+                    <div class="fs-4 fw-bolder">
+                        @post.PostModel.Title
                     </div>
-                    <div class="fs-6 fw-light text-muted text-capitalize mt-0">
-                        @post.PostDataModel.Author
+                    <div class="fs-6 fw-light text-muted mt-0">
+                        @post.PostModel.Author
                     </div>
-                    <a href="@post.PostDataModel.Link">@post.PostDataModel.Link</a>
-                    <div>
-                        <div class="fw-normal mt-1 mb-0">
-                            @post.PostDataModel.Text
-                            <div class="float-end">
-                                <button @onclick="() => EditExistingPost(post)" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
-                                <button @onclick="() => DeletePost.Open(post)" class="btn p-0"><i class="bi bi-trash"></i></button>
-                            </div>
+                    <a href="@post.PostModel.Link" target="_blank">@post.PostModel.Link</a>
+                    <div class="fw-normal mt-1 mb-0">
+                        @if (@post.PostModel.Text.Length > 350)
+                        {
+                            @post.PostModel.Text.Substring(0, 350);
+                            <span>...</span>
+                        }
+                        else
+                        {
+                            @post.PostModel.Text
+                        }
+                        <div class="float-end">
+                            <button @onclick="() => EditExistingPost(post)" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
+                            <button @onclick="() => DeletePost.Open(post)" class="btn p-0"><i class="bi bi-trash"></i></button>
                         </div>
                     </div>
                 </div>
@@ -63,14 +69,20 @@
                     <div class="fs-6 fw-light text-muted mt-0">
                         @post.PostDataModel.Author
                     </div>
-                        <a href="@post.PostDataModel.Link">@post.PostDataModel.Link</a>
-                    <div>
-                        <div class="fw-normal mt-1 mb-0 text-muted">
-                            @post.PostDataModel.Text
-                            <div class="float-end">
-                                <button @onclick="() => EditExistingPost(post)" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
-                                <button @onclick="() => DeletePost.Open(post)" class="btn p-0"><i class="bi bi-trash"></i></button>
-                            </div>
+                    <a href="@post.PostModel.Link" target="_blank">@post.PostModel.Link</a>
+                    <div class="fw-normal mt-1 mb-0 text-muted">
+                        @if (@post.PostModel.Text.Length > 350)
+                        {
+                            @post.PostModel.Text.Substring(0, 350);
+                            <span>...</span>
+                        }
+                        else
+                        {
+                            @post.PostModel.Text
+                        }
+                        <div class="float-end">
+                            <button @onclick="() => EditExistingPost(post)" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
+                            <button @onclick="() => DeletePost.Open(post)" class="btn p-0"><i class="bi bi-trash"></i></button>
                         </div>
                     </div>
                 </div>
