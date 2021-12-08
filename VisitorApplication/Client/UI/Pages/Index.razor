@@ -8,13 +8,13 @@
 </head>
 
 
-@if (InformationboardList == null)
+@if (AllInformationboards == null)
 {
     <h1 class="display-5 m-1" style="color: white;">Loading...</h1>
 }
 else
 {
-    foreach (var informationboard in InformationboardList)
+    foreach (var informationboard in AllInformationboards)
     {
         // Displays the published information board, if any at the specific path
         if (informationboardID == informationboard.InformationboardID && informationboard.IsPublished == true)
@@ -44,14 +44,14 @@ else
             <section class="wrapper container">
                 <div id="categories" class="row justify-content-center text-center">
                     @* The categories are not yet loaded from the database*@
-                    @if (CategoryList == null)
+                    @if (AllCategories == null)
                     {
                     }
                     @*The order of the categories has not been altered*@
                     @*This ifelse-statement diplays the categories on the ../{informationboardID} page IF the categoryOrder is empty in the database*@
                     else if (informationboard.CategoryOrder == string.Empty)
                     {
-                        foreach (var category in CatList)
+                        foreach (var category in SelectedCategoriesList)
                         {
                             <a class="btn square col-5 m-1 p-1 d-flex align-items-center text-white shadow-lg rounded-3" href="@($"/{informationboard.InformationboardID}/{category.CategoryId}")">
                                 <div class="mx-auto">
@@ -94,7 +94,7 @@ else
         }
 
         @*Displays message if the selected information board is not publised OR if the selected information board has no categories*@
-if ((informationboardID == informationboard.InformationboardID && informationboard.IsPublished != true) || (informationboardID == informationboard.InformationboardID && CatList.Count == 0))
+if ((informationboardID == informationboard.InformationboardID && informationboard.IsPublished != true) || (informationboardID == informationboard.InformationboardID && SelectedCategoriesList.Count == 0))
 {
             <h1 class="col-10 text-center display-1 ms-0" style="color: white;">Der er ikke noget på denne side.</h1>
         }
@@ -108,33 +108,32 @@ if ((informationboardID == informationboard.InformationboardID && informationboa
     [Parameter]
     public int categoryID { get; set; }
 
-    Informationboard[] InformationboardList;
-    Category[] CategoryList;
-    Dictionary<int, Category> CategoryDictionary = new Dictionary<int, Category>();
-    List<int> CategoryOrder = new();
-    List<Category> CatList = new();
-    Informationboard selectedInformationBoard = new Informationboard();
+    Informationboard[] AllInformationboards { get; set; }
+    Category[] AllCategories { get; set; }
+    Dictionary<int, Category> CategoryDictionary { get; set; } = new Dictionary<int, Category>();
+    List<int> CategoryOrder { get; set; } = new();
+    List<Category> SelectedCategoriesList { get; set; } = new();
 
     protected async override Task OnInitializedAsync()
     {
-        InformationboardList = await Http.GetFromJsonAsync<Informationboard[]>("api/Informationboard/InformationboardList");
-        CategoryList = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
-        CatList = CategoryList.Where(x => x.InformationBoardId == informationboardID).Select(x => x).ToList();
-        CategoryToDictionary();
+        AllInformationboards = await Http.GetFromJsonAsync<Informationboard[]>("api/Informationboard/InformationboardList");
+        AllCategories = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
+        SelectedCategoriesList = AllCategories.Where(x => x.InformationBoardId == informationboardID).Select(x => x).ToList();
+        CategoriesToDictionary();
 
-        selectedInformationBoard = InformationboardList.Where(x => x.InformationboardID == informationboardID).Select(x => x).First();
-        CategoryOrder = CategoryOrderGenerator(selectedInformationBoard);
+        var selectedInformationBoard = AllInformationboards.Where(x => x.InformationboardID == informationboardID).Select(x => x).First();
+        CategoryOrder = SplitCategoriesToList(selectedInformationBoard);
     }
 
-    public void CategoryToDictionary()
+    public void CategoriesToDictionary()
     {
-        foreach (var category in CatList)
+        foreach (var category in SelectedCategoriesList)
         {
             CategoryDictionary.Add(category.CategoryId, category);
         }
     }
 
-    public List<int> CategoryOrderGenerator(Informationboard informationboard)
+    public List<int> SplitCategoriesToList(Informationboard informationboard)
     {
         List<string> stringIDList = informationboard.CategoryOrder.Split(",").ToList();
         List<int> intIDList = new();

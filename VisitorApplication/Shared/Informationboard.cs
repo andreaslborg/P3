@@ -15,8 +15,5 @@ namespace VisitorApplication.Shared
         public bool IsPublished { get; set; }
         public int LicenseID { get; set; }
         public string CategoryOrder { get; set; }
-
-
-
     }
 }
