@@ -86,6 +86,14 @@ namespace ManagementPages.Model
             await dbService.SaveData(sql, InformationBoardDataModel);
         }
 
+        public async Task ReloadInformationBoardDataModel(IDbService dbService)
+        {
+            var sql =
+                $"select * from InformationBoard where InformationBoardId = {InformationBoardDataModel.InformationBoardId};";
+            var informationBoardList = await dbService.LoadData<InformationBoardDataModel, dynamic>(sql, new { });
+            InformationBoardDataModel = informationBoardList.First();
+        }
+
         public async Task EditCategoryOrder(IDbService dbService)
         {
             InformationBoardDataModel.CategoryOrder = ConvertToCommaSeparatedString(CategoryOrder);

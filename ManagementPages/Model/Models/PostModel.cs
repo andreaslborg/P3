@@ -1,6 +1,7 @@
 ﻿using System.Threading.Tasks;
 using ManagementPages.Function;
 using Microsoft.AspNetCore.Components;
+using System.Linq;
 
 namespace ManagementPages.Model
 {
@@ -27,6 +28,14 @@ namespace ManagementPages.Model
             await dbService.SaveData(sql, PostDataModel);
 
             PostDeleted?.Invoke(this);
+        }
+
+        public async Task ReloadPostDataModel(IDbService dbService)
+        {
+            var sql =
+                $"select * from Post where PostId = {PostDataModel.PostId};";
+            var postList = await dbService.LoadData<PostDataModel, dynamic>(sql, new { });
+            PostDataModel = postList.First();
         }
 
         // method to compare to posts based on their ID. This should always be used instead of '=='
