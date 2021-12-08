@@ -33,7 +33,7 @@
 
             @foreach (var id in InformationBoard.CategoryOrder)
             {
-                <div class="row modal-body my-auto">
+                <div class="row modal-body" style="height: 111px">
                     <div class="col-3 my-auto">
                         <input type="text" class="form-control" id="title" placeholder="" @bind-value="@InformationBoard.Categories[id].CategoryDataModel.Title"/>
                     </div>
@@ -76,9 +76,8 @@
                     }
                     else if (id == InformationBoard.CategoryOrder.First())
                     {
-                        <div class="col-1 mx-auto mt-auto">
-                            <br/>
-                            <button class="btn py-0">
+                        <div class="col-1 mt-auto mx-auto">
+                            <button class="btn my-0 py-0">
                                 <i class="bi bi-arrow-down-circle" style="font-size: 25px"
                                    @onclick="() => MoveDown(id)">
                                 </i>
@@ -87,8 +86,7 @@
                     }
                     else
                     {
-                        <div class="col-1 mx-auto">
-                            <br/>
+                        <div class="col-1 mb-auto mx-auto">
                             <button class="btn my-0 py-0">
                                 <i class="bi bi-arrow-up-circle" style="font-size: 25px"
                                    @onclick="() => MoveUp(id)">
