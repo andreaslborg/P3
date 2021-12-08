@@ -60,7 +60,7 @@
 
                     @if (!(id == InformationBoard.CategoryOrder.First() || id == InformationBoard.CategoryOrder.Last()))
                     {
-                        <div class="col-1 mx-auto">
+                        <div class="col-1 mx-auto my-auto">
                             <button class="btn my-0 py-0">
                                 <i class="bi bi-arrow-up-circle" style="font-size: 25px"
                                    @onclick="() => MoveUp(id)">
@@ -97,7 +97,7 @@
                 </div>
             }
             <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Close()">Annuller</button>
+                <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Cancel()">Annuller</button>
                 <button type="submit" class="btn btn-success" @onclick="() => SaveAndClose()">Gem</button>
             </div>
 
@@ -144,6 +144,19 @@
         StateHasChanged();
     }
 
+    public async Task Cancel()
+    {
+        // bring categories back to original state
+        InformationBoard.Categories = await InformationBoard.LoadCategories(_dbService);
+
+        // bring category order back to original state
+        InformationBoard.CategoryOrder = InformationBoard.ConvertToListOfInt(InformationBoard.InformationBoardDataModel.CategoryOrder);
+
+        Close();
+
+        await OnChangesMade.InvokeAsync();
+    }
+
     private void CloseAndOpenDeleteCategory(ICategoryModel category)
     {
         Close();
@@ -156,6 +169,7 @@
         {
             category.Value.EditCategory(_dbService);
         }
+        InformationBoard.EditCategoryOrder(_dbService);
         Close();
         OnChangesMade.InvokeAsync();
     }
