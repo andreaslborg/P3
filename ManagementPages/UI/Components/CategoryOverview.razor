@@ -84,14 +84,9 @@
         OnChangesMade.InvokeAsync();
     }
 
-    private async Task OnChangesMadeInChildComponent()
+    private void OnChangesMadeInChildComponent()
     {
-        // reload categories from data base, so that new categories receive an ID (IDs are generated in the data base)
-        //InformationBoard.Categories = await InformationBoard.LoadCategories(_dbService);
-        InformationBoard.CheckCategoryOrder();
-        await InformationBoard.EditCategoryOrder(_dbService);
-
         // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
-        await OnChangesMade.InvokeAsync();
+        OnChangesMade.InvokeAsync();
     }
 }

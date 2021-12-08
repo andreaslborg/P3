@@ -71,8 +71,11 @@ namespace ManagementPages.Model
             };
             categoryModel.CategoryDeleted += DeleteCategory;
 
-            Categories.Add(categoryModel.GetHashCode(), categoryModel);
-            CategoryOrder.Add(categoryModel.GetHashCode());
+            // reload categories from data base, so that new category receives an ID (IDs are generated in the data base)
+            Categories = await LoadCategories(dbService);
+
+            // add the new category to the category order via the CheckCategoryOrder method
+            CheckCategoryOrder();
         }
 
         public async Task EditInformationBoard(IDbService dbService)

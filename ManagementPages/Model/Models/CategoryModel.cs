@@ -53,12 +53,7 @@ namespace ManagementPages.Model
 
             await dbService.SaveData(sql, postDataModel);
 
-            IPostModel newPostAdded = new PostModel
-            {
-                PostDataModel = postDataModel
-            };
-
-            Posts.Add(newPostAdded);
+            Posts = await LoadPosts(dbService);
         }
 
         public async Task EditCategory(IDbService dbService)
