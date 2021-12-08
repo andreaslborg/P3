@@ -1,10 +1,9 @@
-﻿@page "/{informationboardID:int}"
+@page "/{informationboardID:int}"
 @using VisitorApplication.Shared
 @inject HttpClient Http
 
 <head>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.0/font/bootstrap-icons.css">
-    <link rel="stylesheet" href="https://cdn-uicons.flaticon.com/uicons-regular-rounded/css/uicons-regular-rounded.css">
 </head>
 
 
@@ -91,12 +90,17 @@ else
                     }
                 </div>
             </section>
+
+            <section class="font-monospace text-center mt-2">
+                <p class="fw-light fs-6 text-muted">© talDigital 2021</p>
+            </section>
         }
 
         @*Displays message if the selected information board is not publised OR if the selected information board has no categories*@
 if ((informationboardID == informationboard.InformationboardID && informationboard.IsPublished != true) || (informationboardID == informationboard.InformationboardID && SelectedCategoriesList.Count == 0))
 {
             <h1 class="col-10 text-center display-1 ms-0" style="color: white;">Der er ikke noget på denne side.</h1>
+
         }
     }
 }
