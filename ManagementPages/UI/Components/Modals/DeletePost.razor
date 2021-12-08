@@ -1,7 +1,8 @@
-﻿@using ManagementPages.Functions
+﻿@using ManagementPages.Model
+@using ManagementPages.Function
 @inject IDbService _dbService
 
-<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display: @ModalDisplay">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -11,18 +12,18 @@
                 </button>
             </div>
             <div class="row modal-body">
-                <p class="fw-bold">Er du sikker på at du vil slette "@SelectedPost?.PostModel.Title"</p>
+                <p class="fw-bold">Er du sikker på at du vil slette "@SelectedPost?.PostDataModel.Title"</p>
             </div>
             <div class="col-10 mx-auto mb-3">
-                <label for="title" class="form-label">Skriv "@SelectedPost?.PostModel.Title"</label>
+                <label for="title" class="form-label">Skriv "@SelectedPost?.PostDataModel.Title"</label>
                 <input type="text" class="form-control" id="title" placeholder="" @bind-value="PostTitleToBeDeleted" @bind-value:event="oninput">
             </div>
-            
+
             <div class="modal-footer ">
                 <div class="mx-auto text-center">
                     <p>Dette kan ikke fortrydes. Er du sikker?</p>
                     <button type="button" class="btn btn-success m-1" data-dismiss="modal" @onclick="() => Close()">Nej</button>
-                    @if (SelectedPost != null && SelectedPost.PostModel.Title.Equals(PostTitleToBeDeleted,StringComparison.OrdinalIgnoreCase))
+                    @if (SelectedPost != null && SelectedPost.PostDataModel.Title.Equals(PostTitleToBeDeleted, StringComparison.OrdinalIgnoreCase))
                     {
                         <button type="button" class="btn btn-danger m-1" data-dismiss="modal" @onclick="() => DeleteAndClose()">Ja</button>
                     }
@@ -47,13 +48,13 @@
     public string ModalDisplay = "none;";
     public string ModalClass = "";
     public bool ShowBackdrop = false;
-    public IPostViewModel SelectedPost { get; set; }
+    public IPostModel SelectedPost { get; set; }
     public string PostTitleToBeDeleted { get; set; }
 
     [Parameter]
     public EventCallback OnChangesMade { get; set; }
 
-    public void Open(IPostViewModel selectedPost)
+    public void Open(IPostModel selectedPost)
     {
         SelectedPost = selectedPost;
         ModalDisplay = "block;";
@@ -75,7 +76,7 @@
         Close();
 
         // delete post from database
-        await SelectedPost.DeletePost(_dbService);
+        await SelectedPost.DeletePostFromDatabase(_dbService);
 
         // notify parent (PostOverview)
         await OnChangesMade.InvokeAsync();

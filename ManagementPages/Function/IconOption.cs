@@ -1,12 +1,7 @@
-﻿using System;
-namespace ManagementPages.Functions
+﻿namespace ManagementPages.Function
 {
     public class IconOption
     {
-        public IconOption()
-        {
-        }
-
         public string BootstrapCode { get; set; }
 
         public string Name { get; set; }
