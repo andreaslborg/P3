@@ -33,27 +33,27 @@
 
             @foreach (var id in InformationBoard.CategoryOrder)
             {
-                <div class="row modal-body">
-                    <div class="col-3">
+                <div class="row modal-body" style="height: 111px">
+                    <div class="col-3 my-auto">
                         <input type="text" class="form-control" id="title" placeholder="" @bind-value="@InformationBoard.Categories[id].CategoryDataModel.Title"/>
                     </div>
-                    <div class="col-1">
+                    <div class="col-1 my-auto">
                         <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseAndOpenDeleteCategory(InformationBoard.Categories[id])">
                             <i class="bi bi-trash"></i>
                         </button>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 my-auto">
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked=@InformationBoard.Categories[id].CategoryDataModel.IsPublished @bind-value="InformationBoard.Categories[id].CategoryDataModel.IsPublished">
                         </div>
                     </div>
-                    <div class="col-3">
+                    <div class="col-3 my-auto">
                         <SfDropDownList CssClass="form-control" ID="icon" TValue="string" Placeholder="Vælg et ikon" TItem="IconOption" @bind-Value="@InformationBoard.Categories[id].CategoryDataModel.Icon"
                                         DataSource="@Icons">
                             <DropDownListFieldSettings IconCss="BootstrapCode" Value="BootstrapCode" Text="Name"></DropDownListFieldSettings>
                         </SfDropDownList>
                     </div>
-                    <div class="col-2">
+                    <div class="col-2 my-auto">
                         <button class="btn btn-primary" disabled>Vælg tema farve</button>
                     </div>
 
@@ -76,8 +76,7 @@
                     }
                     else if (id == InformationBoard.CategoryOrder.First())
                     {
-                        <div class="col-1 mx-auto">
-                            <br/>
+                        <div class="col-1 mt-auto mx-auto">
                             <button class="btn my-0 py-0">
                                 <i class="bi bi-arrow-down-circle" style="font-size: 25px"
                                    @onclick="() => MoveDown(id)">
@@ -87,8 +86,7 @@
                     }
                     else
                     {
-                        <div class="col-1 mx-auto">
-                            <br/>
+                        <div class="col-1 mb-auto mx-auto">
                             <button class="btn my-0 py-0">
                                 <i class="bi bi-arrow-up-circle" style="font-size: 25px"
                                    @onclick="() => MoveUp(id)">
