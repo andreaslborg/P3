@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Bunit;
 using Bunit.TestDoubles;
 using Xunit;
-using ManagementPages.Functions;
+using ManagementPages.UI.Components;
 
 namespace ManagementPages.Tests
 {
@@ -16,7 +16,7 @@ namespace ManagementPages.Tests
         public void CounterStartsAtZero()
         {
             // Arrange
-            var cut = RenderComponent<Counter>();
+            var cut = RenderComponent<NewLicense>();
 
             // Assert that content of the paragraph shows counter at zero
             cut.Find("p").MarkupMatches("<p>Current count: 0</p>");
@@ -26,7 +26,7 @@ namespace ManagementPages.Tests
         public void ClickingButtonIncrementsCounter()
         {
             // Arrange
-            var cut = RenderComponent<Counter>();
+            var cut = RenderComponent<CategoryOverview>();
 
             // Act - click button to increment counter
             cut.Find("button").Click();
