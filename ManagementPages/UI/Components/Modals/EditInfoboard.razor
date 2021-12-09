@@ -12,23 +12,29 @@
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
-            <div class="col-12 row modal-body">
-                <div class="col-4">
-                    <label for="title" class="form-label">Rediger navn</label>
-                    <input type="text" class="form-control" id="title" @bind-value="SelectedInformationBoard.InformationBoardDataModel.Title">
-                </div>
-                <div class="col-2"></div>
-                <div class="col-6">
-                    Privat/Offentlig <br />
+
+            <EditForm Model="SelectedInformationBoard.InformationBoardDataModel" OnValidSubmit="SaveAndClose">
+                <DataAnnotationsValidator />
+                <ValidationSummary />
+
+                <div class="col-12 row modal-body">
+                    <div class="col-4">
+                        <label for="title" class="form-label">Rediger navn</label>
+                        <input type="text" class="form-control" id="title" @bind-value="SelectedInformationBoard.InformationBoardDataModel.Title">
+                    </div>
+                    <div class="col-2"></div>
+                    <div class="col-6">
+                        Privat/Offentlig <br />
                         <div class="form-check form-switch">
                             <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked=@SelectedInformationBoard.InformationBoardDataModel.IsPublished @bind-value="SelectedInformationBoard.InformationBoardDataModel.IsPublished">
                         </div>
+                    </div>
                 </div>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Cancel()">Annuller</button>
-                <button type="submit" class="btn btn-success" @onclick="() => SaveAndClose()">Gem</button>
-            </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Cancel()">Annuller</button>
+                    <button type="submit" class="btn btn-success" @onclick="() => SaveAndClose()">Gem</button>
+                </div>
+            </EditForm>
         </div>
     </div>
 </div>
@@ -75,12 +81,18 @@
 
     private void SaveAndClose()
     {
-        Close();
+        if (SelectedInformationBoard.InformationBoardDataModel.Title == string.Empty)
+        {
+        }
+        else
+        {
+            Close();
 
-        // save changes to database
-        SelectedInformationBoard.EditInformationBoard(_dbService);
+            // save changes to database
+            SelectedInformationBoard.EditInformationBoard(_dbService);
 
-        // notify InformationBoardOverview about changes
-        OnChangesMade.InvokeAsync();
+            // notify InformationBoardOverview about changes
+            OnChangesMade.InvokeAsync();
+        }
     }
 }

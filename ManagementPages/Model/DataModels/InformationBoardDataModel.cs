@@ -1,4 +1,6 @@
-﻿namespace ManagementPages.Model
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace ManagementPages.Model
 {
     public class InformationBoardDataModel
     {
@@ -6,6 +8,8 @@
 
         public int LicenseId { get; set; }
 
+        [Required(ErrorMessage = "Titel-feltet skal udfyldes")]
+        [StringLength(30, ErrorMessage = "Titlen er for lang")]
         public string Title { get; set; }
 
         public string Url { get; set; }
