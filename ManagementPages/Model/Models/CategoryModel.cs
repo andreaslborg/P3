@@ -49,6 +49,9 @@ namespace ManagementPages.Model
                 Link = newPost.Link
             };
 
+            // ensure that " and \ are written correctly in order to be saved in the database
+            postDataModel.FixSpecialCharacters();
+
             var sql =
                 $"insert into Post (Title, CategoryId, Text, Author, IsPublished, Link) values (\"{postDataModel.Title}\", {postDataModel.CategoryId}, \"{postDataModel.Text}\", \"{postDataModel.Author}\", {postDataModel.IsPublished}, \"{postDataModel.Link}\" );";
 

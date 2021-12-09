@@ -46,12 +46,15 @@
                     <div class="fw-normal mt-1 mb-0">
                         @if (@post.PostDataModel.Text.Length > 350)
                         {
-                            @post.PostDataModel.Text.Substring(0, 350);
-                            <span>...</span>
+                            <div class="respect-newline">
+                                @post.PostDataModel.Text.Substring(0, 350)...
+                            </div>
                         }
                         else
                         {
-                            @post.PostDataModel.Text
+                            <div class="respect-newline">
+                                @post.PostDataModel.Text
+                            </div>
                         }
                         <div class="float-end">
                             <button @onclick="() => EditExistingPost(post)" class="btn btn-sm btn-light ms-1 p-0">

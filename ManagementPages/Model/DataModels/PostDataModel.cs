@@ -32,5 +32,12 @@ namespace ManagementPages.Model
         public string Link { get; set; }
 
         public DateTime ExpirationDate { get; set; }
+
+        public void FixSpecialCharacters()
+        {
+            Title = Title.Replace("\\", "\\\\").Replace("\"", "\\\"");
+            Author = Author.Replace("\\", "\\\\").Replace("\"", "\\\"");
+            Text = Text.Replace("\\", "\\\\").Replace("\"", "\\\"");
+        }
     }
 }

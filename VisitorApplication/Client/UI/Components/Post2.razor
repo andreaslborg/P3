@@ -46,16 +46,12 @@
                 <div class="m-3 py-2">
                     <h1 class="">@post.Title</h1>
                     <p class="fst-italic">@post.Author</p>
-                    <p>@post.Text</p>
+                    <p class="respect-newline">@post.Text</p>
 
-                    @if (!post.Link.Contains("."))
+                    @if (post.Link.Contains("."))
                     {
-                    }
-                    else
-                    { 
                         <a class="text-white" href="@post.Link">Tryk her for at læse mere</a>
                     }
-
                 </div>
             </section>
             }
