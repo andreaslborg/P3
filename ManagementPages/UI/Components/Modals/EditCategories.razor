@@ -19,15 +19,15 @@
                 <div class="col-3">
                     <label for="title" class="form-label">Rediger titel</label>
                 </div>
-                <div class="col-1"/>
+                <div class="col-1" />
                 <div class="col-2">
-                    <label class="form-label">Privat/Offentlig</label> <br/>
+                    <label class="form-label">Privat/Offentlig</label> <br />
                 </div>
                 <div class="col-3">
                     <label for="author" class="form-label">Ikon</label>
                 </div>
                 <div class="col-2">
-                    <label class="form-label">Farve</label> <br/>
+                    <label class="form-label">Farve</label> <br />
                 </div>
             </div>
 
@@ -35,7 +35,7 @@
             {
                 <div class="row modal-body" style="height: 111px">
                     <div class="col-3 my-auto">
-                        <input type="text" class="form-control" id="title" placeholder="" @bind-value="@InformationBoard.Categories[id].CategoryDataModel.Title"/>
+                        <input type="text" class="form-control" id="title" placeholder="Titel-feltet skal udfyldes!" @bind-value="@InformationBoard.Categories[id].CategoryDataModel.Title" @bind-value:event="oninput"/>
                     </div>
                     <div class="col-1 my-auto">
                         <button data-dismiss="modal" class="btn btn-danger" @onclick="() => CloseAndOpenDeleteCategory(InformationBoard.Categories[id])">
@@ -66,7 +66,7 @@
                                    @onclick="() => MoveUp(id)">
                                 </i>
                             </button>
-                            <br/>
+                            <br />
                             <button class="btn my-0 py-0">
                                 <i class="bi bi-arrow-down-circle" style="font-size: 25px"
                                    @onclick="() => MoveDown(id)">
@@ -96,11 +96,17 @@
                     }
                 </div>
             }
-            <div class="modal-footer">
-                <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Cancel()">Annuller</button>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Cancel()">Annuller</button>
+            @if (CheckIfCategoriesAreValid())
+            {
                 <button type="submit" class="btn btn-success" @onclick="() => SaveAndClose()">Gem</button>
-            </div>
-
+            }
+            else
+            {
+                <button type="submit" class="btn btn-success" disabled>Gem</button>
+            }
+        </div>
         </div>
     </div>
 </div>
@@ -142,6 +148,21 @@
         ModalClass = "";
         ShowBackdrop = false;
         StateHasChanged();
+    }
+
+    public bool CheckIfCategoriesAreValid()
+    {
+        bool result = true;
+
+        foreach(var category in InformationBoard.Categories)
+        {
+            if(category.Value.CategoryDataModel.Title == string.Empty)
+            {
+                result = false;
+                break;
+            }
+        }
+        return result;
     }
 
     public async Task Cancel()
