@@ -3,10 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xunit;
 
 namespace ManagementPages.Tests
 {
-    class CheckCategoryOrder
+    public class ConvertCommaToSeperatedStringTest
     {
+        [Fact]
+        public void TestConvertCommaToSeperatedString()
+        {
+
+        }
     }
 }
