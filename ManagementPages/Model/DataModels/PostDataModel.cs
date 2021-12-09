@@ -28,7 +28,7 @@ namespace ManagementPages.Model
         public string Audio { get; set; }
 
         public bool IsPublished { get; set; }
-
+        
         public string Link { get; set; }
 
         public DateTime ExpirationDate { get; set; }
