@@ -76,7 +76,7 @@
         Close();
 
         // delete category from database
-        await Category.DeleteCategory(_dbService);
+        await Category.DeleteCategoryFromDatabase(_dbService);
 
         // notify edit category modal about changes (edit category modal will then notify the category overview,
         // which will re-fetch the categories from the database)

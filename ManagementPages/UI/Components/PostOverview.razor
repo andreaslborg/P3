@@ -54,8 +54,12 @@
                             @post.PostDataModel.Text
                         }
                         <div class="float-end">
-                            <button @onclick="() => EditExistingPost(post)" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
-                            <button @onclick="() => DeletePost.Open(post)" class="btn p-0"><i class="bi bi-trash"></i></button>
+                            <button @onclick="() => EditExistingPost(post)" class="btn btn-sm btn-light ms-1 p-0">
+                                <i class="bi bi-pencil"></i> Rediger
+                            </button>
+                            <button @onclick="() => DeletePost.Open(post)" class="btn btn-sm btn-light ms-1 p-0">
+                                <i class="bi bi-trash"></i> Slet
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -81,8 +85,12 @@
                             @post.PostDataModel.Text
                         }
                         <div class="float-end">
-                            <button @onclick="() => EditExistingPost(post)" class="btn ms-1 p-0"><i class="bi bi-pencil"></i></button>
-                            <button @onclick="() => DeletePost.Open(post)" class="btn p-0"><i class="bi bi-trash"></i></button>
+                            <button @onclick="() => EditExistingPost(post)" class="btn btn-sm btn-light ms-1 p-0">
+                                <i class="bi bi-pencil"></i> Rediger
+                            </button>
+                            <button @onclick="() => DeletePost.Open(post)" class="btn btn-sm btn-light ms-1 p-0">
+                                <i class="bi bi-trash"></i> Slet
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -119,7 +127,9 @@
     {
         // in order to delete a post, a post must have an ID, which means that when a new post have been added, we must
         // reload the posts from the database to get the ID of the new post
-        SelectedInformationBoard.SelectedCategory.Posts = await SelectedInformationBoard.SelectedCategory.LoadPosts(_dbService);
+
+        // which means that this could be in a call back when add post has happened. interesting.
+        //SelectedInformationBoard.SelectedCategory.Posts = await SelectedInformationBoard.SelectedCategory.LoadPosts(_dbService);
 
         // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
         // this is done, as the displayed posts should be the ones from the selected category, so PostOverview needs to be updated

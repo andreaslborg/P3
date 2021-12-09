@@ -23,5 +23,9 @@ namespace ManagementPages.Model
         Task EditCategoryOrder(IDbService dbService);
 
         void CheckCategoryOrder();
+
+        List<int> ConvertToListOfInt(string input);
+
+        Task ReloadInformationBoardDataModel(IDbService dbService);
     }
 }

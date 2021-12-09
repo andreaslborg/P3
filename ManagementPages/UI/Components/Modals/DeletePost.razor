@@ -76,7 +76,7 @@
         Close();
 
         // delete post from database
-        await SelectedPost.DeletePost(_dbService);
+        await SelectedPost.DeletePostFromDatabase(_dbService);
 
         // notify parent (PostOverview)
         await OnChangesMade.InvokeAsync();

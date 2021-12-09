@@ -14,5 +14,6 @@ namespace VisitorApplication.Shared
         public string QRCode { get; set; }
         public bool IsPublished { get; set; }
         public int LicenseID { get; set; }
+        public string CategoryOrder { get; set; }
     }
 }

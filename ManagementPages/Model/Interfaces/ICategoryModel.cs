@@ -16,6 +16,8 @@ namespace ManagementPages.Model
 
         Task EditCategory(IDbService dbService);
 
-        Task DeleteCategory(IDbService dbService);
+        Task DeleteCategoryFromDatabase(IDbService dbService);
+
+        void DeletePost(IPostModel postModel);
     }
 }
