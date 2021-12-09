@@ -44,7 +44,7 @@ namespace ManagementPages.Model
 
         public ICategoryModel SelectedCategory
         {
-            get => _selectedCategory ?? Categories.FirstOrDefault().Value;
+            get => _selectedCategory ?? Categories[CategoryOrder.First()];
             set => _selectedCategory = value;
         }
 

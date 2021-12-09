@@ -20,7 +20,7 @@
                 <div class="col-12 row modal-body">
                     <div class="col-4">
                         <label for="title" class="form-label">Rediger navn</label>
-                        <input type="text" class="form-control" id="title" @bind-value="SelectedInformationBoard.InformationBoardDataModel.Title">
+                        <input type="text" class="form-control" id="title" @bind-value="SelectedInformationBoard.InformationBoardDataModel.Title" @bind-value:event="oninput">
                     </div>
                     <div class="col-2"></div>
                     <div class="col-6">
@@ -81,7 +81,8 @@
 
     private void SaveAndClose()
     {
-        if (SelectedInformationBoard.InformationBoardDataModel.Title == string.Empty)
+        if (SelectedInformationBoard.InformationBoardDataModel.Title == string.Empty 
+            || SelectedInformationBoard.InformationBoardDataModel.Title.Length > 30)
         {
             // required to show editform warnings
         }
