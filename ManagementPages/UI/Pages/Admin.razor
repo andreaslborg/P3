@@ -35,10 +35,17 @@
 
     public int licenseId { get; set; } = 1;
 
-    
+
     protected override async Task OnInitializedAsync()
     {
-        License = await dbService.InitializeLicense(licenseId);
+        try
+        {
+            License = await dbService.InitializeLicense(licenseId);
+        }
+        catch (Exception)
+        {
+            //håndter
+        }
     }
 
     private void OnChangesMadeInChildComponent()

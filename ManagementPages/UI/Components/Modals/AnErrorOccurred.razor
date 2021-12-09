@@ -1,0 +1,86 @@
+﻿@using ManagementPages.Functions
+@inject IDbService _dbService
+
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Advarsel</h5>
+                <button @onclick="() => Close()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                    <i class="bi bi-x-lg"></i>
+                </button>
+            </div>
+            <div class="row modal-body">
+                <p class="fw-bold">Er du sikker på at du vil slette "@SelectedPost?.PostModel.Title"</p>
+            </div>
+            <div class="col-10 mx-auto mb-3">
+                <label for="title" class="form-label">Skriv "@SelectedPost?.PostModel.Title"</label>
+                <input type="text" class="form-control" id="title" placeholder="" @bind-value="PostTitleToBeDeleted" @bind-value:event="oninput">
+            </div>
+            
+            <div class="modal-footer ">
+                <div class="mx-auto text-center">
+                    <p>Dette kan ikke fortrydes. Er du sikker?</p>
+                    <button type="button" class="btn btn-success m-1" data-dismiss="modal" @onclick="() => Close()">Nej</button>
+                    @if (SelectedPost != null && SelectedPost.PostModel.Title.Equals(PostTitleToBeDeleted,StringComparison.OrdinalIgnoreCase))
+                    {
+                        <button type="button" class="btn btn-danger m-1" data-dismiss="modal" @onclick="() => DeleteAndClose()">Ja</button>
+                    }
+                    else
+                    {
+                        <button type="button" class="btn btn-danger m-1" data-dismiss="modal" disabled>Ja</button>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@if (ShowBackdrop)
+{
+    <div class="modal-backdrop fade show"></div>
+}
+
+
+@code {
+    public string ModalDisplay = "none;";
+    public string ModalClass = "";
+    public bool ShowBackdrop = false;
+    public IPostViewModel SelectedPost { get; set; }
+    public string PostTitleToBeDeleted { get; set; }
+
+    [Parameter]
+    public EventCallback OnChangesMade { get; set; }
+
+    public void Open(IPostViewModel selectedPost)
+    {
+        SelectedPost = selectedPost;
+        ModalDisplay = "block;";
+        ModalClass = "Show";
+        ShowBackdrop = true;
+        StateHasChanged();
+    }
+
+    public void Close()
+    {
+        ModalDisplay = "none";
+        ModalClass = "";
+        ShowBackdrop = false;
+        StateHasChanged();
+    }
+
+    private async Task DeleteAndClose()
+    {
+        Close();
+
+        // delete post from database
+        await SelectedPost.DeletePost(_dbService);
+
+        // notify parent (PostOverview)
+        await OnChangesMade.InvokeAsync();
+
+        // reset input field in delete post modal
+        PostTitleToBeDeleted = "";
+    }
+}
