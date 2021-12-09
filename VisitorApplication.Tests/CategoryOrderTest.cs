@@ -35,7 +35,6 @@ namespace VisitorApplication.Tests
 
             foreach (string item in stringIDList)
             {
-
                 try
                 {
                     intIDList.Add(Convert.ToInt32(item));
