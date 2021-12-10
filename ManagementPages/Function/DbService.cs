@@ -19,6 +19,7 @@ namespace ManagementPages.Function
 
         public string ConnectionStringName { get; set; } = "default";
 
+        // Generic method for fetching data from the database
         public async Task<List<T>> LoadData<T, U>(string sql, U parameters)
         {
             var connectionstring = _config.GetConnectionString(ConnectionStringName);
@@ -30,6 +31,7 @@ namespace ManagementPages.Function
             }
         }
 
+        // Generic method for uploading, changing or deleting data from the database
         public Task SaveData<T>(string sql, T parameters)
         {
             var connectionstring = _config.GetConnectionString(ConnectionStringName);
