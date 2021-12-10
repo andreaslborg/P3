@@ -11,17 +11,38 @@ namespace ManagementPages.Tests
 {
     public class CheckCategoryOrderTest
     {
-        Dictionary<int, ICategoryModel> Categories = new();
-        List<int> CategoryOrder = new List<int> { 223, 144, 342, 412, 667, 554 };
+        Dictionary<int, CategoryModel> Categories = new();
+        List<int> CategoryOrder = new List<int> { 223, 144, 342 };
 
+        
 
         [Fact]
         public void TestCategoryOrder()
         {
             InformationBoardDataModel informationBoardDataModel = new InformationBoardDataModel();
-            
 
 
+            var result = new Dictionary<int, ICategoryModel>();
+
+            CategoryModel categoryModel = new CategoryModel();
+
+            /* When CategoryOrder is the same after executing CheckCategoryOrder() */
+            // var categoryOrderBefore = new List<int> { 223, 144, 342 };
+
+            /* When CategoryOrder changes after executing CheckCategoryOrder() */
+            var expectedCategoryOrder = new List<int> { 223, 1443, 3423 };
+
+            Categories.Add(223, categoryModel);
+            Categories.Add(1443, categoryModel);
+            Categories.Add(3423, categoryModel);
+
+            CheckCategoryOrder();
+
+            /* When CategoryOrder is the same after executing CheckCategoryOrder() */
+            // Assert.Equal(categoryOrderBefore, CategoryOrder);
+
+            /* When CategoryOrder changes after executing CheckCategoryOrder() */
+            Assert.Equal(expectedCategoryOrder, CategoryOrder);
         }
 
 
