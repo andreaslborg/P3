@@ -97,8 +97,8 @@ else
         }
 
         @*Displays message if the selected information board is not publised OR if the selected information board has no categories*@
-if ((informationboardID == informationboard.InformationboardID && informationboard.IsPublished != true) || (informationboardID == informationboard.InformationboardID && SelectedCategoriesList.Count == 0))
-{
+        if ((informationboardID == informationboard.InformationboardID && informationboard.IsPublished != true) || (informationboardID == informationboard.InformationboardID && SelectedCategoriesList.Count == 0))
+        {
             <h1 class="col-10 text-center display-1 ms-0" style="color: white;">Der er ikke noget på denne side.</h1>
 
         }
@@ -122,9 +122,13 @@ if ((informationboardID == informationboard.InformationboardID && informationboa
     {
         AllInformationboards = await Http.GetFromJsonAsync<Informationboard[]>("api/Informationboard/InformationboardList");
         AllCategories = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
+        //only choose the categories with the correct infoboard id
         SelectedCategoriesList = AllCategories.Where(x => x.InformationBoardId == informationboardID).Select(x => x).ToList();
+
+        // selectedcategorieslist to category dictionary
         CategoriesToDictionary();
 
+        //only choose the infoboard with the correct id
         var selectedInformationBoard = AllInformationboards.Where(x => x.InformationboardID == informationboardID).Select(x => x).First();
         CategoryOrder = SplitCategoriesToList(selectedInformationBoard);
     }
@@ -139,12 +143,12 @@ if ((informationboardID == informationboard.InformationboardID && informationboa
 
     public List<int> SplitCategoriesToList(Informationboard informationboard)
     {
+        //split the string list of categoryorder and convert to in list
         List<string> stringIDList = informationboard.CategoryOrder.Split(",").ToList();
         List<int> intIDList = new();
 
         foreach (string item in stringIDList)
         {
-
             try
             {
                 intIDList.Add(Convert.ToInt32(item));

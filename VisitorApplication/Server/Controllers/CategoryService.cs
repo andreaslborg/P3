@@ -49,7 +49,7 @@ namespace VisitorApplication.Server.Controllers
                     {
                         categoryList.Add(new Category
                         {
-                            //det ID der er i databasen vil vi gerne have hen i en variabel ID
+                            //rdr reads the element inside [] from the database and saves it in the variable
                             CategoryId = (int)rdr["CategoryId"],
                             Title = rdr["Title"].ToString(),
                             IsPublished = (bool)rdr["IsPublished"],

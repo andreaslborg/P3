@@ -90,6 +90,7 @@ namespace ManagementPages.Model
         {
             var sql =
                 $"select * from InformationBoard where InformationBoardId = {InformationBoardDataModel.InformationBoardId};";
+
             var informationBoardList = await dbService.LoadData<InformationBoardDataModel, dynamic>(sql, new { });
             InformationBoardDataModel = informationBoardList.First();
         }
@@ -148,6 +149,7 @@ namespace ManagementPages.Model
             return InformationBoardDataModel.InformationBoardId;
         }
 
+        // Method for when categoryorder should be uploaded to database
         private string ConvertToCommaSeparatedString(List<int> list)
         {
             var result = string.Empty;
@@ -157,6 +159,7 @@ namespace ManagementPages.Model
             return result;
         }
 
+        // Method for when categoryorder should be fetched from database
         public List<int> ConvertToListOfInt(string input)
         {
             List<int> result = new();

@@ -33,6 +33,7 @@ namespace ManagementPages.Model
 
         public DateTime ExpirationDate { get; set; }
 
+        // Method that makes it possible to write " and \ in title, author and textfield
         public void FixSpecialCharacters()
         {
             Title = Title.Replace("\\", "\\\\").Replace("\"", "\\\"");

@@ -50,7 +50,6 @@ namespace VisitorApplication.Server.Controllers
                     {
                         informationboardList.Add(new Informationboard
                         {
-                            //det ID der er i databasen vil vi gerne have hen i en variabel ID
                             InformationboardID = (int)rdr["InformationBoardId"],
                             Title = rdr["Title"].ToString(),
                             Url = rdr["Url"].ToString(),
