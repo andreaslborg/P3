@@ -49,7 +49,6 @@ namespace VisitorApplication.Server.Controllers
                     {
                         lst.Add(new Post
                         {
-                            //det ID der er i databasen vil vi gerne have hen i en variabel ID
                             PostID = (int)rdr["PostId"],
                             Title = rdr["Title"].ToString(),
                             Author = rdr["Author"].ToString(),
