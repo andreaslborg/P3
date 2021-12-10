@@ -34,6 +34,7 @@ namespace ManagementPages.Model
         {
             var sql =
                 $"select * from Post where PostId = {PostDataModel.PostId};";
+
             var postList = await dbService.LoadData<PostDataModel, dynamic>(sql, new { });
             PostDataModel = postList.First();
         }

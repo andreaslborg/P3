@@ -2,9 +2,9 @@
 using System.Data;
 using System.Linq;
 using System.Threading.Tasks;
-using Dapper;
-using Microsoft.Extensions.Configuration;
-using MySql.Data.MySqlClient;
+using Dapper; //query and execute async methods
+using Microsoft.Extensions.Configuration; //get connectionstring
+using MySql.Data.MySqlClient; //mysqlconnection
 
 namespace ManagementPages.Function
 {

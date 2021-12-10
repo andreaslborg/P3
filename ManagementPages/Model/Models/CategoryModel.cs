@@ -29,6 +29,7 @@ namespace ManagementPages.Model
                     PostDataModel = postDataModel
                 };
 
+                // if a post is deleted call deletePost method
                 postModel.PostDeleted += DeletePost;
 
                 result.Add(postModel);
@@ -74,11 +75,13 @@ namespace ManagementPages.Model
 
             await dbService.SaveData(sql, CategoryDataModel);
 
+            // let subscriber know that a category has been deleted
             CategoryDeleted?.Invoke(this);
         }
 
         public void DeletePost(IPostModel postModel)
         {
+            //Remove the post from the list
             Posts.Remove(postModel);
         }
 
