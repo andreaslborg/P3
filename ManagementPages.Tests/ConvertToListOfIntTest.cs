@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Xunit;
 using ManagementPages.Model;
 
@@ -48,6 +45,3 @@ namespace ManagementPages.Tests
 
     }
 }
-
-// bring category order back to original state
-//InformationBoard.CategoryOrder = InformationBoard.ConvertToListOfInt(InformationBoard.InformationBoardDataModel.CategoryOrder);
