@@ -10,9 +10,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisitorApplication.Client",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisitorApplication.Shared", "VisitorApplication\Shared\VisitorApplication.Shared.csproj", "{6EF611E0-2EE3-424C-A6CF-E31F06210BB5}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagementPages.Tests", "ManagementPages.Tests\ManagementPages.Tests.csproj", "{8EC481B8-8D72-4594-988C-A36DB8B0E717}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagementPages.Tests", "ManagementPages.Tests\ManagementPages.Tests.csproj", "{8EC481B8-8D72-4594-988C-A36DB8B0E717}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VisitorApplication.Tests", "VisitorApplication.Tests\VisitorApplication.Tests.csproj", "{920EBAA9-ACCA-469B-AC11-7C8149A77B58}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VisitorApplication.Tests", "VisitorApplication.Tests\VisitorApplication.Tests.csproj", "{920EBAA9-ACCA-469B-AC11-7C8149A77B58}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

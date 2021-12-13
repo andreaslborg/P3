@@ -7,6 +7,7 @@ using Xunit;
 using ManagementPages.Function;
 using Microsoft.Extensions.Configuration;
 using System.Data;
+using System.Configuration;
 
 using Dapper;
 
@@ -23,31 +24,44 @@ namespace ManagementPages.Tests
 { 
     public class DatabaseTest
     {
-        private readonly Mock<IConfiguration> _configMock = new Mock<IConfiguration>();
-        private readonly Mock<IDbService> dbServiceMock = new Mock<IDbService>();
-
-
+        
         [Fact]
-        public void TestDatabase()
+        public async Task TestDatabase()
         {
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+            .SetBasePath(Environment.CurrentDirectory)
+            .AddJsonFile("appsettings.json")
+            .Build();
 
+            DbService dbService = new DbService(configuration);
 
-            var connectionstring = _config.GetConnectionString("Server=mysql113.unoeuro.com;Database=taldigital_dk_db_aau;Uid=taldigital_dk;Pwd=mrERx2dGezhf;");
-
-            //var service = new DbService(_config);
-
-
-            var expected = "Server=mysql113.unoeuro.com;Database=taldigital_dk_db_aau;Uid=taldigital_dk;Pwd=mrERx2dGezhf;";
-
-            //Assert.NotEqual(expected, service.ConnectionStringName);
-
-            Assert.NotEqual(expected, connectionstring);
-
+            var sql = "Select * from Post";
+            
+            var test = await dbService.LoadData<PostDataModel, dynamic>(sql, new {});
         }
 
-
-
         
+        // [Fact]
+        // public void TestDatabase()
+        // {
+
+
+        //     var connectionstring = _config.GetConnectionString("Server=mysql113.unoeuro.com;Database=taldigital_dk_db_aau;Uid=taldigital_dk;Pwd=mrERx2dGezhf;");
+
+        //     //var service = new DbService(_config);
+
+
+        //     var expected = "Server=mysql113.unoeuro.com;Database=taldigital_dk_db_aau;Uid=taldigital_dk;Pwd=mrERx2dGezhf;";
+
+        //     //Assert.NotEqual(expected, service.ConnectionStringName);
+
+        //     Assert.NotEqual(expected, connectionstring); 
+
+        // }
+
+
+
+
 
 
 
