@@ -47,7 +47,7 @@ To run the program, please follow these simple steps.
 ### Prerequisites
 
 Before
-* Install ASP.NET https://dotnet.microsoft.com/en-us/download 
+* Install .NET 5.0 Runtime https://dotnet.microsoft.com/en-us/download/dotnet/5.0/runtime
 
 ### Run
 
