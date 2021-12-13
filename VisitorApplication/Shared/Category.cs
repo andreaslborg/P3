@@ -19,5 +19,14 @@ namespace VisitorApplication.Shared
 
         public string Icon { get; set; }
 
+        public bool ContentIsValid => CheckIfContentIsValid();
+
+        private bool CheckIfContentIsValid()
+        {
+            return !string.IsNullOrEmpty(Title) && Title.Length <= 30
+                                                && CategoryId > 0
+                                                && InformationBoardId > 0
+                                                && !string.IsNullOrEmpty(Icon);
+        }
     }
 }

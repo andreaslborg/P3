@@ -157,7 +157,7 @@
 
         foreach (var category in InformationBoard.Categories)
         {
-            if (category.Value.CategoryDataModel.Title == string.Empty || category.Value.CategoryDataModel.Title.Length > 30)
+            if (!category.Value.CategoryDataModel.ContentIsValid)
             {
                 result = false;
                 break;

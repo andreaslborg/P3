@@ -63,7 +63,7 @@
         ModalClass = "Show";
         ShowBackdrop = true;
         StateHasChanged();
-    }
+    }   
 
     public void Close()
     {
@@ -81,8 +81,7 @@
 
     private void SaveAndClose()
     {
-        if (SelectedInformationBoard.InformationBoardDataModel.Title == string.Empty
-            || SelectedInformationBoard.InformationBoardDataModel.Title.Length > 30)
+        if (!SelectedInformationBoard.InformationBoardDataModel.ContentIsValid)
         {
             // swallow attempt to save invalid data
         }

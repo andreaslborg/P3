@@ -47,15 +47,29 @@ namespace VisitorApplication.Server.Controllers
 
                     while (rdr.Read())
                     {
-                        categoryList.Add(new Category
+                        try
                         {
-                            //rdr reads the element inside [] from the database and saves it in the variable
-                            CategoryId = (int)rdr["CategoryId"],
-                            Title = rdr["Title"].ToString(),
-                            IsPublished = (bool)rdr["IsPublished"],
-                            Icon = rdr["Icon"].ToString(),
-                            InformationBoardId = (int)rdr["InformationBoardId"]
-                        });
+                            var category = new Category
+                            {
+                                //rdr reads the element inside [] from the database and saves it in the variable
+                                CategoryId = (int)rdr["CategoryId"],
+                                Title = rdr["Title"].ToString(),
+                                IsPublished = (bool)rdr["IsPublished"],
+                                Icon = rdr["Icon"].ToString(),
+                                InformationBoardId = (int)rdr["InformationBoardId"]
+                            };
+
+                            if (!category.ContentIsValid)
+                            {
+                                throw new Exception("Tried to load invalid category");
+                            }
+
+                            categoryList.Add(category);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                     }
                     return categoryList.ToList();
                 }

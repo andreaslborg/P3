@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using ManagementPages.Model.Post;
 using ManagementPages.Services;
@@ -23,15 +24,27 @@ namespace ManagementPages.Model.Category
 
             foreach (var postDataModel in postDataModels)
             {
-                var postModel = new PostModel
+                try
                 {
-                    PostDataModel = postDataModel
-                };
+                    if (!postDataModel.ContentIsValid)
+                    {
+                        throw new Exception("Invalid post");
+                    }
 
-                // if a post is deleted call deletePost method
-                postModel.PostDeleted += DeletePost;
+                    var postModel = new PostModel
+                    {
+                        PostDataModel = postDataModel
+                    };
 
-                result.Add(postModel);
+                    // if a post is deleted, the deletePost method will be called, because the event is invoked
+                    postModel.PostDeleted += DeletePost;
+
+                    result.Add(postModel);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
 
             return result;

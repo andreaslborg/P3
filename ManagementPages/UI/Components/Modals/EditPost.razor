@@ -145,11 +145,7 @@
 
     public void EditPublishAndClose()
     {
-        if (SelectedPost.PostDataModel.Title == string.Empty || SelectedPost.PostDataModel.Text == string.Empty
-            || SelectedPost.PostDataModel.Author == string.Empty
-            || SelectedPost.PostDataModel.Author.Length > 100
-            || SelectedPost.PostDataModel.Title.Length > 30
-            || SelectedPost.PostDataModel.Text.Length > 429496729)
+        if (!SelectedPost.PostDataModel.ContentIsValid)
         {
            // swallow attempt to save invalid data
         }
@@ -157,10 +153,10 @@
         {
             Close();
 
-    // save changes to database
+            // save changes to database
             SelectedPost.EditPost(_dbService);
 
-    // notify PostOverview about changes
+            // notify PostOverview about changes
             OnChangesMade.InvokeAsync();
         }
     }

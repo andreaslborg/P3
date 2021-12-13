@@ -18,5 +18,16 @@ namespace VisitorApplication.Shared
         public string Image { get; set; }
         public string Audio { get; set; }
         public int CategoryID { get; set; }
+
+        public bool ContentIsValid => CheckIfContentIsValid();
+
+        private bool CheckIfContentIsValid()
+        {
+            return !string.IsNullOrEmpty(Title) && Title.Length <= 30
+                                                && PostID > 0
+                                                && CategoryID > 0
+                                                && !string.IsNullOrEmpty(Text) && Text.Length <= 429496729
+                                                && !string.IsNullOrEmpty(Author) && Author.Length <= 100;
+        }
     }
 }

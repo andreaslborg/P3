@@ -47,19 +47,33 @@ namespace VisitorApplication.Server.Controllers
 
                     while (rdr.Read())
                     {
-                        lst.Add(new Post
+                        try
                         {
-                            PostID = (int)rdr["PostId"],
-                            Title = rdr["Title"].ToString(),
-                            Author = rdr["Author"].ToString(),
-                            Text = rdr["Text"].ToString(),
-                            IsPublished = (bool)rdr["IsPublished"],
-                            Link = rdr["Link"].ToString(),
-                            ExpirationDate = (DateTime)rdr["ExpirationDate"],
-                            Image = rdr["Image"].ToString(),
-                            Audio = rdr["Audio"].ToString(),
-                            CategoryID = (int)rdr["CategoryID"]
-                        });
+                            var post = new Post
+                            {
+                                PostID = (int)rdr["PostId"],
+                                Title = rdr["Title"].ToString(),
+                                Author = rdr["Author"].ToString(),
+                                Text = rdr["Text"].ToString(),
+                                IsPublished = (bool)rdr["IsPublished"],
+                                Link = rdr["Link"].ToString(),
+                                ExpirationDate = (DateTime)rdr["ExpirationDate"],
+                                Image = rdr["Image"].ToString(),
+                                Audio = rdr["Audio"].ToString(),
+                                CategoryID = (int)rdr["CategoryID"]
+                            };
+
+                            if (!post.ContentIsValid)
+                            {
+                                throw new Exception("Tried to load invalid post");
+                            }
+
+                            lst.Add(post);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                     }
                     return lst.ToList();
                 }

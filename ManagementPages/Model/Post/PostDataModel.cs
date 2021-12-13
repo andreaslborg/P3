@@ -5,6 +5,17 @@ namespace ManagementPages.Model.Post
 {
     public class PostDataModel
     {
+        public bool ContentIsValid => CheckIfContentIsValid();
+
+        private bool CheckIfContentIsValid()
+        {
+            return !string.IsNullOrEmpty(Title) && Title.Length <= 30
+                && PostId > 0
+                && CategoryId > 0
+                && !string.IsNullOrEmpty(Text) && Text.Length <= 429496729
+                && !string.IsNullOrEmpty(Author) && Author.Length <= 100;
+        }
+
         public int PostId { get; set; }
 
         public int CategoryId { get; set; }
@@ -20,7 +31,7 @@ namespace ManagementPages.Model.Post
 
 
         [Required(ErrorMessage = "Forfatter-feltet skal udfyldes")]
-        [StringLength(100, ErrorMessage = "Navnet er for lang")]
+        [StringLength(100, ErrorMessage = "Forfatter-navnet er for lang")]
         public string Author { get; set; }
 
         public string Image { get; set; }

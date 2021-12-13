@@ -118,7 +118,7 @@ else
     List<int> CategoryOrder { get; set; } = new();
     List<Category> SelectedCategoriesList { get; set; } = new();
 
-    protected async override Task OnInitializedAsync()
+    protected override async Task OnInitializedAsync()
     {
         AllInformationboards = await Http.GetFromJsonAsync<Informationboard[]>("api/Informationboard/InformationboardList");
         AllCategories = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
@@ -131,6 +131,8 @@ else
         //only choose the infoboard with the correct id
         var selectedInformationBoard = AllInformationboards.Where(x => x.InformationboardID == informationboardID).Select(x => x).First();
         CategoryOrder = SplitCategoriesToList(selectedInformationBoard);
+
+        selectedInformationBoard.CheckCategoryOrder(CategoryOrder, SelectedCategoriesList);
     }
 
     public void CategoriesToDictionary()
