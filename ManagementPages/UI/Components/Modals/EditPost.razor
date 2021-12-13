@@ -7,7 +7,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Rediger opslag - Nyheder</h5>
-                <button @onclick="() => Close()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                <button @onclick="() => Cancel()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
@@ -145,22 +145,18 @@
 
     public void EditPublishAndClose()
     {
-        if (SelectedPost.PostDataModel.Title == string.Empty || SelectedPost.PostDataModel.Text == string.Empty
-            || SelectedPost.PostDataModel.Author == string.Empty
-            || SelectedPost.PostDataModel.Author.Length > 100
-            || SelectedPost.PostDataModel.Title.Length > 30
-            || SelectedPost.PostDataModel.Text.Length > 429496729)
+        if (!SelectedPost.PostDataModel.ContentIsValid)
         {
-    // required to show editform warnings
+           // swallow attempt to save invalid data
         }
         else
         {
             Close();
 
-    // save changes to database
+            // save changes to database
             SelectedPost.EditPost(_dbService);
 
-    // notify PostOverview about changes
+            // notify PostOverview about changes
             OnChangesMade.InvokeAsync();
         }
     }

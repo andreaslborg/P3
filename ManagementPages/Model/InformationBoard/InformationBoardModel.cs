@@ -23,15 +23,27 @@ namespace ManagementPages.Model.InformationBoard
 
             foreach (var categoryDataModel in categoryDataModels)
             {
-                var categoryModel = new CategoryModel
+                try
                 {
-                    CategoryDataModel = categoryDataModel
-                };
-                categoryModel.Posts = await categoryModel.LoadPosts(dbService);
+                    if (!categoryDataModel.ContentIsValid)
+                    {
+                        throw new Exception("Category invalid");
+                    }
 
-                categoryModel.CategoryDeleted += DeleteCategory;
+                    var categoryModel = new CategoryModel
+                    {
+                        CategoryDataModel = categoryDataModel
+                    };
+                    categoryModel.Posts = await categoryModel.LoadPosts(dbService);
 
-                result.Add(categoryModel.GetHashCode(), categoryModel);
+                    categoryModel.CategoryDeleted += DeleteCategory;
+
+                    result.Add(categoryModel.GetHashCode(), categoryModel);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
 
             return result;
