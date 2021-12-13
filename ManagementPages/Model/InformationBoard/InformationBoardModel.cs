@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ManagementPages.Function;
 using ManagementPages.Model.Category;
+using ManagementPages.Services;
 
 namespace ManagementPages.Model.InformationBoard
 {
@@ -98,7 +98,7 @@ namespace ManagementPages.Model.InformationBoard
 
         public async Task EditCategoryOrder(IDbService dbService)
         {
-            InformationBoardDataModel.CategoryOrder = ConvertToCommaSeparatedString(CategoryOrder);
+            InformationBoardDataModel.CategoryOrder = ConversionService.ConvertToCommaSeparatedString(CategoryOrder);
 
             var sql =
                 $"update InformationBoard set CategoryOrder = \"{InformationBoardDataModel.CategoryOrder}\"  where InformationBoardId = {InformationBoardDataModel.InformationBoardId}";
@@ -148,36 +148,6 @@ namespace ManagementPages.Model.InformationBoard
         public override int GetHashCode()
         {
             return InformationBoardDataModel.InformationBoardId;
-        }
-
-        // Method for when categoryorder should be uploaded to database
-        private string ConvertToCommaSeparatedString(List<int> list)
-        {
-            var result = string.Empty;
-
-            foreach (var number in list) result += $"{number},";
-
-            return result;
-        }
-
-        // Method for when categoryorder should be fetched from database
-        public List<int> ConvertToListOfInt(string input)
-        {
-            List<int> result = new();
-            var list = input.Split(',');
-
-            foreach (var numberString in list)
-                try
-                {
-                    var number = int.Parse(numberString);
-                    result.Add(number);
-                }
-                catch (FormatException)
-                {
-                    // Handle
-                }
-
-            return result;
         }
     }
 }

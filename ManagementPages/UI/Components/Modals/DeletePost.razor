@@ -1,5 +1,4 @@
-﻿@using ManagementPages.Model
-@using ManagementPages.Function
+﻿@using ManagementPages.Services
 @using ManagementPages.Model.Post
 @inject IDbService _dbService
 
@@ -76,13 +75,14 @@
     {
         Close();
 
-        // delete post from database
+    // delete post from database
         await SelectedPost.DeletePostFromDatabase(_dbService);
 
-        // notify parent (PostOverview)
+    // notify parent (PostOverview)
         await OnChangesMade.InvokeAsync();
 
-        // reset input field in delete post modal
+    // reset input field in delete post modal
         PostTitleToBeDeleted = "";
     }
+
 }

@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using ManagementPages.Function;
+using ManagementPages.Services;
 
 namespace ManagementPages.Model.Post
 {

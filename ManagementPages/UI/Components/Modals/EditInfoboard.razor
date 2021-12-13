@@ -1,10 +1,9 @@
-﻿@using ManagementPages.Model
-@using ManagementPages.Function
+﻿@using ManagementPages.Services
 @using ManagementPages.Model.InformationBoard
 @inject IDbService _dbService
 
 
-<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display: @ModalDisplay">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
@@ -15,8 +14,8 @@
             </div>
 
             <EditForm Model="SelectedInformationBoard.InformationBoardDataModel" OnValidSubmit="SaveAndClose">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+                <DataAnnotationsValidator/>
+                <ValidationSummary/>
 
                 <div class="col-12 row modal-body">
                     <div class="col-4">
@@ -25,9 +24,9 @@
                     </div>
                     <div class="col-2"></div>
                     <div class="col-6">
-                        Privat/Offentlig <br />
+                        Privat/Offentlig <br/>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked=@SelectedInformationBoard.InformationBoardDataModel.IsPublished @bind-value="SelectedInformationBoard.InformationBoardDataModel.IsPublished">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked="@SelectedInformationBoard.InformationBoardDataModel.IsPublished "@bind-value="SelectedInformationBoard.InformationBoardDataModel.IsPublished">
                         </div>
                     </div>
                 </div>
@@ -82,20 +81,21 @@
 
     private void SaveAndClose()
     {
-        if (SelectedInformationBoard.InformationBoardDataModel.Title == string.Empty 
+        if (SelectedInformationBoard.InformationBoardDataModel.Title == string.Empty
             || SelectedInformationBoard.InformationBoardDataModel.Title.Length > 30)
         {
-            // required to show editform warnings
+    // required to show editform warnings
         }
         else
         {
             Close();
 
-            // save changes to database
+    // save changes to database
             SelectedInformationBoard.EditInformationBoard(_dbService);
 
-            // notify InformationBoardOverview about changes
+    // notify InformationBoardOverview about changes
             OnChangesMade.InvokeAsync();
         }
     }
+
 }

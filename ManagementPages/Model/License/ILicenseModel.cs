@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ManagementPages.Function;
 using ManagementPages.Model.InformationBoard;
+using ManagementPages.Services;
 
 namespace ManagementPages.Model.License
 {

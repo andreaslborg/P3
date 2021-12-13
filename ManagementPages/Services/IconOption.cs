@@ -1,4 +1,4 @@
-﻿namespace ManagementPages.Function
+﻿namespace ManagementPages.Services
 {
     public class IconOption
     {

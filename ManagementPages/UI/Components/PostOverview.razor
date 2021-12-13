@@ -1,14 +1,12 @@
-@using ManagementPages.Model
+@using ManagementPages.Services
 @using ManagementPages.UI.Components.Modals
-@using ManagementPages.Function
 @using ManagementPages.Model.InformationBoard
 @using ManagementPages.Model.Post
-
 @inject IDbService _dbService
 
-<NewPost @ref="NewPost" OnChangesMade="OnChangesMadeInChildComponent" />
-<EditPost @ref="EditPost" OnChangesMade="OnChangesMadeInChildComponent" />
-<DeletePost @ref="DeletePost" OnChangesMade="OnChangesMadeInChildComponent" />
+<NewPost @ref="NewPost" OnChangesMade="OnChangesMadeInChildComponent"/>
+<EditPost @ref="EditPost" OnChangesMade="OnChangesMadeInChildComponent"/>
+<DeletePost @ref="DeletePost" OnChangesMade="OnChangesMadeInChildComponent"/>
 
 <div class="col bg-white rounded">
     <div class="p-2 border-2 border-bottom">
@@ -41,7 +39,7 @@
                     </div>
                     <a href="@post.PostDataModel.Link" target="_blank">@post.PostDataModel.Link</a>
                     <div class="fw-normal mt-1 mb-0">
-                        @if (@post.PostDataModel.Text.Length > 350)
+                        @if (post.PostDataModel.Text.Length > 350)
                         {
                             <div class="respect-newline">
                                 @post.PostDataModel.Text.Substring(0, 350)...
@@ -75,9 +73,10 @@
                     </div>
                     <a href="@post.PostDataModel.Link" target="_blank">@post.PostDataModel.Link</a>
                     <div class="fw-normal mt-1 mb-0 text-muted">
-                        @if (@post.PostDataModel.Text.Length > 350)
+                        @if (post.PostDataModel.Text.Length > 350)
                         {
-                            @post.PostDataModel.Text.Substring(0, 350);
+                            @post.PostDataModel.Text.Substring(0, 350)
+                            ;
                             <span>...</span>
                         }
                         else
@@ -105,6 +104,7 @@
 </div>
 
 @code {
+
     [Parameter]
     public IInformationBoardModel SelectedInformationBoard { get; set; } = new InformationBoardModel();
 
@@ -125,14 +125,15 @@
 
     private async Task OnChangesMadeInChildComponent()
     {
-        // in order to delete a post, a post must have an ID, which means that when a new post have been added, we must
-        // reload the posts from the database to get the ID of the new post
+    // in order to delete a post, a post must have an ID, which means that when a new post have been added, we must
+    // reload the posts from the database to get the ID of the new post
 
-        // which means that this could be in a call back when add post has happened. interesting.
-        //SelectedInformationBoard.SelectedCategory.Posts = await SelectedInformationBoard.SelectedCategory.LoadPosts(_dbService);
+    // which means that this could be in a call back when add post has happened. interesting.
+    //SelectedInformationBoard.SelectedCategory.Posts = await SelectedInformationBoard.SelectedCategory.LoadPosts(_dbService);
 
-        // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
-        // this is done, as the displayed posts should be the ones from the selected category, so PostOverview needs to be updated
+    // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
+    // this is done, as the displayed posts should be the ones from the selected category, so PostOverview needs to be updated
         await OnChangesMade.InvokeAsync();
     }
+
 }
