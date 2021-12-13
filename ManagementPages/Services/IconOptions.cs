@@ -136,12 +136,12 @@ namespace ManagementPages.Services
                 Name = "Sky",
                 BootstrapCode = "bi bi-cloud"
             },
-            new IconOption()
+            new IconOption
             {
                 Name = "Tv",
                 BootstrapCode = "bi bi-tv"
             },
-            new IconOption()
+            new IconOption
             {
                 Name = "Person",
                 BootstrapCode = "bi bi-person"
