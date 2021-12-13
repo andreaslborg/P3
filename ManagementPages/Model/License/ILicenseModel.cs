@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ManagementPages.Function;
+using ManagementPages.Model.InformationBoard;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.License
 {
     public interface ILicenseModel
     {

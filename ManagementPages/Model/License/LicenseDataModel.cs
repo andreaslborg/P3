@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.License
 {
     public class LicenseDataModel
     {

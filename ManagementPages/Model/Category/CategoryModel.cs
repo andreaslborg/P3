@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 using ManagementPages.Function;
-using ManagementPages.Model;
-using System.Linq;
+using ManagementPages.Model.Post;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.Category
 {
     public class CategoryModel : ICategoryModel
     {

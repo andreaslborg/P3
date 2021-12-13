@@ -1,9 +1,8 @@
-﻿using System.Threading.Tasks;
+﻿using System.Linq;
+using System.Threading.Tasks;
 using ManagementPages.Function;
-using Microsoft.AspNetCore.Components;
-using System.Linq;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.Post
 {
     public class PostModel : IPostModel
     {
