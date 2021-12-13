@@ -6,7 +6,9 @@ using Dapper; //query and execute async methods
 using Microsoft.Extensions.Configuration; //get connectionstring
 using MySql.Data.MySqlClient; //mysqlconnection
 
-namespace ManagementPages.Function
+
+
+namespace ManagementPages.Services
 {
     public class DbService : IDbService
     {

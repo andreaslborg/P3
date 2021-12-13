@@ -1,8 +1,7 @@
-@using ManagementPages.Model
-@using Syncfusion.Blazor.DropDowns
-@using ManagementPages.Function
-@using ManagementPages.Model.Category
+@using ManagementPages.Services
 @using ManagementPages.Model.InformationBoard
+@using ManagementPages.Model.Category
+@using Syncfusion.Blazor.DropDowns 
 @inject IDbService _dbService
 
 <div class="modal @ModalClass" tabindex="-1" role="dialog" style="display: @ModalDisplay">
@@ -88,14 +87,15 @@
     {
         Close();
 
-        // add new category to database
+    // add new category to database
         SelectedInformationBoard.AddNewCategory(NewCategoryModelTemp, IsPublished, _dbService);
 
-        // notify CategoryOverview about changes, so that the list of categories is re-fetched from the database (to give
-        // the new category a category ID, and to update the view)
+    // notify CategoryOverview about changes, so that the list of categories is re-fetched from the database (to give
+    // the new category a category ID, and to update the view)
         OnChangesMade.InvokeAsync();
 
-        // reset temporary category object
+    // reset temporary category object
         NewCategoryModelTemp = new CategoryDataModel();
     }
+
 }
