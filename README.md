@@ -61,7 +61,7 @@ Before
    ```
    or
    ```
-   cd /P3/VisitorApplication
+   cd /P3/VisitorApplication/Server
    ```
 3. Run the application
    ```
