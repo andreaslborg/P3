@@ -57,23 +57,19 @@ This is an example of how to list things you need to use the software and how to
 
 _Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
 
-1. Get a free API Key at [https://example.com](https://example.com)
+1. Install ASP.NET https://dotnet.microsoft.com/en-us/download 
 2. Clone the repo
-   ```sh
-   git clone https://github.com/andreasborgaau/P3.git
    ```
-3. Run the application
-   ```cd ~/P3/ManagementPages
+   gh repo clone andreasborgaau/P3
+   ```
+3. cd to either /ManangementPages or /VisitorApplication
+   ```
+   cd /P3/ManagementPages
+   ```
+4. Run the application
+   ```
    dotnet watch run
    ```
-
-<!-- USAGE EXAMPLES -->
-## Usage
-
-Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
-
-_For more examples, please refer to the [Documentation](https://example.com)_
-
 
 <div id="contact">
 
