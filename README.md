@@ -42,8 +42,7 @@ This project is build using ASP.NET, Blazor Server and Blazor Webassembly.
 <!-- GETTING STARTED -->
 ## Getting Started
 
-This is an example of how you may give instructions on setting up your project locally.
-To get a local copy up and running follow these simple example steps.
+To run the program, please follow these simple steps.
 
 ### Prerequisites
 
@@ -52,13 +51,17 @@ Before
 
 ### Run
 
-1. Clone the repo
+1. Clone the repository
    ```
    gh repo clone andreasborgaau/P3
    ```
-2. cd to either /ManangementPages or /VisitorApplication
+2. Choose which application you want to run
    ```
    cd /P3/ManagementPages
+   ```
+   or
+   ```
+   cd /P3/VisitorApplication
    ```
 3. Run the application
    ```
