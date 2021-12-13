@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ManagementPages.Function
+namespace ManagementPages.Services
 {
     public class IconOptions
     {

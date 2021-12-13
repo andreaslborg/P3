@@ -1,6 +1,7 @@
-@using ManagementPages.Model
+@using ManagementPages.Model.Category
+@using ManagementPages.Model.InformationBoard
 @using ManagementPages.UI.Components.Modals
-@using ManagementPages.Function
+@using ManagementPages.Services
 @inject IDbService _dbService
 <NewCategory @ref="NewCategory" OnChangesMade="OnChangesMadeInChildComponent"/>
 <EditCategories @ref="EditCategories" InformationBoard="InformationBoard" OnChangesMade="OnChangesMadeInChildComponent"/>

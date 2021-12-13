@@ -1,4 +1,4 @@
-﻿namespace ManagementPages.Model
+﻿namespace ManagementPages.Model.InformationBoard
 {
     public class InformationBoardDataModel
     {

@@ -1,6 +1,7 @@
-@using ManagementPages.Model
+@using ManagementPages.Model.InformationBoard
+@using ManagementPages.Model.Post
 @using ManagementPages.UI.Components.Modals
-@using ManagementPages.Function
+@using ManagementPages.Services
 
 @inject IDbService _dbService
 
@@ -105,12 +106,6 @@
 
     private async Task OnChangesMadeInChildComponent()
     {
-        // in order to delete a post, a post must have an ID, which means that when a new post have been added, we must
-        // reload the posts from the database to get the ID of the new post
-
-        // which means that this could be in a call back when add post has happened. interesting.
-        //SelectedInformationBoard.SelectedCategory.Posts = await SelectedInformationBoard.SelectedCategory.LoadPosts(_dbService);
-
         // inform parent (Admin.razor) that changes have been made, meaning that it should rerender the entire view
         // this is done, as the displayed posts should be the ones from the selected category, so PostOverview needs to be updated
         await OnChangesMade.InvokeAsync();

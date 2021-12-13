@@ -1,9 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ManagementPages.Function;
+using ManagementPages.Model.InformationBoard;
+using ManagementPages.Services;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.License
 {
     public class LicenseModel : ILicenseModel
     {
@@ -38,7 +39,7 @@ namespace ManagementPages.Model
                 if (informationBoardDataModel.CategoryOrder != null)
                 {
                     informationBoardModel.CategoryOrder =
-                        informationBoardModel.ConvertToListOfInt(informationBoardDataModel.CategoryOrder);
+                        ConversionService.ConvertToListOfInt(informationBoardDataModel.CategoryOrder);
                 }
 
                 informationBoardModel.CheckCategoryOrder();

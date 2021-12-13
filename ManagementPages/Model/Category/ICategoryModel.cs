@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ManagementPages.Function;
+using ManagementPages.Model.Post;
+using ManagementPages.Services;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.Category
 {
     public interface ICategoryModel
     {

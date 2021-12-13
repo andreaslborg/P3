@@ -1,7 +1,7 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.Post
 {
     public class PostDataModel
     {

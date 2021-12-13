@@ -1,6 +1,7 @@
-﻿@using ManagementPages.Model
+﻿@using ManagementPages.Model.Category
+@using ManagementPages.Model.InformationBoard
 @using Syncfusion.Blazor.DropDowns
-@using ManagementPages.Function
+@using ManagementPages.Services
 @inject IDbService _dbService
 
 <ManagementPages.UI.Components.Modals.DeleteCategory @ref="DeleteCategory" OnChangesMade="OnChangesMadeInChildComponent"/>
@@ -9,6 +10,7 @@
     <div class="modal-dialog modal-xl" role="document">
         <div class="modal-content">
             <div class="modal-header">
+                <a href="C:\Users\EmilieSteinmann\Documents\P3sourcetree\ManagementPages\UI\Components\Modals\EditCategories.razor">C:\Users\EmilieSteinmann\Documents\P3sourcetree\ManagementPages\UI\Components\Modals\EditCategories.razor</a>
                 <h5 class="modal-title">Rediger kategorier - @InformationBoard.InformationBoardDataModel.Title</h5>
                 <button @onclick="() => Close()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
                     <i class="bi bi-x-lg"></i>

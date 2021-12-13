@@ -1,8 +1,7 @@
 ﻿using System.Threading.Tasks;
-using ManagementPages.Function;
-using Microsoft.AspNetCore.Components;
+using ManagementPages.Services;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.Post
 {
     public class PostModel : IPostModel
     {

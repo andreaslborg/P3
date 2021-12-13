@@ -6,7 +6,7 @@ using Dapper;
 using Microsoft.Extensions.Configuration;
 using MySql.Data.MySqlClient;
 
-namespace ManagementPages.Function
+namespace ManagementPages.Services
 {
     public class DbService : IDbService
     {
