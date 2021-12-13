@@ -2,8 +2,9 @@
 using System.Linq;
 using System.Threading.Tasks;
 using ManagementPages.Function;
+using ManagementPages.Model.InformationBoard;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.License
 {
     public class LicenseModel : ILicenseModel
     {

@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.Category
 {
     public class CategoryDataModel
     {

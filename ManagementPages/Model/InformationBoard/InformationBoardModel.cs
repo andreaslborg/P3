@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using ManagementPages.Function;
+using ManagementPages.Model.Category;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.InformationBoard
 {
     public class InformationBoardModel : IInformationBoardModel
     {
