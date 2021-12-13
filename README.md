@@ -47,26 +47,20 @@ To get a local copy up and running follow these simple example steps.
 
 ### Prerequisites
 
-This is an example of how to list things you need to use the software and how to install them.
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+Before
+* Install ASP.NET https://dotnet.microsoft.com/en-us/download 
 
-### Installation
+### Run
 
-_Below is an example of how you can instruct your audience on installing and setting up your app. This template doesn't rely on any external dependencies or services._
-
-1. Install ASP.NET https://dotnet.microsoft.com/en-us/download 
-2. Clone the repo
+1. Clone the repo
    ```
    gh repo clone andreasborgaau/P3
    ```
-3. cd to either /ManangementPages or /VisitorApplication
+2. cd to either /ManangementPages or /VisitorApplication
    ```
    cd /P3/ManagementPages
    ```
-4. Run the application
+3. Run the application
    ```
    dotnet watch run
    ```
