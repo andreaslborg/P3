@@ -6,11 +6,11 @@ namespace ManagementPages.Model.Post
 {
     public class PostModel : IPostModel
     {
-        public PostDataModel PostDataModel { get; set; } = new();
-
         public delegate void PostEvent(PostModel postModel);
 
         public PostEvent PostDeleted;
+
+        public PostDataModel PostDataModel { get; set; } = new();
 
         public async Task EditPost(IDbService dbService)
         {

@@ -20,5 +20,8 @@ namespace ManagementPages.Model.Category
         Task DeleteCategoryFromDatabase(IDbService dbService);
 
         void DeletePost(IPostModel postModel);
+
+        event CategoryEvent CategoryDeleted;
+
     }
 }

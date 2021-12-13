@@ -172,7 +172,7 @@
         InformationBoard.Categories = await InformationBoard.LoadCategories(_dbService);
 
     // bring category order back to original state
-        InformationBoard.CategoryOrder = ConversionService.ConvertToListOfInt(InformationBoard.InformationBoardDataModel.CategoryOrder);
+        InformationBoard.CategoryOrder = ConversionService.ConvertCommaSeparatedStringToListOfInt(InformationBoard.InformationBoardDataModel.CategoryOrder);
 
         Close();
 

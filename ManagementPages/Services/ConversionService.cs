@@ -1,14 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace ManagementPages.Services
 {
     public static class ConversionService
     {
         // Method for when categoryorder should be fetched from database
-        public static List<int> ConvertToListOfInt(string input)
+        public static List<int> ConvertCommaSeparatedStringToListOfInt(string input)
         {
             List<int> result = new();
             var list = input.Split(',');
@@ -28,11 +26,12 @@ namespace ManagementPages.Services
         }
 
         // Method for when categoryorder should be uploaded to database
-        public static string ConvertToCommaSeparatedString(List<int> list)
+        public static string ConvertListToCommaSeparatedString<T>(List<T> list)
         {
             var result = string.Empty;
 
             foreach (var number in list) result += $"{number},";
+            result = result.Trim(',');
 
             return result;
         }

@@ -27,29 +27,26 @@ namespace ManagementPages.Model.License
 
             var informationBoardDataModels = await LoadInformationBoardDataModels(dbService);
 
-            
+
             foreach (var informationBoardDataModel in informationBoardDataModels)
             {
                 try
                 {
                     if (!informationBoardDataModel.ContentIsValid)
-                    {
                         throw new Exception("Problem with information board");
-                    }
 
-                    var informationBoardModel = new InformationBoardModel
+                    IInformationBoardModel informationBoardModel = new InformationBoardModel
                     {
-                        InformationBoardDataModel = informationBoardDataModel,
+                        InformationBoardDataModel = informationBoardDataModel
                     };
+
                     informationBoardModel.Categories = await informationBoardModel.LoadCategories(dbService);
 
                     result.Add(informationBoardModel);
 
                     if (informationBoardDataModel.CategoryOrder != null)
-                    {
                         informationBoardModel.CategoryOrder =
-                            ConversionService.ConvertToListOfInt(informationBoardDataModel.CategoryOrder);
-                    }
+                            ConversionService.ConvertCommaSeparatedStringToListOfInt(informationBoardDataModel.CategoryOrder);
 
                     informationBoardModel.CheckCategoryOrder();
                 }

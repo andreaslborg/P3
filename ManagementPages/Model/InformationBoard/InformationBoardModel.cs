@@ -22,15 +22,11 @@ namespace ManagementPages.Model.InformationBoard
             var categoryDataModels = await LoadCategoryDataModels(dbService);
 
             foreach (var categoryDataModel in categoryDataModels)
-            {
                 try
                 {
-                    if (!categoryDataModel.ContentIsValid)
-                    {
-                        throw new Exception("Category invalid");
-                    }
+                    if (!categoryDataModel.ContentIsValid) throw new Exception("Category invalid");
 
-                    var categoryModel = new CategoryModel
+                    ICategoryModel categoryModel = new CategoryModel
                     {
                         CategoryDataModel = categoryDataModel
                     };
@@ -44,15 +40,8 @@ namespace ManagementPages.Model.InformationBoard
                 {
                     Console.WriteLine(e.Message);
                 }
-            }
 
             return result;
-        }
-
-        public void DeleteCategory(CategoryModel categoryModel)
-        {
-            Categories.Remove(categoryModel.GetHashCode());
-            CategoryOrder.Remove(categoryModel.GetHashCode());
         }
 
         public ICategoryModel SelectedCategory
@@ -78,10 +67,11 @@ namespace ManagementPages.Model.InformationBoard
 
             await dbService.SaveData(sql, categoryDataModel);
 
-            var categoryModel = new CategoryModel()
+            ICategoryModel categoryModel = new CategoryModel
             {
-                CategoryDataModel = categoryDataModel,
+                CategoryDataModel = categoryDataModel
             };
+
             categoryModel.CategoryDeleted += DeleteCategory;
 
             // reload categories from data base, so that new category receives an ID (IDs are generated in the data base)
@@ -99,18 +89,20 @@ namespace ManagementPages.Model.InformationBoard
             await dbService.SaveData(sql, InformationBoardDataModel);
         }
 
+        // re-fetches the information board data from the data base, in case the information board object has been changed, and the user wants to cancel the changes
         public async Task ReloadInformationBoardDataModel(IDbService dbService)
         {
             var sql =
                 $"select * from InformationBoard where InformationBoardId = {InformationBoardDataModel.InformationBoardId};";
 
             var informationBoardList = await dbService.LoadData<InformationBoardDataModel, dynamic>(sql, new { });
+
             InformationBoardDataModel = informationBoardList.First();
         }
 
         public async Task EditCategoryOrder(IDbService dbService)
         {
-            InformationBoardDataModel.CategoryOrder = ConversionService.ConvertToCommaSeparatedString(CategoryOrder);
+            InformationBoardDataModel.CategoryOrder = ConversionService.ConvertListToCommaSeparatedString(CategoryOrder);
 
             var sql =
                 $"update InformationBoard set CategoryOrder = \"{InformationBoardDataModel.CategoryOrder}\"  where InformationBoardId = {InformationBoardDataModel.InformationBoardId}";
@@ -120,24 +112,29 @@ namespace ManagementPages.Model.InformationBoard
 
         public void CheckCategoryOrder()
         {
-            // check if all categories are in the CategoryOrder (meaning that they will be displayed), and
-            // add them to the end, if they are missing
+            // the key is the ID of the categories, which is used as the keys in the dictionary
             List<int> keysToAdd = new();
             List<int> keysToRemove = new();
 
+            // check if all categories are in the CategoryOrder (meaning that they will be displayed)
             foreach (var category in Categories)
                 if (!CategoryOrder.Contains(category.Key))
                     keysToAdd.Add(category.Key);
 
-            // check if there are any invalid ids in the CategoryOrder, and if so - delete them
+            // check if there are any invalid IDs in the CategoryOrder
             foreach (var key in CategoryOrder)
                 if (!Categories.ContainsKey(key))
                     keysToRemove.Add(key);
 
-            // keys cannot be deleted/added inside foreach loop as it messes up the order
+            // add/remove the identified trouble keys (keys cannot be deleted/added inside the foreach loops as it messes up the order of the items)
             foreach (var key in keysToAdd) CategoryOrder.Add(key);
-
             foreach (var key in keysToRemove) CategoryOrder.Remove(key);
+        }
+
+        private void DeleteCategory(CategoryModel categoryModel)
+        {
+            Categories.Remove(categoryModel.GetHashCode());
+            CategoryOrder.Remove(categoryModel.GetHashCode());
         }
 
         private async Task<List<CategoryDataModel>> LoadCategoryDataModels(IDbService dbService)
