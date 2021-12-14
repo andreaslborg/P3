@@ -1,24 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using Xunit;
 using ManagementPages.Function;
 using Microsoft.Extensions.Configuration;
-using System.Data;
-using System.Configuration;
-
-using Dapper;
-
-using MySql.Data.MySqlClient;
-using ManagementPages.Model;
-using Microsoft.Extensions.DependencyInjection;
-using System.Data;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
-using MySql.Data.EntityFrameworkCore;
-using Moq;
 
 namespace ManagementPages.Tests
 { 
@@ -30,64 +15,30 @@ namespace ManagementPages.Tests
             .Build();
 
         [Fact]
-        public async Task FetchFromDbTest()
+        public async Task AddDeleteFetchDbTest()
         {
             DbService dbService = new DbService(configuration);
 
-            var sql = "Select * from Test";
-            
-            var test = await dbService.LoadData<DbTestClass, dynamic>(sql, new {});
-
-            DbTestClass expectedOjbect = new DbTestClass
-            {
-                TestInt = 1,
-                TestString = "This is a test",
-                TestBool = true
-
-            };
-
             DbTestClass dbObject = new DbTestClass
             {
-                TestInt = test.First().TestInt,
-                TestString = test.First().TestString,
-                TestBool = test.First().TestBool
+                TestInt = 1,
+                TestString = "This is a test string",
+                TestBool = true
             };
 
-            var expectedObj = new Likeness<DbTestClass, DbTestClass>(dbObject);
+            var sqlInsert = "Insert into Test (TestInt, TestString, TestBool) values (1, \"This is a test string\", true);";
+            var sqlSelect = "Select * from Test;";
+            var sqlDelete = "Delete from Test Where TestInt = 1;";
 
-            Assert.Equal(expectedObj, dbObject);
+            await dbService.SaveData(sqlInsert, dbObject);
+            var testList = await dbService.LoadData<DbTestClass, dynamic>(sqlSelect, new { });
+            bool objectFound = testList.Any(item => item.TestInt == dbObject.TestInt && item.TestString == dbObject.TestString && item.TestBool == dbObject.TestBool);
+            Assert.True(objectFound);
+
+            await dbService.SaveData(sqlDelete, dbObject);
+            testList = await dbService.LoadData<DbTestClass, dynamic>(sqlSelect, new { });
+            objectFound = testList.Any(item => item.TestInt == dbObject.TestInt && item.TestString == dbObject.TestString && item.TestBool == dbObject.TestBool);
+            Assert.False(objectFound);
         }
-
-        [Fact]
-        public async Task AddToDbTest()
-        {
-
-        }
-        
-        
-        // [Fact]
-        // public void TestDatabase()
-        // {
-
-
-        //     var connectionstring = _config.GetConnectionString("Server=mysql113.unoeuro.com;Database=taldigital_dk_db_aau;Uid=taldigital_dk;Pwd=mrERx2dGezhf;");
-
-        //     //var service = new DbService(_config);
-
-
-        //     var expected = "Server=mysql113.unoeuro.com;Database=taldigital_dk_db_aau;Uid=taldigital_dk;Pwd=mrERx2dGezhf;";
-
-        //     //Assert.NotEqual(expected, service.ConnectionStringName);
-
-        //     Assert.NotEqual(expected, connectionstring); 
-
-        // }
-
-
-
-
-
-
-
     }
 }
