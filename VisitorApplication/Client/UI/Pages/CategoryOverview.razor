@@ -123,7 +123,7 @@ else
         AllInformationboards = await Http.GetFromJsonAsync<Informationboard[]>("api/Informationboard/InformationboardList");
         AllCategories = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
         //only choose the categories with the correct infoboard id
-        SelectedCategoriesList = AllCategories.Where(x => x.InformationBoardId == informationboardID).Select(x => x).ToList();
+        SelectedCategoriesList = AllCategories.Where(x => x.InformationBoardId == informationboardID && x.IsPublished == true).Select(x => x).ToList();
 
         // selectedcategorieslist to category dictionary
         CategoriesToDictionary();
