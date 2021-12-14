@@ -47,7 +47,7 @@ To run the program, please follow these simple steps.
 ### Prerequisites
 
 Before
-* Install .NET 5.0 Runtime https://dotnet.microsoft.com/en-us/download/dotnet/5.0/runtime
+* Install .NET 5.0 Runtime https://dotnet.microsoft.com/en-us/download/dotnet/thank-you/runtime-aspnetcore-5.0.12-windows-hosting-bundle-installer
 
 ### Run
 
