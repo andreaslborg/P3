@@ -60,13 +60,13 @@
 </section>
 
 @code {
-    Informationboard[] informationboardList;
+    //Informationboard[] informationboardList;
     Post[] postList;
     Category[] categoryList;
 
     protected async override Task OnInitializedAsync()
     {
-        informationboardList = await Http.GetFromJsonAsync<Informationboard[]>("api/Informationboard/InformationboardList");
+        //informationboardList = await Http.GetFromJsonAsync<Informationboard[]>("api/Informationboard/InformationboardList");
         categoryList = await Http.GetFromJsonAsync<Category[]>("api/Category/CategoryList");
         postList = await Http.GetFromJsonAsync<Post[]>("api/Post/PostList");
     }
