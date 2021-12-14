@@ -24,22 +24,46 @@ namespace ManagementPages.Tests
 { 
     public class DatabaseTest
     {
-        
-        [Fact]
-        public async Task TestDatabase()
-        {
-            IConfigurationRoot configuration = new ConfigurationBuilder()
+        IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Environment.CurrentDirectory)
             .AddJsonFile("appsettings.json")
             .Build();
 
+        [Fact]
+        public async Task FetchFromDbTest()
+        {
             DbService dbService = new DbService(configuration);
 
-            var sql = "Select * from Post";
+            var sql = "Select * from Test";
             
-            var test = await dbService.LoadData<PostDataModel, dynamic>(sql, new {});
+            var test = await dbService.LoadData<DbTestClass, dynamic>(sql, new {});
+
+            DbTestClass expectedOjbect = new DbTestClass
+            {
+                TestInt = 1,
+                TestString = "This is a test",
+                TestBool = true
+
+            };
+
+            DbTestClass dbObject = new DbTestClass
+            {
+                TestInt = test.First().TestInt,
+                TestString = test.First().TestString,
+                TestBool = test.First().TestBool
+            };
+
+            var expectedObj = new Likeness<DbTestClass, DbTestClass>(dbObject);
+
+            Assert.Equal(expectedObj, dbObject);
         }
 
+        [Fact]
+        public async Task AddToDbTest()
+        {
+
+        }
+        
         
         // [Fact]
         // public void TestDatabase()
