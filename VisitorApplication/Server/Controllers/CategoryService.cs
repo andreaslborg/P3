@@ -61,7 +61,7 @@ namespace VisitorApplication.Server.Controllers
 
                             if (!category.ContentIsValid)
                             {
-                                throw new Exception("Tried to load invalid category");
+                                throw new Exception("Tried to load invalid category: " + category.Title);
                             }
 
                             categoryList.Add(category);
