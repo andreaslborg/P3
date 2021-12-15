@@ -65,7 +65,7 @@ namespace VisitorApplication.Server.Controllers
 
                             if (!post.ContentIsValid)
                             {
-                                throw new Exception("Tried to load invalid post");
+                                throw new Exception("Tried to load invalid post: " + post.Title);
                             }
 
                             lst.Add(post);

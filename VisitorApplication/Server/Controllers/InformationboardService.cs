@@ -63,7 +63,7 @@ namespace VisitorApplication.Server.Controllers
 
                             if (!informationBoard.ContentIsValid)
                             {
-                                throw new Exception("Tried to load invalid information board");
+                                throw new Exception("Tried to load invalid information board: " + informationBoard.Title);
                             }
 
                             informationboardList.Add(informationBoard);
