@@ -1,5 +1,6 @@
-﻿@using ManagementPages.Model
-@using ManagementPages.Function
+﻿@using ManagementPages.Services
+@using ManagementPages.Model.Category
+@using ManagementPages.Model.Post
 @inject IDbService _dbService
 
 <div class="modal @ModalClass" tabindex="-1" role="dialog" style="display: @ModalDisplay">
@@ -13,8 +14,8 @@
             </div>
 
             <EditForm Model="NewPostTemp" OnValidSubmit="SaveAndClose">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+                <DataAnnotationsValidator/>
+                <ValidationSummary/>
 
                 <div class="col-12 row modal-body">
                     <div class="col-6">
@@ -140,13 +141,14 @@
     {
         Close();
 
-        // add new post to database
+    // add new post to database
         SelectedCategory.AddNewPost(NewPostTemp, IsPublished, _dbService);
 
-        // notify PostOverview about changes
+    // notify PostOverview about changes
         OnChangesMade.InvokeAsync();
 
-        // reset temporary post object
+    // reset temporary post object
         NewPostTemp = new PostDataModel();
     }
+
 }

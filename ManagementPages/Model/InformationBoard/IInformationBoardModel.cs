@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
-using ManagementPages.Function;
+using ManagementPages.Model.Category;
+using ManagementPages.Services;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.InformationBoard
 {
     public interface IInformationBoardModel
     {
@@ -23,8 +24,6 @@ namespace ManagementPages.Model
         Task EditCategoryOrder(IDbService dbService);
 
         void CheckCategoryOrder();
-
-        List<int> ConvertToListOfInt(string input);
 
         Task ReloadInformationBoardDataModel(IDbService dbService);
     }

@@ -8,7 +8,8 @@ using VisitorApplication.Shared;
 namespace VisitorApplication.Server.Controllers
 {
     [Route("api/[controller]")]
-    //den første del af navnet TestController er sådan man tilgår den, så api/Test
+    // The first part of the controller name (category) is how the api/controller will be accesed,
+    // meaning ..api/category
     public class CategoryController : Controller
     {
         readonly ICategory _ICategory;
@@ -18,7 +19,7 @@ namespace VisitorApplication.Server.Controllers
             _ICategory = Icategory;
         }
 
-        //for at gette listen bliver det så til api/Test/TestList
+        // The method CategoryList will be invoked at api/catgory/categorylist
         [HttpGet("[action]")]
         public async Task<List<Category>> CategoryList()
         {

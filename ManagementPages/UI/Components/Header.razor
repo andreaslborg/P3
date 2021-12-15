@@ -1,8 +1,7 @@
-﻿@using ManagementPages.Model
+﻿@using ManagementPages.Model.License
 @using ManagementPages.UI.Components.Modals
-
-<Help @ref="Help" />
-<Profile @ref="Profile" />
+<Help @ref="Help"/>
+<Profile @ref="Profile"/>
 
 <section class="row col mb-2 bg-white">
     <div class="col-3 mt-1 border-bottom">
@@ -20,6 +19,7 @@
 </section>
 
 @code {
+
     [Parameter]
     public ILicenseModel License { get; set; }
 

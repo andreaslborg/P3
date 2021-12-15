@@ -48,17 +48,30 @@ namespace VisitorApplication.Server.Controllers
 
                     while (rdr.Read())
                     {
-                        informationboardList.Add(new Informationboard
+                        try
                         {
-                            //det ID der er i databasen vil vi gerne have hen i en variabel ID
-                            InformationboardID = (int)rdr["InformationBoardId"],
-                            Title = rdr["Title"].ToString(),
-                            Url = rdr["Url"].ToString(),
-                            QRCode = rdr["QRCode"].ToString(),
-                            IsPublished = (bool)rdr["IsPublished"],
-                            LicenseID = (int)rdr["LicenseID"],
-                            CategoryOrder = rdr["CategoryOrder"].ToString()
-                        });
+                            var informationBoard = new Informationboard
+                            {
+                                InformationboardID = (int)rdr["InformationBoardId"],
+                                Title = rdr["Title"].ToString(),
+                                Url = rdr["Url"].ToString(),
+                                QRCode = rdr["QRCode"].ToString(),
+                                IsPublished = (bool)rdr["IsPublished"],
+                                LicenseID = (int)rdr["LicenseID"],
+                                CategoryOrder = rdr["CategoryOrder"].ToString()
+                            };
+
+                            if (!informationBoard.ContentIsValid)
+                            {
+                                throw new Exception("Tried to load invalid information board");
+                            }
+
+                            informationboardList.Add(informationBoard);
+                        }
+                        catch (Exception e)
+                        {
+                            Console.WriteLine(e.Message);
+                        }
                     }
                     return informationboardList.ToList();
                 }

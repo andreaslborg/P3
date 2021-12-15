@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
-using ManagementPages.Function;
+using ManagementPages.Services;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.Post
 {
     public interface IPostModel
     {

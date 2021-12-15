@@ -1,20 +1,16 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
-using ManagementPages.Function;
-using ManagementPages.Model;
-using System.Linq;
+using ManagementPages.Model.Post;
+using ManagementPages.Services;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.Category
 {
     public class CategoryModel : ICategoryModel
     {
         public List<IPostModel> Posts { get; set; } = new();
 
         public CategoryDataModel CategoryDataModel { get; set; }
-
-        public delegate void CategoryEvent(CategoryModel categoryModel);
-
-        public CategoryEvent CategoryDeleted;
 
         public async Task<List<IPostModel>> LoadPosts(IDbService dbService)
         {
@@ -23,16 +19,24 @@ namespace ManagementPages.Model
             var postDataModels = await LoadPostDataModels(dbService);
 
             foreach (var postDataModel in postDataModels)
-            {
-                var postModel = new PostModel
+                try
                 {
-                    PostDataModel = postDataModel
-                };
+                    if (!postDataModel.ContentIsValid) throw new Exception("Invalid post");
 
-                postModel.PostDeleted += DeletePost;
+                    var postModel = new PostModel
+                    {
+                        PostDataModel = postDataModel
+                    };
 
-                result.Add(postModel);
-            }
+                    // if a post is deleted, the deletePost method on the category will be called, because the event is invoked
+                    postModel.PostDeleted += DeletePost;
+
+                    result.Add(postModel);
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
 
             return result;
         }
@@ -60,6 +64,7 @@ namespace ManagementPages.Model
             Posts = await LoadPosts(dbService);
         }
 
+        // over-write the original category object in the database
         public async Task EditCategory(IDbService dbService)
         {
             var sql =
@@ -74,6 +79,7 @@ namespace ManagementPages.Model
 
             await dbService.SaveData(sql, CategoryDataModel);
 
+            // let subscriber know that a category has been deleted
             CategoryDeleted?.Invoke(this);
         }
 
@@ -81,6 +87,8 @@ namespace ManagementPages.Model
         {
             Posts.Remove(postModel);
         }
+
+        public event CategoryEvent CategoryDeleted;
 
         private async Task<List<PostDataModel>> LoadPostDataModels(IDbService dbService)
         {
@@ -91,10 +99,7 @@ namespace ManagementPages.Model
         // method to compare to Categories based on their ID. This should always be used instead of '=='
         public override bool Equals(object obj)
         {
-            if (obj is ICategoryModel other)
-            {
-                return CategoryDataModel.CategoryId == other.CategoryDataModel.CategoryId;
-            }
+            if (obj is ICategoryModel other) return CategoryDataModel.CategoryId == other.CategoryDataModel.CategoryId;
 
             return false;
         }
@@ -104,4 +109,7 @@ namespace ManagementPages.Model
             return CategoryDataModel.CategoryId;
         }
     }
+
+    // declare event type for category events in the category namespace
+    public delegate void CategoryEvent(CategoryModel categoryModel);
 }

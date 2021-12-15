@@ -1,17 +1,16 @@
-﻿using System.Threading.Tasks;
-using ManagementPages.Function;
-using Microsoft.AspNetCore.Components;
-using System.Linq;
+﻿using System.Linq;
+using System.Threading.Tasks;
+using ManagementPages.Services;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.Post
 {
     public class PostModel : IPostModel
     {
-        public PostDataModel PostDataModel { get; set; } = new();
-
         public delegate void PostEvent(PostModel postModel);
 
         public PostEvent PostDeleted;
+
+        public PostDataModel PostDataModel { get; set; } = new();
 
         public async Task EditPost(IDbService dbService)
         {
@@ -34,6 +33,7 @@ namespace ManagementPages.Model
         {
             var sql =
                 $"select * from Post where PostId = {PostDataModel.PostId};";
+
             var postList = await dbService.LoadData<PostDataModel, dynamic>(sql, new { });
             PostDataModel = postList.First();
         }

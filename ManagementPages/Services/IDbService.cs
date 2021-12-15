@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace ManagementPages.Function
+namespace ManagementPages.Services
 {
     public interface IDbService
     {

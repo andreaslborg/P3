@@ -1,21 +1,21 @@
-﻿@using ManagementPages.Model
-@using ManagementPages.Function
+﻿@using ManagementPages.Services
+@using ManagementPages.Model.InformationBoard
 @inject IDbService _dbService
 
 
-<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display:@ModalDisplay">
+<div class="modal @ModalClass" tabindex="-1" role="dialog" style="display: @ModalDisplay">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Rediger informationstavle - @SelectedInformationBoard.InformationBoardDataModel.Title</h5>
-                <button @onclick="() => Close()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                <button @onclick="() => Cancel()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
 
             <EditForm Model="SelectedInformationBoard.InformationBoardDataModel" OnValidSubmit="SaveAndClose">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
+                <DataAnnotationsValidator/>
+                <ValidationSummary/>
 
                 <div class="col-12 row modal-body">
                     <div class="col-4">
@@ -24,9 +24,9 @@
                     </div>
                     <div class="col-2"></div>
                     <div class="col-6">
-                        Privat/Offentlig <br />
+                        Privat/Offentlig <br/>
                         <div class="form-check form-switch">
-                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked=@SelectedInformationBoard.InformationBoardDataModel.IsPublished @bind-value="SelectedInformationBoard.InformationBoardDataModel.IsPublished">
+                            <input class="form-check-input" type="checkbox" id="flexSwitchCheckChecked" style="height: 30px; width: 55px" checked="@SelectedInformationBoard.InformationBoardDataModel.IsPublished "@bind-value="SelectedInformationBoard.InformationBoardDataModel.IsPublished">
                         </div>
                     </div>
                 </div>
@@ -63,7 +63,7 @@
         ModalClass = "Show";
         ShowBackdrop = true;
         StateHasChanged();
-    }
+    }   
 
     public void Close()
     {
@@ -81,10 +81,9 @@
 
     private void SaveAndClose()
     {
-        if (SelectedInformationBoard.InformationBoardDataModel.Title == string.Empty 
-            || SelectedInformationBoard.InformationBoardDataModel.Title.Length > 30)
+        if (!SelectedInformationBoard.InformationBoardDataModel.ContentIsValid)
         {
-            // required to show editform warnings
+            // swallow attempt to save invalid data
         }
         else
         {
@@ -97,4 +96,5 @@
             OnChangesMade.InvokeAsync();
         }
     }
+
 }

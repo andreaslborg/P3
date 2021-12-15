@@ -1,6 +1,7 @@
-﻿@using ManagementPages.Model
-@using Syncfusion.Blazor.DropDowns
-@using ManagementPages.Function
+﻿@using ManagementPages.Services
+@using ManagementPages.Model.InformationBoard
+@using ManagementPages.Model.Category
+@using Syncfusion.Blazor.DropDowns 
 @inject IDbService _dbService
 
 <ManagementPages.UI.Components.Modals.DeleteCategory @ref="DeleteCategory" OnChangesMade="OnChangesMadeInChildComponent"/>
@@ -10,7 +11,7 @@
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title">Rediger kategorier - @InformationBoard.InformationBoardDataModel.Title</h5>
-                <button @onclick="() => Close()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
+                <button @onclick="() => Cancel()" type="button" class="close btn btn-secondary" data-dismiss="modal" aria-label="Close">
                     <i class="bi bi-x-lg"></i>
                 </button>
             </div>
@@ -19,15 +20,15 @@
                 <div class="col-3">
                     <label for="title" class="form-label">Rediger titel</label>
                 </div>
-                <div class="col-1" />
+                <div class="col-1"/>
                 <div class="col-2">
-                    <label class="form-label">Privat/Offentlig</label> <br />
+                    <label class="form-label">Privat/Offentlig</label> <br/>
                 </div>
                 <div class="col-3">
                     <label for="author" class="form-label">Ikon</label>
                 </div>
                 <div class="col-2">
-                    <label class="form-label">Farve</label> <br />
+                    <label class="form-label">Farve</label> <br/>
                 </div>
             </div>
 
@@ -66,7 +67,7 @@
                                    @onclick="() => MoveUp(id)">
                                 </i>
                             </button>
-                            <br />
+                            <br/>
                             <button class="btn my-0 py-0">
                                 <i class="bi bi-arrow-down-circle" style="font-size: 25px"
                                    @onclick="() => MoveDown(id)">
@@ -96,17 +97,17 @@
                     }
                 </div>
             }
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Cancel()">Annuller</button>
-            @if (CheckIfCategoriesAreValid())
-            {
-                <button type="submit" class="btn btn-success" @onclick="() => SaveAndClose()">Gem</button>
-            }
-            else
-            {
-                <button type="submit" class="btn btn-success" disabled>Gem</button>
-            }
-        </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-dismiss="modal" @onclick="() => Cancel()">Annuller</button>
+                @if (CheckIfCategoriesAreValid())
+                {
+                    <button type="submit" class="btn btn-success" @onclick="() => SaveAndClose()">Gem</button>
+                }
+                else
+                {
+                    <button type="submit" class="btn btn-success" disabled>Gem</button>
+                }
+            </div>
         </div>
     </div>
 </div>
@@ -152,11 +153,11 @@
 
     public bool CheckIfCategoriesAreValid()
     {
-        bool result = true;
+        var result = true;
 
-        foreach(var category in InformationBoard.Categories)
+        foreach (var category in InformationBoard.Categories)
         {
-            if(category.Value.CategoryDataModel.Title == string.Empty || category.Value.CategoryDataModel.Title.Length > 30)
+            if (!category.Value.CategoryDataModel.ContentIsValid)
             {
                 result = false;
                 break;
@@ -167,11 +168,11 @@
 
     public async Task Cancel()
     {
-        // bring categories back to original state
+    // bring categories back to original state
         InformationBoard.Categories = await InformationBoard.LoadCategories(_dbService);
 
-        // bring category order back to original state
-        InformationBoard.CategoryOrder = InformationBoard.ConvertToListOfInt(InformationBoard.InformationBoardDataModel.CategoryOrder);
+    // bring category order back to original state
+        InformationBoard.CategoryOrder = ConversionService.ConvertCommaSeparatedStringToListOfInt(InformationBoard.InformationBoardDataModel.CategoryOrder);
 
         Close();
 
@@ -216,10 +217,11 @@
 
     private void OnChangesMadeInChildComponent()
     {
-        // open edit categories modal again after a category has been deleted in the delete category modal
+    // open edit categories modal again after a category has been deleted in the delete category modal
         Open();
 
-        // notify parent about changes, so that the category overview is rerendered
+    // notify parent about changes, so that the category overview is rerendered
         OnChangesMade.InvokeAsync();
     }
+
 }

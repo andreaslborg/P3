@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace ManagementPages.Function
+namespace ManagementPages.Services
 {
     public class IconOptions
     {
@@ -136,12 +136,12 @@ namespace ManagementPages.Function
                 Name = "Sky",
                 BootstrapCode = "bi bi-cloud"
             },
-            new IconOption()
+            new IconOption
             {
                 Name = "Tv",
                 BootstrapCode = "bi bi-tv"
             },
-            new IconOption()
+            new IconOption
             {
                 Name = "Person",
                 BootstrapCode = "bi bi-person"

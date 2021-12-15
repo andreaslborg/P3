@@ -1,9 +1,11 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using ManagementPages.Function;
+using ManagementPages.Model.InformationBoard;
+using ManagementPages.Services;
 
-namespace ManagementPages.Model
+namespace ManagementPages.Model.License
 {
     public class LicenseModel : ILicenseModel
     {
@@ -25,23 +27,33 @@ namespace ManagementPages.Model
 
             var informationBoardDataModels = await LoadInformationBoardDataModels(dbService);
 
+
             foreach (var informationBoardDataModel in informationBoardDataModels)
             {
-                var informationBoardModel = new InformationBoardModel
+                try
                 {
-                    InformationBoardDataModel = informationBoardDataModel,
-                };
-                informationBoardModel.Categories = await informationBoardModel.LoadCategories(dbService);
+                    if (!informationBoardDataModel.ContentIsValid)
+                        throw new Exception("Problem with information board");
 
-                result.Add(informationBoardModel);
+                    IInformationBoardModel informationBoardModel = new InformationBoardModel
+                    {
+                        InformationBoardDataModel = informationBoardDataModel
+                    };
 
-                if (informationBoardDataModel.CategoryOrder != null)
-                {
-                    informationBoardModel.CategoryOrder =
-                        informationBoardModel.ConvertToListOfInt(informationBoardDataModel.CategoryOrder);
+                    informationBoardModel.Categories = await informationBoardModel.LoadCategories(dbService);
+
+                    result.Add(informationBoardModel);
+
+                    if (informationBoardDataModel.CategoryOrder != null)
+                        informationBoardModel.CategoryOrder =
+                            ConversionService.ConvertCommaSeparatedStringToListOfInt(informationBoardDataModel.CategoryOrder);
+
+                    informationBoardModel.CheckCategoryOrder();
                 }
-
-                informationBoardModel.CheckCategoryOrder();
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
             }
 
             return result;
