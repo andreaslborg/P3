@@ -19,4 +19,7 @@
     </PackageReference>
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\VisitorApplication\Shared\VisitorApplication.Shared.csproj" />
+  </ItemGroup>
 </Project>
