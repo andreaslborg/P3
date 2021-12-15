@@ -33,4 +33,12 @@
 	  <ProjectReference Include="..\ManagementPages\ManagementPages.csproj" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <None Remove="CategoryOrderTest\" />
+	  <None Remove="DatabaseTest\" />
+	</ItemGroup>
+	<ItemGroup>
+	  <Folder Include="CategoryOrderTest\" />
+	  <Folder Include="DatabaseTest\" />
+	</ItemGroup>
 </Project>
