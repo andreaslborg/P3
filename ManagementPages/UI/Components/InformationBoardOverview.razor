@@ -9,78 +9,78 @@
     <p class="fw-bold fs-5 border-dark border-2 border-bottom">Informationstavler</p>
     <table class="table table-hover bg-white rounded">
         <tbody>
-        @foreach (var informationBoard in License.InformationBoards)
-        {
-            if (informationBoard.Equals(License.SelectedInformationBoard))
+            @foreach (var informationBoard in License.InformationBoards)
             {
-                <tr>
-                    @if (informationBoard.InformationBoardDataModel.IsPublished)
-                    {
-                        <td class="table-active" style="transform: rotate(0);">
-                            <button class="btn btn-outline p-0 " @onclick="() => SetSelectedInformationBoard(informationBoard)" style="">
-                                @informationBoard.InformationBoardDataModel.Title
-                            </button>
-                        </td>
-                    }
-                    else
-                    {
-                        <td class="table-active" style="transform: rotate(0);">
-                            <button class="btn btn-outline p-0 text-muted " @onclick="() => SetSelectedInformationBoard(informationBoard)" style="">
-                                @informationBoard.InformationBoardDataModel.Title
+                if (informationBoard.Equals(License.SelectedInformationBoard))
+                {
+                    <tr>
+                        @if (informationBoard.InformationBoardDataModel.IsPublished)
+                        {
+                            <td class="table-active" style="transform: rotate(0);">
+                                <button class="btn btn-outline p-0 " @onclick="() => SetSelectedInformationBoard(informationBoard)" style="">
+                                    @informationBoard.InformationBoardDataModel.Title
+                                </button>
+                            </td>
+                        }
+                        else
+                        {
+                            <td class="table-active" style="transform: rotate(0);">
+                                <button class="btn btn-outline p-0 text-muted " @onclick="() => SetSelectedInformationBoard(informationBoard)" style="">
+                                    @informationBoard.InformationBoardDataModel.Title
 
-                            </button>
+                                </button>
+                            </td>
+                        }
+                        <td class="table-active" style="width: 8vw">
+                            <div class="float-end">
+                                <button @onclick="() => EditInfoboard.Open(informationBoard)" class="btn ms-1 p-0">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button @onclick="() => InfoboardQR.Open()" class="btn ms-1 p-0">
+                                    <i class="bi bi-qr-code"></i>
+                                </button>
+                                <button @onclick="() => InfoboardStatistics.Open()" class="btn ms-1 p-0">
+                                    <i class="bi bi-bar-chart"></i>
+                                </button>
+                            </div>
                         </td>
-                    }
-                    <td class="table-active" style="width: 8vw">
-                        <div class="float-end">
-                            <button @onclick="() => EditInfoboard.Open(informationBoard)" class="btn ms-1 p-0">
-                                <i class="bi bi-pencil"></i>
-                            </button>
-                            <button @onclick="() => InfoboardQR.Open()" class="btn ms-1 p-0">
-                                <i class="bi bi-qr-code"></i>
-                            </button>
-                            <button @onclick="() => InfoboardStatistics.Open()" class="btn ms-1 p-0">
-                                <i class="bi bi-bar-chart"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
+                    </tr>
+                }
+                else
+                {
+                    <tr>
+                        @if (informationBoard.InformationBoardDataModel.IsPublished)
+                        {
+                            <td style="transform: rotate(0);">
+                                <button class="btn btn-outline p-0 shadow-none stretched-link" @onclick="() => SetSelectedInformationBoard(informationBoard)">
+                                    @informationBoard.InformationBoardDataModel.Title
+                                </button>
+                            </td>
+                        }
+                        else
+                        {
+                            <td style="transform: rotate(0);">
+                                <button class="btn btn-outline p-0 text-muted shadow-none stretched-link" @onclick="() => SetSelectedInformationBoard(informationBoard)">
+                                    @informationBoard.InformationBoardDataModel.Title
+                                </button>
+                            </td>
+                        }
+                        <td>
+                            <div class="float-end">
+                                <button @onclick="() => EditInfoboard.Open(informationBoard)" class="btn ms-1 p-0">
+                                    <i class="bi bi-pencil"></i>
+                                </button>
+                                <button @onclick="() => InfoboardQR.Open()" class="btn ms-1 p-0">
+                                    <i class="bi bi-qr-code"></i>
+                                </button>
+                                <button @onclick="() => InfoboardStatistics.Open()" class="btn ms-1 p-0">
+                                    <i class="bi bi-bar-chart"></i>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                }
             }
-            else
-            {
-                <tr>
-                    @if (informationBoard.InformationBoardDataModel.IsPublished)
-                    {
-                        <td style="transform: rotate(0);">
-                            <button class="btn btn-outline p-0 shadow-none stretched-link" @onclick="() => SetSelectedInformationBoard(informationBoard)">
-                                @informationBoard.InformationBoardDataModel.Title
-                            </button>
-                        </td>
-                    }
-                    else
-                    {
-                        <td style="transform: rotate(0);">
-                            <button class="btn btn-outline p-0 text-muted shadow-none stretched-link" @onclick="() => SetSelectedInformationBoard(informationBoard)">
-                                @informationBoard.InformationBoardDataModel.Title
-                            </button>
-                        </td>
-                    }
-                    <td>
-                        <div class="float-end">
-                            <button @onclick="() => EditInfoboard.Open(informationBoard)" class="btn ms-1 p-0">
-                                <i class="bi bi-pencil"></i>
-                            </button>
-                            <button @onclick="() => InfoboardQR.Open()" class="btn ms-1 p-0">
-                                <i class="bi bi-qr-code"></i>
-                            </button>
-                            <button @onclick="() => InfoboardStatistics.Open()" class="btn ms-1 p-0">
-                                <i class="bi bi-bar-chart"></i>
-                            </button>
-                        </div>
-                    </td>
-                </tr>
-            }
-        }
         </tbody>
     </table>
 </section>
