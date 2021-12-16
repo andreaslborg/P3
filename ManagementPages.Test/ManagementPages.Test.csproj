@@ -34,7 +34,6 @@
   <ItemGroup>
     <Folder Include="DatabaseTests\" />
     <Folder Include="IntegrationTests\" />
-    <Folder Include="UnitTests\" />
     <Folder Include="UnitTests\CategoryOrderTests\" />
   </ItemGroup>
 </Project>
