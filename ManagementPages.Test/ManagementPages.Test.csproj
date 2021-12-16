@@ -21,14 +21,18 @@
 
   <ItemGroup>
     <ProjectReference Include="..\ManagementPages\ManagementPages.csproj" />
+    <ProjectReference Include="..\VisitorApplication\Shared\VisitorApplication.Shared.csproj" />
+    <ProjectReference Include="..\VisitorApplication\Server\VisitorApplication.Server.csproj" />
   </ItemGroup>
 
   <ItemGroup>
     <None Remove="DatabaseTests\" />
     <None Remove="CategoryOrderTests\" />
+    <None Remove="IntegrationTests\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DatabaseTests\" />
     <Folder Include="CategoryOrderTests\" />
+    <Folder Include="IntegrationTests\" />
   </ItemGroup>
 </Project>
