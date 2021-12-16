@@ -13,7 +13,7 @@
     <!--<a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />-->
     <br />
-    <a href="https://aau.taldigital.dk/1">View Demo</a>
+    <a href="https://edit.taldigital.dk/admin">View Admin Demo</a>
     ·
     <a href="https://taldigital.dk">talDigital.dk</a>
     ·
