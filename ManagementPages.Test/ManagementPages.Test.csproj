@@ -27,12 +27,14 @@
 
   <ItemGroup>
     <None Remove="DatabaseTests\" />
-    <None Remove="CategoryOrderTests\" />
     <None Remove="IntegrationTests\" />
+    <None Remove="UnitTests\" />
+    <None Remove="UnitTests\CategoryOrderTests\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="DatabaseTests\" />
-    <Folder Include="CategoryOrderTests\" />
     <Folder Include="IntegrationTests\" />
+    <Folder Include="UnitTests\" />
+    <Folder Include="UnitTests\CategoryOrderTests\" />
   </ItemGroup>
 </Project>
