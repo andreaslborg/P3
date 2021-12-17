@@ -20,7 +20,6 @@ namespace ManagementPages.Test.DatabaseTests
         public async Task TestEditCategoryAsync()
         {
             // Arrange
-            // Insert from management
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Environment.CurrentDirectory)
             .AddJsonFile("appsettings.json")
