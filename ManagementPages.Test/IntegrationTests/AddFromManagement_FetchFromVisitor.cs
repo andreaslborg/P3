@@ -10,12 +10,12 @@ using System.Collections.Generic;
 
 namespace ManagementPages.Test.IntegrationTests
 {
-    public class IntegrationTest
+    public class AddFromManagement_FetchFromVisitor
     {
         [Fact]
         public async Task AddFromManagement_And_FetchFromVisitor()
         {
-            // Insert from management
+            // Arrange
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Environment.CurrentDirectory)
             .AddJsonFile("appsettings.json")
@@ -31,22 +31,18 @@ namespace ManagementPages.Test.IntegrationTests
                 IsPublished = true
             };
 
+            // Act
             var sqlInsert = $"insert into Category (Title, InformationBoardId, IsPublished, Icon) values(\"{category.Title}\", {category.InformationBoardId}, {category.IsPublished}, \"{category.Icon}\");";
             await dbService.SaveData(sqlInsert, category);
 
-
-            //Fetch from visitor application
             ICategory Icategory = new CategoryService(configuration);
             CategoryController categoryController = new CategoryController(Icategory);
 
             var categoryList = await Icategory.CategoryList();
 
+            // Assert
             bool objectFound = categoryList.Any(item => item.Title == category.Title && item.InformationBoardId == category.InformationBoardId && item.IsPublished == category.IsPublished && item.Icon == category.Icon);
-
-            //bool objectFound = categoryList.Any(item => item.Title == category.Title && item.InformationBoardId == category.InformationBoardId && item.IsPublished == category.IsPublished);
-
             Assert.True(objectFound);
-
         }
     }
 }

@@ -13,6 +13,7 @@ namespace ManagementPages.Tests
         [Fact]
         public async Task AddToDbTest()
         {
+            //Arrange
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Environment.CurrentDirectory)
             .AddJsonFile("appsettings.json")
@@ -30,8 +31,11 @@ namespace ManagementPages.Tests
             var sqlInsert = "Insert into Test (TestInt, TestString, TestBool) values (1, \"This is a test string\", true);";
             var sqlSelect = "Select * from Test;";
 
+            //Act
             await dbService.SaveData(sqlInsert, dbObject);
             var testList = await dbService.LoadData<DbTestClass, dynamic>(sqlSelect, new { });
+
+            //Assert
             bool objectFound = testList.Any(item => item.TestInt == dbObject.TestInt && item.TestString == dbObject.TestString && item.TestBool == dbObject.TestBool);
             Assert.True(objectFound);
         }
@@ -40,6 +44,7 @@ namespace ManagementPages.Tests
         [Fact]
         public async Task DeleteFromDbTest()
         {
+            //Arrange
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Environment.CurrentDirectory)
             .AddJsonFile("appsettings.json")
@@ -57,8 +62,11 @@ namespace ManagementPages.Tests
             var sqlDelete = "Delete from Test Where TestInt = 1;";
             var sqlSelect = "Select * from Test;";
 
+            //Act
             await dbService.SaveData(sqlDelete, dbObject);
             var testList = await dbService.LoadData<DbTestClass, dynamic>(sqlSelect, new { });
+
+            //Assert
             bool objectFound = testList.Any(item => item.TestInt == dbObject.TestInt && item.TestString == dbObject.TestString && item.TestBool == dbObject.TestBool);
             Assert.False(objectFound);
         }
