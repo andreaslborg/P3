@@ -16,7 +16,6 @@ namespace ManagementPages.Test.UnitTests
         public async void TestDeletePostFromDatabase()
         {
             // Arrange
-            // Insert from management
             IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Environment.CurrentDirectory)
             .AddJsonFile("appsettings.json")
@@ -30,10 +29,10 @@ namespace ManagementPages.Test.UnitTests
 
             selectedPost.PostDataModel = postInitial;
 
-            var sqlInsert2 = $"insert into Post (Title, CategoryId, Text, Author, IsPublished, Link) values (\"{postInitial.Title}\", {postInitial.CategoryId}, \"{postInitial.Text}\", \"{postInitial.Author}\", {postInitial.IsPublished}, \"{postInitial.Link}\" );";
+            var sqlInsert = $"insert into Post (Title, CategoryId, Text, Author, IsPublished, Link) values (\"{postInitial.Title}\", {postInitial.CategoryId}, \"{postInitial.Text}\", \"{postInitial.Author}\", {postInitial.IsPublished}, \"{postInitial.Link}\" );";
             var sqlSelect = "Select * from Post;";
 
-            await dbService.SaveData(sqlInsert2, postInitial);
+            await dbService.SaveData(sqlInsert, postInitial);
 
             var AllPostsList = await dbService.LoadData<PostDataModel, dynamic>(sqlSelect, new { });
 
