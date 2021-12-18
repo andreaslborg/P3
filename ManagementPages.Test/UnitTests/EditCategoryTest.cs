@@ -35,7 +35,7 @@ namespace ManagementPages.Test.DatabaseTests
 
             await dbService.SaveData(sqlInsert, categoryInitial);
 
-            categoryModel.CategoryDataModel = new CategoryDataModel { CategoryId = 145, Title = "Så er den ændret", 
+            categoryModel.CategoryDataModel = new CategoryDataModel { CategoryId = 145, Title = "Title has changed", 
                 Icon = "Test icon", IsPublished = true };
 
             var testList = await dbService.LoadData<CategoryDataModel, dynamic>(sqlSelect, new { });
@@ -50,7 +50,7 @@ namespace ManagementPages.Test.DatabaseTests
 
             testList = await dbService.LoadData<CategoryDataModel, dynamic>(sqlSelect, new { });
 
-            bool objectFound = testList.Any(item => item.Title == "Så er den ændret");
+            bool objectFound = testList.Any(item => item.Title == "Title has changed");
 
 
             // Assert

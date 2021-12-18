@@ -20,6 +20,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\VisitorApplication\Client\VisitorApplication.Client.csproj" />
+    <ProjectReference Include="..\VisitorApplication\Server\VisitorApplication.Server.csproj" />
     <ProjectReference Include="..\VisitorApplication\Shared\VisitorApplication.Shared.csproj" />
   </ItemGroup>
 </Project>
