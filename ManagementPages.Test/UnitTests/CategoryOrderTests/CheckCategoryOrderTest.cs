@@ -16,6 +16,7 @@ namespace ManagementPages.Tests
         [InlineData(new int[] { 1, 2, 3 }, new int[] {}, new int[] {})]
         public void CategoryOrderTest(int[] categoryArr, int[] dictionaryArr, int[] expectedArr)
         {
+            //Arrange
             InformationBoardModel informationBoardModel = new InformationBoardModel();
             CategoryModel categoryModel = new CategoryModel();
 
@@ -29,8 +30,10 @@ namespace ManagementPages.Tests
             for (int i = 0; i < expectedArr.Length; i++)
                 expectedList.Add(expectedArr[i]);
 
+            //Act
             informationBoardModel.CheckCategoryOrder();
 
+            //Assert
             Assert.Equal(expectedList, informationBoardModel.CategoryOrder);
         }
     }
