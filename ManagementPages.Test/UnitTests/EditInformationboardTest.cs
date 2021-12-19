@@ -28,9 +28,8 @@ namespace ManagementPages.Test.UnitTests
             var informationboardInitial = new InformationBoardDataModel { LicenseId = 1, Title = "Test Informationboard", 
                 Url="Test Url", QRCode = "Test QRCode", IsPublished = true, CategoryOrder = string.Empty };
 
-            // sqlInsert er ikki broytt frá categories
-            var sqlInsert = $"insert into Informationboard (Title, InformationBoardId, IsPublished, Icon) values(\"{informationboardInitial.Title}\", {informationboardInitial.InformationBoardId}, {informationboardInitial.IsPublished}, \"{informationboardInitial.Icon}\");";
-            var sqlSelect = "Select * from Informationboard;";
+            var sqlInsert = $"insert into InformationBoard (Title, IsPublished) values(\"{informationboardInitial.Title}\", {informationboardInitial.IsPublished});";
+            var sqlSelect = "Select * from InformationBoard;";
 
             await dbService.SaveData(sqlInsert, informationboardInitial);
 
@@ -39,7 +38,7 @@ namespace ManagementPages.Test.UnitTests
 
             var testList = await dbService.LoadData<InformationBoardDataModel, dynamic>(sqlSelect, new { });
 
-            var testInformationboard = testList.Where(item => item.IsPublished == true).First();
+            var testInformationboard = testList.Where(item => item.Title == "Test Informationboard").First();
 
             informationBoardModel.InformationBoardDataModel.InformationBoardId = testInformationboard.InformationBoardId;
 

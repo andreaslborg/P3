@@ -1,19 +1,19 @@
-using System.Collections.Generic;
-using Xunit;
 using ManagementPages.Model.Category;
 using ManagementPages.Model.InformationBoard;
+using System.Collections.Generic;
+using Xunit;
 
 namespace ManagementPages.Tests
 {
     public class CheckCategoryOrderTest
     {
         [Theory]
-        [InlineData(new int[] { 1, 2, 3 }, new int[] { 1, 2, 3}, new int[] { 1, 2, 3})]
-        [InlineData(new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 3 }, new int[] { 1, 2, 3})]
-        [InlineData(new int[] { 1, 2, 3 }, new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 3, 4, 5})]
+        [InlineData(new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 })]
+        [InlineData(new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 })]
+        [InlineData(new int[] { 1, 2, 3 }, new int[] { 1, 2, 3, 4, 5 }, new int[] { 1, 2, 3, 4, 5 })]
         [InlineData(new int[] { 1, 2, 3 }, new int[] { 2, 4, 5 }, new int[] { 2, 4, 5 })]
-        [InlineData(new int[] {}, new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 })]
-        [InlineData(new int[] { 1, 2, 3 }, new int[] {}, new int[] {})]
+        [InlineData(new int[] { }, new int[] { 1, 2, 3 }, new int[] { 1, 2, 3 })]
+        [InlineData(new int[] { 1, 2, 3 }, new int[] { }, new int[] { })]
         public void CategoryOrderTest(int[] categoryArr, int[] dictionaryArr, int[] expectedArr)
         {
             //Arrange
@@ -37,8 +37,8 @@ namespace ManagementPages.Tests
             Assert.Equal(expectedList, informationBoardModel.CategoryOrder);
         }
     }
-        
-}   
+
+}
 
 /*
  * 

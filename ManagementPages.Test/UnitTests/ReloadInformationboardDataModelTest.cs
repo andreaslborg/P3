@@ -22,7 +22,7 @@ namespace ManagementPages.Test.UnitTests
             .Build();
 
             IDbService dbService = new DbService(configuration);
-            
+
             InformationBoardModel informationBoardModel = new InformationBoardModel();
 
             informationBoardModel.InformationBoardDataModel = new();
@@ -32,8 +32,9 @@ namespace ManagementPages.Test.UnitTests
 
         }
     }
+}
 
-
+    /*
     public async Task ReloadInformationBoardDataModel(IDbService dbService)
     {
         var sql =
@@ -44,6 +45,5 @@ namespace ManagementPages.Test.UnitTests
         InformationBoardDataModel = informationBoardList.First();
     }
 }
-
-
+    */
 
