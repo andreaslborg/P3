@@ -24,10 +24,11 @@ namespace VisitorApplication.Test
             IInformationboard Iinformationboard = new InformationboardService(configuration);
             InformationboardController categoryController = new InformationboardController(Iinformationboard);
 
+            // Act
             var informationboardList = await Iinformationboard.InformationboardList();
-
-            // Assert
             var publishedInformationboards = informationboardList.Where(informationboard => informationboard.IsPublished == true);
+            
+            // Assert
             Assert.NotEmpty(publishedInformationboards);
         }
     }
