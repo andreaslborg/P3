@@ -1,3 +1,7 @@
+[![Contributors][contributors-shield]][contributors-url]
+[![Stargazers][stars-shield]][stars-url]
+[![Issues][issues-shield]][issues-url]
+
 <!-- PROJECT LOGO -->
 <br />
 <div align="center">
@@ -79,3 +83,11 @@ Or contact Andreas Løvig Borg - alb19@student.aau.dk
 
 Project Link: [github.com/andreasborgaau/P3](https://github.com/andreasborgaau/P3)
 </div>
+
+[contributors-shield]: https://img.shields.io/github/contributors/othneildrew/Best-README-Template.svg?style=for-the-badge
+[contributors-url]: https://github.com/andreasborgaau/P3/graphs/contributors
+[stars-shield]: https://img.shields.io/github/stars/othneildrew/Best-README-Template.svg?style=for-the-badge
+[stars-url]: https://github.com/andreasborgaau/P3/stargazers
+[issues-shield]: https://img.shields.io/github/issues/othneildrew/Best-README-Template.svg?style=for-the-badge
+[issues-url]: https://github.com/andreasborgaau/P3/issues
+[product-screenshot]: images/screenshot.png
