@@ -1,5 +1,4 @@
 [![Contributors][contributors-shield]][contributors-url]
-[![Stargazers][stars-shield]][stars-url]
 [![Issues][issues-shield]][issues-url]
 
 <!-- PROJECT LOGO -->
@@ -86,7 +85,5 @@ Project Link: [github.com/andreasborgaau/P3](https://github.com/andreasborgaau/P
 
 [contributors-shield]: https://img.shields.io/github/contributors/andreasborgaau/P3.svg?style=for-the-badge
 [contributors-url]: https://github.com/andreasborgaau/P3/graphs/contributors
-[stars-shield]: https://img.shields.io/github/stars/andreasborgaau/P3.svg?style=for-the-badge
-[stars-url]: https://github.com/andreasborgaau/P3/stargazers
 [issues-shield]: https://img.shields.io/github/issues/andreasborgaau/P3.svg?style=for-the-badge
 [issues-url]: https://github.com/andreasborgaau/P3/issues
