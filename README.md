@@ -11,7 +11,7 @@
   <h3 align="center">AAU P3 Project | talDigital</h3>
 
   <p align="center">
-    A Digital Information Board
+    Digital Information Boards
     <br />
     <!--<a href="https://github.com/othneildrew/Best-README-Template"><strong>Explore the docs »</strong></a>
     <br />-->
