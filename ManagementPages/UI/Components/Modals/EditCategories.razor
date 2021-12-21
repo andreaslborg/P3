@@ -176,6 +176,7 @@
 
     // bring category order back to original state
         InformationBoard.CategoryOrder = ConversionService.ConvertCommaSeparatedStringToListOfInt(InformationBoard.InformationBoardDataModel.CategoryOrder);
+        InformationBoard.CheckCategoryOrder();
 
         Close();
 
