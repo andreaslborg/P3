@@ -30,7 +30,7 @@
 
 With the growing use of technology and with 90%
 of the Danish population having access to a smart-
-phone [1] it would seem useful to replace physical
+phone it would seem useful to replace physical
 elements with software solutions was new innova-
 tions and ideas arise. The purpose of this project
 is to develop a dynamic and flexible digital infor-
@@ -41,8 +41,8 @@ tion boards can both replace physical information
 boards and be an addition to any company seeking
 to share information. The development process
 is done in collaboration with talDigital and with
-the utilisation of design guidelines presented in [2]
-and [3]. Furthermore, the software solution was
+the utilisation of design guidelines presented in SU
+and DEB. Furthermore, the software solution was
 created by using the following technologies; pro-
 gressive web application, Blazor, Bootstrap and
 MySQL. The solution consists of two web pages,
@@ -55,7 +55,7 @@ such as a laptop or desktop, and tested to be intu-
 itive and easy to use. The solution is successful in
 giving a dynamic digital information board with
 an administrator panel and is considered a useful
-proof-of-concept for talDigital
+proof-of-concept for talDigital.
 
 ### Built With
 
