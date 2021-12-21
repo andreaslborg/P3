@@ -29,11 +29,12 @@
 ## About The Project
 
 With the growing use of technology and with 90% of the Danish population having access to a smartphone it would seem useful to replace physical
-elements with software solutions as new innovations and ideas arise. 
+elements with software solutions as new innovations and ideas arise. <br /><br />
 The purpose of this project is to develop a dynamic and flexible digital information board, with the ability to easily change
 the information on the visitor application using an administration panel. 
-These digital information boards can both replace physical information boards and be an addition to any company seeking to share information. The development process is done in collaboration with talDigital and with the utilisation of design guidelines presented in SU and DEB. 
-Furthermore, the software solution was created by using the following technologies; progressive web application, Blazor, Bootstrap and MySQL. The solution consists of two web pages, the visitor application and the administrator panel. The visitor application is developed to be viewed on a mobile device and is concluded by test participants as intuitive to use. The administrator panel is developed to be viewed on a larger screen, such as a laptop or desktop, and tested to be intuitive and easy to use. 
+These digital information boards can both replace physical information boards and be an addition to any company seeking to share information. <br /><br />
+The development process is done in collaboration with talDigital and with the utilisation of design guidelines presented in SU and DEB. 
+Furthermore, the software solution was created by using the following technologies; progressive web application, Blazor, Bootstrap and MySQL. The solution consists of two web pages, the visitor application and the administrator panel. The visitor application is developed to be viewed on a mobile device and is concluded by test participants as intuitive to use. The administrator panel is developed to be viewed on a larger screen, such as a laptop or desktop, and tested to be intuitive and easy to use. <br /><br />
 The solution is successful in giving a dynamic digital information board with an administrator panel and is considered a useful proof-of-concept for talDigital.
 
 ### Built With
