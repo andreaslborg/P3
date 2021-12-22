@@ -63,11 +63,11 @@ Before
    ```
 2. Choose which application you want to run
    ```
-   cd /P3/ManagementPages
+   cd P3/ManagementPages
    ```
    or
    ```
-   cd /P3/VisitorApplication/Server
+   cd P3/VisitorApplication/Server
    ```
 3. Run the application
    ```
