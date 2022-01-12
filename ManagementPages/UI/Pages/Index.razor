@@ -64,11 +64,16 @@
 
         <div class="checkbox mb-3">
             <label>
-            <input type="checkbox" value="remember-me"> Husk mig
+                <input type="checkbox" value="remember-me"> Husk mig
             </label>
         </div>
 
-        <NavLink class="nav-link px-0" href="admin">
+        <div>
+            <label for="licenseId">Indtast licens ID</label>
+            <input type="number" id="licenseId" @bind="@LicenseId" />
+        </div>
+
+        <NavLink class="nav-link px-0" href="@($"/admin/{LicenseId}")">
             <button class="w-100 btn btn-lg btn-primary" role="button">Log ind Admin</button>
         </NavLink>
 
@@ -81,5 +86,5 @@
 </main>
 
 @code {
-
+    public int LicenseId { get; set; }
 }

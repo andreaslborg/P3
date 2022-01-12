@@ -1,4 +1,4 @@
-﻿@page "/admin"
+﻿@page "/admin/{LicenseId:int}"
 @using ManagementPages.UI.Components
 @using ManagementPages.Model.License
 @using ManagementPages.Services
@@ -30,9 +30,12 @@
 
 
 @code {
+    [Parameter]
+    public int LicenseId { get; set; }
+
     public ILicenseModel License { get; set; } = new LicenseModel();
 
-    public int LicenseId { get; set; } = 1;  // hardcoded, should be passed to the admin page from the login page
+    //public int LicenseId { get; set; } = 1;  // hardcoded, should be passed to the admin page from the login page
 
 
     protected override async Task OnInitializedAsync()
