@@ -14,6 +14,8 @@ namespace ManagementPages.Model.Post
 
         public async Task EditPost(IDbService dbService)
         {
+            PostDataModel.FixSpecialCharacters();
+
             var sql =
                 $"update Post set Title = \"{PostDataModel.Title}\", Text = \"{PostDataModel.Text}\", Author = \"{PostDataModel.Author}\", IsPublished = {PostDataModel.IsPublished}, Link = \"{PostDataModel.Link}\" where PostId = {PostDataModel.PostId}";
 
