@@ -40,8 +40,17 @@
 
     protected override async Task OnInitializedAsync()
     {
-        License.LicenseDataModel = await License.LoadLicenseDataModel(LicenseId, _dbService);
-        License.InformationBoards = await License.LoadInformationBoards(_dbService);
+        try
+        {
+            License.LicenseDataModel = await License.LoadLicenseDataModel(LicenseId, _dbService);
+            License.InformationBoards = await License.LoadInformationBoards(_dbService);
+
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
+
     }
 
     private void OnChangesMadeInChildComponent()
