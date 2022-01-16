@@ -4,6 +4,8 @@
 @inject IDbService dbService
 @inject ILicenseModel licenseViewModel
 
+@inject IDbService _dbService
+
 <style>
     html {
         background: rgb(107,81,242);
@@ -26,26 +28,25 @@
         margin: auto;
     }
 
-    .form-signin .checkbox {
-        font-weight: 400;
-    }
+        .form-signin .checkbox {
+            font-weight: 400;
+        }
 
-    .form-signin .form-floating:focus-within {
-        z-index: 2;
-    }
+        .form-signin .form-floating:focus-within {
+            z-index: 2;
+        }
 
-    .form-signin input[type="email"] {
-        margin-bottom: -1px;
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
-    }
+        .form-signin input[type="email"] {
+            margin-bottom: -1px;
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
+        }
 
-    .form-signin input[type="password"] {
-        margin-bottom: 10px;
-        border-top-left-radius: 0;
-        border-top-right-radius: 0;
-    }
-
+        .form-signin input[type="password"] {
+            margin-bottom: 10px;
+            border-top-left-radius: 0;
+            border-top-right-radius: 0;
+        }
 </style>
 
 <main class="form-signin border rounded bg-light mt-5">
@@ -70,12 +71,22 @@
 
         <div>
             <label for="licenseId">Indtast licens ID</label>
-            <input type="number" id="licenseId" @bind="@LicenseId" />
+            <input type="number" min="0" id="licenseId" step="any" value="@LicenseId" @oninput="Load"/>
         </div>
 
-        <NavLink class="nav-link px-0" href="@($"/admin/{LicenseId}")">
-            <button class="w-100 btn btn-lg btn-primary" role="button">Log ind Admin</button>
-        </NavLink>
+        @if (loading)
+        {
+            <NavLink class="nav-link px-0" href="@($"/admin/{LicenseId}")">
+                <button class="w-100 btn btn-lg btn-primary" role="button">Log ind Admin</button>
+            </NavLink>
+        }
+        else
+        {
+            <p>LicensID er ikke gyldigt!</p>
+            <NavLink class="nav-link px-0">
+                <button class="w-100 btn btn-lg btn-primary" type="button" disabled>Log ind Admin</button>
+            </NavLink>
+        }
 
         <NavLink class="nav-link px-0" href="productowner">
             <button class="w-100 btn btn-lg btn-primary" role="button">Log ind Owner</button>
@@ -87,4 +98,25 @@
 
 @code {
     public int LicenseId { get; set; }
+
+    public ILicenseModel License { get; set; } = new LicenseModel();
+    public bool loading = false;
+
+    //public int LicenseId { get; set; } = 1;  // hardcoded, should be passed to the admin page from the login page
+
+    public async Task Load(ChangeEventArgs args)
+    {
+        try
+        {
+            LicenseId = Convert.ToInt32((String)args.Value);
+            License.LicenseDataModel = await License.LoadLicenseDataModel(LicenseId, _dbService);
+            loading = true;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+            loading = false;
+        }
+    }
+
 }

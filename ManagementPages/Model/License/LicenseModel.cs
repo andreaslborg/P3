@@ -64,7 +64,14 @@ namespace ManagementPages.Model.License
             var sql = $"select * from License where LicenseId = {licenseId};";
             var licenseList = await dbService.LoadData<LicenseDataModel, dynamic>(sql, new { });
 
-            return licenseList.First();
+            if(licenseList.Count <= 0)
+            {
+                throw new Exception("Not valid licenseID");
+            }
+            else
+            {
+                return licenseList.First();
+            }
         }
 
         private async Task<List<InformationBoardDataModel>> LoadInformationBoardDataModels(IDbService dbService)
