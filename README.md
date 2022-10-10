@@ -59,7 +59,7 @@ Before
 
 1. Clone the repository
    ```
-   gh repo clone andreasborgaau/P3
+   gh repo clone andreaslborg/P3
    ```
 2. Choose which application you want to run
    ```
